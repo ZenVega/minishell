@@ -1,13 +1,14 @@
-#Minishell
+# Minishell
 
-##Description
+## Description
 
 This is @jhelbig4\`s and @ZenVega\`s version of 42s minishell subject. A simple shell with basic functionality;
 
-##File Structure
+## File Structure
 
 This is could be our main app structure. Depending on it's complexity, a feature might also have two *.h files, one for feature specific functionality and an export *.h for imports in the main app
 
+```
 root
 |__ .git
 |__ .gitignore
@@ -22,9 +23,9 @@ root
 |  |__ includes/
 |  |  |__ main.h                // Imports all *.h files and definitions of app state stucts
 |  |  |__ CONSTANTS.h           // Macros and global variables
+```
 
-
-##Installation
+## Installation
 
 ```shell
 $ make
