@@ -2,7 +2,7 @@
 
 ## Description
 
-This is @jhelbig4\`s and @ZenVega\`s version of 42s minishell subject. A simple shell with basic functionality;
+This is [jhelbig42](https://github.com/jhelbig42)\`s and [ZenVega](https://github.com/ZenVega)\`s version of 42s minishell subject. A simple shell with basic functionality;
 
 ## File Structure
 
@@ -33,5 +33,5 @@ $ make
 after successfull compilation, script can be run via
 
 ```shell
-$ ./minishel
+$ ./minishell
 ```
