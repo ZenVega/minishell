@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_printnbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 16:28:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/11 16:28:53 by uschmidt         ###   ########.fr       */
+/*   Created: 2024/11/25 14:47:57 by uschmidt          #+#    #+#             */
+/*   Updated: 2024/11/27 10:47:24 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../libft/libft.h"
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "libft.h"
+
+int	ft_printnbr(long long nbr)
+{
+	int		len;
+	char	*num;
+
+	len = 0;
+	num = ft_itoa(nbr);
+	len = ft_printstr(num);
+	free(num);
+	return (len);
+}

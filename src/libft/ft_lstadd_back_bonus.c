@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 16:28:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/11 16:28:53 by uschmidt         ###   ########.fr       */
+/*   Created: 2024/11/19 10:35:18 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/02/07 17:25:16 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../libft/libft.h"
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "libft.h"
+
+void	ft_lstadd_back(t_list **lst, t_list *new_lst)
+{
+	t_list	*tmp;
+
+	if (!new_lst)
+		return ;
+	if (!*lst)
+	{
+		*lst = new_lst;
+		return ;
+	}
+	if (!*lst && !new_lst)
+		return ;
+	tmp = ft_lstlast(*lst);
+	tmp->next = new_lst;
+}

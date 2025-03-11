@@ -1,16 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 16:28:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/11 16:28:53 by uschmidt         ###   ########.fr       */
+/*   Created: 2024/11/19 09:08:44 by uschmidt          #+#    #+#             */
+/*   Updated: 2024/11/19 09:08:47 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../libft/libft.h"
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "libft.h"
+
+char	*ft_strdup(const char *s)
+{
+	size_t	len;
+	size_t	i;
+	char	*dup;
+
+	i = 0;
+	len = ft_strlen(s);
+	dup = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}

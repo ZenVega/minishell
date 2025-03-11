@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 16:28:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/11 16:28:53 by uschmidt         ###   ########.fr       */
+/*   Created: 2024/11/19 09:05:11 by uschmidt          #+#    #+#             */
+/*   Updated: 2024/11/19 09:05:14 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../libft/libft.h"
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "libft.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned char	uc;
+
+	uc = (unsigned char)c;
+	while (*s && *s != uc)
+		s++;
+	if (*s == uc)
+		return ((char *)s);
+	return (NULL);
+}
