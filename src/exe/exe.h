@@ -6,12 +6,13 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/12 14:59:41 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:34:57 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXE_H
 # define EXE_H
 
 # include "../includes/minishell.h"
+# include <unistd.h>
 
 #endif
