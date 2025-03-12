@@ -6,7 +6,13 @@ Here we can create a list of todos with the possibility to assign them and cross
 -[x] define app_struct
 
 ## Parser
-...
+- [ ] readline
+- [ ] initial split (CAVE: will have to split on " "/' ' first later)
+- [ ] redirections
+	-[ ] >
+	-[ ] >>
+	-[ ] <
+	-[ ] << here_doc
 
 ## EXE
 -[ ] bin execution
