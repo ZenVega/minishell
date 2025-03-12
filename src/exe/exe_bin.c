@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/12 16:09:22 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:05:30 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // if no path was found, check for build_in functions
 int	exe_buildin(char **argv)
 {
+	if (argv[0])
+		return (0);
 	return (1);
 }
 
@@ -23,6 +25,7 @@ char	*get_path(char *cmd_name)
 {
 	char	*path;
 
+	path = cmd_name;
 	return (path);
 }
 

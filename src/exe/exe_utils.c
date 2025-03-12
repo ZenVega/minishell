@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:35 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/12 16:04:40 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:06:18 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,7 @@
 //  ...
 int	is_valid(t_cmd_info *cmd)
 {
-	return (1);
+	if (cmd->type != 0)
+		return (1);
+	return (0);
 }

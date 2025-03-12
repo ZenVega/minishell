@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:28:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/12 14:06:39 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/12 17:07:00 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 #include <readline/history.h>
 
 typedef enum e_cmd_type {
-	LOGICAL,
-	PIPE,
-	BIN
+	UNDEFINED = 0,
+	LOGICAL = 1,
+	PIPE = 2,
+	BIN = 3
 }	t_cmd_type;
 
 typedef struct s_cmd_info

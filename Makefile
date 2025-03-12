@@ -1,10 +1,21 @@
 SRC_FOLDER	= src/
+OBJ_FOLDER	= ofiles/
 
+NAME		= minishell
 
-CFILES		= \
-			$(SRC_FOLDER)$(NAME).c\
+CFILES		:=
+# vpath adds a path to find files(%.c)
+vpath %.c $(SRC_FOLDER)
+CFILES += $(NAME).c
 
-OFILES 		= $(CFILES:.c=.o)
+vpath %.c $(SRC_FOLDER)exe
+CFILES += exe.c
+CFILES += exe_bin.c
+CFILES += exe_utils.c
+
+#notdir removes all path from filename 
+#addprefix adds something to each file, in this case the output folder
+OFILES      = $(addprefix $(OBJ_FOLDER), $(notdir $(CFILES:.c=.o)))
 
 LIBFT_PATH	= $(SRC_FOLDER)libft/
 LIBFT_NAME	= libft.a
@@ -19,8 +30,6 @@ DEPS		= $(SRC_FOLDER)includes/minishell.h\
 CC			= cc
 
 CFLAGS		= -g -Wall -Wextra -Werror
-
-NAME		= minishell
 
 all: $(NAME) 
 
@@ -38,11 +47,13 @@ $(NAME): $(OFILES) $(LIBFT)
 $(LIBFT):
 	$(MAKE) bonus -C $(LIBFT_PATH)
 
-%.o: %.c $(DEPS)
+$(OBJ_FOLDER)%.o: %.c $(DEPS)
+	mkdir -p $(OBJ_FOLDER)
 	$(CC) $(CFLAGS) -I/usr/include $(INC) -g -c $< -o $@
 
 clean:
 	rm -f $(OFILES)
+	rm -fd $(OBJ_FOLDER)
 	find $(SRC_FOLDER) -name "*.o" -delete
 	$(MAKE) -C $(LIBFT_PATH) clean
 

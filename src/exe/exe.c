@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:47 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/12 16:02:31 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:25:12 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	exe(t_cmd_info *cmd)
 		return (1);
 //		on_error();
 	if (cmd->type == BIN)
-		exe_bin(cmd);
+		return (exe_bin(cmd));
+	return (1);
 }
