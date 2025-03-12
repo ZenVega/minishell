@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exe.c                                              :+:      :+:    :+:   */
+/*   exe_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 14:58:47 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/12 16:02:31 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/03/12 16:00:35 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/03/12 16:04:40 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 
-// exe takes the cmd struct
-// checks if the input is valid
-// and executes the corresponding function
-// if there is an err, we exit cleanly
-// int execv(const char *pathname, char *const argv[]);
-int	exe(t_cmd_info *cmd)
+//  all possible checks
+//  cmd_info has all necessary keys set
+//  argv[0] has no special characters
+//  ...
+int	is_valid(t_cmd_info *cmd)
 {
-	if (!is_valid(cmd))
-		return (1);
-//		on_error();
-	if (cmd->type == BIN)
-		exe_bin(cmd);
+	return (1);
 }

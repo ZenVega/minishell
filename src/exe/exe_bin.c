@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exe.c                                              :+:      :+:    :+:   */
+/*   exe_bin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 14:58:47 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/12 16:02:31 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/03/12 16:09:22 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 
-// exe takes the cmd struct
-// checks if the input is valid
-// and executes the corresponding function
-// if there is an err, we exit cleanly
-// int execv(const char *pathname, char *const argv[]);
-int	exe(t_cmd_info *cmd)
+// if no path was found, check for build_in functions
+int	exe_buildin(char **argv)
 {
-	if (!is_valid(cmd))
-		return (1);
-//		on_error();
-	if (cmd->type == BIN)
-		exe_bin(cmd);
+	return (1);
+}
+
+// finds path of binary on system
+char	*get_path(char *cmd_name)
+{
+	char	*path;
+
+	return (path);
+}
+
+// finds path of binary on system
+int	exe_bin(t_cmd_info *cmd)
+{
+	char	*path;
+
+	path = get_path(cmd->args[0]);
+	if (path)
+		return (execv(path, cmd->args));
+	else
+		return (exe_buildin(cmd->args));
 }
