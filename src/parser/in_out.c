@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/12 15:17:19 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/14 11:02:24 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int **infile(char **args, t_cmd_type *cmd)
 			// TO DO: error if < is last char* --> no infile given
 			file = args[i + 1];
 			cmd->infile = open(file, O_RDONLY);
+			// TO DO: error handling if not possible to open
 			args[i] = NULL;
 			args[i + 1] = NULL;
 		}
 		i++;
-		
 	}
 	return (0);	
 }
