@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 11:51:20 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:06:38 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXE_H
@@ -14,6 +14,7 @@
 
 # include "../includes/minishell.h"
 # include "../utils/utils.h"
+# include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -30,5 +31,6 @@ int		exe_bin(t_cmd_info *cmd);
 //exe_utils.c
 void	isolate_cmd(char *args, char *dest);
 int		is_valid(t_cmd_info *cmd);
+int		is_in_path(char *path);
 
 #endif

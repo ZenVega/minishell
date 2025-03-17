@@ -106,3 +106,22 @@ struct sigaction
 #add signals - int sigaddset(sigset_t *set, int sig)
 - returns 0 on success, -1 on error
 
+# Directories 
+
+overall functionality is quite similiar to open()/read()/close()
+'#include <dirent.h>'
+struct dirent 
+{
+   ino_t          d_ino;       /* Inode number */
+   off_t          d_off;       /* Not an offset; see below */
+   unsigned short d_reclen;    /* Length of this record */
+   unsigned char  d_type;      /* Type of file; not supported
+                                  by all filesystem types */
+   char           d_name[256]; /* Null-terminated filename */
+};
+
+## DIR *opendir(const char *name);
+## struct dirent *readdir(DIR *dirp); - opens a directorystream from struct returned from opendir
+## int closedir(DIR *dirp);
+
+calling dirent on a DIR stream will reaturn each file (everything is a file) in a folder until it returns NULL;

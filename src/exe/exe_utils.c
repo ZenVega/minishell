@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:35 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 11:51:48 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:07:29 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,23 @@ int	is_valid(t_cmd_info *cmd)
 	if (cmd->type != 0)
 		return (1);
 	return (0);
+}
+
+int	is_in_path(char *path)
+{
+	DIR				*dir_ptr;
+	struct dirent	*dir_entity;
+
+	dir_ptr = opendir(path);
+	if (!dir_ptr)
+		return (-1);
+	while (1)
+	{
+		dir_entity = readdir(dir_ptr);
+		if (!dir_entity)
+			return (0);
+		ft_printf("%s\n", dir_entity->d_name);
+	}
+	closedir(dir_ptr);
+	return (1);
 }

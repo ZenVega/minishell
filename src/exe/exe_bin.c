@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 12:03:08 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:06:07 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_exe	*init_exe(char *cmd_name)
 	paths = ft_split(getenv("PATH"), ':');
 	while (*paths)
 	{
-		ft_printf("%s\n", *paths);
+		ft_printf("PATH: %s\n", *paths);
+		is_in_path(*paths);
 		paths++;
 	}
 	exe->args = cmd_name;
