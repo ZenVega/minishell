@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 14:06:07 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:58:49 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,27 @@ int	exe_buildin(char **argv)
 }
 
 // initialize exe obj
-t_exe	*init_exe(char *cmd_name)
+t_exe	*init_exe(char *args)
 {
 	t_exe	*exe;
 	char	**paths;
 
 	//TODO: include in track_malloc
 	exe = (t_exe *)malloc(sizeof(t_exe));
+	exe->args = args;
+	exe->path = NULL;
+	isolate_cmd_name(exe->args, &exe->cmd_name);
 	paths = ft_split(getenv("PATH"), ':');
 	while (*paths)
 	{
 		ft_printf("PATH: %s\n", *paths);
-		is_in_path(*paths);
+		if (!is_in_path(*paths, exe->cmd_name))
+		{
+			exe->path = *paths;
+			break ;
+		}
 		paths++;
 	}
-	exe->args = cmd_name;
-	isolate_cmd(exe->args, exe->cmd);
 	return (exe);
 }
 
