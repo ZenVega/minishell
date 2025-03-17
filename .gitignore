@@ -1,4 +1,6 @@
 **/*.o
+ofiles/
+exe/test/ofiles/
 minishell
 libft/libft.a
 **/*.swp

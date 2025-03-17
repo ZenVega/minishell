@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/12 17:05:30 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:18:02 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ char	*get_path(char *cmd_name)
 {
 	char	*path;
 
+	path = getenv("PATH");
+	ft_printf("%s\n", path);
 	path = cmd_name;
 	return (path);
 }
 
-// finds path of binary on system
+// execute with fnct
 int	exe_bin(t_cmd_info *cmd)
 {
 	char	*path;
