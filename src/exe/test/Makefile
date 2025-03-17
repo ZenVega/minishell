@@ -5,11 +5,15 @@ NAME		= exe_test
 
 CFILES		:=
 vpath %.c $(SRC_FOLDER)
+
 vpath %.c $(SRC_FOLDER)exe
 CFILES += test/$(NAME).c
 CFILES += exe.c
 CFILES += exe_bin.c
 CFILES += exe_utils.c
+
+vpath %.c $(SRC_FOLDER)utils
+CFILES += utils.c
 
 OFILES      = $(addprefix $(OBJ_FOLDER), $(notdir $(CFILES:.c=.o)))
 

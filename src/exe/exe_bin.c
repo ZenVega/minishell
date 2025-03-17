@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 10:18:02 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:03:08 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,33 @@ int	exe_buildin(char **argv)
 	return (1);
 }
 
-// finds path of binary on system
-char	*get_path(char *cmd_name)
+// initialize exe obj
+t_exe	*init_exe(char *cmd_name)
 {
-	char	*path;
+	t_exe	*exe;
+	char	**paths;
 
-	path = getenv("PATH");
-	ft_printf("%s\n", path);
-	path = cmd_name;
-	return (path);
+	//TODO: include in track_malloc
+	exe = (t_exe *)malloc(sizeof(t_exe));
+	paths = ft_split(getenv("PATH"), ':');
+	while (*paths)
+	{
+		ft_printf("%s\n", *paths);
+		paths++;
+	}
+	exe->args = cmd_name;
+	isolate_cmd(exe->args, exe->cmd);
+	return (exe);
 }
 
 // execute with fnct
 int	exe_bin(t_cmd_info *cmd)
 {
-	char	*path;
+	t_exe	*exe;
 
-	path = get_path(cmd->args[0]);
-	if (path)
-		return (execv(path, cmd->args));
+	exe = init_exe(cmd->args[0]);
+	if (exe->path)
+		return (execv(exe->path, cmd->args));
 	else
 		return (exe_buildin(cmd->args));
 }
