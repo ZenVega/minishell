@@ -58,12 +58,11 @@ int	is_in_path(char *path, char *cmd_name)
 		if (!ft_strcmp(dir_entity->d_name, cmd_name))
 		{
 			found = 1;
-			ft_printf("Found in path %s\n", path);
 			break ;
 		}
 	}
 	closedir(dir_ptr);
-	if (!found)
+	if (found)
 		return (0);
 	return (1);
 }

@@ -20,6 +20,8 @@ int	exe_buildin(char **argv)
 	return (1);
 }
 
+// add cmd name to path
+// leave in argv
 // initialize exe obj
 t_exe	*init_exe(char *args)
 {
@@ -32,12 +34,13 @@ t_exe	*init_exe(char *args)
 	exe->path = NULL;
 	isolate_cmd_name(exe->args, &exe->cmd_name);
 	paths = ft_split(getenv("PATH"), ':');
+	// free all paths but the right one
 	while (*paths)
 	{
-		ft_printf("PATH: %s\n", *paths);
 		if (!is_in_path(*paths, exe->cmd_name))
 		{
-			exe->path = *paths;
+			exe->path = ft_strjoin(*paths, exe->cmd_name);
+			//add to malloc
 			break ;
 		}
 		paths++;
@@ -49,10 +52,17 @@ t_exe	*init_exe(char *args)
 int	exe_bin(t_cmd_info *cmd)
 {
 	t_exe	*exe;
+	char		*test_1_args[] = {"pwd", NULL};
 
 	exe = init_exe(cmd->args[0]);
 	if (exe->path)
-		return (execv(exe->path, cmd->args));
+	{
+		ft_printf("Found in path %s\n", exe->path);
+		return (execve(exe->path, cmd->args));
+	}
 	else
+	{
+		ft_printf("Not found in path");
 		return (exe_buildin(cmd->args));
+	}
 }
