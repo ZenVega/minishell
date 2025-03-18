@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/18 10:10:18 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/18 11:49:44 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,28 @@ void	in_out(char **args, t_cmd_info *cmd)
 void	set_infile(char **args, t_cmd_info *cmd)
 {
 	int		i;
-	char	*file;
+	char	*file_name;
 
 	i = 0;
 	while (args[i])
 	{
-		//option 1)
-		if ((args[i][0] == '<') && (ft_strlen(args[i]) > 1))
+		if ((args[i][0] == '<') && (ft_strlen(args[i]) > 1) && args[i][1] != '<')
 		{
-		ft_printf("args [i]: %s\n", args[i]);
-			file = ft_strtrim(args[i], (const char *) "<");
-		ft_printf("file: %s\n", file);
-			cmd->infile = open(file, O_RDONLY);
-			// TO DO: ERROR-HANDLING
-			free(file);
-			args[i] = NULL;
+			file_name = ft_strtrim(args[i], (const char *) "<");
+			cmd->infile = open(file_name, O_RDONLY);
+			if (cmd->infile < 0)
+				no_infile(args, file_name);
+			free(file_name);
 		}
-		//option 2)
 		else if (args[i][0] == '<' && ft_strlen(args[i]) == 1)
 		{
-			// TO DO: error if < is last char* --> no infile given
-			file = args[i + 1];
-			cmd->infile = open(file, O_RDONLY);
-			// TO DO: error handling if not possible to open
-			args[i] = NULL;
-			args[i + 1] = NULL;
+			if (args[i + 1])
+				file_name = args[i + 1];
+			else
+				parse_error_near_nl(args);
+			cmd->infile = open(file_name, O_RDONLY);
+			if (cmd->infile < 0)
+				no_infile(args, file_name);
 		}
 		i++;
 	}	

@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_test.c                                      :+:      :+:    :+:   */
+/*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 09:33:36 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/18 11:44:44 by jhelbig          ###   ########.fr       */
+/*   Created: 2025/03/18 10:15:18 by jhelbig           #+#    #+#             */
+/*   Updated: 2025/03/18 11:43:29 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include "parser.h"
 
-int main(int argc, char **argv)
+void	free_args_split(char **args)
 {
-	char 		**split;
-	t_cmd_info	cmd_info;
-	if (argc == 1)
+	int	i;
+
+	i = 0;
+	while (args[i])
 	{
-		ft_printf("please, give a string as an argument\n");
-		return (1);
+		free(args[i]);
+		i++;
 	}
-	split = ft_split(argv[1], ' ');
-	cmd_info_init(&cmd_info);
-	in_out(split, &cmd_info);
-	ft_printf("infile fd: %d\n", cmd_info.infile);
-	free_args_split(split);	
+	free(args);
+}
+
+// given infile_name does not exist or not possible to open
+void	no_infile(char **args, char *file_name)
+{
+	ft_printf("No such file or directory: %s\n", file_name);
+	free_args_split(args);
+	exit(1);
+}
+
+void	parse_error_near_nl(char **args)
+{
+	ft_printf("parse error near '\\n'\n");
+	free_args_split(args);
+	exit(1);
 }
