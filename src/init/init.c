@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/18 17:03:09 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/03/18 16:59:33 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
-#include "init/init.h"
+#include "init.h"
 
-int	main(int argc, char **argv, char *envp[])
+t_app	*init_shell(char *envp[])
 {
 	t_app	*app;
+	char	*test;
 
-	if (argc != 1)
-		return (1);
-	//errorhandling
-	ft_printf("Hello %s\n", argv[0]);
-	app = init_shell(envp);
-	free_malloc_list(app);
-	return (0);
+	app = (t_app *)malloc(sizeof(t_app));
+	if (!app)
+		return (NULL);
+	//error handling here
+	app->malloc_list = NULL;
+	app->envp = envp;
+	return (app);
 }
