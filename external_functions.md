@@ -148,3 +148,19 @@ in pathname
 - removes a link - deletes a filename
 - if it is the last link to the filename, it removes the file name itself
 
+# tty
+- TeleTYpewriter
+
+## int isatty(int fd)
+- test whether fd is an open file descriptor and refering to a terminal
+- returns 1 on success, otherwise 0
+
+## char *ttyname (int fd)
+- returns a pointer to the null-terminated pathename of the terminal device that is open on fd
+- returns NULL on error
+
+## ttyslot
+- returns the index of the current user's entry in some file
+- honestly, do not understand the use for this --> man page
+
+
