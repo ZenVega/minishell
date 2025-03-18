@@ -28,3 +28,9 @@ typedef struct s_cmd_info
 	char		**args;
 	t_cmd_type	type;
 }	t_cmd_info;
+
+typedef struct s_app
+{
+	t_list	*malloc_list;
+	char	*envp[];
+}	t_app;
