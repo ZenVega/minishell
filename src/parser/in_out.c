@@ -6,26 +6,25 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/14 11:02:24 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/18 10:10:18 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "parser.h"
 
 //getting the split input
 //looking for > and < to set infile and output
-char	**in_out(char **args)
+void	in_out(char **args, t_cmd_info *cmd)
 {
-	t_cmd_type	cmd;
-
-	infile(args, &cmd);
-	outfile(args, &cmd);
-	trim_args(args);
+	set_infile(args, cmd);
+	//set_outfile(args, cmd);
+	//trim_args(args);
 }
 
 // finding > in splits and set infile
 //options: 1) >infile 2) > infile
-int **infile(char **args, t_cmd_type *cmd)
+void	set_infile(char **args, t_cmd_info *cmd)
 {
 	int		i;
 	char	*file;
@@ -36,7 +35,9 @@ int **infile(char **args, t_cmd_type *cmd)
 		//option 1)
 		if ((args[i][0] == '<') && (ft_strlen(args[i]) > 1))
 		{
-			file = ft_strtrim(args[i], <);
+		ft_printf("args [i]: %s\n", args[i]);
+			file = ft_strtrim(args[i], (const char *) "<");
+		ft_printf("file: %s\n", file);
 			cmd->infile = open(file, O_RDONLY);
 			// TO DO: ERROR-HANDLING
 			free(file);
@@ -53,6 +54,5 @@ int **infile(char **args, t_cmd_type *cmd)
 			args[i + 1] = NULL;
 		}
 		i++;
-	}
-	return (0);	
+	}	
 }
