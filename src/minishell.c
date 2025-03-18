@@ -6,14 +6,22 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/11 16:28:59 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:03:09 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+#include "init/init.h"
 
-int	main(void)
+int	main(int argc, char **argv, char *envp[])
 {
-	ft_printf("Hello Shelly");
+	t_app	*app;
+
+	if (argc != 1)
+		return (1);
+	//errorhandling
+	ft_printf("Hello %s\n", argv[0]);
+	app = init_shell(envp);
+	free_malloc_list(app);
 	return (0);
 }

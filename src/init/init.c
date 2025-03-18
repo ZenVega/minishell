@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 16:28:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/18 15:37:08 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/03/18 16:59:33 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "init.h"
 
-# include <stdio.h>
-# include "../libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-
-typedef enum e_cmd_type {
-	LOGICAL,
-	PIPE,
-	BIN
-}	t_cmd_type;
-
-typedef struct s_cmd_info
+t_app	*init_shell(char *envp[])
 {
-	int			infile;
-	int			outfile;
-	char		**args;
-	t_cmd_type	type;
-}	t_cmd_info;
+	t_app	*app;
+	char	*test;
 
-typedef struct s_app
-{
-	t_list	*malloc_list;
-	char	**envp;
-}	t_app;
-
-#endif
+	app = (t_app *)malloc(sizeof(t_app));
+	if (!app)
+		return (NULL);
+	//error handling here
+	app->malloc_list = NULL;
+	app->envp = envp;
+	return (app);
+}
