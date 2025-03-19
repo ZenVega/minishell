@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 14:58:49 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:20:10 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,28 @@ int	exe_buildin(char **argv)
 	return (1);
 }
 
-// add cmd name to path
-// leave in argv
 // initialize exe obj
-t_exe	*init_exe(char *args)
+// add cmd name to path
+t_exe	*init_exe(t_app *app, char *args)
 {
 	t_exe	*exe;
 	char	**paths;
+	char	*temp;
 
-	//TODO: include in track_malloc
-	exe = (t_exe *)malloc(sizeof(t_exe));
+	exe = (t_exe *)malloc_and_add_list(&app->malloc_list, sizeof(t_exe));
 	exe->args = args;
 	exe->path = NULL;
-	isolate_cmd_name(exe->args, &exe->cmd_name);
+	isolate_cmd_name(app, exe->args, &exe->cmd_name);
 	paths = ft_split(getenv("PATH"), ':');
-	// free all paths but the right one
+	add_list_to_malloc_list(&app->malloc_list, (void **)paths);
 	while (*paths)
 	{
 		if (!is_in_path(*paths, exe->cmd_name))
 		{
-			exe->path = ft_strjoin(*paths, exe->cmd_name);
-			//add to malloc
+			temp = ft_strjoin(*paths, "/");
+			exe->path = ft_strjoin(temp, exe->cmd_name);
+			add_to_malloc_list(&app->malloc_list, exe->path);
+			free(temp);
 			break ;
 		}
 		paths++;
@@ -49,16 +50,16 @@ t_exe	*init_exe(char *args)
 }
 
 // execute with fnct
-int	exe_bin(t_cmd_info *cmd)
+int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
-	char		*test_1_args[] = {"pwd", NULL};
-
-	exe = init_exe(cmd->args[0]);
+	// overwrite in and outfile if necessary
+	exe = init_exe(app, cmd->args[0]);
 	if (exe->path)
 	{
+		// fork here to follow processes
 		ft_printf("Found in path %s\n", exe->path);
-		return (execve(exe->path, cmd->args));
+		return (execve(exe->path, cmd->args, app->envp));
 	}
 	else
 	{

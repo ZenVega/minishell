@@ -15,6 +15,12 @@ CFILES += exe_utils.c
 vpath %.c $(SRC_FOLDER)utils
 CFILES += utils.c
 
+vpath %.c $(SRC_FOLDER)init
+CFILES += init.c
+
+vpath %.c $(SRC_FOLDER)malloc_list
+CFILES += malloc_list.c
+
 OFILES      = $(addprefix $(OBJ_FOLDER), $(notdir $(CFILES:.c=.o)))
 
 LIBFT_PATH	= $(SRC_FOLDER)libft/
@@ -37,7 +43,7 @@ debug: $(NAME)
 	gdb --args ./$(NAME)
 
 test: $(NAME)
-	./$(NAME)
+	valgrind --leak-check=full ./$(NAME)
 
 $(NAME): $(OFILES) $(LIBFT)
 	echo "Createing exe_test"
@@ -62,4 +68,4 @@ fclean:	clean
 
 re: fclean all
 
-.PHONY: all clean fclean re debug norm
+.PHONY: all clean fclean re test debug norm

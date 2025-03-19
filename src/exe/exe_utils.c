@@ -6,14 +6,14 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:35 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 15:09:09 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:06:56 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 
 // isolates cmd_name from args** and writes it to dest
-void	isolate_cmd_name(char *args, char **dest)
+void	isolate_cmd_name(t_app *app, char *args, char **dest)
 {
 	size_t	i;
 
@@ -22,8 +22,7 @@ void	isolate_cmd_name(char *args, char **dest)
 		args++;
 	while (!is_space(args[i]))
 		i++;
-	//TODO: add track_malloc
-	*dest = (char *)malloc(sizeof(char) * i);
+	*dest = (char *)malloc_and_add_list(&app->malloc_list, sizeof(char) * i);
 	ft_strlcpy(*dest, args, i);
 	ft_printf("CMD: %s\n", *dest);
 }

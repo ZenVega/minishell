@@ -16,12 +16,12 @@
 // checks if the input is valid
 // and executes the corresponding function
 // if there is an err, we exit cleanly int execv(const char *pathname, char *const argv[]);
-int	exe(t_cmd_info *cmd)
+int	exe(t_app *app, t_cmd_info *cmd)
 {
 	if (!is_valid(cmd))
 		return (1);
 //		on_error();
 	if (cmd->type == BIN)
-		return (exe_bin(cmd));
+		return (exe_bin(app, cmd));
 	return (1);
 }
