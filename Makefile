@@ -16,6 +16,12 @@ CFILES += exe_utils.c
 vpath %.c $(SRC_FOLDER)utils
 CFILES += utils.c
 
+vpath %.c $(SRC_FOLDER)malloc_list
+CFILES += malloc_list.c
+
+vpath %.c $(SRC_FOLDER)init
+CFILES += init.c
+
 #notdir removes all path from filename 
 #addprefix adds something to each file, in this case the output folder
 OFILES      = $(addprefix $(OBJ_FOLDER), $(notdir $(CFILES:.c=.o)))
@@ -38,6 +44,9 @@ all: $(NAME)
 
 debug: $(NAME)
 	gdb --args ./$(NAME)
+
+test: $(NAME)
+	./$(NAME)
 
 norm:
 	norminette $(NAME).c
@@ -66,4 +75,4 @@ fclean:	clean
 
 re: fclean all
 
-.PHONY: all clean fclean re debug norm
+.PHONY: all clean fclean re test debug norm

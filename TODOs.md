@@ -4,6 +4,8 @@ Here we can create a list of todos with the possibility to assign them and cross
 
 ## Setup
 -[x] define app_struct
+- [ ] malloc_list
+- [ ] free_malloc_list
 
 ## Parser
 - [ ] readline

@@ -3,5 +3,5 @@ ofiles/
 exe/test/ofiles/
 exe/test/exe_test
 minishell
-libft/libft.a
+src/libft/libft.a
 **/*.swp
