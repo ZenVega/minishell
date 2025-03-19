@@ -6,7 +6,7 @@
 #    By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/18 11:27:10 by jhelbig           #+#    #+#              #
-#    Updated: 2025/03/18 11:38:37 by jhelbig          ###   ########.fr        #
+#    Updated: 2025/03/19 09:47:15 by jhelbig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,13 @@ NAME = parser_tester
 SRC = parser_test.c \
 		parser_error.c \
 		cmd_info_init.c \
-		in_out.c
+		in_out.c \
+		../malloc_list/malloc_list.c
 
 OBJS = $(SRC:%.c=%.o)
 
-HEADERS = parser.h
+HEADERS = parser.h \
+			../malloc_list/malloc_list.h
 
 LIBFT_DIR = ../libft
 
@@ -30,6 +32,8 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
 MAKEALL = make all
+
+MAKEBONUS = make bonus
 
 MAKECLEAN = make clean
 
@@ -42,8 +46,11 @@ ${NAME}: ${OBJS} ${HEADERS} $(LIBFT_A)
 
 
 ${LIBFT_A}:
-	$(MAKEALL) -C $(LIBFT_DIR)
-	
+	$(MAKEBONUS) -C $(LIBFT_DIR)
+
+debug: $(NAME)
+	gdb --args ./$(NAME)
+
 clean: 
 	$(MAKECLEAN) -C $(LIBFT_DIR)
 	rm -f $(OBJS)
