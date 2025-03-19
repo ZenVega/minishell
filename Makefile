@@ -13,14 +13,14 @@ CFILES += exe.c
 CFILES += exe_bin.c
 CFILES += exe_utils.c
 
-vpath %.c $(SRC_FOLDER)utils
-CFILES += utils.c
+vpath %.c $(SRC_FOLDER)init
+CFILES += init.c
 
 vpath %.c $(SRC_FOLDER)malloc_list
 CFILES += malloc_list.c
 
-vpath %.c $(SRC_FOLDER)init
-CFILES += init.c
+vpath %.c $(SRC_FOLDER)utils
+CFILES += utils.c
 
 #notdir removes all path from filename 
 #addprefix adds something to each file, in this case the output folder

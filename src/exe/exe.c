@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:47 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 11:51:28 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:24:39 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // exe takes the cmd struct
 // checks if the input is valid
 // and executes the corresponding function
-// if there is an err, we exit cleanly int execv(const char *pathname, char *const argv[]);
+// if there is an err, we exit cleanly
 int	exe(t_app *app, t_cmd_info *cmd)
 {
 	if (!is_valid(cmd))
