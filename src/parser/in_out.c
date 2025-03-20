@@ -19,7 +19,7 @@
 void	in_out(char **args, t_cmd_info *cmd, t_list **malloc_list)
 {
 	set_infile(args, cmd, malloc_list);
-	//set_outfile(args, cmd);
+	set_outfile(args, cmd, malloc_list);
 	//trim_args(args);
 }
 
@@ -68,6 +68,7 @@ void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list)
 
 //problem: here_doc muss vermutlich readline verwenden, statt get_next_line
 // options: ">>END" and ">>" "END"
+/*
 void	here_doc(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 {
 	int		fd;
@@ -92,4 +93,43 @@ void	here_doc(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 		free(next_line);
 	}
 	return ;
+}
+*/
+
+void	set_outfile(char **args, t_cmd_info *cmd, t_list **malloc_list)
+{
+	int		i;
+	char	*file_name;
+
+	i = 0;
+	while (args[i])
+	{	
+		if (args[i][0] == '>')
+		{
+			// case > outfile
+			if (ft_strlen(args[i]) == 1)
+			{
+				if (args[i + 1])
+					file_name = args[i + 1];
+				else
+					parse_error_near_nl(malloc_list);
+				cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0777);
+				if (cmd->outfile < 0)
+					no_infile(file_name, malloc_list);
+			}
+			if (ft_strlen(args[i]) > 1)
+			{
+				// case >outfile
+				if (args[i][1] != '>')
+				{
+					file_name = ft_strtrim(args[i], (const char *) ">");
+					add_to_malloc_list(malloc_list, (void *) file_name);
+					cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0777);
+					if (cmd->outfile < 0)
+						no_infile(file_name, malloc_list);
+				}	
+			}	
+		}
+	i++;
+	}	
 }

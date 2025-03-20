@@ -32,5 +32,6 @@ int main(int argc, char **argv)
 	cmd_info_init(&cmd_info);
 	in_out(split, &cmd_info, &malloc_list);
 	ft_printf("infile fd: %d\n", cmd_info.infile);
+	ft_printf("outfile fd: %d\n", cmd_info.outfile);
 	ft_lstclear(&malloc_list, free);	
 }

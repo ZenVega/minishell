@@ -17,6 +17,8 @@ void	cmd_info_init(t_cmd_info *cmd_info);
 void	in_out(char **args, t_cmd_info *cmd, t_list **malloc_list);
 
 void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list);
+void	set_outfile(char **args, t_cmd_info *cmd, t_list **malloc_list);
+
 
 //parser_error.c
 //void	free_args_split(char **args);
