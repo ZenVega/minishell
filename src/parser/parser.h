@@ -16,7 +16,12 @@ void	cmd_info_init(t_cmd_info *cmd_info);
 //in_out.c
 void	in_out(char **args, t_cmd_info *cmd, t_list **malloc_list);
 
+//infile.c
 void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list);
+void    found_infile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list);
+void    simple_infile(char *file_name, t_cmd_info *cmd, t_list **malloc_list);
+
+//outfile.c
 void	set_outfile(char **args, t_cmd_info *cmd, t_list **malloc_list);
 void    found_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list);
 void    truncate_outfile(char *file_name, t_cmd_info *cmd, t_list **malloc_list);
