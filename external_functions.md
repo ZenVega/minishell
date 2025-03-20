@@ -127,6 +127,16 @@ struct dirent
 
 calling dirent on a DIR stream will reaturn each file (everything is a file) in a folder until it returns NULL;
 
+## access
+'#include <unistd.h>'
+int access(const char *pathname, int mode);
+checks for user access of a certain file (in our case executables)
+the mode flag defines if we are looking for
+- existence F_OK
+- reading rights R_OK
+- writing rights W_OK
+- execution rights X_OK
+
 # current working directory of a process
 
 ## retrieving - getcwd()

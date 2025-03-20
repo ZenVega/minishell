@@ -38,7 +38,9 @@ int	is_valid(t_cmd_info *cmd)
 	return (0);
 }
 
-// iterates over each file in path and compares to cmd_name
+// TODO: This function is deprecated.
+// Since parts of it might be a good example of how to use *dir functions, Ill keep it here
+// as an example. MUST BE DELETED before launch
 int	is_in_path(char *path, char *cmd_name)
 {
 	DIR				*dir_ptr;
