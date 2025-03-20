@@ -20,7 +20,7 @@
 # include <stdlib.h>
 
 typedef struct s_exe {
-	char	*args;
+	char	**args;
 	char	*cmd_name;
 	char	*path;
 }	t_exe;

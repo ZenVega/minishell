@@ -20,30 +20,51 @@ int	exe_buildin(char **argv)
 	return (1);
 }
 
+char	**get_paths(char *cmd)
+{
+	int		path_len;
+	int		i;
+	char	**paths;
+	char	*tmp;
+
+	paths = ft_split(getenv("PATH"), ':');
+	i = 0;
+	while (paths[i])
+	{
+		path_len = ft_strlen(cmd) + ft_strlen(paths[i]) + 2;
+		tmp = ft_strjoin(paths[i], "/");
+		free(paths[i]);
+		paths[i] = ft_strjoin(tmp, cmd);
+		free(tmp);
+		i++;
+	}
+	return (paths);
+}
+
 // initialize exe obj
 // add cmd name to path
-t_exe	*init_exe(t_app *app, char *args)
+t_exe	*init_exe(t_app *app, char **args)
 {
 	t_exe	*exe;
 	char	**paths;
-	char	*temp;
+	int		found;
 
+	found = 0;
 	exe = (t_exe *)malloc_and_add_list(&app->malloc_list, sizeof(t_exe));
 	exe->args = args;
 	exe->path = NULL;
-	isolate_cmd_name(app, exe->args, &exe->cmd_name);
-	paths = ft_split(getenv("PATH"), ':');
-	add_list_to_malloc_list(&app->malloc_list, (void **)paths);
+	exe->cmd_name = args[0];
+	paths = get_paths(exe->cmd_name);
 	while (*paths)
 	{
-		if (!is_in_path(*paths, exe->cmd_name))
+		if (!found && !access(*paths, X_OK))
 		{
-			temp = ft_strjoin(*paths, "/");
-			exe->path = ft_strjoin(temp, exe->cmd_name);
+			found = 1;
+			exe->path = *paths;
 			add_to_malloc_list(&app->malloc_list, exe->path);
-			free(temp);
-			break ;
 		}
+		else
+			free(*paths);
 		paths++;
 	}
 	return (exe);
@@ -54,7 +75,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
 	// overwrite in and outfile if necessary
-	exe = init_exe(app, cmd->args[0]);
+	exe = init_exe(app, cmd->args);
 	if (exe->path)
 	{
 		// fork here to follow processes
