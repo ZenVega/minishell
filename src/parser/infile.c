@@ -13,9 +13,7 @@ void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list)
 	while (args[i])
 	{	
 		if (args[i][0] == '<')
-		{
 			found_infile(args, i, cmd, malloc_list);	
-		}
 	i++;
 	}	
 }

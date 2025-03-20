@@ -15,6 +15,7 @@ void	cmd_info_init(t_cmd_info *cmd_info);
 
 //in_out.c
 void	in_out(char **args, t_cmd_info *cmd, t_list **malloc_list);
+void    trim_args(char **args, t_cmd_info *cmd, t_list **malloc_list);
 
 //infile.c
 void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list);

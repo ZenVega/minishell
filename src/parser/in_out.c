@@ -20,5 +20,11 @@ void	in_out(char **args, t_cmd_info *cmd, t_list **malloc_list)
 {
 	set_infile(args, cmd, malloc_list);
 	set_outfile(args, cmd, malloc_list);
-	//trim_args(args);
+	//trim_args(args, cmd, malloc_list);
 }
+/*
+void    trim_args(char **args, t_cmd_info *cmd, t_list **malloc_list)
+{
+
+}
+*/

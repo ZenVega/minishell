@@ -19,7 +19,8 @@ int main(int argc, char **argv)
 {
 	char 		**split;
 	t_cmd_info	cmd_info;
-	t_list		*malloc_list;	
+	t_list		*malloc_list;
+	int			i;
 
 	if (argc == 1)
 	{
@@ -33,5 +34,10 @@ int main(int argc, char **argv)
 	in_out(split, &cmd_info, &malloc_list);
 	ft_printf("infile fd: %d\n", cmd_info.infile);
 	ft_printf("outfile fd: %d\n", cmd_info.outfile);
+	i = 0;
+	while (cmd_info.args && cmd_info.args[i])
+	{
+		ft_printf("cmd part %d: %s\n", i, cmd_info.args[i]);
+	}
 	ft_lstclear(&malloc_list, free);	
 }

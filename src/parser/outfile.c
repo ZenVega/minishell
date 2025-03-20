@@ -31,14 +31,14 @@ void    found_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 	else if (ft_strlen(args[i]) > 1)
 	{
 	    // case >outfile
-	    if (args[i][1] != '>')
+		if (args[i][1] != '>')
 		{
 			file_name = ft_strtrim(args[i], (const char *) ">");
 			add_to_malloc_list(malloc_list, (void *) file_name);
             truncate_outfile(file_name, cmd, malloc_list);
 		}
         //case_append outfile >>
-        else if (args[i][1] == '>')
+		else if (args[i][1] == '>')
             append_outfile(args, i, cmd, malloc_list);
 	}	
 }
