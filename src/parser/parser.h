@@ -18,6 +18,9 @@ void	in_out(char **args, t_cmd_info *cmd, t_list **malloc_list);
 
 void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list);
 void	set_outfile(char **args, t_cmd_info *cmd, t_list **malloc_list);
+void    found_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list);
+void    truncate_outfile(char *file_name, t_cmd_info *cmd, t_list **malloc_list);
+void    append_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list);
 
 
 //parser_error.c

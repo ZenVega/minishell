@@ -16,6 +16,9 @@ SRC = parser_test.c \
 		parser_error.c \
 		cmd_info_init.c \
 		in_out.c \
+		infile.c \
+		outfile.c \
+		here_doc.c \
 		../malloc_list/malloc_list.c
 
 OBJS = $(SRC:%.c=%.o)
