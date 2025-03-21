@@ -6,27 +6,14 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:15:18 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/19 09:32:16 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/21 14:40:10 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../libft/libft.h"
 
-/*
-void	free_args_split(char **args)
-{
-	int	i;
-
-	i = 0;
-	while (args[i])
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
-}
-*/
+// error-handling
 
 // given infile_name does not exist or not possible to open
 void	no_infile(char *file_name, t_list **malloc_list)

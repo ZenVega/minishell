@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:23 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/21 13:20:25 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/21 14:22:18 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,7 @@ void    found_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 	{
 	    // case >outfile
 		if (args[i][1] != '>')
-		{
-			file_name = ft_strtrim(args[i], (const char *) ">");
-			add_to_malloc_list(malloc_list, (void *) file_name);
-            truncate_outfile(file_name, cmd, malloc_list);
-		}
+            truncate_outfile(args[i] + 1, cmd, malloc_list);
         //case_append outfile >>
 		else if (args[i][1] == '>')
             append_outfile(args, i, cmd, malloc_list);
@@ -81,10 +77,8 @@ void append_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
     // case >>outfile
     else
     {
-        file_name = ft_strtrim(args[i], (const char *) ">");
-		add_to_malloc_list(malloc_list, (void *) file_name);
-		cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		cmd->outfile = open(args[i] + 2, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		if (cmd->outfile < 0)
-			no_infile(file_name, malloc_list);
+			no_infile(args[i] + 2, malloc_list);
     }
 }

@@ -6,7 +6,7 @@
 #    By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/18 11:27:10 by jhelbig           #+#    #+#              #
-#    Updated: 2025/03/19 09:47:15 by jhelbig          ###   ########.fr        #
+#    Updated: 2025/03/21 14:07:13 by jhelbig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRC = parser_test.c \
 		in_out.c \
 		infile.c \
 		outfile.c \
-		here_doc.c \
 		../malloc_list/malloc_list.c
 
 OBJS = $(SRC:%.c=%.o)

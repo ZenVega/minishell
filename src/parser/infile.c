@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/21 13:20:10 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/21 14:08:18 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,7 @@ void    found_infile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 	{
         // case <infile
 		if (args[i][1] != '<')
-		{
-			file_name = ft_strtrim(args[i], (const char *) "<");
-			add_to_malloc_list(malloc_list, (void *) file_name);
-			simple_infile(file_name, cmd, malloc_list);
-		}
+			simple_infile(args[i] + 1, cmd, malloc_list);
 		//here_doc <<
 		    //if (args[i][1] == '<')
 			//here_doc(args, i, cmd, malloc_list);	
