@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:57:04 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/18 16:49:11 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:19:21 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ void	add_to_malloc_list(t_list **malloc_list, void *addr)
 	ft_lstadd_back(malloc_list, new_node);
 }
 
+void	add_list_to_malloc_list(t_list **malloc_list, void **addr)
+{
+	void	**og_addr;
+
+	og_addr = addr;
+	while (*addr)
+	{
+		add_to_malloc_list(malloc_list, *addr);
+		addr++;
+	}
+	add_to_malloc_list(malloc_list, og_addr);
+}
 
 // to free the list call:
 // ft_lstclear(**malloc_list, free)

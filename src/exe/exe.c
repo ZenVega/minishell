@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_list.h                                      :+:      :+:    :+:   */
+/*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 15:24:17 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/18 16:52:06 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/03/12 14:58:47 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/03/19 11:24:39 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MALLOC_LIST_H
-# define MALLOC_LIST_H
+#include "exe.h"
 
-# include "../includes/minishell.h"
-# include "../libft/libft.h"
-
-void	*malloc_and_add_list(t_list **malloc_list, size_t size);
-void	add_to_malloc_list(t_list **malloc_list, void *addr);
-void	add_list_to_malloc_list(t_list **malloc_list, void **addr);
-void	free_malloc_list(t_app *app);
-
-#endif
+// exe takes the cmd struct
+// checks if the input is valid
+// and executes the corresponding function
+// if there is an err, we exit cleanly
+int	exe(t_app *app, t_cmd_info *cmd)
+{
+	if (!is_valid(cmd))
+		return (1);
+//		on_error();
+	if (cmd->type == BIN)
+		return (exe_bin(app, cmd));
+	return (1);
+}

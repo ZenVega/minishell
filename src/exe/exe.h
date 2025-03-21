@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_list.h                                      :+:      :+:    :+:   */
+/*   exe.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 15:24:17 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/18 16:52:06 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/03/19 11:06:28 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef MALLOC_LIST_H
-# define MALLOC_LIST_H
+#ifndef EXE_H
+# define EXE_H
 
 # include "../includes/minishell.h"
-# include "../libft/libft.h"
+# include "../malloc_list/malloc_list.h"
+# include "../utils/utils.h"
+# include <dirent.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-void	*malloc_and_add_list(t_list **malloc_list, size_t size);
-void	add_to_malloc_list(t_list **malloc_list, void *addr);
-void	add_list_to_malloc_list(t_list **malloc_list, void **addr);
-void	free_malloc_list(t_app *app);
+typedef struct s_exe {
+	char	**args;
+	char	*cmd_name;
+	char	*path;
+}	t_exe;
+
+//exe.c
+int		exe(t_app *app, t_cmd_info *cmd);
+//exe_bin.c
+int		exe_bin(t_app *app, t_cmd_info *cmd);
+//exe_utils.c
+int		is_valid(t_cmd_info *cmd);
+int		is_in_path(char *path, char *cmd_name);
 
 #endif

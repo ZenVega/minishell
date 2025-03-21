@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_list.h                                      :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 15:24:17 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/18 16:52:06 by uschmidt         ###   ########.fr       */
+/*   Created: 2024/11/19 09:08:04 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/03/17 14:32:47 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MALLOC_LIST_H
-# define MALLOC_LIST_H
+#include "libft.h"
 
-# include "../includes/minishell.h"
-# include "../libft/libft.h"
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
 
-void	*malloc_and_add_list(t_list **malloc_list, size_t size);
-void	add_to_malloc_list(t_list **malloc_list, void *addr);
-void	add_list_to_malloc_list(t_list **malloc_list, void **addr);
-void	free_malloc_list(t_app *app);
-
-#endif
+	i = 0;
+	while ((unsigned char)s1[i])
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}

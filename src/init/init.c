@@ -15,7 +15,6 @@
 t_app	*init_shell(char *envp[])
 {
 	t_app	*app;
-	char	*test;
 
 	app = (t_app *)malloc(sizeof(t_app));
 	if (!app)
