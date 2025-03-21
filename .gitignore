@@ -1,7 +1,7 @@
 **/*.o
 ofiles/
-exe/test/ofiles/
-exe/test
+src/exe/test/ofiles/
+src/exe/test/exe_test
 minishell
 src/libft/libft.a
 **/*.swp

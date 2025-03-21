@@ -30,7 +30,6 @@ int		exe(t_app *app, t_cmd_info *cmd);
 //exe_bin.c
 int		exe_bin(t_app *app, t_cmd_info *cmd);
 //exe_utils.c
-void	isolate_cmd_name(t_app *app, char *args, char **dest);
 int		is_valid(t_cmd_info *cmd);
 int		is_in_path(char *path, char *cmd_name);
 
