@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/19 09:22:28 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/21 11:39:02 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ void	cmd_info_init(t_cmd_info *cmd_info);
 
 //in_out.c
 void	in_out(char **args, t_cmd_info *cmd, t_list **malloc_list);
-void    trim_args(char **args, t_cmd_info *cmd, t_list **malloc_list);
+void    trim_args(char **args, t_cmd_info *cmd);
 
 //infile.c
 void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list);

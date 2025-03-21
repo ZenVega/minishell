@@ -45,7 +45,7 @@ void    found_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 
 void    truncate_outfile(char *file_name, t_cmd_info *cmd, t_list **malloc_list)
 {
-    cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0777);
+    cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (cmd->outfile < 0)
         //could not open outfile error here
 		no_infile(file_name, malloc_list);
