@@ -12,6 +12,17 @@
 
 #include "exe.h"
 
+//  all possible checks
+//  cmd_info has all necessary keys set
+//  argv[0] has no special characters
+//  ...
+int	is_valid(t_cmd_info *cmd)
+{
+	if (cmd->type != 0)
+		return (1);
+	return (0);
+}
+
 // TODO: This function is deprecated.
 // Since parts of it might be a good example of how to use *dir functions, Ill keep it here
 // as an example. MUST BE DELETED before launch
