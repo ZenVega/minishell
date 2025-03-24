@@ -172,6 +172,14 @@ in pathname
 
 - all return a stat structure in the buffer pointed to by statbuf (maybe to be looked up later if we need it)
 
+# rerouting FDs
+
+int dup(int oldfd);
+int dup2(int oldfd, int newfd);
+
+Both functions create a new copy of a file descriptor and return it. "dup" picks the lowest free one that is unused, whereas dup2 needs a FD to be written on. If it ain't free it will beclosed and overwritte.
+This comes in very handy to overwrite the stdin -output.
+
 # unlink()
 - int unlink(const char *pathname);
 - 0 on success, -1 on error

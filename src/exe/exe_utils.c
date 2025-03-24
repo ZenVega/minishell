@@ -23,6 +23,14 @@ int	is_valid(t_cmd_info *cmd)
 	return (0);
 }
 
+void	reroute_io(t_io_file input, t_io_file output)
+{
+	if (input.fd != STDIN_FILENO)
+		dup2(input.fd, STDIN_FILENO);
+	if (output.fd != STDOUT_FILENO)
+		dup2(output.fd, STDOUT_FILENO);
+}
+
 // TODO: This function is deprecated.
 // Since parts of it might be a good example of how to use *dir functions, Ill keep it here
 // as an example. MUST BE DELETED before launch

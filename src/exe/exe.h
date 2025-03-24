@@ -31,6 +31,7 @@ int		exe(t_app *app, t_cmd_info *cmd);
 int		exe_bin(t_app *app, t_cmd_info *cmd);
 //exe_utils.c
 int		is_valid(t_cmd_info *cmd);
+void	reroute_io(t_io_file input, t_io_file output);
 int		is_in_path(char *path, char *cmd_name);
 
 #endif

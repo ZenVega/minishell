@@ -27,10 +27,15 @@ typedef enum e_cmd_type {
 	BIN = 3
 }	t_cmd_type;
 
+typedef struct s_io_file {
+	int			fd;
+	int			tmp;
+}	t_io_file;
+
 typedef struct s_cmd_info
 {
-	int			infile;
-	int			outfile;
+	t_io_file	infile;
+	t_io_file	outfile;
 	char		**args;
 	t_cmd_type	type;
 }	t_cmd_info;

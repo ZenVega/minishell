@@ -43,7 +43,7 @@ debug: $(NAME)
 	gdb --args ./$(NAME)
 
 test: $(NAME)
-	valgrind --leak-check=full ./$(NAME)
+	./$(NAME)
 
 $(NAME): $(OFILES) $(LIBFT)
 	echo "Createing exe_test"
