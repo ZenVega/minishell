@@ -18,10 +18,16 @@
 // if there is an err, we exit cleanly
 int	exe(t_app *app, t_cmd_info *cmd)
 {
+	int	err;
+
+	err = 0;
 	if (!is_valid(cmd))
 		return (1);
 //		on_error();
 	if (cmd->type == BIN)
-		return (exe_bin(app, cmd));
+	{
+		err = exe_bin(app, cmd);
+		return (err);
+	}
 	return (1);
 }

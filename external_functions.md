@@ -179,10 +179,11 @@ int dup2(int oldfd, int newfd);
 
 Both functions create a new copy of a file descriptor and return it. "dup" picks the lowest free one that is unused, whereas dup2 needs a FD to be written on. If it ain't free it will beclosed and overwritte.
 This comes in very handy to overwrite the stdin -output.
+The scope of dup is only within the process and gets lost after it. the next process can use stdin/out as usual
 
 # unlink()
 - int unlink(const char *pathname);
 - 0 on success, -1 on error
 - removes a link - deletes a filename
 - if it is the last link to the filename, it removes the file name itself
-
+- If the name was the last link to a file but any processes still have the file open, the file will remain in existence until the last file descriptor referring to it is closed. -- I think this means for us, that theparser can actually open the file and directly unlink it. As soon as exe closes the fd the file will be removed
