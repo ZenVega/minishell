@@ -43,6 +43,7 @@ debug: $(NAME)
 	gdb --args ./$(NAME)
 
 test: $(NAME)
+	rm -f test_out
 	./$(NAME)
 
 $(NAME): $(OFILES) $(LIBFT)
