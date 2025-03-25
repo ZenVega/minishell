@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/25 15:07:07 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:00:55 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int argc, char **argv, char *envp[])
 	if (argc != 1)
 		return (1);
 	//errorhandling
-	ft_printf("Hello %s\n", argv[0]);
 	app = init_shell(envp);
 	start_shell(app);
 	free_malloc_list(app);

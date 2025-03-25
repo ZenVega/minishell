@@ -19,6 +19,9 @@ CFILES += init.c
 vpath %.c $(SRC_FOLDER)malloc_list
 CFILES += malloc_list.c
 
+vpath %.c $(SRC_FOLDER)shell
+CFILES += shell.c
+
 vpath %.c $(SRC_FOLDER)utils
 CFILES += utils.c
 
@@ -54,7 +57,7 @@ norm:
 	norminette includes/*
 
 $(NAME): $(OFILES) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(LIBFT) $(INC)
+	$(CC) $(CFLAGS) -lreadline -o $(NAME) $(OFILES) $(LIBFT) $(INC)
 
 $(LIBFT):
 	$(MAKE) bonus -C $(LIBFT_PATH)
