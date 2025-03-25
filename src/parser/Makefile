@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/18 11:27:10 by jhelbig           #+#    #+#              #
-#    Updated: 2025/03/21 14:07:13 by jhelbig          ###   ########.fr        #
+#    Updated: 2025/03/25 13:32:44 by jhelbig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRC = parser_test.c \
 		in_out.c \
 		infile.c \
 		outfile.c \
+		parser.c \
+		pipe_split.c \
 		../malloc_list/malloc_list.c
 
 OBJS = $(SRC:%.c=%.o)

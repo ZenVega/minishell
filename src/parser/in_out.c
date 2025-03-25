@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/21 11:48:15 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/25 13:29:06 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@
 
 //getting the split input
 //looking for > and < to set infile and output
-void	in_out(char **args, t_cmd_info *cmd, t_list **malloc_list)
+void	in_out(char *line, t_cmd_info *cmd, t_list **malloc_list)
 {
-	set_infile(args, cmd, malloc_list);
-	set_outfile(args, cmd, malloc_list);
-	trim_args(args, cmd);
+	char **split;
+	
+	split = ft_split(line, ' ');
+	add_to_malloc_list(malloc_list, (void *)split);
+	set_infile(split, cmd, malloc_list);
+	set_outfile(split, cmd, malloc_list);
+	trim_args(split, cmd);
 }
 
 void    trim_args(char **args, t_cmd_info *cmd)

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:59:35 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/25 12:26:12 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/25 13:44:29 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char **pipe_split(char *line, t_list **malloc_list)
 {
 	char	*part;
 	char	**parts;
-	int		len;
+	size_t	len;
 
 	parts = (char **)malloc(sizeof(char*) * 3);
  	if (!parts)
@@ -35,7 +35,7 @@ char **pipe_split(char *line, t_list **malloc_list)
 		len = part - line;
 		parts[0] = (char *)malloc(len + 1);
 		if (parts[0])
-			ft_strncpy(parts[0], line, len);
+			ft_strlcpy(parts[0], line, len);
 		parts[0][len] = '\0';
 
 		//right
@@ -56,5 +56,6 @@ char **pipe_split(char *line, t_list **malloc_list)
 		free(parts);
 		return (NULL);
 	}
+	return (parts);
 
 }

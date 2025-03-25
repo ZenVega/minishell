@@ -3,18 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/21 11:39:02 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/25 13:55:10 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+//parser.c
+t_cmd_info	*parser(char *line, t_list **malloc_list);
+
+//pipe_split.c
+char **pipe_split(char *line, t_list **malloc_list);
+
 //cmd_info_init.c
-void	cmd_info_init(t_cmd_info *cmd_info);
+t_cmd_info	*cmd_info_init(t_list **malloc_list);
 
 //in_out.c
-void	in_out(char **args, t_cmd_info *cmd, t_list **malloc_list);
+void	in_out(char *line, t_cmd_info *cmd, t_list **malloc_list);
 void    trim_args(char **args, t_cmd_info *cmd);
 
 //infile.c
