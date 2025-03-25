@@ -17,13 +17,11 @@ int main(int argc, char **argv, char *envp[]) {
 
 	// Test 1: "pwd"
 	char *test_args_1[] = {"pwd", NULL};
-	t_io_file test_infile = {0, 0};
-	t_io_file test_outfile = {1, 0};
-	t_cmd_info test_1 = {test_infile, test_outfile, test_args_1, BIN};
+	t_cmd_info test_1 = {0, 1, test_args_1, BIN};
 
 	// Test 2: "unknown"
 	char *test_args_2[] = {"unknown", NULL};
-	t_cmd_info test_2 = {test_infile, test_outfile, test_args_2, BIN};
+	t_cmd_info test_2 = {0, 1, test_args_2, BIN};
 
 	// Test 3: "ls" with output to file
 	int fd_out = open("test_out", O_RDWR | O_CREAT, 0644);
@@ -34,8 +32,7 @@ int main(int argc, char **argv, char *envp[]) {
 	}
 
 	char *test_args_3[] = {"ls", NULL};
-	t_io_file test_outfile_3 = {fd_out, 0};
-	t_cmd_info test_3 = {test_infile, test_outfile_3, test_args_3, BIN};
+	t_cmd_info test_3 = {0, fd_out, test_args_3, BIN};
 
 	// Test 4: "sort" with infile
 	int fd_in = open("test_in", O_RDONLY, 0644);
@@ -46,8 +43,7 @@ int main(int argc, char **argv, char *envp[]) {
 	}
 
 	char *test_args_4[] = {"sort", NULL};
-	t_io_file test_infile_4 = {fd_in, 0};
-	t_cmd_info test_4 = {test_infile_4, test_outfile, test_args_4, BIN};
+	t_cmd_info test_4 = {fd_in, 1, test_args_4, BIN};
 
 	// Execute tests
 	ft_printf("\nTest 1: pwd, stdout\n");

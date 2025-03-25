@@ -86,6 +86,8 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 			reroute_io(cmd->infile, cmd->outfile);
 			return (execve(exe->path, cmd->args, app->envp));
 		}
+		//TODO: do I have to wait??
+		//waitpid()
 	}
 	else
 	{

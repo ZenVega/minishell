@@ -29,5 +29,6 @@ int	exe(t_app *app, t_cmd_info *cmd)
 		err = exe_bin(app, cmd);
 		return (err);
 	}
+	//TODO: CLEANUP 
 	return (1);
 }
