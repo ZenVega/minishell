@@ -4,8 +4,8 @@ Here we can create a list of todos with the possibility to assign them and cross
 
 ## Setup
 -[x] define app_struct
-- [ ] malloc_list
-- [ ] free_malloc_list
+- [x] malloc_list
+- [x] free_malloc_list
 
 ## Parser
 - [ ] readline
@@ -17,7 +17,8 @@ Here we can create a list of todos with the possibility to assign them and cross
 	-[ ] << here_doc
 
 ## EXE
--[ ] bin execution
+-[x] bin execution
+-[ ] reroute input output to files
 -[ ] build_in functions
     -[ ] echo
     -[ ] cd
@@ -30,8 +31,12 @@ Here we can create a list of todos with the possibility to assign them and cross
 -[ ] logic
 
 ## HELPER
--[ ] create track_malloc
+-[x] create track_malloc
 -[ ] create error_handler
     -[ ] clean_up
     -[ } sig handler
 
+## TEST EDGE_CASES
+-[ ] open minishell in minishell
+-[ ] echo Hello" $uname"Howareyou?
+-[ ] cm1 > out | cmd2

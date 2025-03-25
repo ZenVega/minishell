@@ -74,17 +74,27 @@ t_exe	*init_exe(t_app *app, char **args)
 int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
-	// overwrite in and outfile if necessary
+	int		pid;
+	int		status;
+
 	exe = init_exe(app, cmd->args);
 	if (exe->path)
 	{
-		// fork here to follow processes
 		ft_printf("Found in path %s\n", exe->path);
-		return (execve(exe->path, cmd->args, app->envp));
+		pid = fork();
+		if (pid == 0)
+		{
+			reroute_io(cmd->infile, cmd->outfile);
+			execve(exe->path, cmd->args, app->envp);
+			perror("execve failed");
+			exit(1);
+		}
+		wait(&status);
 	}
 	else
 	{
-		ft_printf("Not found in path");
+		ft_printf("Not found in path\n");
 		return (exe_buildin(cmd->args));
 	}
+	return (1);
 }

@@ -18,6 +18,8 @@
 # include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <sys/wait.h>
+# include <sys/types.h>
 
 typedef struct s_exe {
 	char	**args;
@@ -31,6 +33,7 @@ int		exe(t_app *app, t_cmd_info *cmd);
 int		exe_bin(t_app *app, t_cmd_info *cmd);
 //exe_utils.c
 int		is_valid(t_cmd_info *cmd);
+void	reroute_io(int input, int output);
 int		is_in_path(char *path, char *cmd_name);
 
 #endif
