@@ -75,6 +75,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
 	int		pid;
+	int		status;
 
 	exe = init_exe(app, cmd->args);
 	if (exe->path)
@@ -84,10 +85,11 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 		if (pid == 0)
 		{
 			reroute_io(cmd->infile, cmd->outfile);
-			return (execve(exe->path, cmd->args, app->envp));
+			execve(exe->path, cmd->args, app->envp);
+			perror("execve failed");
+			exit(1);
 		}
-		//TODO: do I have to wait??
-		//waitpid()
+		wait(&status);
 	}
 	else
 	{
