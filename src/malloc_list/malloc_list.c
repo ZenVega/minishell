@@ -6,11 +6,12 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:57:04 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/18 16:49:11 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/19 09:28:39 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../libft/libft.h"
 
 //to be used instead of malloc
 void	*malloc_and_add_list(t_list **malloc_list, size_t size)
