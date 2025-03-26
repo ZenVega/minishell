@@ -30,6 +30,6 @@ t_cmd_info	*parser(char *line, t_list **malloc_list)
 		cmd->type = PIPE;
 		return (cmd);
 	}
-	in_out(line, cmd, malloc_list);
+	set_io_files(line, cmd, malloc_list);
 	return (cmd);
 }

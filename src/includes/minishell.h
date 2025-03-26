@@ -13,6 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <errno.h>
 # include <stdio.h>
 # include "../libft/libft.h"
 # include <readline/readline.h>
@@ -20,9 +21,10 @@
 # include <fcntl.h>
 
 typedef enum e_cmd_type {
-	LOGICAL,
-	PIPE,
-	BIN
+	UNDEFINED = 0,
+	LOGICAL = 1,
+	PIPE = 2,
+	BIN = 3
 }	t_cmd_type;
 
 typedef struct s_cmd_info

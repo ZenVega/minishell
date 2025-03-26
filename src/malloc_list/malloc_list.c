@@ -36,6 +36,18 @@ void	add_to_malloc_list(t_list **malloc_list, void *addr)
 	ft_lstadd_back(malloc_list, new_node);
 }
 
+void	add_list_to_malloc_list(t_list **malloc_list, void **addr)
+{
+	void	**og_addr;
+
+	og_addr = addr;
+	while (*addr)
+	{
+		add_to_malloc_list(malloc_list, *addr);
+		addr++;
+	}
+	add_to_malloc_list(malloc_list, og_addr);
+}
 
 // to free the list call:
 // ft_lstclear(**malloc_list, free)

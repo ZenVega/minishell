@@ -21,7 +21,7 @@ t_cmd_info	*cmd_info_init(t_list **malloc_list)
 	cmd_info->infile = 0;
 	cmd_info->outfile = 1;
 	cmd_info->args = NULL;
-	cmd_info->type = UN;
+	cmd_info->type = UNDEFINED;
 
 	return (cmd_info);
 }

@@ -1,14 +1,13 @@
-SRC_FOLDER	= src/
+SRC_FOLDER	= ../../
 OBJ_FOLDER	= ofiles/
 
-NAME		= minishell
+NAME		= exe_test
 
 CFILES		:=
-# vpath adds a path to find files(%.c)
 vpath %.c $(SRC_FOLDER)
-CFILES += $(NAME).c
 
 vpath %.c $(SRC_FOLDER)exe
+CFILES += test/$(NAME).c
 CFILES += exe.c
 CFILES += exe_bin.c
 CFILES += exe_utils.c
@@ -22,8 +21,6 @@ CFILES += malloc_list.c
 vpath %.c $(SRC_FOLDER)utils
 CFILES += utils.c
 
-#notdir removes all path from filename 
-#addprefix adds something to each file, in this case the output folder
 OFILES      = $(addprefix $(OBJ_FOLDER), $(notdir $(CFILES:.c=.o)))
 
 LIBFT_PATH	= $(SRC_FOLDER)libft/
@@ -46,14 +43,11 @@ debug: $(NAME)
 	gdb --args ./$(NAME)
 
 test: $(NAME)
+	rm -f test_out
 	./$(NAME)
 
-norm:
-	norminette $(NAME).c
-	norminette src/*
-	norminette includes/*
-
 $(NAME): $(OFILES) $(LIBFT)
+	echo "Createing exe_test"
 	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(LIBFT) $(INC)
 
 $(LIBFT):
@@ -70,7 +64,7 @@ clean:
 	$(MAKE) -C $(LIBFT_PATH) clean
 
 fclean:	clean
-	rm -f $(SRC_FOLDER)exe/test/$(NAME)
+	rm -f $(NAME)
 	$(MAKE) -C $(LIBFT_PATH) fclean
 
 re: fclean all

@@ -6,7 +6,7 @@
 #    By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 10:42:30 by uschmidt          #+#    #+#              #
-#    Updated: 2025/02/20 11:39:19 by uschmidt         ###   ########.fr        #
+#    Updated: 2025/03/17 14:33:17 by uschmidt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ ft_strlcpy.c\
 ft_strlcat.c\
 ft_strlen.c\
 ft_strmapi.c\
+ft_strcmp.c\
 ft_strncmp.c\
 ft_strnstr.c\
 ft_strrchr.c\

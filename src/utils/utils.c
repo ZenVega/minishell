@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_list.h                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 15:24:17 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/18 16:52:06 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/03/17 11:24:14 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/03/17 11:28:59 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MALLOC_LIST_H
-# define MALLOC_LIST_H
+// I don't really have a good idea how to structure out utilities right now. My suggestion would be, to just dump every helper function in this file for now. no matter the Norm and later we organize it. But I am happy for other ideas.
 
-# include "../includes/minishell.h"
-# include "../libft/libft.h"
-
-void	*malloc_and_add_list(t_list **malloc_list, size_t size);
-void	add_to_malloc_list(t_list **malloc_list, void *addr);
-void	add_list_to_malloc_list(t_list **malloc_list, void **addr);
-void	free_malloc_list(t_app *app);
-
-#endif
+int	is_space(char c)
+{
+	if (
+		c == ' '
+		|| c == '\b'
+		|| c == '\t'
+		|| c == '\n'
+		|| c == '\v'
+	) 
+		return (1);
+	return (0);
+}

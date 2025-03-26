@@ -107,6 +107,36 @@ struct sigaction
 ### add signals - int sigaddset(sigset_t *set, int sig)
 - returns 0 on success, -1 on error
 
+# Directories 
+
+overall functionality is quite similiar to open()/read()/close()
+'#include <dirent.h>'
+struct dirent 
+{
+   ino_t          d_ino;       /* Inode number */
+   off_t          d_off;       /* Not an offset; see below */
+   unsigned short d_reclen;    /* Length of this record */
+   unsigned char  d_type;      /* Type of file; not supported
+                                  by all filesystem types */
+   char           d_name[256]; /* Null-terminated filename */
+};
+
+## DIR *opendir(const char *name);
+## struct dirent *readdir(DIR *dirp); - opens a directorystream from struct returned from opendir
+## int closedir(DIR *dirp);
+
+calling dirent on a DIR stream will reaturn each file (everything is a file) in a folder until it returns NULL;
+
+## access
+'#include <unistd.h>'
+int access(const char *pathname, int mode);
+checks for user access of a certain file (in our case executables)
+the mode flag defines if we are looking for
+- existence F_OK
+- reading rights R_OK
+- writing rights W_OK
+- execution rights X_OK
+
 # current working directory of a process
 
 ## retrieving - getcwd()
@@ -142,9 +172,18 @@ in pathname
 
 - all return a stat structure in the buffer pointed to by statbuf (maybe to be looked up later if we need it)
 
+# rerouting FDs
+
+int dup(int oldfd);
+int dup2(int oldfd, int newfd);
+
+Both functions create a new copy of a file descriptor and return it. "dup" picks the lowest free one that is unused, whereas dup2 needs a FD to be written on. If it ain't free it will beclosed and overwritte.
+This comes in very handy to overwrite the stdin -output.
+The scope of dup is only within the process and gets lost after it. the next process can use stdin/out as usual
+
 # unlink()
 - int unlink(const char *pathname);
 - 0 on success, -1 on error
 - removes a link - deletes a filename
 - if it is the last link to the filename, it removes the file name itself
-
+- If the name was the last link to a file but any processes still have the file open, the file will remain in existence until the last file descriptor referring to it is closed. -- I think this means for us, that theparser can actually open the file and directly unlink it. As soon as exe closes the fd the file will be removed
