@@ -15,6 +15,8 @@ Here we can create a list of todos with the possibility to assign them and cross
 	-[ ] >>
 	-[ ] <
 	-[ ] << here_doc
+- [ ] close fds in the end
+- [ ] unlink here_doc if used
 
 ## EXE
 -[x] bin execution
