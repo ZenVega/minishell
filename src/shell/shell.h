@@ -16,6 +16,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../includes/types.h"
+# include "../includes/CONSTANTS.h"
 
 void	start_shell(t_app *app);
 

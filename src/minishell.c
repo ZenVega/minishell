@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char *envp[])
 {
 	t_app	*app;
 
-	if (argc != 1)
+	if (argc != 1 || !argv)
 		return (1);
 	//errorhandling
 	app = init_shell(envp);

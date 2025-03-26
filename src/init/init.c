@@ -22,6 +22,6 @@ t_app	*init_shell(char *envp[])
 	//error handling here
 	app->malloc_list = NULL;
 	app->envp = envp;
-	app->prompt = "mimimiminishell $";
+	app->prompt = NULL;
 	return (app);
 }
