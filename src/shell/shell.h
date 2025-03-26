@@ -15,9 +15,11 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "../exe/exe.h"
 # include "../includes/types.h"
 # include "../includes/CONSTANTS.h"
 # include "../malloc_list/malloc_list.h"
+# include "../parser/parser.h"
 
 void	start_shell(t_app *app);
 

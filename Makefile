@@ -19,6 +19,17 @@ CFILES += init.c
 vpath %.c $(SRC_FOLDER)malloc_list
 CFILES += malloc_list.c
 
+vpath %.c $(SRC_FOLDER)parser
+CFILES += cmd_info_init.c
+CFILES += here_doc.c
+CFILES += in_out_utils.c
+CFILES += infile.c
+CFILES += outfile.c
+CFILES += parser.c
+CFILES += parser_error.c
+CFILES += pipe_split.c
+CFILES += set_io_files.c
+
 vpath %.c $(SRC_FOLDER)shell
 CFILES += shell.c
 

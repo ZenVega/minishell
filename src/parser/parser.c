@@ -19,7 +19,7 @@ t_cmd_info	*parser(char *line, t_list **malloc_list)
 {
 	t_cmd_info	*cmd;
 	char		**parts;
-	
+
 	cmd = cmd_info_init(malloc_list);
 	//find pipe, split on first pipe
 	parts = NULL;
@@ -30,6 +30,7 @@ t_cmd_info	*parser(char *line, t_list **malloc_list)
 		cmd->type = PIPE;
 		return (cmd);
 	}
+	cmd->type = BIN;
 	set_io_files(line, cmd, malloc_list);
 	return (cmd);
 }

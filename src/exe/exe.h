@@ -12,10 +12,10 @@
 #ifndef EXE_H
 # define EXE_H
 
-# include "../includes/minishell.h"
 # include "../malloc_list/malloc_list.h"
 # include "../utils/utils.h"
 # include <dirent.h>
+# include <errno.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/wait.h>

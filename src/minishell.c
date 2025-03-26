@@ -21,6 +21,7 @@ int	main(int argc, char **argv, char *envp[])
 	//errorhandling
 	app = init_shell(envp);
 	start_shell(app);
-	free_malloc_list(app);
+	free(app->malloc_list);
+	free(app);
 	return (0);
 }

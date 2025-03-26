@@ -18,8 +18,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
 # include "../init/init.h"
+# include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
 # include "../shell/shell.h"
 

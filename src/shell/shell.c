@@ -41,7 +41,7 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 	if (path_abs)
 		workdir_name = extrude_workdir(path_abs);
 	tmp = ft_strjoin(ROOT_PROMPT_PINK, workdir_name);
-	*prompt_addr = ft_strjoin(tmp, "/ $");
+	*prompt_addr = ft_strjoin(tmp, "/ $ \x1b[0m");
 	free(path_abs);
 	free(tmp);
 	return (0);
@@ -49,15 +49,18 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 
 void	start_shell(t_app *app)
 {
-	char	*read_line;
+	char		*read_line;
+	t_cmd_info	*cmd;
 	//TODO: create prompt
 	while (1)
 	{
 		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
+		cmd = parser(read_line, &app->malloc_list);
+		exe(app, cmd);
+		free_malloc_list(app);
 		// FORK -> EXE(PARSER(read_line)):
 		// cleanup
-		ft_printf("%s\n", read_line);
 		free(read_line);
 	}
 }
