@@ -7,3 +7,4 @@ src/exe/test/exe_test
 minishell
 src/libft/libft.a
 **/*.swp
+.DS_Store
