@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char *envp[])
 	//errorhandling
 	app = init_shell(envp);
 	start_shell(app);
-	free(app->malloc_list);
+	//TODO: controlled exit on SIGTER...);
 	free(app);
 	return (0);
 }
