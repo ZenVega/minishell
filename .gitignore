@@ -8,3 +8,5 @@ minishell
 src/libft/libft.a
 **/*.swp
 .DS_Store
+.vscode/*
+.vscode
