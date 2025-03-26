@@ -15,6 +15,8 @@ Here we can create a list of todos with the possibility to assign them and cross
 	-[ ] >>
 	-[ ] <
 	-[ ] << here_doc
+- double outfile
+- double infile (i.E. function accumulate infile) 
 
 ## EXE
 -[x] bin execution

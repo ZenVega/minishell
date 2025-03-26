@@ -25,7 +25,7 @@ char	*extrude_workdir(char *path)
 		return (NULL);
 }
 
-int	set_prompt(char **prompt_addr)
+int	set_prompt(char **prompt_addr, t_list **malloc_list)
 {
 	char	*path_abs;
 	char	*tmp;
@@ -33,6 +33,8 @@ int	set_prompt(char **prompt_addr)
 
 	if (*prompt_addr)
 		free(*prompt_addr);
+	else
+		add_to_malloc_list(malloc_list, *prompt_addr);
 	path_abs = (char *)malloc(10000);
 	path_abs = getcwd(path_abs, 10000);
 	workdir_name = NULL;
@@ -51,7 +53,7 @@ void	start_shell(t_app *app)
 	//TODO: create prompt
 	while (1)
 	{
-		set_prompt(&app->prompt);
+		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
 		// FORK -> EXE(PARSER(read_line)):
 		// cleanup

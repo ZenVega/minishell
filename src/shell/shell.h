@@ -17,6 +17,7 @@
 # include <readline/history.h>
 # include "../includes/types.h"
 # include "../includes/CONSTANTS.h"
+# include "../malloc_list/malloc_list.h"
 
 void	start_shell(t_app *app);
 
