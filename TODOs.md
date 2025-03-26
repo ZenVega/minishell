@@ -15,8 +15,10 @@ Here we can create a list of todos with the possibility to assign them and cross
 	-[ ] >>
 	-[ ] <
 	-[ ] << here_doc
-- double outfile
-- double infile (i.E. function accumulate infile) 
+- [ ] double outfile
+- [ ] double infile (i.E. function accumulate infile) 
+- [ ] close fds in the end
+- [ ] unlink here_doc if used
 
 ## EXE
 -[x] bin execution
