@@ -33,7 +33,7 @@ LIBFT_A = $(LIBFT_DIR)/libft.a
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 
 MAKEALL = make all
 
