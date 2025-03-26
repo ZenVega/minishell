@@ -49,17 +49,20 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 
 void	start_shell(t_app *app)
 {
-	char		*read_line;
-	t_cmd_info	*cmd;
+	char			*read_line;
+	t_cmd_info		*cmd;
+	t_parser_info	p_info;
 	//TODO: create prompt
 	while (1)
 	{
 		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
-		cmd = parser(read_line, &app->malloc_list);
+		//TODO: INIT P_INFO
+		p_info.line = read_line;
+		p_info.infile = 2;
+		cmd = parser(p_info, &app->malloc_list);
 		exe(app, cmd);
 		free_malloc_list(app);
-		// FORK -> EXE(PARSER(read_line)):
 		// cleanup
 		free(read_line);
 	}

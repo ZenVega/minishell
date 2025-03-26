@@ -6,23 +6,24 @@ Here we can create a list of todos with the possibility to assign them and cross
 -[x] define app_struct
 - [x] malloc_list
 - [x] free_malloc_list
+- [ ] exit fnct
 
 ## Parser
-- [ ] readline
+- [x] readline
 - [ ] initial split (CAVE: will have to split on " "/' ' first later)
 - [ ] redirections
-	-[ ] >
-	-[ ] >>
-	-[ ] <
+	-[x] >
+	-[x] >>
+	-[x] <
 	-[ ] << here_doc
 - [ ] double outfile
-- [ ] double infile (i.E. function accumulate infile) 
+- [ ] double infile (i.E. function overwrite infile) 
 - [ ] close fds in the end
 - [ ] unlink here_doc if used
 
 ## EXE
 -[x] bin execution
--[ ] reroute input output to files
+-[x] reroute input output to files
 -[ ] build_in functions
     -[ ] echo
     -[ ] cd

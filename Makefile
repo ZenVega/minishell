@@ -62,6 +62,9 @@ debug: $(NAME)
 test: $(NAME)
 	/bin/bash -c "./$(NAME)"
 
+val_test: $(NAME)
+	/bin/bash -c "valgrind --leak-check=full ./$(NAME)"
+
 norm:
 	norminette $(NAME).c
 	norminette src/*

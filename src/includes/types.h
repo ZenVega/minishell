@@ -35,4 +35,11 @@ typedef struct s_cmd_info
 	char		**args;
 	t_cmd_type	type;
 }	t_cmd_info;
+
+typedef struct s_parser_info
+{
+	int			infile;
+	int			outfile;
+	char		*line;
+}	t_parser_info;
 #endif
