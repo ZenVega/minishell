@@ -16,7 +16,7 @@
 
 //getting the split input
 //looking for > and < to set infile and output
-void	in_out(char *line, t_cmd_info *cmd, t_list **malloc_list)
+void	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list)
 {
 	char **split;
 	

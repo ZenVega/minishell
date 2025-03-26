@@ -17,12 +17,11 @@ t_cmd_info	*cmd_info_init(t_list **malloc_list)
 {
 	t_cmd_info *cmd_info;
 
-	cmd_info = (t_cmd_info *)malloc(sizeof(t_cmd_info));
-	add_to_malloc_list(malloc_list, cmd_info);
+	cmd_info = malloc_and_add_list(malloc_list, sizeof(t_cmd_info));
 	cmd_info->infile = 0;
 	cmd_info->outfile = 1;
 	cmd_info->args = NULL;
-	cmd_info->type = BIN;
+	cmd_info->type = UN;
 
 	return (cmd_info);
 }

@@ -15,7 +15,7 @@ NAME = parser_tester
 SRC = parser_test.c \
 		parser_error.c \
 		cmd_info_init.c \
-		in_out.c \
+		set_io_files.c \
 		infile.c \
 		outfile.c \
 		parser.c \
