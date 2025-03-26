@@ -46,10 +46,10 @@ CFLAGS		= -g -Wall -Wextra -Werror
 all: $(NAME) 
 
 debug: $(NAME)
-	gdb --args ./$(NAME)
+	/bin/bash -c "gdb ./$(NAME)"
 
 test: $(NAME)
-	./$(NAME)
+	/bin/bash -c "./$(NAME)"
 
 norm:
 	norminette $(NAME).c

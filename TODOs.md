@@ -40,3 +40,5 @@ Here we can create a list of todos with the possibility to assign them and cross
 -[ ] open minishell in minishell
 -[ ] echo Hello" $uname"Howareyou?
 -[ ] cm1 > out | cmd2
+-[ ] ls | < infile sort 
+-[ ] exit | exit
