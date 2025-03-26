@@ -6,22 +6,22 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/18 17:03:09 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:00:55 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-#include "init/init.h"
 
 int	main(int argc, char **argv, char *envp[])
 {
 	t_app	*app;
 
-	if (argc != 1)
+	if (argc != 1 || !argv)
 		return (1);
 	//errorhandling
-	ft_printf("Hello %s\n", argv[0]);
 	app = init_shell(envp);
-	free_malloc_list(app);
+	start_shell(app);
+	//TODO: controlled exit on SIGTER...);
+	free(app);
 	return (0);
 }

@@ -80,7 +80,6 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	exe = init_exe(app, cmd->args);
 	if (exe->path)
 	{
-		ft_printf("Found in path %s\n", exe->path);
 		pid = fork();
 		if (pid == 0)
 		{

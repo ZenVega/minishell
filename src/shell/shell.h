@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 16:28:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/25 15:49:59 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/03/25 13:40:03 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/03/25 15:49:52 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-# include <errno.h>
+#ifndef SHELL_H
+# define SHELL_H
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <fcntl.h>
-# include "../init/init.h"
-# include "../libft/libft.h"
+# include "../exe/exe.h"
+# include "../includes/types.h"
+# include "../includes/CONSTANTS.h"
 # include "../malloc_list/malloc_list.h"
-# include "../shell/shell.h"
+# include "../parser/parser.h"
+
+void	start_shell(t_app *app);
 
 #endif

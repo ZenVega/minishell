@@ -10,26 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
 #include "parser.h"
-#include "../malloc_list/malloc_list.h"
-#include "../libft/libft.h"
 
-t_cmd_info	*parser(char *line, t_list **malloc_list)
+t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 {
 	t_cmd_info	*cmd;
 	char		**parts;
-	
+
 	cmd = cmd_info_init(malloc_list);
 	//find pipe, split on first pipe
 	parts = NULL;
-	parts = pipe_split(line, malloc_list);
+	parts = pipe_split(p_info.line, malloc_list);
 	if (parts)
 	{
 		cmd->args = parts;
 		cmd->type = PIPE;
 		return (cmd);
 	}
-	set_io_files(line, cmd, malloc_list);
+	cmd->type = BIN;
+	set_io_files(p_info.line, cmd, malloc_list);
 	return (cmd);
 }

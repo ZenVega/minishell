@@ -55,5 +55,4 @@ void	free_malloc_list(t_app *app)
 {
 	ft_lstclear(&app->malloc_list, free);
 	free(app->malloc_list);
-	free(app);
 }

@@ -19,6 +19,20 @@ CFILES += init.c
 vpath %.c $(SRC_FOLDER)malloc_list
 CFILES += malloc_list.c
 
+vpath %.c $(SRC_FOLDER)parser
+CFILES += cmd_info_init.c
+CFILES += here_doc.c
+CFILES += in_out_utils.c
+CFILES += infile.c
+CFILES += outfile.c
+CFILES += parser.c
+CFILES += parser_error.c
+CFILES += pipe_split.c
+CFILES += set_io_files.c
+
+vpath %.c $(SRC_FOLDER)shell
+CFILES += shell.c
+
 vpath %.c $(SRC_FOLDER)utils
 CFILES += utils.c
 
@@ -43,10 +57,13 @@ CFLAGS		= -g -Wall -Wextra -Werror
 all: $(NAME) 
 
 debug: $(NAME)
-	gdb --args ./$(NAME)
+	/bin/bash -c "gdb ./$(NAME)"
 
 test: $(NAME)
-	./$(NAME)
+	/bin/bash -c "./$(NAME)"
+
+val_test: $(NAME)
+	/bin/bash -c "valgrind --leak-check=full ./$(NAME)"
 
 norm:
 	norminette $(NAME).c
@@ -54,7 +71,7 @@ norm:
 	norminette includes/*
 
 $(NAME): $(OFILES) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(LIBFT) $(INC)
+	$(CC) $(CFLAGS) -lreadline -o $(NAME) $(OFILES) $(LIBFT) $(INC)
 
 $(LIBFT):
 	$(MAKE) bonus -C $(LIBFT_PATH)
