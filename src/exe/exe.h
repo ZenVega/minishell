@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/19 11:06:28 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:51:47 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXE_H
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <sys/types.h>
+# include "../parser/parser.h"
 
 typedef struct s_exe {
 	char	**args;
@@ -31,6 +32,8 @@ typedef struct s_exe {
 int		exe(t_app *app, t_cmd_info *cmd);
 //exe_bin.c
 int		exe_bin(t_app *app, t_cmd_info *cmd);
+//exe_pip
+int		open_pipe(t_app *app, t_cmd_info *cmd);
 //exe_utils.c
 int		is_valid(t_cmd_info *cmd);
 void	reroute_io(int input, int output);
