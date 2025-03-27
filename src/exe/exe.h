@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 10:51:47 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:07:53 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXE_H
@@ -29,14 +29,15 @@ typedef struct s_exe {
 }	t_exe;
 
 //exe.c
-int		exe(t_app *app, t_cmd_info *cmd);
+int				exe(t_app *app, t_cmd_info *cmd);
 //exe_bin.c
-int		exe_bin(t_app *app, t_cmd_info *cmd);
+int				exe_bin(t_app *app, t_cmd_info *cmd);
 //exe_pip
-int		open_pipe(t_app *app, t_cmd_info *cmd);
+int				open_pipe(t_app *app, t_cmd_info *cmd);
 //exe_utils.c
-int		is_valid(t_cmd_info *cmd);
-void	reroute_io(int input, int output);
-int		is_in_path(char *path, char *cmd_name);
+t_parser_info	init_parser_info(int infile, int outfile, char *line);
+int				is_in_path(char *path, char *cmd_name);
+int				is_valid(t_cmd_info *cmd);
+void			reroute_io(int input, int output);
 
 #endif

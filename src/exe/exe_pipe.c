@@ -6,21 +6,11 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:02:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 11:58:27 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:10:07 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
-
-t_parser_info	init_parser_info(int infile, int outfile, char *line)
-{
-	t_parser_info	p_info;
-
-	p_info.infile = infile;
-	p_info.outfile = outfile;
-	p_info.line = line;
-	return (p_info);
-}
 
 int	open_pipe(t_app *app, t_cmd_info *cmd)
 {
@@ -40,11 +30,13 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		{
 			p_info = init_parser_info(cmd->infile, fd[1], cmd->args[0]);
 			exe(app, parser(p_info, &app->malloc_list));
+			exit(0);
 		}
 		else //Parent process - read from child
 		{
 			p_info = init_parser_info(fd[0], cmd->outfile, cmd->args[1]);
 			exe(app, parser(p_info, &app->malloc_list));
+			exit(0);
 			// Check for input file
 		}
 	}
@@ -52,3 +44,4 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		wait(NULL);
 	return (0);
 }
+
