@@ -16,7 +16,6 @@ int	main(int argc, char **argv, char *envp[])
 {
 	t_app	*app;
 
-	close(fd);
 	if (argc != 1 || !argv)
 		return (1);
 	//errorhandling

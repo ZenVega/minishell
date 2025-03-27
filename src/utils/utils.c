@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:24:14 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 16:14:07 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:22:12 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	is_space(char c)
 
 void	exit_with_error(int err)
 {
+	// use fprint f here to print errors!!
 	if (err)
 		perror("Minishell: Process exited with err: ");
 }

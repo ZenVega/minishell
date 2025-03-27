@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/25 16:03:10 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:23:31 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	start_shell(t_app *app)
 		p_info.line = read_line;
 		p_info.infile = 2;
 		cmd = parser(p_info, &app->malloc_list);
-		exe(app, cmd);
+		err = exe(app, cmd);
+		if(err)
+			exit_with_error(err);
 		free_malloc_list(app);
 		// cleanup
 		free(read_line);
