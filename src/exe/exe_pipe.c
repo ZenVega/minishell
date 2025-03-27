@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:02:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 11:08:02 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:58:27 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,13 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 	int				fd[2];
 	t_parser_info	p_info;
 
+	if (pipe(fd) < 0)
+		return (errno = SIGPIPE, errno);
 	pids[0] = fork();
 	if (pids[0] == -1)
-	{
-		perror("fork");
-		return (1);
-	}
-	// TODO: error check
+		return (perror("fork"), 1);
 	if (pids[0] == 0)
 	{
-		if (pipe(fd) < 0)
-			return (errno = SIGPIPE, errno);
 		pids[1] = fork();
 		if (pids[1] == 0) //Child process - write to parent
 		{
