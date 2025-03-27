@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:23:22 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 16:56:00 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:11:46 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,11 @@ void	ft_putull_base(unsigned long long nbr,
 int		ft_printnbr(int fd, long long nbr);
 int		ft_printprcnt(int fd);
 int		ft_print_ptr(int fd, unsigned long long ptr);
+
+// ft_putnbr_base_fd
+void	ft_putull_base_fd(int fd, unsigned long long nbr,
+			char *base, int cnt);
+int		ft_get_base(char *base);
+int		ft_putnbr_base_fd(int fd, long long nbr, char *base);
 
 #endif

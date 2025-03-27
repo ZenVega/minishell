@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:57:28 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 16:59:35 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:14:05 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,6 @@ int	ft_printptr(int fd, void *ptr)
 		temp /= 16;
 		len++;
 	}
-	ft_putull_base((unsigned long long)ptr, "0123456789abcdef", 0, 16);
+	ft_putull_base_fd(fd, (unsigned long long)ptr, "0123456789abcdef", 0);
 	return (len);
-}
-
-void	ft_putull_base(unsigned long long nbr,
-		char *base, int cnt, int radix)
-{
-	unsigned long long	div;
-	unsigned long long	mod;
-
-	div = nbr / radix;
-	mod = nbr % radix;
-	if (div)
-	{
-		cnt++;
-		ft_putull_base(div, base, cnt, radix);
-	}
-	write(1, &base[mod], 1);
 }

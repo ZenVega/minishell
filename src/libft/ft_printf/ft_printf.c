@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:48:02 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 16:58:45 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:13:16 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ static int	print_conversion(int fd, char co, va_list arg)
 	else if (co == 'p')
 		return (ft_printptr(fd, va_arg(arg, void *)));
 	else if (co == 'd' || co == 'i')
-		return (ft_putnbr_base(fd, va_arg(arg, int), "0123456789"));
+		return (ft_putnbr_base_fd(fd, va_arg(arg, int), "0123456789"));
 	else if (co == '%')
 		return (ft_printprcnt(fd));
 	else if (co == 'u')
-		return (ft_putnbr_base(fd, va_arg(arg, unsigned int), "0123456789"));
+		return (ft_putnbr_base_fd(fd, va_arg(arg, unsigned int), "0123456789"));
 	else if (co == 'x')
-		return (ft_putnbr_base(fd, va_arg(arg, unsigned int), "0123456789abcdef"));
+		return (
+			ft_putnbr_base_fd(fd, va_arg(arg, unsigned int), "0123456789abcdef"));
 	else if (co == 'X')
-		return (ft_putnbr_base(fd, va_arg(arg, unsigned int), "0123456789ABCDEF"));
+		return (
+			ft_putnbr_base_fd(fd, va_arg(arg, unsigned int), "0123456789ABCDEF"));
 	return (0);
 }
 

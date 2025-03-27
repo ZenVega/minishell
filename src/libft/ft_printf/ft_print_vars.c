@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:47:57 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 16:50:19 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:14:50 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_print_ptr(int fd, unsigned long long ptr)
 		len += write(fd, "0", 1);
 	else
 	{
-		ft_putull_base(ptr, "0123456789abcdef", 0, 16);
+		ft_putull_base_fd(fd, ptr, "0123456789abcdef", 0);
 		len += ft_ptr_len(ptr);
 	}
 	return (len);

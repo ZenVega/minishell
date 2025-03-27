@@ -6,7 +6,7 @@
 #    By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 10:42:30 by uschmidt          #+#    #+#              #
-#    Updated: 2025/03/27 16:31:50 by uschmidt         ###   ########.fr        #
+#    Updated: 2025/03/27 17:08:01 by uschmidt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ ft_substr.c\
 ft_tolower.c\
 ft_toupper.c\
 ft_putnbr_base.c\
+ft_printf/ft_putnbr_base_fd.c\
 ft_printf/ft_printf.c\
 ft_printf/ft_print_utils.c\
 ft_printf/ft_print_vars.c\

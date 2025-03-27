@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 16:13:15 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:21:19 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char *envp[])
 {
 	t_app	*app;
 
-	ft_printf("Hello shello");
+	close(fd);
 	if (argc != 1 || !argv)
 		return (1);
 	//errorhandling
