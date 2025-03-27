@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/19 11:20:10 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:03:49 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,11 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 			exit(1);
 		}
 		wait(&status);
+		if (cmd->infile != 0)
+			close(cmd->infile);
+		if (cmd->outfile != 1)
+			close(cmd->outfile);
+		//TODO: close FDs?
 	}
 	else
 	{

@@ -6,11 +6,21 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:35 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/19 11:06:56 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:06:50 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
+
+t_parser_info	init_parser_info(int infile, int outfile, char *line)
+{
+	t_parser_info	p_info;
+
+	p_info.infile = infile;
+	p_info.outfile = outfile;
+	p_info.line = line;
+	return (p_info);
+}
 
 //  all possible checks
 //  cmd_info has all necessary keys set
