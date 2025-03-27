@@ -6,33 +6,33 @@
 /*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:57:28 by uschmidt          #+#    #+#             */
-/*   Updated: 2024/11/27 16:11:25 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:59:35 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_printchar(char c)
+int	ft_printchar(int fd, char c)
 {
-	ft_putchar_fd(c, 1);
+	ft_putchar_fd(c, fd);
 	return (1);
 }
 
-int	ft_printstr(char *str)
+int	ft_printstr(int fd, char *str)
 {
 	int	len;
 
 	if (!str)
 	{
-		ft_putstr_fd("(null)", 1);
+		ft_putstr_fd("(null)", fd);
 		return (6);
 	}
 	len = ft_strlen(str);
-	ft_putstr_fd(str, 1);
+	ft_putstr_fd(str, fd);
 	return (len);
 }
 
-int	ft_printptr(void *ptr)
+int	ft_printptr(int fd, void *ptr)
 {
 	int					len;
 	unsigned long long	temp;
@@ -41,10 +41,10 @@ int	ft_printptr(void *ptr)
 	temp = (unsigned long long)ptr;
 	if (ptr == NULL)
 	{
-		ft_putstr_fd("(nil)", 1);
+		ft_putstr_fd("(nil)", fd);
 		return (5);
 	}
-	ft_putstr_fd("0x", 1);
+	ft_putstr_fd("0x", fd);
 	while (temp)
 	{
 		temp /= 16;

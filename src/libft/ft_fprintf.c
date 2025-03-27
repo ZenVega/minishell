@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_fprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:48:02 by uschmidt          #+#    #+#             */
-/*   Updated: 2024/11/27 10:47:37 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:09:10 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 static int	print_conversion(char co, va_list arg)
 {
@@ -33,13 +33,13 @@ static int	print_conversion(char co, va_list arg)
 	return (0);
 }
 
-int	ft_printf(const char *str, ...)
+int	ft_fprintf(int outfile, const char *str, ...)
 {
 	va_list		arg;
 	int			i;
 	int			counter;
 
-	if (!str)
+	if (!str || !outfile)
 		return (-1);
 	i = 0;
 	counter = 0;
