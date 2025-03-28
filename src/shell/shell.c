@@ -50,6 +50,7 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 void	start_shell(t_app *app)
 {
 	char			*read_line;
+	int				err;
 	t_cmd_info		*cmd;
 	t_parser_info	p_info;
 	//TODO: create prompt
@@ -61,8 +62,9 @@ void	start_shell(t_app *app)
 		p_info.line = read_line;
 		p_info.infile = 2;
 		cmd = parser(p_info, &app->malloc_list);
+		//TODO: What is the parsers error return?
 		err = exe(app, cmd);
-		if(err)
+		if (err)
 			exit_with_error(err);
 		free_malloc_list(app);
 		// cleanup

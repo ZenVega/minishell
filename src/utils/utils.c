@@ -27,7 +27,6 @@ int	is_space(char c)
 
 void	exit_with_error(int err)
 {
-	// use fprint f here to print errors!!
-	if (err)
-		perror("Minishell: Process exited with err: ");
+	ft_fprintf(2, "Minishell: Process exited with err: %d, %s\n",
+		err, strerror(err));
 }

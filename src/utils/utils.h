@@ -15,7 +15,10 @@
 
 # include <errno.h>
 # include <stdio.h>
+# include <string.h>
+# include "../libft/libft.h"
 
-int	is_space(char c);
+int		is_space(char c);
+void	exit_with_error(int err);
 
 #endif

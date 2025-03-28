@@ -194,8 +194,8 @@ The scope of dup is only within the process and gets lost after it. the next pro
 
 - A function might have a return value. that can be identified as invalid, line '-1' or 'NULL'. If that function returns one of these, the calling function can react accordingly.
 - If the return value of a function can validly be for example '-1' or 'NULL', we can make use of the errno. This global variable can be included via <errno.h> and reached from every file and scope of the program.
-- Certain errornumbers have predefined meanings. Check the list [here] {https://man7.org/linux/man-pages/man3/errno.3.html}
-
+- Certain errornumbers have predefined meanings. Check the list [here] 
+{https://en.wikipedia.org/wiki/Errno.h}
 - Functions to access these errors are perror(char *str) and strerror(errno);
 
 - perror(char *str) Outputs whatever message is passed to the function as an Argument, followed by the error message of the current errno.
