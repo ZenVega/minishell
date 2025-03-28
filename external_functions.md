@@ -187,3 +187,22 @@ The scope of dup is only within the process and gets lost after it. the next pro
 - removes a link - deletes a filename
 - if it is the last link to the filename, it removes the file name itself
 - If the name was the last link to a file but any processes still have the file open, the file will remain in existence until the last file descriptor referring to it is closed. -- I think this means for us, that theparser can actually open the file and directly unlink it. As soon as exe closes the fd the file will be removed
+
+# error_handling
+
+## Whats the situation
+
+- A function might have a return value. that can be identified as invalid, line '-1' or 'NULL'. If that function returns one of these, the calling function can react accordingly.
+- If the return value of a function can validly be for example '-1' or 'NULL', we can make use of the errno. This global variable can be included via <errno.h> and reached from every file and scope of the program.
+- Certain errornumbers have predefined meanings. Check the list [here] 
+{https://en.wikipedia.org/wiki/Errno.h}
+- Functions to access these errors are perror(char *str) and strerror(errno);
+
+- perror(char *str) Outputs whatever message is passed to the function as an Argument, followed by the error message of the current errno.
+- strerror(errno) returns the error message of the current errornumber to be used in the current context.
+
+## What is the preferred procedure
+
+- If a function exits due to an error, we want to stop all predecessing processes, except the minishell program and clean the allocated data.
+- A descriptive error message should be printed.
+- The program prompts for a new input

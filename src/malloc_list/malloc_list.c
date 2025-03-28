@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
+#include "malloc_list.h"
 
 //to be used instead of malloc
 void	*malloc_and_add_list(t_list **malloc_list, size_t size)
@@ -21,7 +20,7 @@ void	*malloc_and_add_list(t_list **malloc_list, size_t size)
 
 	addr = malloc(size);
 	if (!addr)
-		return (NULL);	
+		return (NULL);
 	new_node = ft_lstnew(addr);
 	ft_lstadd_back(malloc_list, new_node);
 	return (addr);

@@ -82,7 +82,7 @@ $(OBJ_FOLDER)%.o: %.c $(DEPS)
 
 clean:
 	rm -f $(OFILES)
-	rm -fd $(OBJ_FOLDER)
+	rm -frd $(OBJ_FOLDER)
 	find $(SRC_FOLDER) -name "*.o" -delete
 	$(MAKE) -C $(LIBFT_PATH) clean
 

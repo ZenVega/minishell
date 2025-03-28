@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_putnbr_base_fd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 10:02:03 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 17:02:36 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:16:06 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 int	ft_get_base(char *base)
 {
@@ -37,7 +37,25 @@ int	ft_get_base(char *base)
 	return (counter);
 }
 
-int	ft_putnbr_base(long long nbr, char *base)
+void	ft_putull_base_fd(int fd, unsigned long long nbr,
+		char *base, int cnt)
+{
+	unsigned long long	div;
+	unsigned long long	mod;
+	int					radix;
+
+	radix = ft_get_base(base);
+	div = nbr / radix;
+	mod = nbr % radix;
+	if (div)
+	{
+		cnt++;
+		ft_putull_base_fd(fd, div, base, cnt);
+	}
+	write(fd, &base[mod], 1);
+}
+
+int	ft_putnbr_base_fd(int fd, long long nbr, char *base)
 {
 	unsigned long long	len;
 	unsigned long long	temp;
@@ -48,7 +66,7 @@ int	ft_putnbr_base(long long nbr, char *base)
 		len++;
 	if (nbr < 0)
 	{
-		write(1, "-", 1);
+		write(1, "-", fd);
 		nbr = -nbr;
 		len++;
 	}
@@ -61,6 +79,6 @@ int	ft_putnbr_base(long long nbr, char *base)
 		temp /= radix;
 		len++;
 	}
-	ft_putull_base(nbr, base, 0, radix);
+	ft_putull_base_fd(fd, nbr, base, 0);
 	return ((int)len);
 }

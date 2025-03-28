@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:41:43 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 14:33:38 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:53:58 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,13 @@ int		ft_lstsize(t_list *lst);
 
 //ft_printf
 int		ft_printf(const char *str, ...);
+int		ft_fprintf(int fd, const char *str, ...);
 int		ft_putnbr_base(long long nbr, char *base);
 void	ft_putull_base(unsigned long long nbr, char *base, int cnt, int radix);
-int		ft_printptr(void *ptr);
-int		ft_printchar(char c);
-int		ft_printstr(char *c);
-int		ft_printnbr(long long nbr);
-int		ft_printprcnt(void);
-int		ft_print_ptr(unsigned long long ptr);
+int		ft_printptr(int fd, void *ptr);
+int		ft_printchar(int fd, char c);
+int		ft_printstr(int fd, char *c);
+int		ft_printnbr(int fd, long long nbr);
+int		ft_printprcnt(int fd);
+int		ft_print_ptr(int fd, unsigned long long ptr);
 #endif
