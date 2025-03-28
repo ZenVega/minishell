@@ -53,14 +53,13 @@ void	start_shell(t_app *app)
 	int				err;
 	t_cmd_info		*cmd;
 	t_parser_info	p_info;
-	//TODO: create prompt
+
 	while (1)
 	{
 		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
 		//TODO: INIT P_INFO
 		p_info.line = read_line;
-		p_info.infile = 2;
 		cmd = parser(p_info, &app->malloc_list);
 		//TODO: What is the parsers error return?
 		err = exe(app, cmd);

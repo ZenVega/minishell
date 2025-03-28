@@ -19,7 +19,7 @@
 int	is_valid(t_cmd_info *cmd)
 {
 	if (cmd->type == UNDEFINED)
-		return (errno = EINVAL, errno);
+		return (errno = EINVAL, -1);
 	return (0);
 }
 

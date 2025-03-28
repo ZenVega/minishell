@@ -112,10 +112,10 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 		{
 			reroute_io(cmd->infile, cmd->outfile);
 			execve(exe->path, cmd->args, app->envp);
-			//execve(exe->path, cmd->args, app->envp);
 			perror("execve failed");
 			exit(errno);
 		}
+		//TODO: understand what's happening with wait and waitpid. @jhelbig can u help?
 		wait(&status);
 	}
 	else
@@ -123,5 +123,5 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 		ft_printf("Not found in path\n");
 		return (exe_buildin(cmd->args));
 	}
-	return (errno);
+	return (0);
 }
