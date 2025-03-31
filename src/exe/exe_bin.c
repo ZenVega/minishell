@@ -104,7 +104,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	//TODO: build ins will be checket first, before allocating path memory
 	exe = init_exe(app, cmd->args);
 	if (!exe)
-		return (1);
+		return (-1);
 	if (exe->path)
 	{
 		pid = fork();
@@ -120,9 +120,6 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 			return (status);
 	}
 	else
-	{
-		ft_printf("Not found in path\n");
-		return (exe_buildin(cmd->args));
-	}
+		return (-1);
 	return (0);
 }
