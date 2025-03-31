@@ -20,14 +20,14 @@ int	exe(t_app *app, t_cmd_info *cmd)
 {
 	int	err;
 
-	err = 0;
-	if (!is_valid(cmd))
-		return (1);
+	err = is_valid(cmd);
+	if (err)
+		return (err);
 //		on_error();
 	if (cmd->type == BIN)
 		return (exe_bin(app, cmd));
 	else if (cmd->type == PIPE)
 		return (open_pipe(app, cmd));
 	//TODO: CLEANUP 
-	return (1);
+	return (err);
 }
