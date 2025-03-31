@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/21 14:08:18 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/03/31 13:27:10 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 // finding > in splits and set infile
 //options: 1) >infile 2) > infile
 
-void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list)
+// circling through all the argument parts, multiple infiles are just overwritten by following
+int	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list)
 {
 	int		i;
 
@@ -26,8 +27,9 @@ void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list)
 	{	
 		if (args[i][0] == '<')
 			found_infile(args, i, cmd, malloc_list);	
-	i++;
-	}	
+		i++;
+	}
+	return (0);	
 }
 
 void    found_infile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
