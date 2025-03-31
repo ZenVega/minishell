@@ -33,6 +33,7 @@ typedef struct s_cmd_info
 	int			infile;
 	int			outfile;
 	char		**args;
+	char		*error_msg;
 	t_cmd_type	type;
 }	t_cmd_info;
 

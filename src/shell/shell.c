@@ -58,14 +58,8 @@ void	start_shell(t_app *app)
 	{
 		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
-<<<<<<< HEAD
 		p_info = init_parser_info(0, 1, read_line);
-=======
-		//TODO: INIT P_INFO
-		p_info.line = read_line;
->>>>>>> main
 		cmd = parser(p_info, &app->malloc_list);
-		//TODO: What is the parsers error return?
 		err = exe(app, cmd);
 		if (err)
 			exit_with_error(cmd->args[0]);
