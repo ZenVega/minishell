@@ -25,7 +25,6 @@ int	is_space(char c)
 	return (0);
 }
 
-// TODO: should read: minishell: <cmd name> : <error>
 void	exit_with_error(char *cmd_name)
 {
 	ft_fprintf(2, "minishell: %s: %s\n",
