@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/25 16:03:10 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:23:31 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,21 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 void	start_shell(t_app *app)
 {
 	char			*read_line;
+	int				err;
 	t_cmd_info		*cmd;
 	t_parser_info	p_info;
-	//TODO: create prompt
+
 	while (1)
 	{
 		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
 		//TODO: INIT P_INFO
 		p_info.line = read_line;
-		p_info.infile = 2;
 		cmd = parser(p_info, &app->malloc_list);
-		exe(app, cmd);
+		//TODO: What is the parsers error return?
+		err = exe(app, cmd);
+		if (err)
+			exit_with_error(cmd->args[0]);
 		free_malloc_list(app);
 		// cleanup
 		free(read_line);

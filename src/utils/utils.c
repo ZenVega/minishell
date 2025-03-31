@@ -6,11 +6,11 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:24:14 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/17 11:28:59 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:22:12 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// I don't really have a good idea how to structure out utilities right now. My suggestion would be, to just dump every helper function in this file for now. no matter the Norm and later we organize it. But I am happy for other ideas.
+#include "utils.h" 
 
 int	is_space(char c)
 {
@@ -23,4 +23,11 @@ int	is_space(char c)
 	) 
 		return (1);
 	return (0);
+}
+
+// TODO: should read: minishell: <cmd name> : <error>
+void	exit_with_error(char *cmd_name)
+{
+	ft_fprintf(2, "minishell: %s: %s\n",
+		cmd_name, strerror(errno));
 }
