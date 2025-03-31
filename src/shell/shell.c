@@ -61,8 +61,6 @@ void	start_shell(t_app *app)
 		p_info = init_parser_info(0, 1, read_line);
 		cmd = parser(p_info, &app->malloc_list);
 		err = exe(app, cmd);
-		if (err)
-			exit_with_error(cmd->args[0]);
 		free_malloc_list(app);
 		// cleanup
 		free(read_line);
