@@ -19,6 +19,5 @@
 # include "../libft/libft.h"
 
 int		is_space(char c);
-void	exit_with_error(int err);
-
+void	exit_with_error(char *cmd_name);
 #endif

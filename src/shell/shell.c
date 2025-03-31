@@ -64,7 +64,7 @@ void	start_shell(t_app *app)
 		//TODO: What is the parsers error return?
 		err = exe(app, cmd);
 		if (err)
-			exit_with_error(err);
+			exit_with_error(cmd->args[0]);
 		free_malloc_list(app);
 		// cleanup
 		free(read_line);

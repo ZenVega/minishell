@@ -25,8 +25,9 @@ int	is_space(char c)
 	return (0);
 }
 
-void	exit_with_error(int err)
+// TODO: should read: minishell: <cmd name> : <error>
+void	exit_with_error(char *cmd_name)
 {
-	ft_fprintf(2, "Minishell: Process exited with err: %d, %s\n",
-		err, strerror(err));
+	ft_fprintf(2, "minishell: %s: %s\n",
+		cmd_name, strerror(errno));
 }

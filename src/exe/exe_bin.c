@@ -90,7 +90,7 @@ t_exe	*init_exe(t_app *app, char **args)
 		paths++;
 	}
 	if (!found)
-		return (errno = EPERM, NULL);
+		return (errno = ENOENT, NULL);
 	return (exe);
 }
 
@@ -104,7 +104,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	//TODO: build ins will be checket first, before allocating path memory
 	exe = init_exe(app, cmd->args);
 	if (!exe)
-		return (errno);
+		return (1);
 	if (exe->path)
 	{
 		pid = fork();
@@ -115,8 +115,9 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 			perror("execve failed");
 			exit(errno);
 		}
-		//TODO: understand what's happening with wait and waitpid. @jhelbig can u help?
-		wait(&status);
+		//TODO: how to test this?
+		if (waitpid(pid, &status, 0) == -1)
+			return (status);
 	}
 	else
 	{
