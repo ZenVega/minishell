@@ -33,9 +33,11 @@ typedef struct s_cmd_info
 	int			infile;
 	int			outfile;
 	char		**args;
+	int			error_msg;
 	t_cmd_type	type;
 }	t_cmd_info;
 
+//TODO: error msg is an integer. We need to include an error message lookup table
 typedef struct s_parser_info
 {
 	int			infile;

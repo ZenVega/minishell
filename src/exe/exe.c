@@ -25,9 +25,11 @@ int	exe(t_app *app, t_cmd_info *cmd)
 		return (err);
 //		on_error();
 	if (cmd->type == BIN)
-		return (exe_bin(app, cmd));
+		err = exe_bin(app, cmd);
 	else if (cmd->type == PIPE)
-		return (open_pipe(app, cmd));
+		err = open_pipe(app, cmd);
 	//TODO: CLEANUP 
+	if (err)
+		exit_with_error(cmd->args[0]);
 	return (err);
 }
