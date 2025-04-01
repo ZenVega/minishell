@@ -62,7 +62,6 @@ void	start_shell(t_app *app)
 		cmd = parser(p_info, &app->malloc_list);
 		err = exe(app, cmd);
 		free_malloc_list(app);
-		// cleanup
 		free(read_line);
 	}
 }

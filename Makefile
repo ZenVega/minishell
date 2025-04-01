@@ -64,7 +64,7 @@ test: $(NAME)
 	/bin/bash -c "./$(NAME)"
 
 val_test: $(NAME)
-	/bin/bash -c "valgrind --leak-check=full ./$(NAME)"
+	/bin/bash -c "valgrind --leak-check=full --track-fds=yes ./$(NAME)"
 
 norm:
 	norminette $(NAME).c

@@ -120,7 +120,6 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 			close(cmd->infile);
 		if (cmd->outfile != 1)
 			close(cmd->outfile);
-		//TODO: close FDs?
 	}
 	else
 		return (-1);
