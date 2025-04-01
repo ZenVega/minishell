@@ -28,8 +28,8 @@ t_parser_info	init_parser_info(int infile, int outfile, char *line)
 //  ...
 int	is_valid(t_cmd_info *cmd)
 {
-	if (cmd->type != 0)
-		return (1);
+	if (cmd->type == UNDEFINED)
+		return (errno = EINVAL, -1);
 	return (0);
 }
 
