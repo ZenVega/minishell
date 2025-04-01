@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:47 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/19 11:24:39 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:32:04 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ int	exe(t_app *app, t_cmd_info *cmd)
 		return (err);
 //		on_error();
 	if (cmd->type == BIN)
-	{
-		err = exe_bin(app, cmd);
-		return (err);
-	}
+		return (exe_bin(app, cmd));
+	else if (cmd->type == PIPE)
+		return (open_pipe(app, cmd));
 	//TODO: CLEANUP 
 	return (err);
 }

@@ -11,6 +11,7 @@ CFILES += $(NAME).c
 vpath %.c $(SRC_FOLDER)exe
 CFILES += exe.c
 CFILES += exe_bin.c
+CFILES += exe_pipe.c
 CFILES += exe_utils.c
 
 vpath %.c $(SRC_FOLDER)init
