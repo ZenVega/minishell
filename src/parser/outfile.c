@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:23 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/01 09:43:15 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/01 10:05:59 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    found_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 
 void    truncate_outfile(char *file_name, t_cmd_info *cmd, t_list **malloc_list)
 {
-    if (cmd->outfile != 1)
+    if (cmd->outfile != STDOUT_FILENO)
 		close(cmd->outfile);
 	cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (cmd->outfile < 0)
@@ -65,6 +65,8 @@ void append_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 {
 	char	*file_name;
 
+	if (cmd->outfile != STDOUT_FILENO)
+		close(cmd->outfile);
     // case >> outfile
     if (ft_strlen(args[i]) == 2)
     {
