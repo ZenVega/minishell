@@ -24,7 +24,6 @@
 
 typedef struct s_exe {
 	char	**args;
-	char	**envp;
 	char	*cmd_name;
 	char	*path;
 }	t_exe;

@@ -71,15 +71,7 @@ t_exe	*init_exe(t_app *app, char **args)
 
 	found = 0;
 	exe = (t_exe *)malloc_and_add_list(&app->malloc_list, sizeof(t_exe));
-	exe->args = dup_str_arr(args);
-	if (!exe->args)
-		return (NULL);
-	exe->envp = dup_str_arr(app->envp);
-	if (!exe->envp)
-	{
-		free_list(exe->args);
-		return (NULL);
-	}
+	exe->args = args;
 	exe->path = NULL;
 	exe->cmd_name = args[0];
 	paths = get_paths(exe->cmd_name);
@@ -91,7 +83,7 @@ t_exe	*init_exe(t_app *app, char **args)
 		{
 			found = 1;
 			exe->path = *paths;
-			add_to_malloc_list(&app->malloc_list, exe->path);
+			add_to_malloc_list(&app->malloc_list, *paths);
 		}
 		else
 			free(*paths);
@@ -102,14 +94,13 @@ t_exe	*init_exe(t_app *app, char **args)
 	return (exe);
 }
 
-void	free_exe(t_exe *exe)
+int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 {
-	free_list(exe->args);
-	free_list(exe->envp);
-	free(exe->path);
-	free(exe);
+	reroute_io(cmd->infile, cmd->outfile);
+	execve(exe->path, exe->args, app->envp);
+	perror("execve failed");
+	exit(errno);
 }
-
 // execute with fnct
 int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
@@ -124,15 +115,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	{
 		pid = fork();
 		if (pid == 0)
-		{
-			reroute_io(cmd->infile, cmd->outfile);
-			free_malloc_list(app);
-			free(app);
-			free(cmd);
-			execve(exe->path, exe->args, exe->envp);
-			perror("execve failed");
-			exit(errno);
-		}
+			call_execve(exe, app, cmd);
 		waitpid(pid, NULL, 0);
 		if (cmd->infile != 0)
 			close(cmd->infile);
@@ -140,9 +123,6 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 			close(cmd->outfile);
 	}
 	else
-	{
-		free(exe);
 		return (-1);
-	}
 	return (0);
 }

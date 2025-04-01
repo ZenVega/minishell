@@ -63,6 +63,7 @@ char	**dup_str_arr(char **arr)
 		dup[i] = ft_strdup(arr[i]);
 		if (!dup[i])
 			return (free_list(dup));
+		i++;
 	}
 	dup[i] = NULL;
 	return (dup);
