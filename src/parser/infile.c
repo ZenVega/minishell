@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/21 14:08:18 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/01 10:09:31 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 // finding > in splits and set infile
 //options: 1) >infile 2) > infile
 
-void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list)
+// circling through all the argument parts, multiple infiles are just overwritten by following
+int	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list)
 {
 	int		i;
 
@@ -26,8 +27,9 @@ void	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list)
 	{	
 		if (args[i][0] == '<')
 			found_infile(args, i, cmd, malloc_list);	
-	i++;
-	}	
+		i++;
+	}
+	return (0);	
 }
 
 void    found_infile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
@@ -57,6 +59,8 @@ void    found_infile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 
 void    simple_infile(char *file_name, t_cmd_info *cmd, t_list **malloc_list)
 {
+	if (cmd->infile != STDIN_FILENO)
+		close(cmd->infile);
     cmd->infile = open(file_name, O_RDONLY);
 	if (cmd->infile < 0)
 		no_infile(file_name, malloc_list);
