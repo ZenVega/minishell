@@ -15,7 +15,7 @@
 
 t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info)
 {
-	t_cmd_info *cmd_info;
+	t_cmd_info	*cmd_info;
 
 	cmd_info = malloc_and_add_list(malloc_list, sizeof(t_cmd_info));
 	if (!cmd_info)
@@ -24,6 +24,5 @@ t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info)
 	cmd_info->outfile = p_info->outfile;
 	cmd_info->args = NULL;
 	cmd_info->type = UNDEFINED;
-
 	return (cmd_info);
 }

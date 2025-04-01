@@ -18,7 +18,6 @@ int	main(int argc, char **argv, char *envp[])
 
 	if (argc != 1 || !argv)
 		return (1);
-	//errorhandling
 	app = init_shell(envp);
 	start_shell(app);
 	//TODO: controlled exit on SIGTER...);

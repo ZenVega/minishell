@@ -13,6 +13,7 @@
 #ifndef TYPES_H
 # define TYPES_H
 # include "../libft/libft.h"
+# include "CONSTANTS.h"
 
 typedef struct s_app
 {
@@ -42,4 +43,10 @@ typedef struct s_parser_info
 	int			outfile;
 	char		*line;
 }	t_parser_info;
+
+typedef struct s_err_info {
+	t_error_code	code;
+	char			*message;
+}	t_err_info;
+
 #endif

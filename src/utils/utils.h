@@ -20,4 +20,6 @@
 
 int		is_space(char c);
 void	exit_with_error(char *cmd_name);
+void	*free_list(char **list);
+char	**dup_str_arr(char **arr);
 #endif

@@ -30,3 +30,40 @@ void	exit_with_error(char *cmd_name)
 	ft_fprintf(2, "minishell: %s: %s\n",
 		cmd_name, strerror(errno));
 }
+
+void	*free_list(char **list)
+{
+	int		i;
+
+	i = 0;
+	while (list[i])
+	{
+		free(list[i]);
+		i++;
+	}
+	free(list);
+	list = NULL;
+	return (list);
+}
+
+char	**dup_str_arr(char **arr)
+{
+	int		i;
+	char	**dup;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	dup = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (arr[i])
+	{
+		dup[i] = ft_strdup(arr[i]);
+		if (!dup[i])
+			return (free_list(dup));
+	}
+	dup[i] = NULL;
+	return (dup);
+}
