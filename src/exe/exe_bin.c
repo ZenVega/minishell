@@ -99,7 +99,6 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
 	int		pid;
-	int		status;
 
 	//TODO: build ins will be checket first, before allocating path memory
 	exe = init_exe(app, cmd->args);
@@ -115,8 +114,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 			perror("execve failed");
 			exit(errno);
 		}
-		if (waitpid(pid, &status, 0) == -1)
-			return (status);
+		waitpid(pid, NULL, 0);
 		//TODO: how to test this?
 		if (cmd->infile != 0)
 			close(cmd->infile);

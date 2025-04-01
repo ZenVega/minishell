@@ -19,13 +19,14 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 	t_parser_info	p_info;
 	int				err;
 
-	if (pipe(fd) < 0)
-		return (-1);
+	err = 0;
 	pids[0] = fork();
 	if (pids[0] == -1)
 		return (-1);
 	if (pids[0] == 0)
 	{
+		if (pipe(fd) < 0)
+			return (-1);
 		pids[1] = fork();
 		if (pids[1] == -1)
 			return (-1);
@@ -45,6 +46,6 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		}
 	}
 	else
-		waitpid(pids[0], &err, 0);
+		waitpid(pids[0], NULL, 0);
 	return (err);
 }
