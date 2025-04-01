@@ -37,11 +37,9 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 			p_info = init_parser_info(fd[0], cmd->outfile, cmd->args[1]);
 			exe(app, parser(p_info, &app->malloc_list));
 			exit(0);
-			// Check for input file
 		}
 	}
 	else
 		wait(NULL);
 	return (0);
 }
-
