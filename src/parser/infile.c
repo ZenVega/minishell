@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/31 13:27:10 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/01 10:09:31 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void    found_infile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 
 void    simple_infile(char *file_name, t_cmd_info *cmd, t_list **malloc_list)
 {
+	if (cmd->infile != STDIN_FILENO)
+		close(cmd->infile);
     cmd->infile = open(file_name, O_RDONLY);
 	if (cmd->infile < 0)
 		no_infile(file_name, malloc_list);
