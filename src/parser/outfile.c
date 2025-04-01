@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:23 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/01 10:05:59 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:54:36 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,26 @@
 #include "parser.h"
 #include "../malloc_list/malloc_list.h"
 
-void	set_outfile(char **args, t_cmd_info *cmd, t_list **malloc_list)
+int	set_outfile(char **args, t_cmd_info *cmd)
 {
 	int		i;
+	int		err;
 
 	i = 0;
 	while (args[i])
 	{	
 		if (args[i][0] == '>')
-            found_outfile(args, i, cmd, malloc_list);
-	i++;
-	}	
+        {
+			err = found_outfile(args, i, cmd);
+			if (err != 0)
+				return (err);
+		}
+		i++;
+	}
+	return (0);	
 }
 
-void    found_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
+int    found_outfile(char **args, int i, t_cmd_info *cmd)
 {
     char    *file_name;
 
@@ -37,31 +43,33 @@ void    found_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 		if (args[i + 1])
 			file_name = args[i + 1];
 		else
-			parse_error_near_nl(malloc_list);
-        truncate_outfile(file_name, cmd, malloc_list);
+			return (301);
+        return (truncate_outfile(file_name, cmd));
 	}
 	else if (ft_strlen(args[i]) > 1)
 	{
 	    // case >outfile
 		if (args[i][1] != '>')
-            truncate_outfile(args[i] + 1, cmd, malloc_list);
+            return (truncate_outfile(args[i] + 1));
         //case_append outfile >>
 		else if (args[i][1] == '>')
-            append_outfile(args, i, cmd, malloc_list);
-	}	
+            return (append_outfile(args, i, cmd));
+	}
+	return (0);
 }
 
-void    truncate_outfile(char *file_name, t_cmd_info *cmd, t_list **malloc_list)
+int	truncate_outfile(char *file_name, t_cmd_info *cmd)
 {
     if (cmd->outfile != STDOUT_FILENO)
 		close(cmd->outfile);
 	cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (cmd->outfile < 0)
         //could not open outfile error here
-		no_infile(file_name, malloc_list);
+		return (304);
+	return (0);
 }
 
-void append_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
+int	append_outfile(char **args, int i, t_cmd_info *cmd)
 {
 	char	*file_name;
 
@@ -73,16 +81,17 @@ void append_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
         if (args[i + 1])
 			file_name = args[i + 1];
         else
-			parse_error_near_nl(malloc_list);
+			return (301);
 		cmd->outfile = open(file_name, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (cmd->outfile < 0)
-			no_infile(file_name, malloc_list);
+			return (304);
     }
     // case >>outfile
     else if (ft_strlen(args[i]) > 2)
     {
 		cmd->outfile = open(args[i] + 2, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (cmd->outfile < 0)
-			no_infile(args[i] + 2, malloc_list);
+			return (304);
     }
+	return (0);
 }
