@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/01 15:35:27 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/02 11:09:05 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	set_infile(char **args, t_cmd_info *cmd)
 	{	
 		if (args[i][0] == '<')
 		{
-			err = found_infile(args, i, cmd, malloc_list);	
+			err = found_infile(args, i, cmd);	
 			if (err != 0)
 				return (err);
 		}
@@ -49,17 +49,18 @@ int    found_infile(char **args, int i, t_cmd_info *cmd)
 			file_name = args[i + 1];
 		else
 			return (301);
-		return (simple_infile(file_name, cmd, malloc_list));
+		return (simple_infile(file_name, cmd));
 	}
 	if (ft_strlen(args[i]) > 1)
 	{
         // case <infile
 		if (args[i][1] != '<')
-			return (simple_infile(args[i] + 1, cmd, malloc_list));
+			return (simple_infile(args[i] + 1, cmd));
 		//here_doc <<
 		    //if (args[i][1] == '<')
 			//here_doc(args, i, cmd, malloc_list);	
 	}
+	return (0);
 }
 
 int    simple_infile(char *file_name, t_cmd_info *cmd)
