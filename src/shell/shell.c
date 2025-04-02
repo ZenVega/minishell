@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 14:10:27 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:08:58 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ void	start_shell(t_app *app)
 	{
 		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
-		p_info = init_parser_info(0, 1, read_line);
-		cmd = parser(p_info, &app->malloc_list);
-		err = exe(app, cmd);
-		free_malloc_list(app);
-		free(read_line);
+		if (*read_line != '\0')
+		{
+			p_info = init_parser_info(0, 1, read_line);
+			cmd = parser(p_info, &app->malloc_list);
+			err = exe(app, cmd);
+			free_malloc_list(app);
+			free(read_line);
+		}
 	}
 }
