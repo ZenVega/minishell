@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/02 12:08:58 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/02 12:27:19 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,28 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 	return (0);
 }
 
+//handling SIGINT to just display a newline
+void	handle_signal(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(STDOUT_FILENO, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
 void	start_shell(t_app *app)
 {
-	char			*read_line;
-	int				err;
-	t_cmd_info		*cmd;
-	t_parser_info	p_info;
+	char				*read_line;
+	int					err;
+	t_cmd_info			*cmd;
+	t_parser_info		p_info;
+	struct sigaction	sa;
+
+	sa.sa_handler = &handle_signal;
+	sigaction(SIGINT, &sa, NULL);
 
 	while (1)
 	{
