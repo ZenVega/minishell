@@ -6,19 +6,21 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:49:38 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/25 15:52:35 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:55:02 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
 # include "../libft/libft.h"
+# include <signal.h>
 
 typedef struct s_app
 {
 	t_list	*malloc_list;
 	char	**envp;
 	char	*prompt;
+	struct sigaction sa;
 }	t_app;
 
 typedef enum e_cmd_type {

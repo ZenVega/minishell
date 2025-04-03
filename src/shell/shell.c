@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/03 11:08:28 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/03 13:25:51 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,23 @@ void	start_shell(t_app *app)
 	int					err;
 	t_cmd_info			*cmd;
 	t_parser_info		p_info;
-	struct sigaction	sa;
+	//struct sigaction	sa;
 
-	sa.sa_handler = &handle_signal;
-	sa.sa_flags = 0;
-	sigemptyset(&sa.sa_mask);
-	sigaction(SIGINT, &sa, NULL);
+	app->sa.sa_handler = &handle_signal;
+	app->sa.sa_flags = 0;
+	sigemptyset(&app->sa.sa_mask);
+	sigaction(SIGINT, &app->sa, NULL);
 
 	while (1)
 	{
 		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
-		// ctrl-D is EOF
 		if (read_line == NULL)
 		{
 			write(STDOUT_FILENO, "exit\n", 5);
 			free_malloc_list(app);
 			free(app->prompt);
+			free(read_line);
 			break;
 		}
 		if (*read_line != '\0')
