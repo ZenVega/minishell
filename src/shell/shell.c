@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/03 13:25:51 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:18:20 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,13 @@ void	start_shell(t_app *app)
 	app->sa.sa_flags = 0;
 	sigemptyset(&app->sa.sa_mask);
 	sigaction(SIGINT, &app->sa, NULL);
-
+	
+	struct sigaction sa_quit;
+    sa_quit.sa_handler = SIG_IGN;  // Ignore SIGTERM for the shell
+    sa_quit.sa_flags = 0;
+    sigemptyset(&sa_quit.sa_mask);
+    sigaction(SIGQUIT, &sa_quit, NULL); 
+	
 	while (1)
 	{
 		set_prompt(&app->prompt, &app->malloc_list);
