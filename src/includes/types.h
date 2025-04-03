@@ -29,26 +29,25 @@ typedef enum e_cmd_type {
 	BIN = 3
 }	t_cmd_type;
 
+typedef struct s_err_info {
+	t_err_code	code;
+	char		*suspect;
+}	t_err_info;
+
 typedef struct s_cmd_info
 {
 	int			infile;
 	int			outfile;
 	char		**args;
-	int			error_msg;
+	t_err_info	err_info;
 	t_cmd_type	type;
 }	t_cmd_info;
 
-//TODO: error msg is an integer. We need to include an error message lookup table
 typedef struct s_parser_info
 {
 	int			infile;
 	int			outfile;
 	char		*line;
 }	t_parser_info;
-
-typedef struct s_err_info {
-	t_error_code	code;
-	char			*message;
-}	t_err_info;
 
 #endif

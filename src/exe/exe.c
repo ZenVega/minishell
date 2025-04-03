@@ -30,6 +30,6 @@ int	exe(t_app *app, t_cmd_info *cmd)
 		err = open_pipe(app, cmd);
 	//TODO: CLEANUP 
 	if (err)
-		exit_with_error(cmd->args[0]);
+		exit_with_error(cmd);
 	return (err);
 }

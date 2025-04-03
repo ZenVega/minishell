@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 11:24:14 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/03 13:19:11 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/04/03 13:21:13 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/04/03 13:27:17 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef ERROR_H
+# define ERROR_H
 
-#include "utils.h" 
+# include "../includes/CONSTANTS.h"
+# include "../includes/types.h"
+# include "../libft/libft.h"
+# include <errno.h>
+# include <string.h>
 
-int	is_space(char c)
-{
-	if (
-		c == ' '
-		|| c == '\b'
-		|| c == '\t'
-		|| c == '\n'
-		|| c == '\v'
-	) 
-		return (1);
-	return (0);
-}
+typedef struct s_err {
+	t_err_code	code;
+	const char	*msg;
+}	t_err;
+
+void	exit_with_error(t_cmd_info cmd);
+
+#endif

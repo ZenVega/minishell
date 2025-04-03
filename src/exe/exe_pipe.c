@@ -35,7 +35,6 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 			close(fd[0]);
 			p_info = init_parser_info(cmd->infile, fd[1], cmd->args[0]);
 			exe(app, parser(p_info, &app->malloc_list));
-			//TODO: cleanup!
 			exit(0);
 		}
 		else //Parent process - read from child
@@ -43,7 +42,6 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 			close(fd[1]);
 			p_info = init_parser_info(fd[0], cmd->outfile, cmd->args[1]);
 			exe(app, parser(p_info, &app->malloc_list));
-			//TODO: cleanup! exe->path is lost
 			exit(0);
 		}
 	}
