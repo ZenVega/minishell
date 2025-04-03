@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/31 11:52:57 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/02 11:05:51 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,21 @@
 //looking for > and < to set infile and output
 int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list)
 {
-	char **split;
+	char	**split;
+	int		err;
 	
 	split = ft_split(line, ' ');
 	if (!split)
 		return (-1);
 	add_to_malloc_list(malloc_list, (void *)split);
 	//multiple infiles are just overwritten
-	set_infile(split, cmd, malloc_list);
+	err = set_infile(split, cmd);
+	if (err != 0)
+		return (err);
 	//multiple oufile are overwritten by last, but still opened/created/closed on the way
-	set_outfile(split, cmd, malloc_list);
+	err = set_outfile(split, cmd);
+	if (err != 0)
+		return (err);
 	trim_args(split, cmd);
 	return (0);
 }

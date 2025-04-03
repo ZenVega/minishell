@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:47:31 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/31 14:38:32 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/02 11:03:41 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 	if (!parts)
 		return (NULL);
 	err = pipe_split(parts, p_info.line, malloc_list);
+	//pipe failed
 	if (err == -1)
 		return (NULL);
+	//pipe exists
 	if (err == 0)
 	{
 		cmd->args = parts;
@@ -37,7 +39,7 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 	}
 	cmd->type = BIN;
 	err = set_io_files(p_info.line, cmd, malloc_list);
-	if (err == -1)
+	if (err != 0)
 		return (NULL);
 	return (cmd);
 }
