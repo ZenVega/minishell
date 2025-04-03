@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/31 14:38:53 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:55:20 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ int			set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list);
 void		trim_args(char **args, t_cmd_info *cmd);
 
 //infile.c
-int			set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list);
-void		found_infile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list);
-void		simple_infile(char *file_name, t_cmd_info *cmd, t_list **malloc_list);
+int			set_infile(char **args, t_cmd_info *cmd);
+int			found_infile(char **args, int i, t_cmd_info *cmd);
+int		simple_infile(char *file_name, t_cmd_info *cmd);
 
 //outfile.c
-void		set_outfile(char **args, t_cmd_info *cmd, t_list **malloc_list);
-void		found_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list);
-void		truncate_outfile(char *file_name, t_cmd_info *cmd, t_list **malloc_list);
-void		append_outfile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list);
+int		set_outfile(char **args, t_cmd_info *cmd);
+int		found_outfile(char **args, int i, t_cmd_info *cmd);
+int		truncate_outfile(char *file_name, t_cmd_info *cmd);
+int		append_outfile(char **args, int i, t_cmd_info *cmd);
 
 //parser_error.c
 //void	free_args_split(char **args);
