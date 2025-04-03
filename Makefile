@@ -8,6 +8,9 @@ CFILES		:=
 vpath %.c $(SRC_FOLDER)
 CFILES += $(NAME).c
 
+vpath %.c $(SRC_FOLDER)error
+CFILES += error.c
+
 vpath %.c $(SRC_FOLDER)exe
 CFILES += exe.c
 CFILES += exe_bin.c

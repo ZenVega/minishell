@@ -13,7 +13,6 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include <errno.h>
 # include "../libft/libft.h"
 # include "../includes/types.h"
 

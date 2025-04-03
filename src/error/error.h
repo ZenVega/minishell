@@ -15,7 +15,6 @@
 # include "../includes/CONSTANTS.h"
 # include "../includes/types.h"
 # include "../libft/libft.h"
-# include <errno.h>
 # include <string.h>
 
 typedef struct s_err {
@@ -23,6 +22,7 @@ typedef struct s_err {
 	const char	*msg;
 }	t_err;
 
-void	exit_with_error(t_cmd_info cmd);
+int		exit_with_error(t_cmd_info cmd);
+int		set_err(t_cmd_info *cmd, t_err_code err, char *suspect);
 
 #endif

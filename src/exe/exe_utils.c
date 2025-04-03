@@ -28,8 +28,12 @@ t_parser_info	init_parser_info(int infile, int outfile, char *line)
 //  ...
 int	is_valid(t_cmd_info *cmd)
 {
-	if (cmd->type == UNDEFINED)
-		return (errno = EINVAL, -1);
+	t_cmd_info	cmd_err;
+
+	cmd_err.err_info.code = ERR_MALLOC;
+	if (cmd == NULL)
+		return (exit_with_error(cmd_err));
+	//TODO: not sure if there are more unvalid cases
 	return (0);
 }
 
@@ -53,7 +57,7 @@ int	is_in_path(char *path, char *cmd_name)
 	dir_ptr = opendir(path);
 	found = 0;
 	if (!dir_ptr)
-		return (errno = ENOENT, errno);
+		return (-1);
 	while (1)
 	{
 		dir_entity = readdir(dir_ptr);
