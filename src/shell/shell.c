@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/03 09:27:57 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/03 11:08:28 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 		workdir_name = extrude_workdir(path_abs);
 	tmp = ft_strjoin(ROOT_PROMPT_PINK, workdir_name);
 	*prompt_addr = ft_strjoin(tmp, "/ $ \x1b[0m");
-	add_to_malloc_list(malloc_list, *prompt_addr);
+	//add_to_malloc_list(malloc_list, *prompt_addr);
 	free(path_abs);
 	free(tmp);
 	return (0);
@@ -82,6 +82,7 @@ void	start_shell(t_app *app)
 		{
 			write(STDOUT_FILENO, "exit\n", 5);
 			free_malloc_list(app);
+			free(app->prompt);
 			break;
 		}
 		if (*read_line != '\0')
