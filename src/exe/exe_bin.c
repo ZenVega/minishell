@@ -75,6 +75,7 @@ t_exe	*init_exe(t_app *app, char **args)
 	exe->path = NULL;
 	exe->cmd_name = args[0];
 	paths = get_paths(exe->cmd_name);
+	add_to_malloc_list(&app->malloc_list, paths);
 	if (!paths)
 		return (NULL);
 	while (*paths)
@@ -83,7 +84,7 @@ t_exe	*init_exe(t_app *app, char **args)
 		{
 			found = 1;
 			exe->path = *paths;
-			add_to_malloc_list(&app->malloc_list, *paths);
+			add_to_malloc_list(&app->malloc_list, exe->path);
 		}
 		else
 			free(*paths);
