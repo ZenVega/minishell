@@ -19,7 +19,6 @@ t_app	*init_shell(char *envp[])
 	app = (t_app *)malloc(sizeof(t_app));
 	if (!app)
 		return (NULL);
-	//error handling here
 	app->malloc_list = NULL;
 	app->envp = envp;
 	app->prompt = NULL;
