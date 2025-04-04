@@ -46,6 +46,9 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [ ] create error_handler
     - [ ] clean_up
     - [ } sig handler
+		[x] ctrl-D
+		[x] ctrl-C
+		[ ] ctrl-\ should create coredump and finish the current process (but not the shell)
 
 ## TEST EDGE_CASES
 - [ ] open minishell in minishell

@@ -27,7 +27,6 @@ CFILES += in_out_utils.c
 CFILES += infile.c
 CFILES += outfile.c
 CFILES += parser.c
-CFILES += parser_error.c
 CFILES += pipe_split.c
 CFILES += set_io_files.c
 
