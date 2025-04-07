@@ -20,44 +20,59 @@ int	exe_buildin(char **argv)
 	return (1);
 }
 
-void	*free_paths(t_cmd_info *cmd, char **paths)
+void	*free_paths(t_cmd_info *cmd, char **paths, int len, char *cmd_name)
 {
-	while (*paths)
+	free(cmd_name);
+	while (--len >= 0)
 	{
-		free(*paths);
-		paths++;
+		free(paths[len]);
+		paths[len] = NULL;
 	}
+	free(paths);
 	set_err(cmd, ERR_MALLOC, NULL);
 	return (NULL);
 }
 
+int	get_paths_len(char **paths)
+{
+	int	i;
+
+	i = 0;
+	while (paths[i])
+		i++;
+	return (i);
+}
+
 char	**get_paths(t_cmd_info *cmd, char *cmd_name)
 {
-	int		path_len;
 	int		i;
+	int		path_len;
 	char	**paths;
 	char	*tmp;
 
 	tmp = getenv("PATH");
 	if (!tmp)
 		return (set_err(cmd, ERR_NO_VAR, "PATH"), NULL);
+	cmd_name = ft_strjoin("/", cmd_name);
+	if (!cmd_name)
+		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	paths = ft_split(tmp, ':');
 	if (!paths)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
+	path_len = get_paths_len(paths);
 	i = 0;
 	while (paths[i])
 	{
-		path_len = ft_strlen(cmd_name) + ft_strlen(paths[i]) + 2;
-		tmp = ft_strjoin(paths[i], "/");
+		tmp = ft_strjoin(paths[i], cmd_name);
 		if (!tmp)
-			return (free_paths(cmd, paths), NULL);
+			return (free_paths(cmd, paths, path_len, cmd_name));
 		free(paths[i]);
-		paths[i] = ft_strjoin(tmp, cmd_name);
+		paths[i] = tmp;
 		if (!paths[i])
-			return (free_paths(cmd, paths), NULL);
-		free(tmp);
+			return (free_paths(cmd, paths, path_len, cmd_name));
 		i++;
 	}
+	free(cmd_name);
 	return (paths);
 }
 
