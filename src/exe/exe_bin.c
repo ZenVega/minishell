@@ -86,7 +86,7 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 		{
 			found = 1;
 			exe->path = *paths;
-			add_to_malloc_list(&app->malloc_list, exe->path);
+			add_to_malloc_list(&app->malloc_list, *paths);
 		}
 		else
 			free(*paths);

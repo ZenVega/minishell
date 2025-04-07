@@ -62,8 +62,6 @@ void	start_shell(t_app *app)
 		cmd = parser(p_info, &app->malloc_list);
 		err = exe(app, cmd);
 		//TODO: invalid read here
-		if (cmd && cmd->err_info.suspect)
-			free(cmd->err_info.suspect);
 		free_malloc_list(app);
 		free(read_line);
 	}
