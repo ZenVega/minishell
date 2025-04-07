@@ -109,23 +109,25 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
 	int		pid;
+	int		err;
 
 	//TODO: build ins will be checket first, before allocating path memory
+	err = 0;
 	exe = init_exe(app, cmd);
 	if (!exe)
-		return (-1);
-	if (exe->path)
+		err = -1;
+	else if (exe->path)
 	{
 		pid = fork();
 		if (pid == 0)
 			call_execve(exe, app, cmd);
 		waitpid(pid, NULL, 0);
-		if (cmd->infile != 0)
-			close(cmd->infile);
-		if (cmd->outfile != 1)
-			close(cmd->outfile);
 	}
 	else
-		return (-1);
-	return (0);
+		err = -1;
+	if (cmd->infile != 0)
+		close(cmd->infile);
+	if (cmd->outfile != 1)
+		close(cmd->outfile);
+	return (err);
 }
