@@ -16,9 +16,9 @@ Here we can create a list of todos with the possibility to assign them and cross
 	- [x] >>
 	- [x] <
 	- [ ] << here_doc
-- [ ] double outfile
-- [ ] double infile (i.E. function overwrite infile) 
-- [ ] close fds in the end
+- [X] double outfile
+- [x] double infile (i.E. function overwrite infile) 
+- [x] close fds in the end
 - [ ] unlink here_doc if used
 
 ## EXE
@@ -32,12 +32,12 @@ Here we can create a list of todos with the possibility to assign them and cross
     - [ ] unset
     - [ ] env
     - [ ] exit
-- [ ] pipe
+- [x] pipe
 - [ ] logic
 
 ## HISTORY
-- [ ] we can access the minishells history
-- [ ] using the arrow keys, we can search through the previous commands, they are prompted
+- [x] we can access the minishells history
+- [x] using the arrow keys, we can search through the previous commands, they are prompted
 - [ ] we need to handle different key inputs, that are not ascii
 - [ ] search through former commands, prompt them and be able to make changes to them
 

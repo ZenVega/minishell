@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/01 10:09:31 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/02 11:09:05 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,26 @@
 //options: 1) >infile 2) > infile
 
 // circling through all the argument parts, multiple infiles are just overwritten by following
-int	set_infile(char **args, t_cmd_info *cmd, t_list **malloc_list)
+int	set_infile(char **args, t_cmd_info *cmd)
 {
 	int		i;
+	int		err;
 
 	i = 0;
 	while (args[i])
 	{	
 		if (args[i][0] == '<')
-			found_infile(args, i, cmd, malloc_list);	
+		{
+			err = found_infile(args, i, cmd);	
+			if (err != 0)
+				return (err);
+		}
 		i++;
 	}
 	return (0);	
 }
 
-void    found_infile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
+int    found_infile(char **args, int i, t_cmd_info *cmd)
 {
     char	*file_name;
 
@@ -43,25 +48,27 @@ void    found_infile(char **args, int i, t_cmd_info *cmd, t_list **malloc_list)
 		if (args[i + 1])
 			file_name = args[i + 1];
 		else
-			parse_error_near_nl(malloc_list);
-		simple_infile(file_name, cmd, malloc_list);
+			return (301);
+		return (simple_infile(file_name, cmd));
 	}
 	if (ft_strlen(args[i]) > 1)
 	{
         // case <infile
 		if (args[i][1] != '<')
-			simple_infile(args[i] + 1, cmd, malloc_list);
+			return (simple_infile(args[i] + 1, cmd));
 		//here_doc <<
 		    //if (args[i][1] == '<')
 			//here_doc(args, i, cmd, malloc_list);	
 	}
+	return (0);
 }
 
-void    simple_infile(char *file_name, t_cmd_info *cmd, t_list **malloc_list)
+int    simple_infile(char *file_name, t_cmd_info *cmd)
 {
 	if (cmd->infile != STDIN_FILENO)
 		close(cmd->infile);
     cmd->infile = open(file_name, O_RDONLY);
 	if (cmd->infile < 0)
-		no_infile(file_name, malloc_list);
+		return (302);
+	return (0);
 }
