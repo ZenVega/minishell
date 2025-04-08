@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:49:38 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/03 11:55:02 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/08 13:37:35 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ typedef struct s_app
 	t_list	*malloc_list;
 	char	**envp;
 	char	*prompt;
-	struct sigaction sa;
+	struct sigaction sa_init;
+	struct sigaction sa_quit;
 }	t_app;
 
 typedef enum e_cmd_type {

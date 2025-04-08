@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/03 14:18:20 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/08 13:48:57 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,6 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 	return (0);
 }
 
-//handling SIGINT to just display a newline
-void	handle_signal(int sig)
-{
-	if (sig == SIGINT)
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
 
 void	start_shell(t_app *app)
 {
@@ -66,21 +55,11 @@ void	start_shell(t_app *app)
 	int					err;
 	t_cmd_info			*cmd;
 	t_parser_info		p_info;
-	//struct sigaction	sa;
-
-	app->sa.sa_handler = &handle_signal;
-	app->sa.sa_flags = 0;
-	sigemptyset(&app->sa.sa_mask);
-	sigaction(SIGINT, &app->sa, NULL);
-	
-	struct sigaction sa_quit;
-    sa_quit.sa_handler = SIG_IGN;  // Ignore SIGTERM for the shell
-    sa_quit.sa_flags = 0;
-    sigemptyset(&sa_quit.sa_mask);
-    sigaction(SIGQUIT, &sa_quit, NULL); 
 	
 	while (1)
 	{
+		init_sa_shell(app);	
+	
 		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
 		if (read_line == NULL)

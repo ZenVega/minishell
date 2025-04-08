@@ -1,0 +1,10 @@
+exe
+includes
+init
+libft
+malloc_list
+minishell.c
+out
+parser
+shell
+utils

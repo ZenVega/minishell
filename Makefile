@@ -33,6 +33,9 @@ CFILES += set_io_files.c
 vpath %.c $(SRC_FOLDER)shell
 CFILES += shell.c
 
+vpath %.c $(SRC_FOLDER)signals
+CFILES += signals.c
+
 vpath %.c $(SRC_FOLDER)utils
 CFILES += utils.c
 
