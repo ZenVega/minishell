@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 13:25:23 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:59:16 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,9 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	int		pid;
 	int		err;
 
-	//TODO: build ins will be checket first, before allocating path memory
-	err = 0;
-	exe = exe_buildin(app, cmd);
+	err = exe_buildin(app, cmd);
+	if (!err || err != 1)
+		return (err);
 	exe = init_exe(app, cmd);
 	if (!exe)
 		err = -1;

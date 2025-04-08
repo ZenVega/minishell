@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:47:17 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/03 13:20:28 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:12:07 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define ERR_FORK_MSG "Cannot fork a process"
 # define ERR_PIPE_MSG "Pipe failed"
 
+# define BUFFER_SIZE 10
 # define ERR_COUNT 6
 
 typedef enum s_err_code {
@@ -36,4 +37,16 @@ typedef enum s_err_code {
 	ERR_PIPE = 306,
 }	t_err_code;
 
+# define BI_COUNT 8
+
+typedef enum s_buildin {
+	BI_NULL = -1,
+	BI_ECHO = 0,
+	BI_CD = 1,
+	BI_PWD = 2,
+	BI_EXPORT = 3,
+	BI_UNSET = 4,
+	BI_ENV = 5,
+	BI_EXIT = 6,
+}	t_buildin;
 #endif
