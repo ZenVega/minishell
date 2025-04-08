@@ -41,6 +41,10 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [ ] we need to handle different key inputs, that are not ascii
 - [ ] search through former commands, prompt them and be able to make changes to them
 
+##SIGNALS
+- [ ] check if core dump really works
+- [ ] check signal - handling within pipe
+
 ## HELPER
 - [x] create track_malloc
 - [ ] create error_handler
