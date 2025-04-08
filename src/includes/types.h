@@ -20,7 +20,7 @@ typedef struct s_app
 	t_list	*malloc_list;
 	char	**envp;
 	char	*prompt;
-	struct sigaction sa_init;
+	struct sigaction sa_int;
 	struct sigaction sa_quit;
 }	t_app;
 

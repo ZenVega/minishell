@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 14:03:49 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:59:04 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,13 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 		pid = fork();
 		if (pid == 0)
 		{
+			init_sa_child(app);
 			reroute_io(cmd->infile, cmd->outfile);
 			execve(exe->path, cmd->args, app->envp);
 			perror("execve failed");
 			exit(errno);
 		}
+		init_sa_parent(app);
 		waitpid(pid, NULL, 0);
 		//TODO: how to test this?
 		if (cmd->infile != 0)

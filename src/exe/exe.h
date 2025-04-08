@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 14:07:53 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:01:33 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXE_H
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include "../parser/parser.h"
+# include "../signals/signals.h"
 
 typedef struct s_exe {
 	char	**args;
