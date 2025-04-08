@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 14:07:53 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:25:46 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXE_H
@@ -16,6 +16,7 @@
 # include "../malloc_list/malloc_list.h"
 # include "../parser/parser.h"
 # include "../utils/utils.h"
+# include "../buildins/buildins.h"
 # include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>

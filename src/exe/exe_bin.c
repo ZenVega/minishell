@@ -6,19 +6,11 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 14:03:49 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:25:23 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
-
-// if no path was found, check for build_in functions
-int	exe_buildin(char **argv)
-{
-	if (argv[0])
-		return (0);
-	return (1);
-}
 
 void	*free_paths(t_cmd_info *cmd, char **paths, int len, char *cmd_name)
 {
@@ -128,6 +120,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 
 	//TODO: build ins will be checket first, before allocating path memory
 	err = 0;
+	exe = exe_buildin(app, cmd);
 	exe = init_exe(app, cmd);
 	if (!exe)
 		err = -1;
