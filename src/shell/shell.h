@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:40:03 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 15:22:27 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:29:50 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../exe/exe.h"
 # include "../includes/types.h"
 # include "../includes/CONSTANTS.h"
+# include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
 # include "../parser/parser.h"
 

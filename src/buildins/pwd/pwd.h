@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:17:52 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 15:23:00 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:24:54 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,5 @@
 
 int		pwd(t_app *app, t_cmd_info *cmd);
 char	*get_cwd(void);
+
 #endif

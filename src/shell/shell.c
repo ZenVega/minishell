@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 15:23:37 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:33:46 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 	path_abs = get_cwd();
 	if (!path_abs)
 		return (-1);
-	workdir_name = NULL;
 	workdir_name = extrude_workdir(path_abs);
 	tmp = ft_strjoin(ROOT_PROMPT_PINK, workdir_name);
+	if (!tmp)
+		return (free(path_abs), -1);
 	*prompt_addr = ft_strjoin(tmp, "/ $ \x1b[0m");
 	free(path_abs);
 	free(tmp);
@@ -56,7 +57,14 @@ void	start_shell(t_app *app)
 
 	while (1)
 	{
-		set_prompt(&app->prompt, &app->malloc_list);
+		if (set_prompt(&app->prompt, &app->malloc_list) == -1)
+		{
+			cmd->err_info.code = ERR_MALLOC;
+			exit_with_error(*cmd);
+			free_malloc_list(app);
+			free(read_line);
+			break ;
+		}
 		read_line = readline(app->prompt);
 		p_info = init_parser_info(0, 1, read_line);
 		cmd = parser(p_info, &app->malloc_list);
