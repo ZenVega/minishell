@@ -22,14 +22,14 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 	err = 0;
 	pids[0] = fork();
 	if (pids[0] == -1)
-		return (-1);
+		return (set_err(cmd, ERR_FORK, NULL));
 	if (pids[0] == 0)
 	{
 		if (pipe(fd) < 0)
-			return (-1);
+			return (set_err(cmd, ERR_PIPE, NULL));
 		pids[1] = fork();
 		if (pids[1] == -1)
-			return (-1);
+			return (set_err(cmd, ERR_FORK, NULL));
 		else if (pids[1] == 0) //Child process - write to parent
 		{
 			close(fd[0]);
@@ -46,6 +46,11 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		}
 	}
 	else
+	{
 		waitpid(pids[0], NULL, 0);
+		if (cmd && cmd->err_info.suspect)
+			free(cmd->err_info.suspect);
+		free_malloc_list(app);
+	}
 	return (err);
 }

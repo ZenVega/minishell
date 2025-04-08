@@ -17,11 +17,14 @@ int	main(int argc, char **argv, char *envp[])
 	t_app	*app;
 
 	if (argc != 1 || !argv)
-		return (1);
-	//errorhandling
+	{
+		write(2, "Invalid arguments\n", 18);
+		return (-1);
+	}
 	app = init_shell(envp);
+	if (app == NULL)
+		return (-1);
 	start_shell(app);
-	//TODO: controlled exit on SIGTER...);
 	free(app);
 	return (0);
 }
