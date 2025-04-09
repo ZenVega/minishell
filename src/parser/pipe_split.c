@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:59:35 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/31 11:45:47 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:31:32 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	pipe_split(char **parts, char *line, t_list **malloc_list)
 	char	*part;
 	size_t	len;
 
+	if (!line || line[0] == '\0')
+		return (2);
 	part = ft_strchr(line, '|');
 	// pipe found
 	if (part)
