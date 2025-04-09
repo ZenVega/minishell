@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 14:10:27 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:48:57 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,42 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 		workdir_name = extrude_workdir(path_abs);
 	tmp = ft_strjoin(ROOT_PROMPT_PINK, workdir_name);
 	*prompt_addr = ft_strjoin(tmp, "/ $ \x1b[0m");
+	//add_to_malloc_list(malloc_list, *prompt_addr);
 	free(path_abs);
 	free(tmp);
 	return (0);
 }
 
+
 void	start_shell(t_app *app)
 {
-	char			*read_line;
-	int				err;
-	t_cmd_info		*cmd;
-	t_parser_info	p_info;
-
+	char				*read_line;
+	int					err;
+	t_cmd_info			*cmd;
+	t_parser_info		p_info;
+	
 	while (1)
 	{
+		init_sa_shell(app);	
+	
 		set_prompt(&app->prompt, &app->malloc_list);
 		read_line = readline(app->prompt);
-		p_info = init_parser_info(0, 1, read_line);
-		cmd = parser(p_info, &app->malloc_list);
-		err = exe(app, cmd);
-		free_malloc_list(app);
-		free(read_line);
+		if (read_line == NULL)
+		{
+			write(STDOUT_FILENO, "exit\n", 5);
+			free_malloc_list(app);
+			free(app->prompt);
+			free(read_line);
+			break;
+		}
+		if (*read_line != '\0')
+		{
+			p_info = init_parser_info(0, 1, read_line);
+			cmd = parser(p_info, &app->malloc_list);
+			err = exe(app, cmd);
+			add_history(read_line);
+			free_malloc_list(app);
+			free(read_line);
+		}
 	}
 }

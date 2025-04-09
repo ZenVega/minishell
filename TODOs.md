@@ -41,11 +41,18 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [ ] we need to handle different key inputs, that are not ascii
 - [ ] search through former commands, prompt them and be able to make changes to them
 
+##SIGNALS
+- [ ] check if core dump really works
+- [ ] check signal - handling within pipe
+
 ## HELPER
 - [x] create track_malloc
 - [x] create error_handler
     - [x] clean_up
     - [ } sig handler
+		[x] ctrl-D
+		[x] ctrl-C
+		[ ] ctrl-\ should create coredump and finish the current process (but not the shell)
 
 ## TEST EDGE_CASES
 - [ ] open minishell in minishell
@@ -55,3 +62,4 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [ ] ls | < infile sort
 - [ ] ls | < infile <in_2 sort
 - [ ] exit | exit
+- [ ] sleep 3 | pwd really sleeps (for some reason after it completed pwd) - minishell does not

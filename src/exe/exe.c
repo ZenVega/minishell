@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:47 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 11:32:04 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:58:15 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	exe(t_app *app, t_cmd_info *cmd)
 {
 	int	err;
-
+	
 	err = is_valid(cmd);
 	if (err)
 		return (err);
