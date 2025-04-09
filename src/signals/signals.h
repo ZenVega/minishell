@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 13:40:03 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 15:29:50 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/04/08 13:54:49 by jhelbig           #+#    #+#             */
+/*   Updated: 2025/04/08 15:02:02 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
+#ifndef SIGNALS_H
+# define SIGNALS_H
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../buildins/pwd/pwd.h"
-# include "../exe/exe.h"
 # include "../includes/types.h"
 # include "../includes/CONSTANTS.h"
-# include "../libft/libft.h"
-# include "../malloc_list/malloc_list.h"
-# include "../parser/parser.h"
-# include "../signals/signals.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
-void	start_shell(t_app *app);
+void	handle_signal_shell(int sig);
+void	init_sa_shell(t_app *app);
+
+void	handle_signal_parent(int sig);
+void	init_sa_child(t_app *app);
+void	init_sa_parent(t_app *app);
 
 #endif

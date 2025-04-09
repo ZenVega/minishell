@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 14:59:16 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:59:04 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	pid = fork();
 	if (pid == 0)
 	{
+		init_sa_child(app);
 		reroute_io(cmd->infile, cmd->outfile);
 		execve(exe->path, exe->args, app->envp);
 		perror("execve failed");
@@ -120,7 +121,7 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	waitpid(pid, &status, 0);
 	return (status);
 }
-// execute with fnct
+
 int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
