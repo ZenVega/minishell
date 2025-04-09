@@ -23,9 +23,10 @@
 # define ERR_MALLOC_MSG "Cannot allocate memory"
 # define ERR_FORK_MSG "Cannot fork a process"
 # define ERR_PIPE_MSG "Pipe failed"
+# define ERR_ARGS_MSG "Wrong number of arguments"
 
 # define BUFFER_SIZE 10
-# define ERR_COUNT 6
+# define ERR_COUNT 7
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
@@ -35,6 +36,7 @@ typedef enum s_err_code {
 	ERR_MALLOC = 304,
 	ERR_FORK = 305,
 	ERR_PIPE = 306,
+	ERR_ARGS = 307,
 }	t_err_code;
 
 # define BI_COUNT 8

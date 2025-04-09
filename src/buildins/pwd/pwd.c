@@ -38,12 +38,14 @@ int	pwd(t_app *app, t_cmd_info *cmd)
 {
 	char	*path_abs;
 
-	if (!app || ! cmd)
+	if (!app || !cmd)
 		return (-1);
+	if (cmd->args[1] != 0)
+		return (set_err(cmd, ERR_ARGS, NULL));
 	path_abs = get_cwd();
 	if (!path_abs)
 		return (set_err(cmd, ERR_MALLOC, NULL));
 	ft_printf("%s\n", path_abs);
 	free(path_abs);
-	return (0);
+	exit(0);
 }

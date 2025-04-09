@@ -106,33 +106,37 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 
 int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 {
-	reroute_io(cmd->infile, cmd->outfile);
-	execve(exe->path, exe->args, app->envp);
-	perror("execve failed");
-	exit(-1);
+	int		pid;
+	int		status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		reroute_io(cmd->infile, cmd->outfile);
+		execve(exe->path, exe->args, app->envp);
+		perror("execve failed");
+		exit(-1);
+	}
+	waitpid(pid, &status, 0);
+	return (status);
 }
 // execute with fnct
 int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
-	int		pid;
 	int		err;
 
-	err = exe_buildin(app, cmd);
-	if (!err || err != 1)
-		return (err);
-	exe = init_exe(app, cmd);
-	if (!exe)
-		err = -1;
-	else if (exe->path)
-	{
-		pid = fork();
-		if (pid == 0)
-			call_execve(exe, app, cmd);
-		waitpid(pid, NULL, 0);
-	}
+	err = 0;
+	if (is_buildin(cmd->args[0]) != -1) 
+		err = exe_buildin(app, cmd);
 	else
-		err = -1;
+	{
+		exe = init_exe(app, cmd);
+		if (!exe || !exe->path)
+			err = -1;
+		else
+			call_execve(exe, app, cmd);
+	}
 	if (cmd->infile != 0)
 		close(cmd->infile);
 	if (cmd->outfile != 1)

@@ -13,8 +13,10 @@
 #ifndef BUILDINS_H
 # define BUILDINS_H
 
+# include <sys/wait.h>
 # include "pwd/pwd.h"
 # include "../includes/types.h"
 
-int	exe_buildin(t_app *app, t_cmd_info *cmd);
+t_buildin	is_buildin(char *cmd);
+int			exe_buildin(t_app *app, t_cmd_info *cmd);
 #endif
