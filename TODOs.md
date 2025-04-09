@@ -62,3 +62,4 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [ ] ls | < infile sort
 - [ ] ls | < infile <in_2 sort
 - [ ] exit | exit
+- [ ] sleep 3 | pwd really sleeps (for some reason after it completed pwd) - minishell does not
