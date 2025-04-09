@@ -47,8 +47,8 @@ Here we can create a list of todos with the possibility to assign them and cross
 
 ## HELPER
 - [x] create track_malloc
-- [ ] create error_handler
-    - [ ] clean_up
+- [x] create error_handler
+    - [x] clean_up
     - [ } sig handler
 		[x] ctrl-D
 		[x] ctrl-C

@@ -20,50 +20,65 @@ int	exe_buildin(char **argv)
 	return (1);
 }
 
-void	*free_paths(char **paths)
+void	*free_paths(t_cmd_info *cmd, char **paths, int len, char *cmd_name)
 {
-	while (*paths)
+	free(cmd_name);
+	while (--len >= 0)
 	{
-		free(*paths);
-		paths++;
+		free(paths[len]);
+		paths[len] = NULL;
 	}
-	errno = ENOMEM;
+	free(paths);
+	set_err(cmd, ERR_MALLOC, NULL);
 	return (NULL);
 }
 
-char	**get_paths(char *cmd)
+int	get_paths_len(char **paths)
 {
-	int		path_len;
+	int	i;
+
+	i = 0;
+	while (paths[i])
+		i++;
+	return (i);
+}
+
+char	**get_paths(t_cmd_info *cmd, char *cmd_name)
+{
 	int		i;
+	int		path_len;
 	char	**paths;
 	char	*tmp;
 
 	tmp = getenv("PATH");
 	if (!tmp)
-		return (errno = ENOENT, NULL);
+		return (set_err(cmd, ERR_NO_VAR, "PATH"), NULL);
+	cmd_name = ft_strjoin("/", cmd_name);
+	if (!cmd_name)
+		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	paths = ft_split(tmp, ':');
 	if (!paths)
-		return (errno = ENOMEM, NULL);
+		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
+	path_len = get_paths_len(paths);
 	i = 0;
 	while (paths[i])
 	{
-		path_len = ft_strlen(cmd) + ft_strlen(paths[i]) + 2;
-		tmp = ft_strjoin(paths[i], "/");
+		tmp = ft_strjoin(paths[i], cmd_name);
 		if (!tmp)
-			return (free_paths(paths), NULL);
+			return (free_paths(cmd, paths, path_len, cmd_name));
 		free(paths[i]);
-		paths[i] = ft_strjoin(tmp, cmd);
+		paths[i] = tmp;
 		if (!paths[i])
-			return (free_paths(paths), NULL);
-		free(tmp);
+			return (free_paths(cmd, paths, path_len, cmd_name));
 		i++;
 	}
+	free(cmd_name);
 	return (paths);
 }
 
 // initialize exe obj
 // add cmd name to path
-t_exe	*init_exe(t_app *app, char **args)
+t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
 	char	**paths;
@@ -71,59 +86,65 @@ t_exe	*init_exe(t_app *app, char **args)
 
 	found = 0;
 	exe = (t_exe *)malloc_and_add_list(&app->malloc_list, sizeof(t_exe));
-	exe->args = args;
+	if (!exe)
+		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
+	exe->args = cmd->args;
 	exe->path = NULL;
-	exe->cmd_name = args[0];
-	paths = get_paths(exe->cmd_name);
+	exe->cmd_name = cmd->args[0];
+	paths = get_paths(cmd, exe->cmd_name);
 	if (!paths)
 		return (NULL);
+	add_to_malloc_list(&app->malloc_list, paths);
 	while (*paths)
 	{
 		if (!found && !access(*paths, X_OK))
 		{
 			found = 1;
 			exe->path = *paths;
-			add_to_malloc_list(&app->malloc_list, exe->path);
+			add_to_malloc_list(&app->malloc_list, *paths);
 		}
 		else
 			free(*paths);
 		paths++;
 	}
 	if (!found)
-		return (errno = ENOENT, NULL);
+		return (set_err(cmd, ERR_NO_FILE, NULL), NULL);
 	return (exe);
 }
 
+int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
+{
+  init_sa_child(app);
+	reroute_io(cmd->infile, cmd->outfile);
+	execve(exe->path, exe->args, app->envp);
+	perror("execve failed");
+	exit(-1);
+}
 // execute with fnct
 int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
 	int		pid;
+	int		err;
 
 	//TODO: build ins will be checket first, before allocating path memory
-	exe = init_exe(app, cmd->args);
+	err = 0;
+	exe = init_exe(app, cmd);
 	if (!exe)
-		return (-1);
-	if (exe->path)
+		err = -1;
+	else if (exe->path)
 	{
 		pid = fork();
 		if (pid == 0)
-		{
-			init_sa_child(app);
-			reroute_io(cmd->infile, cmd->outfile);
-			execve(exe->path, cmd->args, app->envp);
-			perror("execve failed");
-			exit(errno);
-		}
+			call_execve(exe, app, cmd);
 		init_sa_parent(app);
 		waitpid(pid, NULL, 0);
-		//TODO: how to test this?
-		if (cmd->infile != 0)
-			close(cmd->infile);
-		if (cmd->outfile != 1)
-			close(cmd->outfile);
 	}
 	else
-		return (-1);
-	return (0);
+		err = -1;
+	if (cmd->infile != 0)
+		close(cmd->infile);
+	if (cmd->outfile != 1)
+		close(cmd->outfile);
+	return (err);
 }

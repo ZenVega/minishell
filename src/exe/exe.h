@@ -12,16 +12,16 @@
 #ifndef EXE_H
 # define EXE_H
 
+# include "../error/error.h"
 # include "../malloc_list/malloc_list.h"
+# include "../parser/parser.h"
+# include "../signals/signals.h"
 # include "../utils/utils.h"
 # include <dirent.h>
-# include <errno.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <sys/types.h>
-# include "../parser/parser.h"
-# include "../signals/signals.h"
 
 typedef struct s_exe {
 	char	**args;
