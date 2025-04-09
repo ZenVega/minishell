@@ -118,6 +118,7 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 		perror("execve failed");
 		exit(-1);
 	}
+	init_sa_parent(app);
 	waitpid(pid, &status, 0);
 	return (status);
 }

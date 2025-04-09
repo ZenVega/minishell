@@ -16,6 +16,7 @@
 # include <sys/wait.h>
 # include "pwd/pwd.h"
 # include "../includes/types.h"
+# include "../signals/signals.h"
 
 t_buildin	is_buildin(char *cmd);
 int			exe_buildin(t_app *app, t_cmd_info *cmd);

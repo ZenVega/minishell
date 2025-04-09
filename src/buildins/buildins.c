@@ -45,10 +45,12 @@ int	exe_buildin(t_app *app, t_cmd_info *cmd)
 	pid = fork();
 	if (pid == 0)
 	{
+		init_sa_child(app);
 		bi_cmd = is_buildin(cmd->args[0]); 
 		if (bi_cmd == BI_PWD)
 			err = pwd(app, cmd);
 	}
+	init_sa_parent(app);
 	waitpid(pid, &status, 0);
 	return (status);
 }

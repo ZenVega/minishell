@@ -19,7 +19,7 @@
 int	exe(t_app *app, t_cmd_info *cmd)
 {
 	int	err;
-	
+
 	err = is_valid(cmd);
 	if (err)
 		return (err);
