@@ -6,14 +6,14 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:47:31 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/02 11:03:41 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:35:16 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "../includes/minishell.h"
 
-t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
+t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list, t_app *app)
 {
 	t_cmd_info	*cmd;
 	char		**parts;
@@ -41,5 +41,16 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 	err = set_io_files(p_info.line, cmd, malloc_list);
 	if (err != 0)
 		return (NULL);
+	replace_dollar(cmd->args, app->envp);
+
+	//testing only
+	/*
+	int i = 0;
+	while (cmd->args[i])
+	{
+		ft_printf("%s\n", cmd->args[i]);
+		i++;
+	}
+	*/
 	return (cmd);
 }
