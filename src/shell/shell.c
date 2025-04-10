@@ -35,19 +35,18 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 		free(*prompt_addr);
 	else
 		add_to_malloc_list(malloc_list, *prompt_addr);
-	path_abs = (char *)malloc(10000);
-	path_abs = getcwd(path_abs, 10000);
-	workdir_name = NULL;
-	if (path_abs)
-		workdir_name = extrude_workdir(path_abs);
+	path_abs = get_cwd();
+	if (!path_abs)
+		return (-1);
+	workdir_name = extrude_workdir(path_abs);
 	tmp = ft_strjoin(ROOT_PROMPT_PINK, workdir_name);
+	if (!tmp)
+		return (free(path_abs), -1);
 	*prompt_addr = ft_strjoin(tmp, "/ $ \x1b[0m");
-	//add_to_malloc_list(malloc_list, *prompt_addr);
 	free(path_abs);
 	free(tmp);
 	return (0);
 }
-
 
 void	start_shell(t_app *app)
 {
@@ -55,12 +54,18 @@ void	start_shell(t_app *app)
 	int					err;
 	t_cmd_info			*cmd;
 	t_parser_info		p_info;
-	
+
 	while (1)
 	{
-		init_sa_shell(app);	
-	
-		set_prompt(&app->prompt, &app->malloc_list);
+		init_sa_shell(app);
+		if (set_prompt(&app->prompt, &app->malloc_list) == -1)
+		{
+			cmd->err_info.code = ERR_MALLOC;
+			exit_with_error(*cmd);
+			free_malloc_list(app);
+			free(read_line);
+			break ;
+		}
 		read_line = readline(app->prompt);
 		if (read_line == NULL)
 		{
@@ -68,7 +73,7 @@ void	start_shell(t_app *app)
 			free_malloc_list(app);
 			free(app->prompt);
 			free(read_line);
-			break;
+			break ;
 		}
 		if (*read_line != '\0')
 		{

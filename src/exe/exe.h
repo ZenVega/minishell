@@ -17,6 +17,7 @@
 # include "../parser/parser.h"
 # include "../signals/signals.h"
 # include "../utils/utils.h"
+# include "../buildins/buildins.h"
 # include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>

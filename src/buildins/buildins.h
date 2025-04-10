@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   buildins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 13:40:03 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 15:29:50 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/04/08 13:15:49 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/04/08 14:56:48 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../buildins/pwd/pwd.h"
-# include "../exe/exe.h"
+#ifndef BUILDINS_H
+# define BUILDINS_H
+
+# include <sys/wait.h>
+# include "pwd/pwd.h"
 # include "../includes/types.h"
-# include "../includes/CONSTANTS.h"
-# include "../libft/libft.h"
-# include "../malloc_list/malloc_list.h"
-# include "../parser/parser.h"
 # include "../signals/signals.h"
 
-void	start_shell(t_app *app);
-
+t_buildin	is_buildin(char *cmd);
+int			exe_buildin(t_app *app, t_cmd_info *cmd);
 #endif

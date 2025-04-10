@@ -6,6 +6,7 @@ src/exe/test/test_out
 src/exe/test/exe_test
 src/parser/parser_tester
 minishell
+minishell_tester/
 src/libft/libft.a
 **/*.swp
 .DS_Store

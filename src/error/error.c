@@ -22,6 +22,7 @@ static const char	*get_error_msg(t_err_code err)
 	errors[3] = (t_err){.code = ERR_MALLOC, .msg = ERR_MALLOC_MSG};
 	errors[4] = (t_err){.code = ERR_FORK, .msg = ERR_FORK_MSG};
 	errors[5] = (t_err){.code = ERR_PIPE, .msg = ERR_PIPE_MSG};
+	errors[5] = (t_err){.code = ERR_ARGS, .msg = ERR_ARGS_MSG};
 	i = -1;
 	while (++i < ERR_COUNT)
 		if (errors[i].code == err)

@@ -12,14 +12,6 @@
 
 #include "exe.h"
 
-// if no path was found, check for build_in functions
-int	exe_buildin(char **argv)
-{
-	if (argv[0])
-		return (0);
-	return (1);
-}
-
 void	*free_paths(t_cmd_info *cmd, char **paths, int len, char *cmd_name)
 {
 	free(cmd_name);
@@ -114,34 +106,37 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 
 int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 {
-  init_sa_child(app);
-	reroute_io(cmd->infile, cmd->outfile);
-	execve(exe->path, exe->args, app->envp);
-	perror("execve failed");
-	exit(-1);
+	int		pid;
+	int		status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		init_sa_child(app);
+		reroute_io(cmd->infile, cmd->outfile);
+		execve(exe->path, exe->args, app->envp);
+		perror("execve failed");
+		exit(-1);
+	}
+	init_sa_parent(app);
+	waitpid(pid, &status, 0);
+	return (status);
 }
-// execute with fnct
+
 int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
-	int		pid;
 	int		err;
 
-	//TODO: build ins will be checket first, before allocating path memory
-	err = 0;
-	exe = init_exe(app, cmd);
-	if (!exe)
-		err = -1;
-	else if (exe->path)
+	err = exe_buildin(app, cmd);
+	if (err == 1) 
 	{
-		pid = fork();
-		if (pid == 0)
-			call_execve(exe, app, cmd);
-		init_sa_parent(app);
-		waitpid(pid, NULL, 0);
+		exe = init_exe(app, cmd);
+		if (!exe || !exe->path)
+			err = -1;
+		else
+			err = call_execve(exe, app, cmd);
 	}
-	else
-		err = -1;
 	if (cmd->infile != 0)
 		close(cmd->infile);
 	if (cmd->outfile != 1)
