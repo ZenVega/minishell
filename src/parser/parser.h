@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/01 15:55:20 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:30:56 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 
 # include "../includes/types.h"
 # include "../libft/libft.h"
+
+//dollar.c
+void	replace_dollar(char **args, char **envp);
+
 //parser.c
-t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list);
+t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list, t_app *app);
 
 //pipe_split.c
 int			pipe_split(char **parts, char *line, t_list **malloc_list);
