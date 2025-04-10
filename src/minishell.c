@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/03 11:02:51 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:40:49 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv, char *envp[])
 	if (app == NULL)
 		return (-1);
 	start_shell(app);
+	free_envp(app->envp);
 	free(app);
 	return (0);
 }
