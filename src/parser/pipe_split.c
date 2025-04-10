@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:59:35 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/10 09:33:47 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 09:55:45 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ int	pipe_split(char **parts, char *line, t_list **malloc_list, t_cmd_info *cmd)
 	}
 	// no pipe
 	else
-		return (set_err(cmd, 306, NULL));
+		return (1);
 	return (0);
 }

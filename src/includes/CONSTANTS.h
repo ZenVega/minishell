@@ -23,6 +23,7 @@
 # define ERR_MALLOC_MSG "Cannot allocate memory"
 # define ERR_FORK_MSG "Cannot fork a process"
 # define ERR_PIPE_MSG "Pipe failed"
+# define ERR_OPEN_MSG "could not open file"
 
 # define ERR_COUNT 6
 
@@ -34,6 +35,7 @@ typedef enum s_err_code {
 	ERR_MALLOC = 304,
 	ERR_FORK = 305,
 	ERR_PIPE = 306,
+	ERR_OPEN = 307,
 }	t_err_code;
 
 #endif
