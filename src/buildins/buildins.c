@@ -46,5 +46,7 @@ int	exe_buildin(t_app *app, t_cmd_info *cmd)
 		return (err);
 	else if (bi_cmd == BI_PWD)
 		err = pwd(app, cmd);
+	else if (bi_cmd == BI_ECHO)
+		err = echo(app, cmd);
 	return (err);
 }

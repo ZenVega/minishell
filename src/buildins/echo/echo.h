@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buildins.h                                         :+:      :+:    :+:   */
+/*   echo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 13:15:49 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 14:56:48 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/04/10 11:51:37 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/04/10 11:53:25 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILDINS_H
-# define BUILDINS_H
+#ifndef ECHO_H
+# define ECHO_H
 
-# include <sys/wait.h>
-# include "pwd/pwd.h"
-# include "echo/echo.h"
-# include "../includes/types.h"
-# include "../signals/signals.h"
+# include "../../includes/types.h"
 
-t_buildin	is_buildin(char *cmd);
-int			exe_buildin(t_app *app, t_cmd_info *cmd);
+int	echo(t_app *app, t_cmd_info *cmd);
 #endif
