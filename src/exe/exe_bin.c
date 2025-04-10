@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 14:59:04 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:59:39 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 
 int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 {
-  init_sa_child(app);
+  	init_sa_child(app);
 	reroute_io(cmd->infile, cmd->outfile);
 	execve(exe->path, exe->args, app->envp);
 	perror("execve failed");
@@ -127,7 +127,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	int		pid;
 	int		err;
 
-	//TODO: build ins will be checket first, before allocating path memory
+	//TODO: build ins will be checked first, before allocating path memory
 	err = 0;
 	exe = init_exe(app, cmd);
 	if (!exe)
