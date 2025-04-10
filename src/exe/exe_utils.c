@@ -12,6 +12,29 @@
 
 #include "exe.h"
 
+void	*free_paths(t_cmd_info *cmd, char **paths, int len, char *cmd_name)
+{
+	free(cmd_name);
+	while (--len >= 0)
+	{
+		free(paths[len]);
+		paths[len] = NULL;
+	}
+	free(paths);
+	set_err(cmd, ERR_MALLOC, NULL);
+	return (NULL);
+}
+
+int	get_paths_len(char **paths)
+{
+	int	i;
+
+	i = 0;
+	while (paths[i])
+		i++;
+	return (i);
+}
+
 t_parser_info	init_parser_info(int infile, int outfile, char *line)
 {
 	t_parser_info	p_info;

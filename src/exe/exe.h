@@ -38,8 +38,9 @@ int				exe_bin(t_app *app, t_cmd_info *cmd);
 int				open_pipe(t_app *app, t_cmd_info *cmd);
 //exe_utils.c
 t_parser_info	init_parser_info(int infile, int outfile, char *line);
-int				is_in_path(char *path, char *cmd_name);
 int				is_valid(t_cmd_info *cmd);
 void			reroute_io(int input, int output);
+void			*free_paths(t_cmd_info *cmd, char **paths, int len, char *cmd_name);
+int				get_paths_len(char **paths);
 
 #endif
