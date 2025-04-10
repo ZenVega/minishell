@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:47:31 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/02 11:03:41 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 09:32:54 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 	parts = malloc_and_add_list (malloc_list, sizeof(char *) * 3);
 	if (!parts)
 		return (NULL);
-	err = pipe_split(parts, p_info.line, malloc_list);
+	err = pipe_split(parts, p_info.line, malloc_list, cmd);
 	//pipe failed
 	if (err == -1)
 		return (NULL);

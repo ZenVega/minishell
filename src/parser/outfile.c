@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:23 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/02 11:11:32 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 09:31:43 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int    found_outfile(char **args, int i, t_cmd_info *cmd)
 		if (args[i + 1])
 			file_name = args[i + 1];
 		else
-			return (301);
+			return (set_err(cmd, 301, "near nl"));
         return (truncate_outfile(file_name, cmd));
 	}
 	else if (ft_strlen(args[i]) > 1)
@@ -65,7 +65,7 @@ int	truncate_outfile(char *file_name, t_cmd_info *cmd)
 	cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (cmd->outfile < 0)
         //could not open outfile error here
-		return (304);
+		return (set_err(cmd, 307, file_name));
 	return (0);
 }
 
@@ -81,17 +81,17 @@ int	append_outfile(char **args, int i, t_cmd_info *cmd)
         if (args[i + 1])
 			file_name = args[i + 1];
         else
-			return (301);
+			return (set_err(cmd, 301, "near nl"));
 		cmd->outfile = open(file_name, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (cmd->outfile < 0)
-			return (304);
+			return (set_err(cmd, 307, file_name));
     }
     // case >>outfile
     else if (ft_strlen(args[i]) > 2)
     {
 		cmd->outfile = open(args[i] + 2, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (cmd->outfile < 0)
-			return (304);
+			return (set_err(cmd, 307, args[i] + 2));
     }
 	return (0);
 }

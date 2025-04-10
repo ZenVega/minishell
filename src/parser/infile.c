@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/02 11:09:05 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 09:29:57 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int    found_infile(char **args, int i, t_cmd_info *cmd)
 		if (args[i + 1])
 			file_name = args[i + 1];
 		else
-			return (301);
+			return (set_err(cmd, 301, "near nl"));
 		return (simple_infile(file_name, cmd));
 	}
 	if (ft_strlen(args[i]) > 1)
@@ -69,6 +69,6 @@ int    simple_infile(char *file_name, t_cmd_info *cmd)
 		close(cmd->infile);
     cmd->infile = open(file_name, O_RDONLY);
 	if (cmd->infile < 0)
-		return (302);
+		return (set_err(cmd, 302, file_name));
 	return (0);
 }

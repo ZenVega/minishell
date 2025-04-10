@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:59:35 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/08 15:31:32 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 09:33:47 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 /*
 gives back a left side and a right side of the pipe for further handling
 */
-int	pipe_split(char **parts, char *line, t_list **malloc_list)
+int	pipe_split(char **parts, char *line, t_list **malloc_list, t_cmd_info *cmd)
 {
 	char	*part;
 	size_t	len;
 
 	if (!line || line[0] == '\0')
-		return (2);
+		return (set_err(cmd, 306, NULL));
 	part = ft_strchr(line, '|');
 	// pipe found
 	if (part)
@@ -40,10 +40,10 @@ int	pipe_split(char **parts, char *line, t_list **malloc_list)
 		parts[1] = ft_strdup(part + 1);
 		add_to_malloc_list(malloc_list, parts[1]);
 		if (!parts[0] || !parts[1])
-			return (-1);
+			return (set_err(cmd, 306, NULL));
 	}
 	// no pipe
 	else
-		return (1);
+		return (set_err(cmd, 306, NULL));
 	return (0);
 }
