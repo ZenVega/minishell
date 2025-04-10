@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   pwd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 13:40:03 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 15:29:50 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/04/08 13:17:52 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/04/08 15:24:54 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../buildins/pwd/pwd.h"
-# include "../exe/exe.h"
-# include "../includes/types.h"
-# include "../includes/CONSTANTS.h"
-# include "../libft/libft.h"
-# include "../malloc_list/malloc_list.h"
-# include "../parser/parser.h"
-# include "../signals/signals.h"
+#ifndef PWD_H
+# define PWD_H
+# include "../../includes/types.h"
+# include "../../error/error.h"
 
-void	start_shell(t_app *app);
+int		pwd(t_app *app, t_cmd_info *cmd);
+char	*get_cwd(void);
 
 #endif
