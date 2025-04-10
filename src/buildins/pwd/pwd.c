@@ -45,7 +45,7 @@ int	pwd(t_app *app, t_cmd_info *cmd)
 	path_abs = get_cwd();
 	if (!path_abs)
 		return (set_err(cmd, ERR_MALLOC, NULL));
-	ft_printf("%s\n", path_abs);
+	ft_fprintf(cmd->outfile, "%s\n", path_abs);
 	free(path_abs);
-	exit(0);
+	return (0);
 }

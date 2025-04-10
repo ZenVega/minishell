@@ -128,16 +128,14 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	t_exe	*exe;
 	int		err;
 
-	err = 0;
-	if (is_buildin(cmd->args[0]) != -1) 
-		err = exe_buildin(app, cmd);
-	else
+	err = exe_buildin(app, cmd);
+	if (err == 1) 
 	{
 		exe = init_exe(app, cmd);
 		if (!exe || !exe->path)
 			err = -1;
 		else
-			call_execve(exe, app, cmd);
+			err = call_execve(exe, app, cmd);
 	}
 	if (cmd->infile != 0)
 		close(cmd->infile);
