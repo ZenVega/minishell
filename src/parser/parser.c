@@ -46,6 +46,8 @@ int	create_mask(t_parser_info p_info, t_list **malloc_list, t_cmd_info *cmd)
 					p_info.mask[i++] = 1;
 		}
 	}
+	for (int i = 0; i <= len; i++)
+		ft_printf("%d-", p_info.mask[i]);
 	return (0);
 }
 
