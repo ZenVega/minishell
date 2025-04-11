@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
 #include "parser.h"
 #include "../malloc_list/malloc_list.h"
 #include "../libft/libft.h"
@@ -26,6 +25,7 @@ int	pipe_split(char **parts, char *line, t_list **malloc_list)
 	if (!line || line[0] == '\0')
 		return (2);
 	part = ft_strchr(line, '|');
+	//TODO: check if position is unmasked
 	// pipe found
 	if (part)
 	{

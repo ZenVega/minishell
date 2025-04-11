@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
 #include "parser.h"
 #include "../malloc_list/malloc_list.h"
 
@@ -20,7 +19,8 @@ int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list)
 {
 	char	**split;
 	int		err;
-	
+
+	//TODO: replace with safesplit and check for masked spaces
 	split = ft_split(line, ' ');
 	if (!split)
 		return (-1);
@@ -37,27 +37,26 @@ int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list)
 	return (0);
 }
 
-void    trim_args(char **args, t_cmd_info *cmd)
+void	trim_args(char **args, t_cmd_info *cmd)
 {
 	int		i;
 	int		j;
 	char	*tmp;
 
 	i = 0;
-	j =	0; 
-
+	j = 0;
 	while (args[i])
 	{
 		//case < infile, > outfile, >> outfile
 		// 'delete' 2 args 
 		if (((args[i][0] == '>' || args[i][0] == '<') && ft_strlen(args[i]) == 1) 
 			|| (args[i][0] == '>' && args[i][1] == '>' && ft_strlen(args[i]) == 2))
-				i = i + 2;
+			i = i + 2;
 		else if (((args[i][0] == '>' || args[i][0] == '<') && ft_strlen(args[i]) > 1) 
              || (args[i][0] == '>' && args[i][1] == '>' && ft_strlen(args[i]) > 2))
-				i++;
+			i++;
 		else
-		{	
+		{
 			tmp = args[i];
 			args[j] = tmp;
 			j++;
@@ -71,4 +70,3 @@ void    trim_args(char **args, t_cmd_info *cmd)
 	}
 	cmd->args = args;
 }
-
