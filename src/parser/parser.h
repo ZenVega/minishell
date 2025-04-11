@@ -13,8 +13,11 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "../error/error.h"
 # include "../includes/types.h"
 # include "../libft/libft.h"
+# include "../malloc_list/malloc_list.h"
+
 //parser.c
 t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list);
 
@@ -31,13 +34,13 @@ void		trim_args(char **args, t_cmd_info *cmd);
 //infile.c
 int			set_infile(char **args, t_cmd_info *cmd);
 int			found_infile(char **args, int i, t_cmd_info *cmd);
-int		simple_infile(char *file_name, t_cmd_info *cmd);
+int			simple_infile(char *file_name, t_cmd_info *cmd);
 
 //outfile.c
-int		set_outfile(char **args, t_cmd_info *cmd);
-int		found_outfile(char **args, int i, t_cmd_info *cmd);
-int		truncate_outfile(char *file_name, t_cmd_info *cmd);
-int		append_outfile(char **args, int i, t_cmd_info *cmd);
+int			set_outfile(char **args, t_cmd_info *cmd);
+int			found_outfile(char **args, int i, t_cmd_info *cmd);
+int			truncate_outfile(char *file_name, t_cmd_info *cmd);
+int			append_outfile(char **args, int i, t_cmd_info *cmd);
 
 //parser_error.c
 //void	free_args_split(char **args);
