@@ -12,10 +12,24 @@
 
 #include "echo.h"
 
+// possible args:
+// hello world
+// "hello world"
+// "hello world
+// hello "world"
+// hello $world
+// hello "$world"
+// "hello $world"
+// 'hello $world'
 int	echo(t_app *app, t_cmd_info *cmd)
 {
-	int	err;
+	int		err;
+	char	**args;
 
 	err = 0;
+	if (!app)
+		return (err);
+	args = cmd->args + 1;
+	ft_printf("%s\n", args[0]);
 	return (err);
 }
