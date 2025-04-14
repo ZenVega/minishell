@@ -17,6 +17,6 @@
 # include "../error/error.h"
 # include "../malloc_list/malloc_list.h"
 
-t_app	*init_shell(char *envp[]);
+t_app			*init_shell(char *envp[]);
 
 #endif
