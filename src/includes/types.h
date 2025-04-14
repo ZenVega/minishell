@@ -12,17 +12,18 @@
 
 #ifndef TYPES_H
 # define TYPES_H
+
 # include "../libft/libft.h"
 # include "CONSTANTS.h"
 # include <signal.h>
 
 typedef struct s_app
 {
-	t_list	*malloc_list;
-	char	**envp;
-	char	*prompt;
-	struct sigaction sa_int;
-	struct sigaction sa_quit;
+	t_list				*malloc_list;
+	char				**envp;
+	char				*prompt;
+	struct sigaction	sa_int;
+	struct sigaction	sa_quit;
 }	t_app;
 
 typedef enum e_cmd_type {
@@ -51,6 +52,7 @@ typedef struct s_parser_info
 	int			infile;
 	int			outfile;
 	char		*line;
+	int			*mask;
 }	t_parser_info;
 
 #endif

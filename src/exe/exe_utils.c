@@ -42,6 +42,7 @@ t_parser_info	init_parser_info(int infile, int outfile, char *line)
 	p_info.infile = infile;
 	p_info.outfile = outfile;
 	p_info.line = line;
+	p_info.mask = NULL;
 	return (p_info);
 }
 
