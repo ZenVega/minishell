@@ -22,7 +22,7 @@
 t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list);
 
 //pipe_split.c
-int			pipe_split(char **parts, char *line, t_list **malloc_list);
+int			pipe_split(char **parts, t_parser_info *p_info, t_list **malloc_list);
 
 //cmd_info_init.c
 t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info);

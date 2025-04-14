@@ -14,6 +14,8 @@
 # define INIT_H
 
 # include "../includes/types.h"
+# include "../error/error.h"
+# include "../malloc_list/malloc_list.h"
 
 t_app	*init_shell(char *envp[]);
 
