@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/15 12:29:18 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:02:23 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 {
 	int	err;
 	
-	ft_fprintf(STDOUT_FILENO, "exit\n");
+	reroute_io(cmd->infile, cmd->outfile);
+	ft_fprintf(STDERR_FILENO, "exit\n");
 	err = 0;
 	if (cmd->args[1])
 	{	
@@ -53,6 +54,10 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 		else
 			err = ft_atoi(cmd->args[1]);
 	}
+	if (cmd->infile != 0)
+		close(cmd->infile);
+	if (cmd->outfile != 1)
+		close(cmd->outfile);
 	free_comp_app(app);
 	exit(err);
 	return (err);
