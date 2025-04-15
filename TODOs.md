@@ -20,6 +20,7 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [x] double infile (i.E. function overwrite infile) 
 - [x] close fds in the end
 - [ ] unlink here_doc if used
+- [ ] function to close in/out to save lines
 
 ## EXE
 - [x] bin execution
