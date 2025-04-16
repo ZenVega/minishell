@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:50:18 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/16 12:59:41 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:39:55 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		partition(char **array, int start, int end)
 	i = start;
 	while (i < end)
 	{
-		if (strcmp(array[i], pivot) < 0)
+		if (ft_strcmp(array[i], pivot) < 0)
 		{	
 			swap(&array[i], &array[index]);
 			index++;
@@ -74,7 +74,7 @@ char	**copy_envp(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		copy[i] = strdup(envp[i]);
+		copy[i] = ft_strdup(envp[i]);
 		if (!copy[i]) 
 		{
             		j = 0;
