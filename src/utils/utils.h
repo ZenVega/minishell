@@ -16,5 +16,7 @@
 # include "../libft/libft.h"
 # include "../includes/types.h"
 
-int		is_space(char c);
+char	**copy_envp(char **envp);
+int	is_space(char c);
+
 #endif

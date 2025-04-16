@@ -12,28 +12,8 @@
 
 #include "init.h"
 #include "../malloc_list/malloc_list.h"
+#include "../utils/utils.h"
 
-char	**copy_envp(char **envp, t_list **malloc_list)
-{
-	int		size;
-	int		i;
-	char	**copy;
-
-	malloc_list = NULL;
-	size = 0;
-	while (envp[size])
-		size++;
-	copy = (char **)malloc(sizeof(char *) * (size + 1));
-	i = 0;
-	while (envp[i])
-	{
-		copy[i] = ft_strdup(envp[i]);
-		//add_to_malloc_list(malloc_list, copy[i]);
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
 
 t_app	*init_shell(char *envp[])
 {
@@ -43,7 +23,7 @@ t_app	*init_shell(char *envp[])
 	if (!app)
 		return (NULL);
 	app->malloc_list = NULL;
-	app->envp = copy_envp(envp, &app->malloc_list);
+	app->envp = copy_envp(envp);
 /*	
 	int i = 0;
 	while (app->envp[i])
