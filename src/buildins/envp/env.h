@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 11:24:14 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/16 09:50:06 by jhelbig          ###   ########.fr       */
+/*   Created: 2025/04/15 13:41:56 by jhelbig           #+#    #+#             */
+/*   Updated: 2025/04/15 13:51:30 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h" 
+#ifndef ENV_H
+# define ENV_H
+# include "../../exe/exe.h"
+# include "../../includes/types.h"
+# include "../../error/error.h"
 
-int	is_space(char c)
-{
-	if (
-		c == ' '
-		|| c == '\b'
-		|| c == '\t'
-		|| c == '\n'
-		|| c == '\v'
-	) 
-		return (1);
-	return (0);
-}
+int		env(t_app *app, t_cmd_info *cmd);
 
 
-
-
+#endif

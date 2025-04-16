@@ -10,6 +10,8 @@ CFILES += $(NAME).c
 
 vpath %.c $(SRC_FOLDER)buildins
 CFILES += buildins.c
+vpath %.c $(SRC_FOLDER)buildins/envp
+CFILES += env.c
 vpath %.c $(SRC_FOLDER)buildins/pwd
 CFILES += pwd.c
 

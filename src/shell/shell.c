@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 13:48:57 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:34:39 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	start_shell(t_app *app)
 			write(STDOUT_FILENO, "exit\n", 5);
 			free_malloc_list(app);
 			free(app->prompt);
-			free(read_line);
+			free(read_line);	
 			break ;
 		}
 		if (*read_line != '\0')
