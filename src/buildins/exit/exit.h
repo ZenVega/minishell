@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buildins.h                                         :+:      :+:    :+:   */
+/*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 13:15:49 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/15 11:17:57 by jhelbig          ###   ########.fr       */
+/*   Created: 2025/04/15 12:05:38 by jhelbig           #+#    #+#             */
+/*   Updated: 2025/04/15 13:59:05 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILDINS_H
-# define BUILDINS_H
+#ifndef EXIT_H
+# define EXIT_H
+# include "../../includes/types.h"
+# include "../../exe/exe.h"
+# include "../../error/error.h"
+# include "../../malloc_list/malloc_list.h"
 
-# include <sys/wait.h>
-# include "exit/exit.h"
-# include "pwd/pwd.h"
-# include "../includes/types.h"
-# include "../signals/signals.h"
-
-
-t_buildin	is_buildin(char *cmd);
-int			exe_buildin(t_app *app, t_cmd_info *cmd);
+int		ft_exit(t_app *app, t_cmd_info *cmd);
 
 #endif

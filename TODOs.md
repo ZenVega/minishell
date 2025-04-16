@@ -20,6 +20,7 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [x] double infile (i.E. function overwrite infile) 
 - [x] close fds in the end
 - [ ] unlink here_doc if used
+- [ ] function to close in/out to save lines
 
 ## EXE
 - [x] bin execution
@@ -61,5 +62,5 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [ ] cm1 > out >out2 >out3| cmd2
 - [ ] ls | < infile sort
 - [ ] ls | < infile <in_2 sort
-- [ ] exit | exit
+- [ ] exit | exit - geht noch nicht bzw aktuell: schreibt zweimal exit in stdout
 - [ ] sleep 3 | pwd really sleeps (for some reason after it completed pwd) - minishell does not

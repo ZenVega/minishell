@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+         #
+#    By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 10:42:30 by uschmidt          #+#    #+#              #
-#    Updated: 2025/03/27 17:08:01 by uschmidt         ###   ########.fr        #
+#    Updated: 2025/04/15 11:53:49 by jhelbig          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ ft_isalpha.c\
 ft_isalnum.c\
 ft_isascii.c\
 ft_isdigit.c\
+ft_isnumber.c\
 ft_isprint.c\
 ft_itoa.c\
 ft_memchr.c\

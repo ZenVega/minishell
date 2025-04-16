@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:41:43 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 16:53:58 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:53:35 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		ft_get_base(char *base);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);
+int		ft_isnumber(char *str);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 char	*ft_itoa(int n);
