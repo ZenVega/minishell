@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 14:59:04 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:06:18 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,52 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	return (status);
 }
 
+int	clean_args(t_cmd_info *cmd)
+{
+	int		i;
+	int		j;
+	char	c;
+	char	*scnd;
+
+	i = 0;
+	while (cmd->args[i] != NULL)
+	{
+		j = 0;
+		while (cmd->args[i][j] && cmd->args[i][j] != '"' && cmd->args[i][j] !='\'')
+			j++;
+		if (cmd->args[i][j])
+		{
+			c = cmd->args[i][j];
+			scnd = ft_strchr(cmd->args[i] + j + 1, c);
+			if (scnd == NULL)
+				break ;
+			else
+			{
+				while (scnd >= cmd->args[i] + j)
+				{
+					cmd->args[i][j] = cmd->args[i][j + 1];
+					j++;
+				}
+				while (cmd->args[i][j])
+				{
+					cmd->args[i][j - 2] = cmd->args[i][j];
+					j++;
+				}
+				cmd->args[i][j - 1] = 0;
+				cmd->args[i][j - 2] = 0;
+			}
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
 	int		err;
 
+	clean_args(cmd);
 	err = exe_buildin(app, cmd);
 	if (err == 1) 
 	{
