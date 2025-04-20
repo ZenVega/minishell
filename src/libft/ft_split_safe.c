@@ -23,12 +23,12 @@ static int	get_element_count(char const *s, char c, int *mask)
 	breaker = 1;
 	while (s[i])
 	{
-		if ((s[i] != c || (s[i] == c && mask[i])) && breaker)
+		if ((s[i] != c || mask[i]) && breaker)
 		{
 			count++;
 			breaker = 0;
 		}
-		else if (s[i] == c)
+		else if (s[i] == c && !mask[i])
 			breaker = 1;
 		i++;
 	}
@@ -40,7 +40,7 @@ static int	get_str_len(char const *s, char c, int *mask)
 	int	i;
 
 	i = 0;
-	while (s[i] && (s[i] != c || (s[i] == c && mask[i])))
+	while (s[i] && (s[i] != c || mask[i]))
 		i++;
 	return (i);
 }
@@ -89,7 +89,7 @@ char	**ft_split_safe(char const *s, char c, int	*mask)
 	{
 		while (s[j] == c && !mask[j])
 			j++;
-		len = get_str_len(s + j, c, mask);
+		len = get_str_len(s + j, c, mask + j);
 		if (len)
 			arr[i++] = get_str(s + j, len);
 		if (arr[i - 1] == NULL)

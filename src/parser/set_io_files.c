@@ -15,13 +15,13 @@
 
 //getting the split input
 //looking for > and < to set infile and output
-int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list)
+int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask)
 {
 	char	**split;
 	int		err;
 
 	//TODO: replace with safesplit and check for masked spaces
-	split = ft_split(line, ' ');
+	split = ft_split_safe(line, ' ', mask);
 	if (!split)
 		return (-1);
 	add_list_to_malloc_list(malloc_list, (void *)split);

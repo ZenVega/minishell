@@ -33,6 +33,7 @@ CFILES += cmd_info_init.c
 CFILES += here_doc.c
 CFILES += in_out_utils.c
 CFILES += infile.c
+CFILES += mask.c
 CFILES += outfile.c
 CFILES += parser.c
 CFILES += pipe_split.c
