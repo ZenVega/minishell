@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/20 18:06:18 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/20 18:29:02 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,41 +100,44 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	return (status);
 }
 
+int	clean_arg(char *arg)
+{
+	int	j;
+	char	c;
+	char	*scnd;
+
+	j = 0;
+	while (arg[j] && arg[j] != '"' && arg[j] !='\'')
+		j++;
+	if (arg[j])
+	{
+		c = arg[j];
+		scnd = ft_strchr(arg + j + 1, c);
+		j--;
+		if (scnd == NULL)
+			return 0;
+		else
+		{
+			while (scnd >= arg + ++j)
+				arg[j] = arg[j + 1];
+			j--;
+			while (arg[++j])
+				arg[j - 2] = arg[j];
+			arg[j - 1] = 0;
+			arg[j - 2] = 0;
+		}
+	}
+	return (0);
+}
+
 int	clean_args(t_cmd_info *cmd)
 {
 	int		i;
-	int		j;
-	char	c;
-	char	*scnd;
 
 	i = 0;
 	while (cmd->args[i] != NULL)
 	{
-		j = 0;
-		while (cmd->args[i][j] && cmd->args[i][j] != '"' && cmd->args[i][j] !='\'')
-			j++;
-		if (cmd->args[i][j])
-		{
-			c = cmd->args[i][j];
-			scnd = ft_strchr(cmd->args[i] + j + 1, c);
-			if (scnd == NULL)
-				break ;
-			else
-			{
-				while (scnd >= cmd->args[i] + j)
-				{
-					cmd->args[i][j] = cmd->args[i][j + 1];
-					j++;
-				}
-				while (cmd->args[i][j])
-				{
-					cmd->args[i][j - 2] = cmd->args[i][j];
-					j++;
-				}
-				cmd->args[i][j - 1] = 0;
-				cmd->args[i][j - 2] = 0;
-			}
-		}
+		clean_arg(cmd->args[i]);
 		i++;
 	}
 	return (0);
