@@ -6,13 +6,11 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:50:18 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/16 13:39:55 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/23 10:45:16 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include <stdio.h>
-#include <string.h>
 
 void	swap(char **a, char **b)
 {
@@ -57,41 +55,6 @@ void	quicksort(char **array, int start, int end)
 	}
 }
 
-
-char	**copy_envp(char **envp)
-{
-	int		size;
-	int		i;
-	char	**copy;
-	int		j;
-
-	size = 0;
-	while (envp[size])
-		size++;
-	copy = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!copy)
-		return NULL;
-	i = 0;
-	while (envp[i])
-	{
-		copy[i] = ft_strdup(envp[i]);
-		if (!copy[i]) 
-		{
-            		j = 0;
-            		while (j < i) 
-            		{
-                		free(copy[j]);
-                		j++;
-            		}
-            		free(copy);
-            		return NULL;
-        	}
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
-
 char	**copy_and_qsort(char **array)
 {
 	char	**sorted;
@@ -107,19 +70,3 @@ char	**copy_and_qsort(char **array)
 	return (sorted); 	
 }
 
-//testing
-/*
-int	main(int argc, char **argv, char** envp)
-{
-	char	**print;
-	int		i;
-
-	print = copy_and_qsort(envp);
-	i = 0;
-	while(print[i])
-	{
-		printf("%s\n", print[i]);
-		i++;
-	}
-}
-*/

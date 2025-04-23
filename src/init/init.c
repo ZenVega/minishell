@@ -23,15 +23,7 @@ t_app	*init_shell(char *envp[])
 	if (!app)
 		return (NULL);
 	app->malloc_list = NULL;
-	app->envp = copy_envp(envp);
-/*	
-	int i = 0;
-	while (app->envp[i])
-	{
-		ft_printf("%s\n", app->envp[i]);
-		i++;
-	}
-*/	
+	app->envp = copy_envp(envp);	
 	app->prompt = NULL;
 	return (app);
 }

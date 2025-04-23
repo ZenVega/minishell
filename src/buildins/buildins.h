@@ -14,6 +14,8 @@
 # define BUILDINS_H
 
 # include <sys/wait.h>
+# include "envp/env.h"
+# include "envp/export.h"
 # include "pwd/pwd.h"
 # include "../includes/types.h"
 # include "../signals/signals.h"

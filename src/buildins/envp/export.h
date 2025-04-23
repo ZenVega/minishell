@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   export.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 11:29:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 11:08:42 by jhelbig          ###   ########.fr       */
+/*   Created: 2025/04/23 09:50:01 by jhelbig           #+#    #+#             */
+/*   Updated: 2025/04/23 11:11:01 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef EXPORT_H
+# define EXPORT_H
 
-# include "../libft/libft.h"
-# include "../includes/types.h"
-
-char	**copy_and_qsort(char **array);
-char	**copy_envp(char **envp);
-int		is_space(char c);
+# include "../../error/error.h"
+# include "../../includes/types.h"
+# include "../../malloc_list/malloc_list.h"
+# include "../../utils/utils.h"
+ 
+int     ft_export(t_app *app, t_cmd_info *cmd);
 
 #endif
+
