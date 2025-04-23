@@ -6,22 +6,11 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/15 14:02:23 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/23 08:38:15 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit.h"
-// exit $? = 0
-//exit 4 $? = 4
-
-//exit ab 
-//exit \n bash: exit: ab: numeric argument required
-//$? = 2
-
-//exit 7 5
-//exit
-//bash: exit: too many arguments
-//$? = 1
 
 void	free_comp_app(t_app *app)
 {

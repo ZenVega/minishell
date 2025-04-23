@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:41:43 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/15 11:53:35 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/23 08:42:49 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_get_base(char *base);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
+int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isnumber(char *str);
-int		ft_isascii(int c);
 int		ft_isprint(int c);
 char	*ft_itoa(int n);
 void	*ft_memchr(const void *s, int c, size_t n);
