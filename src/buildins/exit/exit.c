@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/23 08:38:15 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/23 09:42:01 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	free_comp_app(t_app *app)
 
 int	ft_exit(t_app *app, t_cmd_info *cmd)
 {
-	int	err;
-	
+	int		err;
+	char	*suspect;
+
 	reroute_io(cmd->infile, cmd->outfile);
 	ft_fprintf(STDERR_FILENO, "exit\n");
 	err = 0;
@@ -32,17 +33,20 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 		if (cmd->args[2])
 		{
 			err = 1;
-			ft_fprintf(2, "minishell: exit: too many arguments\n");
+			set_err(cmd, 101, "exit");
 		}
 		else if (!ft_isnumber(cmd->args[1]))
 		{
 			err = 2;
-			ft_fprintf(2, "minishell: exit: %s: numeric argument requiered\n", 
-				cmd->args[1]);
+			suspect = ft_strjoin("exit: ", cmd->args[1]);
+			add_to_malloc_list(&app->malloc_list, suspect);
+			set_err(cmd, 102, suspect);
 		}
 		else
 			err = ft_atoi(cmd->args[1]);
 	}
+	if (err == 1 || err == 2)
+		exit_with_error(*cmd);
 	if (cmd->infile != 0)
 		close(cmd->infile);
 	if (cmd->outfile != 1)

@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 09:06:04 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/23 09:39:15 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**copy_envp(char **envp, t_list **malloc_list)
 	while (envp[size])
 		size++;
 	copy = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!copy);
+	if (!copy)
 		return (NULL);
 	i = 0;
 	while (envp[i])
