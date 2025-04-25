@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:59:18 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 12:06:04 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:56:05 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,20 @@ int	clean_arg(char *arg)
 	char	*scnd;
 
 	j = 0;
-	while (arg[j] && arg[j] != '"' && arg[j] != '\'')
-		j++;
-	if (arg[j])
+	while (arg[j])
 	{
+		while (arg[j] && arg[j] != '"' && arg[j] != '\'')
+			j++;
 		c = arg[j];
 		scnd = ft_strchr(arg + j + 1, c);
 		j--;
 		if (scnd == NULL)
 			return (0);
 		else
+		{
 			remove_quotes(scnd, arg, j);
+			j += (scnd - arg);
+		}
 	}
 	return (0);
 }
