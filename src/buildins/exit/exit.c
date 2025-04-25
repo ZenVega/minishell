@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/23 09:42:01 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/25 10:41:57 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 	char	*suspect;
 
 	reroute_io(cmd->infile, cmd->outfile);
-	ft_fprintf(STDERR_FILENO, "exit\n");
+	ft_fprintf(STDOUT_FILENO, "exit\n");
 	err = 0;
 	if (cmd->args[1])
 	{	

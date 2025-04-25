@@ -6,19 +6,18 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 09:39:15 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/25 10:25:53 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-char	**copy_envp(char **envp, t_list **malloc_list)
+char	**copy_envp(char **envp)
 {
 	int		size;
 	int		i;
 	char	**copy;
 
-	malloc_list = NULL;
 	size = 0;
 	while (envp[size])
 		size++;
@@ -43,7 +42,7 @@ t_app	*init_shell(char *envp[])
 	if (!app)
 		return (NULL);
 	app->malloc_list = NULL;
-	app->envp = copy_envp(envp, &app->malloc_list);
+	app->envp = copy_envp(envp);
 	if (!app->envp)
 		return (NULL);
 	app->prompt = NULL;

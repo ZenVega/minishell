@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:38 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/15 13:59:05 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/25 10:23:24 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../../includes/types.h"
 # include "../../exe/exe.h"
 # include "../../error/error.h"
+# include "../../libft/libft.h"
 # include "../../malloc_list/malloc_list.h"
 
 int		ft_exit(t_app *app, t_cmd_info *cmd);
