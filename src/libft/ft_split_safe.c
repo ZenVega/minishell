@@ -71,7 +71,7 @@ static void	*free_all(int i, char **arr)
 	return (NULL);
 }
 
-char	**ft_split_safe(char const *s, char c, int	*mask)
+char	**ft_split_safe(char const *s, char c, int *mask)
 {
 	char	**arr;
 	int		count;

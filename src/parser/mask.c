@@ -50,10 +50,5 @@ int	create_mask(t_parser_info *p_info, t_list **malloc_list, t_cmd_info *cmd)
 		if (p_info->line[i] == '"' || p_info->line[i] == '\'')
 			i = mask_substr(p_info->line, i, p_info->mask, p_info->line[i]);
 	}
-	//ft_printf("MASK: ", p_info->mask[i]);
-	//for (int i = 0; i < len; i++)
-	//	ft_printf("%d", p_info->mask[i]);
-	//ft_printf("\n", p_info->mask[i]);
 	return (0);
 }
-

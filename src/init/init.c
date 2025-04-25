@@ -24,3 +24,14 @@ t_app	*init_shell(char *envp[])
 	app->prompt = NULL;
 	return (app);
 }
+
+t_parser_info	init_parser_info(int infile, int outfile, char *line)
+{
+	t_parser_info	p_info;
+
+	p_info.infile = infile;
+	p_info.outfile = outfile;
+	p_info.line = line;
+	p_info.mask = NULL;
+	return (p_info);
+}

@@ -35,17 +35,6 @@ int	get_paths_len(char **paths)
 	return (i);
 }
 
-t_parser_info	init_parser_info(int infile, int outfile, char *line)
-{
-	t_parser_info	p_info;
-
-	p_info.infile = infile;
-	p_info.outfile = outfile;
-	p_info.line = line;
-	p_info.mask = NULL;
-	return (p_info);
-}
-
 //  all possible checks
 //  cmd_info has all necessary keys set
 //  argv[0] has no special characters

@@ -18,5 +18,6 @@
 # include "../malloc_list/malloc_list.h"
 
 t_app			*init_shell(char *envp[]);
+t_parser_info	init_parser_info(int infile, int outfile, char *line);
 
 #endif
