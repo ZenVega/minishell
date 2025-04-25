@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_pipe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:02:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/03/27 14:10:07 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:37:04 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 			free(cmd->err_info.suspect);
 		free_malloc_list(app);
 	}
+	app->ret_val = err;
 	return (err);
 }
