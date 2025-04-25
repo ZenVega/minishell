@@ -28,11 +28,11 @@ Here we can create a list of todos with the possibility to assign them and cross
 -[ ] build_in functions
     - [ ] echo
     - [ ] cd
-    - [ ] pwd
+    - [x] pwd
     - [ ] export
     - [ ] unset
-    - [ ] env
-    - [ ] exit
+    - [x] env
+    - [x] exit
 - [x] pipe
 - [ ] logic
 
@@ -62,5 +62,5 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [ ] cm1 > out >out2 >out3| cmd2
 - [ ] ls | < infile sort
 - [ ] ls | < infile <in_2 sort
-- [ ] exit | exit - geht noch nicht bzw aktuell: schreibt zweimal exit in stdout
+- [ ] exit | exit - writes 1 exit, should write nothing (but works otherwise)
 - [ ] sleep 3 | pwd really sleeps (for some reason after it completed pwd) - minishell does not
