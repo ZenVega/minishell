@@ -15,6 +15,7 @@
 
 # include "../libft.h"
 # include <stdio.h>
+# include <stdarg.h>
 
 int		ft_printf(const char *str, ...);
 int		ft_fprintf(int fd, const char *str, ...);

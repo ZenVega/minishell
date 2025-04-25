@@ -51,7 +51,6 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 void	start_shell(t_app *app)
 {
 	char				*read_line;
-	int					err;
 	t_cmd_info			*cmd;
 	t_parser_info		p_info;
 
@@ -79,7 +78,7 @@ void	start_shell(t_app *app)
 		{
 			p_info = init_parser_info(0, 1, read_line);
 			cmd = parser(p_info, &app->malloc_list);
-			err = exe(app, cmd);
+			exe(app, cmd);
 			add_history(read_line);
 			free_malloc_list(app);
 			free(read_line);
