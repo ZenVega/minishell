@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:47:17 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 15:12:07 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:32:29 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@
 # define ERR_PIPE_MSG "Pipe failed"
 # define ERR_ARGS_MSG "Wrong number of arguments"
 
+# define ERR_MANY_ARGS_MSG "too many arguments"
+# define ERR_NUM_ARGS_MSG "numeric argument required"
+
 # define BUFFER_SIZE 10
-# define ERR_COUNT 7
+# define ERR_COUNT 9
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
@@ -37,6 +40,8 @@ typedef enum s_err_code {
 	ERR_FORK = 305,
 	ERR_PIPE = 306,
 	ERR_ARGS = 307,
+	ERR_MANY_ARGS = 101,
+	ERR_NUM_ARGS = 102,
 }	t_err_code;
 
 # define BI_COUNT 8

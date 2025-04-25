@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_bin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 12:06:44 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:10:12 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 
 	clean_args(cmd);
 	err = exe_buildin(app, cmd);
-	if (err == 1) 
+	if (err == BI_NULL) 
 	{
 		exe = init_exe(app, cmd);
 		if (!exe || !exe->path)
