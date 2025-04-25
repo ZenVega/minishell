@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:41:56 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/15 13:51:30 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/23 12:01:59 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,5 @@
 # include "../../error/error.h"
 
 int		env(t_app *app, t_cmd_info *cmd);
-
 
 #endif
