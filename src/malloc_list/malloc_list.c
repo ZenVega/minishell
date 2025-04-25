@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:57:04 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/19 09:28:39 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:38:12 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,17 @@ void	free_malloc_list(t_app *app)
 {
 	ft_lstclear(&app->malloc_list, free);
 	free(app->malloc_list);
+}
+
+void	free_envp(char **envp)
+{
+	int	i;
+	
+	i = 0;
+	while (envp[i])
+	{
+		free(envp[i]);
+		i++;
+	}
+	free(envp);
 }

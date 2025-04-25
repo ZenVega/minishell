@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.h                                             :+:      :+:    :+:   */
+/*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 14:05:19 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 08:39:22 by jhelbig          ###   ########.fr       */
+/*   Created: 2025/04/15 12:05:38 by jhelbig           #+#    #+#             */
+/*   Updated: 2025/04/25 10:23:24 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#ifndef EXIT_H
+# define EXIT_H
+# include "../../includes/types.h"
+# include "../../exe/exe.h"
+# include "../../error/error.h"
+# include "../../libft/libft.h"
+# include "../../malloc_list/malloc_list.h"
 
-# include "../includes/types.h"
-# include "../malloc_list/malloc_list.h"
-
-t_app	*init_shell(char *envp[]);
+int		ft_exit(t_app *app, t_cmd_info *cmd);
 
 #endif

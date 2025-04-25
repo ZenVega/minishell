@@ -6,9 +6,10 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:18:44 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/03 13:28:50 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:34:22 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "error.h"
 
 static const char	*get_error_msg(t_err_code err)
@@ -23,6 +24,9 @@ static const char	*get_error_msg(t_err_code err)
 	errors[4] = (t_err){.code = ERR_FORK, .msg = ERR_FORK_MSG};
 	errors[5] = (t_err){.code = ERR_PIPE, .msg = ERR_PIPE_MSG};
 	errors[5] = (t_err){.code = ERR_ARGS, .msg = ERR_ARGS_MSG};
+	errors[6] = (t_err){.code = ERR_MANY_ARGS, .msg = ERR_MANY_ARGS_MSG};
+	errors[7] = (t_err){.code = ERR_NUM_ARGS, .msg = ERR_NUM_ARGS_MSG};
+
 	i = -1;
 	while (++i < ERR_COUNT)
 		if (errors[i].code == err)

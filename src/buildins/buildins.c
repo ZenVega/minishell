@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:19:06 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 14:55:36 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:14:09 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ t_buildin	is_buildin(char *cmd)
 	return (BI_NULL);
 }
 
+// for overview the BI_NULL condition in nice, but for saving lines we can kick it here later
 int	exe_buildin(t_app *app, t_cmd_info *cmd)
 {
 	t_buildin	bi_cmd;
 	int			err;
 
-	err = 1;
+	err = BI_NULL;
 	bi_cmd = is_buildin(cmd->args[0]); 
 	if (bi_cmd == BI_NULL)
 		return (err);
@@ -48,5 +49,7 @@ int	exe_buildin(t_app *app, t_cmd_info *cmd)
 		err = pwd(app, cmd);
 	else if (bi_cmd == BI_ECHO)
 		err = echo(app, cmd);
+	else if (bi_cmd == BI_EXIT)
+		err = ft_exit(app, cmd);
 	return (err);
 }

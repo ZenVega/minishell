@@ -14,6 +14,8 @@ vpath %.c $(SRC_FOLDER)buildins/pwd
 CFILES += pwd.c
 vpath %.c $(SRC_FOLDER)buildins/echo
 CFILES += echo.c
+vpath %.c $(SRC_FOLDER)buildins/exit
+CFILES += exit.c
 
 vpath %.c $(SRC_FOLDER)error
 CFILES += error.c
