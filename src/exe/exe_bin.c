@@ -6,15 +6,35 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 13:47:56 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/25 14:10:12 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 
+static char	**add_cmd_name(t_cmd_info *cmd, char *cmd_name,
+		int path_len, char **paths)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (paths[i])
+	{
+		tmp = ft_strjoin(paths[i], cmd_name);
+		if (!tmp)
+			return (free_paths(cmd, paths, path_len, cmd_name));
+		free(paths[i]);
+		paths[i] = tmp;
+		if (!paths[i])
+			return (free_paths(cmd, paths, path_len, cmd_name));
+		i++;
+	}
+	return (paths);
+}
+
 char	**get_paths(t_cmd_info *cmd, char *cmd_name)
 {
-	int		i;
 	int		path_len;
 	char	**paths;
 	char	*tmp;
@@ -29,18 +49,7 @@ char	**get_paths(t_cmd_info *cmd, char *cmd_name)
 	if (!paths)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	path_len = get_paths_len(paths);
-	i = 0;
-	while (paths[i])
-	{
-		tmp = ft_strjoin(paths[i], cmd_name);
-		if (!tmp)
-			return (free_paths(cmd, paths, path_len, cmd_name));
-		free(paths[i]);
-		paths[i] = tmp;
-		if (!paths[i])
-			return (free_paths(cmd, paths, path_len, cmd_name));
-		i++;
-	}
+	paths = add_cmd_name(cmd, cmd_name, path_len, paths);
 	free(cmd_name);
 	return (paths);
 }
@@ -105,6 +114,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	t_exe	*exe;
 	int		err;
 
+	clean_args(cmd);
 	err = exe_buildin(app, cmd);
 	if (err == BI_NULL) 
 	{

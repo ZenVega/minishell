@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "../includes/minishell.h"
 
 t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 {
@@ -23,10 +22,12 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 	if (!cmd)
 		return (NULL);
 	//find pipe, split on first pipe
-	parts = malloc_and_add_list (malloc_list, sizeof(char *) * 3);
-	if (!parts)
+	parts = (char **)malloc_and_add_list (malloc_list, sizeof(char *) * 3);
+	free(p_info.mask);
+	err = create_mask(&p_info, malloc_list, cmd);
+	if (err == -1 || !parts)
 		return (NULL);
-	err = pipe_split(parts, p_info.line, malloc_list);
+	err = pipe_split(parts, &p_info, malloc_list);
 	//pipe failed
 	if (err == -1)
 		return (NULL);
@@ -38,7 +39,7 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 		return (cmd);
 	}
 	cmd->type = BIN;
-	err = set_io_files(p_info.line, cmd, malloc_list);
+	err = set_io_files(p_info.line, cmd, malloc_list, p_info.mask);
 	if (err != 0)
 		return (NULL);
 	return (cmd);

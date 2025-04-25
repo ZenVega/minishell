@@ -21,6 +21,7 @@ CFILES += error.c
 vpath %.c $(SRC_FOLDER)exe
 CFILES += exe.c
 CFILES += exe_bin.c
+CFILES += exe_clean.c
 CFILES += exe_pipe.c
 CFILES += exe_utils.c
 
@@ -35,6 +36,7 @@ CFILES += cmd_info_init.c
 CFILES += here_doc.c
 CFILES += in_out_utils.c
 CFILES += infile.c
+CFILES += mask.c
 CFILES += outfile.c
 CFILES += parser.c
 CFILES += pipe_split.c
