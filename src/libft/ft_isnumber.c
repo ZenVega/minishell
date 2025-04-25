@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.h                                             :+:      :+:    :+:   */
+/*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 14:05:19 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 08:39:22 by jhelbig          ###   ########.fr       */
+/*   Created: 2025/04/15 12:05:00 by jhelbig           #+#    #+#             */
+/*   Updated: 2025/04/15 12:05:06 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#include "libft.h"
 
-# include "../includes/types.h"
-# include "../malloc_list/malloc_list.h"
+int ft_isnumber(char *str)
+{
+    int i;
 
-t_app	*init_shell(char *envp[]);
-
-#endif
+    i = 0;
+    while(str[i])
+    {
+        if (!ft_isdigit(str[i]))
+            return (0);
+        i++;
+    }
+    return (1);
+}
