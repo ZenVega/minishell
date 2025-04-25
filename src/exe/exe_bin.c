@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 11:49:35 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/25 13:47:56 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,14 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	waitpid(pid, &status, 0);
 	return (status);
 }
-// err randomly set to 127 - to be discussed, but 1 already used
+
 int	exe_bin(t_app *app, t_cmd_info *cmd)
 {
 	t_exe	*exe;
 	int		err;
 
 	err = exe_buildin(app, cmd);
-	if (err == 127) 
+	if (err == BI_NULL) 
 	{
 		exe = init_exe(app, cmd);
 		if (!exe || !exe->path)
