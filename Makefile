@@ -10,10 +10,12 @@ CFILES += $(NAME).c
 
 vpath %.c $(SRC_FOLDER)buildins
 CFILES += buildins.c
-vpath %.c $(SRC_FOLDER)buildins/pwd
-CFILES += pwd.c
+vpath %.c $(SRC_FOLDER)buildins/cd
+CFILES += cd.c
 vpath %.c $(SRC_FOLDER)buildins/exit
 CFILES += exit.c
+vpath %.c $(SRC_FOLDER)buildins/pwd
+CFILES += pwd.c
 
 vpath %.c $(SRC_FOLDER)error
 CFILES += error.c

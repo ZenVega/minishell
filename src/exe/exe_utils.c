@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:00:35 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/08 14:52:58 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:47:12 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,6 @@ int	is_valid(t_cmd_info *cmd)
 		return (exit_with_error(cmd_err));
 	//TODO: not sure if there are more unvalid cases
 	return (0);
-}
-
-void	reroute_io(int input, int output)
-{
-	if (input != STDIN_FILENO)
-		dup2(input, STDIN_FILENO);
-	if (output != STDOUT_FILENO)
-		dup2(output, STDOUT_FILENO);
 }
 
 // TODO: This function is deprecated.

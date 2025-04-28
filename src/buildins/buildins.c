@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:19:06 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 13:53:03 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/28 10:42:48 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ int	exe_buildin(t_app *app, t_cmd_info *cmd)
 	bi_cmd = is_buildin(cmd->args[0]); 
 	if (bi_cmd == BI_NULL)
 		return (err);
-	else if (bi_cmd == BI_PWD)
-		err = pwd(app, cmd);
+	else if (bi_cmd == BI_CD)
+		err = cd(app, cmd);
 	else if (bi_cmd == BI_EXIT)
 		err = ft_exit(app, cmd);
+	else if (bi_cmd == BI_PWD)
+		err = pwd(app, cmd);
 	return (err);
 }

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:15:49 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 08:39:55 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/28 10:44:47 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILDINS_H
 
 # include <sys/wait.h>
+# include "cd/cd.h"
 # include "exit/exit.h"
 # include "pwd/pwd.h"
 # include "../includes/types.h"
