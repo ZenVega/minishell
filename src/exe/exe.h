@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 12:06:28 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/04/28 12:21:15 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXE_H
@@ -45,5 +45,6 @@ void			reroute_io(int input, int output);
 void			*free_paths(t_cmd_info *cmd, char **paths,
 					int len, char *cmd_name);
 int				get_paths_len(char **paths);
-
+//exe_get_path
+char			*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app);
 #endif
