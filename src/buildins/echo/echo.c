@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 14:09:55 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/04/10 11:53:37 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/04/25 14:24:20 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "echo.h"
 
-int	main(int argc, char **argv, char *envp[])
+int	echo(t_app *app, t_cmd_info *cmd)
 {
-	t_app				*app;
+	int		err;
+	int		i;
+	int		new_line;
+	char	**args;
 
-	if (argc != 1 || !argv)
+	err = 0;
+	new_line = 1;
+	i = 0;
+	if (!app)
+		return (err);
+	args = cmd->args + 1;
+	if (*args && !ft_strcmp(*args, "-n"))
 	{
-		write(2, "Invalid arguments\n", 18);
-		return (-1);
+		args++;
+		new_line = 0;
 	}
-	app = init_shell(envp);
-	if (app == NULL)
-		return (-1);
-	start_shell(app);
-	free_envp(app->envp);
-	free(app);
-	return (0);
+	while (args[i])
+		ft_printf("%s ", args[i++]);
+	if (new_line)
+		ft_printf("\n");
+	return (err);
 }
