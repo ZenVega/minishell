@@ -10,6 +10,9 @@ CFILES += $(NAME).c
 
 vpath %.c $(SRC_FOLDER)buildins
 CFILES += buildins.c
+vpath %.c $(SRC_FOLDER)buildins/envp
+CFILES += env.c
+CFILES += export.c
 vpath %.c $(SRC_FOLDER)buildins/pwd
 CFILES += pwd.c
 vpath %.c $(SRC_FOLDER)buildins/echo
@@ -52,6 +55,7 @@ CFILES += signals.c
 
 vpath %.c $(SRC_FOLDER)utils
 CFILES += utils.c
+CFILES += sorting.c
 
 #notdir removes all path from filename 
 #addprefix adds something to each file, in this case the output folder

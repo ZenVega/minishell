@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buildins.h                                         :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 13:15:49 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 08:39:55 by jhelbig          ###   ########.fr       */
+/*   Created: 2025/04/15 13:41:06 by jhelbig           #+#    #+#             */
+/*   Updated: 2025/04/23 12:03:50 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILDINS_H
-# define BUILDINS_H
+#include "env.h"
 
-# include <sys/wait.h>
-# include "envp/env.h"
-# include "envp/export.h"
-# include "exit/exit.h"
-# include "pwd/pwd.h"
-# include "echo/echo.h"
-# include "../includes/types.h"
-# include "../signals/signals.h"
+int	env(t_app *app, t_cmd_info *cmd)
+{
+	int	i;
 
-t_buildin	is_buildin(char *cmd);
-int			exe_buildin(t_app *app, t_cmd_info *cmd);
-
-#endif
+	i = 0;
+	reroute_io(cmd->infile, cmd->outfile);
+	while (cmd && app->envp[i])
+	{
+		ft_printf("%s\n", app->envp[i]);
+		i++;
+	}
+	if (cmd->infile != 0)
+		close(cmd->infile);
+	if (cmd->outfile != 1)
+		close(cmd->outfile);
+	return (0);
+}

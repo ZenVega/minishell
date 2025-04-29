@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "init.h"
+#include "../malloc_list/malloc_list.h"
+#include "../utils/utils.h"
 
 char	**copy_envp(char **envp)
 {
