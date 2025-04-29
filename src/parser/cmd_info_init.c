@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
 #include "../malloc_list/malloc_list.h"
 
 t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info)
