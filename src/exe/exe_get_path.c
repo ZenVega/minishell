@@ -26,8 +26,6 @@ static char	**add_cmd_name(t_cmd_info *cmd, char *cmd_name,
 			return (free_paths(cmd, paths, path_len, cmd_name));
 		free(paths[i]);
 		paths[i] = tmp;
-		if (!paths[i])
-			return (free_paths(cmd, paths, path_len, cmd_name));
 		i++;
 	}
 	return (paths);
