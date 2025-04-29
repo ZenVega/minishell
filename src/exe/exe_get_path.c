@@ -39,6 +39,7 @@ char	**get_paths_from_env(t_cmd_info *cmd, char *cmd_name)
 	char	**paths;
 	char	*tmp;
 
+	//TODO: replace with local vars aka get_local_env
 	tmp = getenv("PATH");
 	if (!tmp)
 		return (set_err(cmd, ERR_NO_VAR, "PATH"), NULL);
@@ -54,6 +55,7 @@ char	**get_paths_from_env(t_cmd_info *cmd, char *cmd_name)
 	return (paths);
 }
 
+// cmd_name == arg[0]
 static int	clean_cmd_name(t_cmd_info *cmd, char **cmd_name)
 {
 	int		len;
