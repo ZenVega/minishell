@@ -55,61 +55,40 @@ char	**get_paths_from_env(t_cmd_info *cmd, char *cmd_name)
 	return (paths);
 }
 
-// cmd_name == arg[0]
-static int	clean_cmd_name(t_cmd_info *cmd, char **cmd_name)
+char	*filter_paths(t_app *app, char **paths)
 {
-	int		len;
-	char	*tmp;
+	int		found;
+	char	*path;
 
-	len = ft_strlen(*cmd_name) - 1;
-	while (len >= 0 && (*cmd_name)[len] != '/')
-		len--;
-	if (len == -1)
+	found = 0;
+	while (*paths)
 	{
-		*cmd_name = NULL;
-		return (1);
+		if (!found && !access(*paths, X_OK))
+		{
+			found = 1;
+			path = *paths;
+			add_to_malloc_list(&app->malloc_list, *paths);
+		}
+		else
+			free(*paths);
+		paths++;
 	}
-	tmp = ft_strdup(*cmd_name + len + 1);
-	if (!tmp)
-		return (set_err(cmd, ERR_MALLOC, NULL));
-	*cmd_name = tmp;
-	return (0);
+	return (path);
 }
 
-//is absolute path
-//is relative path
-//is plain cmd
 char	*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app)
 {
 	char	**paths;
-	char	*path;
-	int		found;
 
-	found = 0;
 	if (exe->cmd_name[0] == '/' || exe->cmd_name[0] == '.')
-	{
-		clean_cmd_name(cmd, &exe->args[0]);
 		return (exe->cmd_name);
-	}
 	else
 	{
 		paths = get_paths_from_env(cmd, exe->cmd_name);
 		if (!paths)
 			return (NULL);
 		add_to_malloc_list(&app->malloc_list, paths);
-		while (*paths)
-		{
-			if (!found && !access(*paths, X_OK))
-			{
-				found = 1;
-				path = *paths;
-				add_to_malloc_list(&app->malloc_list, *paths);
-			}
-			else
-				free(*paths);
-			paths++;
-		}
-		return (path);
+		return (filter_paths(app, paths));
 	}
 	return (NULL);
 }
