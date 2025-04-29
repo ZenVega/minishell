@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:50:18 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/23 10:45:16 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/29 12:34:04 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,23 @@ void	swap(char **a, char **b)
 int		partition(char **array, int start, int end)
 {
 	char	*pivot;
-	int		index;
+	int		pivot_pos;
 	int		i;
 
 	pivot = array[end];
-	index = start;
+	pivot_pos = start;
 	i = start;
 	while (i < end)
 	{
 		if (ft_strcmp(array[i], pivot) < 0)
 		{	
-			swap(&array[i], &array[index]);
-			index++;
+			swap(&array[i], &array[pivot_pos]);
+			pivot_pos++;
 		}
 		i++;
 	}
-	swap(&array[index], &array[end]);
-	return (index);	
+	swap(&array[pivot_pos], &array[end]);
+	return (pivot_pos);	
 }
 
 void	quicksort(char **array, int start, int end)

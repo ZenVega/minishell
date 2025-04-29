@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:41:06 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/23 12:03:50 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/29 12:09:01 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	env(t_app *app, t_cmd_info *cmd)
 
 	i = 0;
 	reroute_io(cmd->infile, cmd->outfile);
-	while (cmd && app->envp[i])
+	while (app->envp[i])
 	{
 		ft_printf("%s\n", app->envp[i]);
 		i++;
