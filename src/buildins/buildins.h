@@ -16,6 +16,7 @@
 # include <sys/wait.h>
 # include "exit/exit.h"
 # include "pwd/pwd.h"
+# include "echo/echo.h"
 # include "../includes/types.h"
 # include "../signals/signals.h"
 
