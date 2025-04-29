@@ -55,7 +55,7 @@ int	clean_args(t_cmd_info *cmd)
 	int		i;
 
 	i = 0;
-	while (cmd->args[i] && cmd->args[i] != NULL)
+	while (cmd->args[i] != NULL)
 	{
 		clean_arg(cmd->args[i]);
 		i++;
