@@ -67,10 +67,9 @@ static int	clean_cmd_name(t_cmd_info *cmd, char **cmd_name)
 		*cmd_name = NULL;
 		return (1);
 	}
-	tmp = ft_strdup(*cmd_name + len);
+	tmp = ft_strdup(*cmd_name + len + 1);
 	if (!tmp)
 		return (set_err(cmd, ERR_MALLOC, NULL));
-	free(*cmd_name);
 	*cmd_name = tmp;
 	return (0);
 }

@@ -23,7 +23,9 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	exe->args = cmd->args;
 	exe->path = NULL;
-	exe->cmd_name = cmd->args[0];
+	exe->cmd_name = ft_strdup(cmd->args[0]);
+	if (!exe->cmd_name)
+		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	exe->path = get_path(cmd, exe, app);
 	if (!exe->path)
 		return (set_err(cmd, ERR_NO_FILE, NULL), NULL);
