@@ -34,6 +34,8 @@ int	clean_arg(char *arg)
 	{
 		while (arg[j] && arg[j] != '"' && arg[j] != '\'')
 			j++;
+		if (!arg[j])
+			return (0);
 		c = arg[j];
 		scnd = ft_strchr(arg + j + 1, c);
 		j--;

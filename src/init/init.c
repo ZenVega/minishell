@@ -6,11 +6,13 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 10:25:53 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/25 14:13:41 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
+#include "../malloc_list/malloc_list.h"
+#include "../utils/utils.h"
 
 char	**copy_envp(char **envp)
 {
@@ -46,6 +48,7 @@ t_app	*init_shell(char *envp[])
 	if (!app->envp)
 		return (NULL);
 	app->prompt = NULL;
+	app->ret_val = 0;
 	return (app);
 }
 

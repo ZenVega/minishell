@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 11:29:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 11:08:42 by jhelbig          ###   ########.fr       */
+/*   Created: 2025/04/10 11:53:37 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/04/25 14:24:20 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "echo.h"
 
-# include "../libft/libft.h"
-# include "../includes/types.h"
+int	echo(t_app *app, t_cmd_info *cmd)
+{
+	int		err;
+	int		i;
+	int		new_line;
+	char	**args;
 
-char	**copy_and_qsort(char **array);
-char	**copy_envp(char **envp);
-int		is_space(char c);
-
-#endif
+	err = 0;
+	new_line = 1;
+	i = 0;
+	if (!app)
+		return (err);
+	args = cmd->args + 1;
+	if (*args && !ft_strcmp(*args, "-n"))
+	{
+		args++;
+		new_line = 0;
+	}
+	while (args[i])
+		ft_printf("%s ", args[i++]);
+	if (new_line)
+		ft_printf("\n");
+	return (err);
+}
