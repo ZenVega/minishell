@@ -33,14 +33,13 @@ static char	**add_cmd_name(t_cmd_info *cmd, char *cmd_name,
 	return (paths);
 }
 
-char	**get_paths_from_env(t_cmd_info *cmd, char *cmd_name)
+static char	**get_paths_from_env(t_app *app, t_cmd_info *cmd, char *cmd_name)
 {
 	int		path_len;
 	char	**paths;
 	char	*tmp;
 
-	//TODO: replace with local vars aka get_local_env
-	tmp = getenv("PATH");
+	tmp = get_env_val(app, "PATH");
 	if (!tmp)
 		return (set_err(cmd, ERR_NO_VAR, "PATH"), NULL);
 	cmd_name = ft_strjoin("/", cmd_name);
@@ -84,7 +83,7 @@ char	*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app)
 		return (exe->cmd_name);
 	else
 	{
-		paths = get_paths_from_env(cmd, exe->cmd_name);
+		paths = get_paths_from_env(app, cmd, exe->cmd_name);
 		if (!paths)
 			return (NULL);
 		add_to_malloc_list(&app->malloc_list, paths);

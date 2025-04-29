@@ -13,7 +13,7 @@
 #ifndef EXIT_H
 # define EXIT_H
 # include "../../includes/types.h"
-# include "../../exe/exe.h"
+# include "../../utils/utils.h"
 # include "../../error/error.h"
 # include "../../libft/libft.h"
 # include "../../malloc_list/malloc_list.h"
