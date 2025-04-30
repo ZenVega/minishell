@@ -29,3 +29,19 @@ int	env(t_app *app, t_cmd_info *cmd)
 		close(cmd->outfile);
 	return (0);
 }
+
+char	*get_env_val(t_app *app, char *key)
+{
+	int		i;
+	int		len;
+
+	len = ft_strlen(key);
+	i = 0;
+	while (app->envp[i])
+	{
+		if (!ft_strncmp(app->envp[i], key, len))
+			return (ft_strdup(app->envp[i] + len + 1));
+		i++;
+	}
+	return (NULL);
+}

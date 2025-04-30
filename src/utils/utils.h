@@ -19,5 +19,6 @@
 char	**copy_and_qsort(char **array);
 char	**copy_envp(char **envp);
 int		is_space(char c);
+void	reroute_io(int input, int output);
 
 #endif
