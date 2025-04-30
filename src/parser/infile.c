@@ -46,7 +46,7 @@ int	found_infile(char **args, int i, t_cmd_info *cmd)
 		if (args[i + 1])
 			file_name = args[i + 1];
 		else
-			return (set_err(cmd, ERR_SYNTAX, "infile"));
+			return (set_err(cmd, ERR_SYNTAX, "after <"));
 		return (simple_infile(file_name, cmd));
 	}
 	if (ft_strlen(args[i]) > 1)
@@ -67,6 +67,6 @@ int	simple_infile(char *file_name, t_cmd_info *cmd)
 		close(cmd->infile);
 	cmd->infile = open(file_name, O_RDONLY);
 	if (cmd->infile < 0)
-		return (set_err(cmd, ERR_NO_FILE, "infile"));
+		return (set_err(cmd, ERR_NO_FILE, file_name));
 	return (0);
 }
