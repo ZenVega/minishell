@@ -14,6 +14,8 @@
 # define CD_H
 
 # include "../../includes/types.h"
+# include "../../error/error.h"
+# include "../../utils/utils.h"
 
 int	cd(t_app *app, t_cmd_info *cmd);
 

@@ -25,16 +25,6 @@ void	*free_paths(t_cmd_info *cmd, char **paths, int len, char *cmd_name)
 	return (NULL);
 }
 
-int	get_paths_len(char **paths)
-{
-	int	i;
-
-	i = 0;
-	while (paths[i])
-		i++;
-	return (i);
-}
-
 //  all possible checks
 //  cmd_info has all necessary keys set
 //  argv[0] has no special characters

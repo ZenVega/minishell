@@ -14,14 +14,14 @@
 
 void	swap(char **a, char **b)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
 
-int		partition(char **array, int start, int end)
+int	partition(char **array, int start, int end)
 {
 	char	*pivot;
 	int		index;
@@ -33,20 +33,20 @@ int		partition(char **array, int start, int end)
 	while (i < end)
 	{
 		if (ft_strcmp(array[i], pivot) < 0)
-		{	
+		{
 			swap(&array[i], &array[index]);
 			index++;
 		}
 		i++;
 	}
 	swap(&array[index], &array[end]);
-	return (index);	
+	return (index);
 }
 
 void	quicksort(char **array, int start, int end)
-{	
+{
 	int	pivot_pos;
-	
+
 	if (start < end)
 	{
 		pivot_pos = partition(array, start, end);
@@ -58,15 +58,14 @@ void	quicksort(char **array, int start, int end)
 char	**copy_and_qsort(char **array)
 {
 	char	**sorted;
-	int	size;
-	
+	int		size;
+
 	sorted = copy_envp(array);
 	if (!sorted)
 		return (NULL);
 	size = 0;
-	while(sorted[size])
+	while (sorted[size])
 		size++;
 	quicksort(sorted, 0, size - 1);
-	return (sorted); 	
+	return (sorted);
 }
-

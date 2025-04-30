@@ -20,7 +20,7 @@ int	exe(t_app *app, t_cmd_info *cmd)
 {
 	int	err;
 
-	err = is_valid(cmd);
+	err = cmd->err_info.code;
 	if (err)
 		return (err);
 	if (cmd->type == BIN)

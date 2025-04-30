@@ -11,6 +11,12 @@
 /* ************************************************************************** */
 
 #include "cd.h"
+
+static char	*get_abs_path(char *path)
+{
+	return (path);
+}
+
 // set OLDPWD as current PWD
 // get 'directory value'
 // expand args / clean string
@@ -18,5 +24,13 @@
 // updateprompt if necessary
 int	cd(t_app *app, t_cmd_info *cmd)
 {
+	char	*abs_path;
+
+	if (!app)
+		return (-1);
+	if (get_char_arr_len(cmd->args) != 2)
+		return (set_err(cmd, ERR_NUM_ARGS, "CD"));
+	abs_path = get_abs_path(cmd->args[1]);
+	chdir(abs_path);
 	return (0);
 }

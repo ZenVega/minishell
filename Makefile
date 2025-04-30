@@ -12,13 +12,11 @@ vpath %.c $(SRC_FOLDER)buildins
 CFILES += buildins.c
 vpath %.c $(SRC_FOLDER)buildins/cd
 CFILES += cd.c
+vpath %.c $(SRC_FOLDER)buildins/echo
+CFILES += echo.c
 vpath %.c $(SRC_FOLDER)buildins/envp
 CFILES += env.c
 CFILES += export.c
-vpath %.c $(SRC_FOLDER)buildins/pwd
-CFILES += pwd.c
-vpath %.c $(SRC_FOLDER)buildins/echo
-CFILES += echo.c
 vpath %.c $(SRC_FOLDER)buildins/exit
 CFILES += exit.c
 vpath %.c $(SRC_FOLDER)buildins/pwd

@@ -47,7 +47,7 @@ char	**copy_envp(char **envp)
 			j = 0;
 			while (j < i) 
 			{
-				free(copy[j]);
+				free(copy[j++]);
 				j++;
 			}
 			free(copy);
@@ -57,6 +57,16 @@ char	**copy_envp(char **envp)
 	}
 	copy[i] = NULL;
 	return (copy);
+}
+
+int	get_char_arr_len(char **paths)
+{
+	int	i;
+
+	i = 0;
+	while (paths[i])
+		i++;
+	return (i);
 }
 
 void	reroute_io(int input, int output)
