@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 11:29:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/28 11:52:07 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/04/15 13:41:56 by jhelbig           #+#    #+#             */
+/*   Updated: 2025/04/23 12:01:59 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef ENV_H
+# define ENV_H
+# include "../../includes/types.h"
+# include "../../error/error.h"
+# include "../../utils/utils.h"
 
-# include "../libft/libft.h"
-# include "../includes/types.h"
-
-char	**copy_and_qsort(char **array);
-char	**copy_envp(char **envp);
-int		is_space(char c);
-void	reroute_io(int input, int output);
+int		env(t_app *app, t_cmd_info *cmd);
+char	*get_env_val(t_app *app, char *key);
 
 #endif

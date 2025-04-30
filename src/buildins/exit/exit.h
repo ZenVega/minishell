@@ -12,6 +12,8 @@
 
 #ifndef EXIT_H
 # define EXIT_H
+# include "../../includes/types.h"
+# include "../../utils/utils.h"
 # include "../../error/error.h"
 # include "../../includes/types.h"
 # include "../../libft/libft.h"

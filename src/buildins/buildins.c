@@ -47,9 +47,16 @@ int	exe_buildin(t_app *app, t_cmd_info *cmd)
 		return (err);
 	else if (bi_cmd == BI_CD)
 		err = cd(app, cmd);
+	else if (bi_cmd == BI_ECHO)
+		err = echo(app, cmd);
+	else if (bi_cmd == BI_ENV)
+		err = env(app, cmd);
 	else if (bi_cmd == BI_EXIT)
 		err = ft_exit(app, cmd);
+	else if (bi_cmd == BI_EXPORT)
+		err = ft_export(app, cmd);
 	else if (bi_cmd == BI_PWD)
 		err = pwd(app, cmd);
+	app->ret_val = err;
 	return (err);
 }

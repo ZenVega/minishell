@@ -15,8 +15,11 @@
 
 # include <sys/wait.h>
 # include "cd/cd.h"
+# include "envp/env.h"
+# include "envp/export.h"
 # include "exit/exit.h"
 # include "pwd/pwd.h"
+# include "echo/echo.h"
 # include "../includes/types.h"
 # include "../signals/signals.h"
 

@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   echo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 11:29:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/28 11:52:07 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/04/10 11:51:37 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/04/10 11:53:25 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef ECHO_H
+# define ECHO_H
 
-# include "../libft/libft.h"
-# include "../includes/types.h"
+# include "../../includes/types.h"
 
-char	**copy_and_qsort(char **array);
-char	**copy_envp(char **envp);
-int		is_space(char c);
-void	reroute_io(int input, int output);
+int	echo(t_app *app, t_cmd_info *cmd);
 
 #endif

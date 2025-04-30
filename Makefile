@@ -12,6 +12,13 @@ vpath %.c $(SRC_FOLDER)buildins
 CFILES += buildins.c
 vpath %.c $(SRC_FOLDER)buildins/cd
 CFILES += cd.c
+vpath %.c $(SRC_FOLDER)buildins/envp
+CFILES += env.c
+CFILES += export.c
+vpath %.c $(SRC_FOLDER)buildins/pwd
+CFILES += pwd.c
+vpath %.c $(SRC_FOLDER)buildins/echo
+CFILES += echo.c
 vpath %.c $(SRC_FOLDER)buildins/exit
 CFILES += exit.c
 vpath %.c $(SRC_FOLDER)buildins/pwd
@@ -24,6 +31,7 @@ vpath %.c $(SRC_FOLDER)exe
 CFILES += exe.c
 CFILES += exe_bin.c
 CFILES += exe_clean.c
+CFILES += exe_get_path.c
 CFILES += exe_pipe.c
 CFILES += exe_utils.c
 
@@ -52,6 +60,7 @@ CFILES += signals.c
 
 vpath %.c $(SRC_FOLDER)utils
 CFILES += utils.c
+CFILES += sorting.c
 
 #notdir removes all path from filename 
 #addprefix adds something to each file, in this case the output folder
