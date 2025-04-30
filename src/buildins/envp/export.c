@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:49:45 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/30 10:17:31 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/30 12:13:55 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,87 @@ int	invalid_identifier(char *arg)
 	return (0);
 }
 
+char	**add_var_to_envp(char **envp, char *new_var)
+{
+	int		size;
+	int		i;
+	char	**new;
+
+	size = 0;
+	while (envp[size])
+		size++;
+	new = (char **)malloc(sizeof(char *) * (size + 2));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (envp[i])
+	{
+		new[i] = ft_strdup(envp[i]);
+		if (!new[i]) 
+		{
+			free_envp(new);
+			return (NULL);
+		}
+		i++;
+	}
+	new[i++] = new_var;
+	new[i] = NULL;
+	free_envp(envp);
+	return (new);
+}
+
+int	update_or_set_new_var(char *var_name, char *var_val, t_app *app)
+{
+	int		i;
+	char	*tmp;
+	char 	*new_var;
+	
+	if (var_val != NULL)
+	{
+		tmp = ft_strjoin(var_name, "=");
+		new_var = ft_strjoin(tmp, var_val);
+		free(tmp);
+	}
+	else
+		new_var = ft_strdup(var_name);
+	i =  0;
+	while (app->envp[i])
+	{
+		if (ft_strncmp(app->envp[i], var_name, ft_strlen(var_name)) == 0
+				&& (app->envp[i][ft_strlen(var_name)] == '=' 
+				|| app->envp[i][ft_strlen(var_name)] == '\0'))	
+		{
+			free(app->envp[i]);
+			app->envp[i] = new_var;
+			free(var_name);
+			return (0);
+		}
+		i++;
+	}
+	app->envp = add_var_to_envp(app->envp, new_var);
+	if (var_val != NULL)
+		free(var_name);
+	return (0);
+}
+
+int set_var(t_app *app, char *arg)
+{
+	char	*var_name;
+	char	*addr_equal;
+	
+	addr_equal = ft_strchr(arg, '=');
+	if (addr_equal != NULL)
+	{
+		var_name = ft_substr(arg, 0, (size_t)(addr_equal - arg));
+		return (update_or_set_new_var(var_name, addr_equal + 1, app));
+	}
+	else
+	{
+		var_name = arg;
+		return (update_or_set_new_var(var_name, NULL, app));
+	}
+}
+
 int	export_with_args(t_app *app, t_cmd_info *cmd)
 {
 	int	i;
@@ -85,8 +166,9 @@ int	export_with_args(t_app *app, t_cmd_info *cmd)
 			app->ret_val = 1;
 		}
 		//if var="val"
-	//	if (ft_strchr(cmd->args[i], '=') != NULL)
-	//		err = set_var_with_val(app, cmd);
+		// or just var
+		else
+			err = set_var(app, cmd->args[i]);
 		//if var
 
 		i++;
