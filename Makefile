@@ -27,6 +27,7 @@ vpath %.c $(SRC_FOLDER)exe
 CFILES += exe.c
 CFILES += exe_bin.c
 CFILES += exe_clean.c
+CFILES += exe_get_path.c
 CFILES += exe_pipe.c
 CFILES += exe_utils.c
 

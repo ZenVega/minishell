@@ -37,28 +37,32 @@ char	**copy_envp(char **envp)
 		size++;
 	copy = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!copy)
-		return NULL;
+		return (NULL);
 	i = 0;
 	while (envp[i])
 	{
 		copy[i] = ft_strdup(envp[i]);
 		if (!copy[i]) 
 		{
-            		j = 0;
-            		while (j < i) 
-            		{
-                		free(copy[j]);
-                		j++;
-            		}
-            		free(copy);
-            		return NULL;
-        	}
+			j = 0;
+			while (j < i) 
+			{
+				free(copy[j]);
+				j++;
+			}
+			free(copy);
+			return (NULL);
+		}
 		i++;
 	}
 	copy[i] = NULL;
 	return (copy);
 }
 
-
-
-
+void	reroute_io(int input, int output)
+{
+	if (input != STDIN_FILENO)
+		dup2(input, STDIN_FILENO);
+	if (output != STDOUT_FILENO)
+		dup2(output, STDOUT_FILENO);
+}

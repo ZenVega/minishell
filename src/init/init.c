@@ -6,13 +6,11 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/30 09:56:00 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/30 10:32:47 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
-#include "../malloc_list/malloc_list.h"
-#include "../utils/utils.h"
 
 t_app	*init_shell(char *envp[])
 {

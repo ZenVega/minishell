@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:49:45 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/30 10:02:31 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/30 10:17:31 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,21 @@ int	invalid_identifier(char *arg)
 {
 	int		c;
 	char	*addr_equal;
-	char	*addr_char;
+	int		len;
+	int		i;
 
 	addr_equal = ft_strchr(arg, '=');
-	c = 33;	
-	while (c <= 128)
+	if (!addr_equal)
+		len = ft_strlen(arg);
+	else
+		len = addr_equal - arg;
+	i = 0;
+	while (i < len)
 	{
-		addr_char = ft_strchr(arg, (char)c);
-		if(addr_char != NULL && addr_char < addr_equal)
+		c = arg[i];
+		if (!(ft_isdigit(c) || ft_isalpha(c) || c == '_'))
 			return (1);
-		if (c == 47)
-			c = 57;
-		else if (c == 64)
-			c = 90;
-		else if (c == 96)
-			c = 122;
-		c++;	
+		i++;	
 	}
 	return (0);
 }
@@ -82,7 +81,7 @@ int	export_with_args(t_app *app, t_cmd_info *cmd)
 			|| invalid_identifier(cmd->args[i]) == 1) 
 
 		{
-			ft_fprintf(2, "minishell: export: '%s': not a valid identifier", cmd->args[1]);
+			ft_fprintf(2, "minishell: export: '%s': not a valid identifier\n", cmd->args[i]);
 			app->ret_val = 1;
 		}
 		//if var="val"

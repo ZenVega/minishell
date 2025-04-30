@@ -12,10 +12,11 @@
 
 #ifndef ENV_H
 # define ENV_H
-# include "../../exe/exe.h"
 # include "../../includes/types.h"
 # include "../../error/error.h"
+# include "../../utils/utils.h"
 
 int		env(t_app *app, t_cmd_info *cmd);
+char	*get_env_val(t_app *app, char *key);
 
 #endif
