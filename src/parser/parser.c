@@ -20,7 +20,10 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 
 	cmd = cmd_info_init(malloc_list, &p_info);
 	if (!cmd)
-		return (NULL);
+	{
+		cmd->err_info.code = ERR_MALLOC;
+		return (set_err(cmd, ERR_MALLOC, ""), cmd);
+	}
 	//find pipe, split on first pipe
 	parts = (char **)malloc_and_add_list (malloc_list, sizeof(char *) * 3);
 	free(p_info.mask);
