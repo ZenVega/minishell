@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:29:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 11:08:42 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/30 11:12:13 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../includes/types.h"
+# include "../malloc_list/malloc_list.h"
 
 char	**copy_and_qsort(char **array);
 char	**copy_envp(char **envp);
