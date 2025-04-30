@@ -6,13 +6,13 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:19:13 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/30 12:23:23 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/30 12:28:03 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "export.h"
 
-int		invalid_identifier(char *arg)
+int	invalid_identifier(char *arg)
 {
 	int		c;
 	char	*addr_equal;
@@ -30,7 +30,7 @@ int		invalid_identifier(char *arg)
 		c = arg[i];
 		if (!(ft_isdigit(c) || ft_isalpha(c) || c == '_'))
 			return (1);
-		i++;	
+		i++;
 	}
 	return (0);
 }
@@ -64,12 +64,12 @@ char	**add_var_to_envp(char **envp, char *new_var)
 	return (new);
 }
 
-int		update_or_set_new_var(char *var_name, char *var_val, t_app *app)
+int	update_or_set_new_var(char *var_name, char *var_val, t_app *app)
 {
 	int		i;
 	char	*tmp;
-	char 	*new_var;
-	
+	char	*new_var;
+
 	if (var_val != NULL)
 	{
 		tmp = ft_strjoin(var_name, "=");
@@ -78,12 +78,12 @@ int		update_or_set_new_var(char *var_name, char *var_val, t_app *app)
 	}
 	else
 		new_var = ft_strdup(var_name);
-	i =  0;
+	i = 0;
 	while (app->envp[i])
 	{
 		if (ft_strncmp(app->envp[i], var_name, ft_strlen(var_name)) == 0
-				&& (app->envp[i][ft_strlen(var_name)] == '=' 
-				|| app->envp[i][ft_strlen(var_name)] == '\0'))	
+			&& (app->envp[i][ft_strlen(var_name)] == '=' 
+			|| app->envp[i][ft_strlen(var_name)] == '\0'))
 		{
 			free(app->envp[i]);
 			app->envp[i] = new_var;
@@ -98,11 +98,11 @@ int		update_or_set_new_var(char *var_name, char *var_val, t_app *app)
 	return (0);
 }
 
-int set_var(t_app *app, char *arg)
+int	set_var(t_app *app, char *arg)
 {
 	char	*var_name;
 	char	*addr_equal;
-	
+
 	addr_equal = ft_strchr(arg, '=');
 	if (addr_equal != NULL)
 	{
@@ -119,18 +119,18 @@ int set_var(t_app *app, char *arg)
 int	export_with_args(t_app *app, t_cmd_info *cmd)
 {
 	int	i;
-	int err;
-	
+	int	err;
+
 	err = 0;
 	i = 1;
 	while (cmd->args[i])
 	{
 		if (ft_isdigit(cmd->args[i][0]) == 1
 			|| cmd->args[i][0] == '='
-			|| invalid_identifier(cmd->args[i]) == 1) 
-
+			|| invalid_identifier(cmd->args[i]) == 1)
 		{
-			ft_fprintf(2, "minishell: export: '%s': not a valid identifier\n", cmd->args[i]);
+			ft_fprintf(2, "minishell: export: '%s': not a valid identifier\n",
+				cmd->args[i]);
 			app->ret_val = 1;
 		}
 		else
