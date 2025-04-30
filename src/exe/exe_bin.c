@@ -24,6 +24,7 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 	exe->args = cmd->args;
 	exe->path = NULL;
 	exe->cmd_name = ft_strdup(cmd->args[0]);
+	add_to_malloc_list(&app->malloc_list, exe->cmd_name);
 	if (!exe->cmd_name)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	exe->path = get_path(cmd, exe, app);

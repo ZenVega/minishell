@@ -40,6 +40,7 @@ static char	**get_paths_from_env(t_app *app, t_cmd_info *cmd, char *cmd_name)
 	tmp = get_env_val(app, "PATH");
 	if (!tmp)
 		return (set_err(cmd, ERR_NO_VAR, "PATH"), NULL);
+	add_to_malloc_list(&app->malloc_list, tmp);
 	cmd_name = ft_strjoin("/", cmd_name);
 	if (!cmd_name)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
@@ -58,6 +59,7 @@ char	*filter_paths(t_app *app, char **paths)
 	char	*path;
 
 	found = 0;
+	path = NULL;
 	while (*paths)
 	{
 		if (!found && !access(*paths, X_OK))
