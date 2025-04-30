@@ -13,6 +13,7 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# include <fcntl.h>
 # include "../error/error.h"
 # include "../includes/types.h"
 # include "../libft/libft.h"
