@@ -12,6 +12,7 @@ vpath %.c $(SRC_FOLDER)buildins
 CFILES += buildins.c
 vpath %.c $(SRC_FOLDER)buildins/cd
 CFILES += cd.c
+CFILES += cd_utils.c
 vpath %.c $(SRC_FOLDER)buildins/echo
 CFILES += echo.c
 vpath %.c $(SRC_FOLDER)buildins/envp
