@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:49:45 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/30 12:30:48 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 15:13:50 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "export.h"
+#include "export_set.h"
 
 int	export_no_args(t_app *app)
 {

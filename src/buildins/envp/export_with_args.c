@@ -6,11 +6,11 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:19:13 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/02 14:22:04 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 15:35:41 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "export.h"
+#include "export_set.h"
 
 int	invalid_identifier(char *arg)
 {
@@ -63,16 +63,19 @@ char	**add_var_to_envp(char **envp, char *new_var)
 	free_envp(envp);
 	return (new);
 }
-int copy_from_loc_to_envp(char *var_name, t_app *app)
+
+int	copy_from_loc_to_envp(char *var_name, t_app *app)
 {
-	t_list *local;
-	
+	t_list	*local;
+	int		var_len;
+
+	var_len = ft_strlen(var_name);
 	local = *(app->local_var);
-	while(local)
-	{	
-		if (ft_strncmp(local->content, var_name, ft_strlen(var_name)) == 0
-			&& (((char *)(local->content))[ft_strlen(var_name)] == '=' 
-			|| ((char*)local->content)[ft_strlen(var_name)] == '\0'))
+	while (local)
+	{
+		if (ft_strncmp(local->content, var_name, var_len) == 0
+			&& (((char *)(local->content))[var_len] == '=' 
+			|| ((char*)local->content)[var_len] == '\0'))
 		{
 			app->envp = add_var_to_envp(app->envp, local->content);
 			return (0);
@@ -81,19 +84,23 @@ int copy_from_loc_to_envp(char *var_name, t_app *app)
 	}
 	return (1);
 }
-int	update_var(char *var_name, char *new_var, t_app *app)
+
+int	update_env_var(char *var_name, char *new_var, t_app *app)
 {
 	int		i;
-	
+	int		var_len;
+
 	i = 0;
+	var_len = ft_strlen(var_name);
 	while (app->envp[i])
 	{
-		if (ft_strncmp(app->envp[i], var_name, ft_strlen(var_name)) == 0
-			&& (app->envp[i][ft_strlen(var_name)] == '=' 
-			|| app->envp[i][ft_strlen(var_name)] == '\0'))
+		if (ft_strncmp(app->envp[i], var_name, var_len) == 0
+			&& (app->envp[i][var_len] == '=' 
+			|| app->envp[i][var_len] == '\0'))
 		{
 			free(app->envp[i]);
 			app->envp[i] = ft_strdup(new_var);
+			update_local_var(var_name, new_var, app);
 			return (0);
 		}
 		i++;
@@ -114,7 +121,7 @@ int	update_or_add_var(char *var_name, char *var_val, t_app *app)
 	}
 	else
 		new_var = ft_strdup(var_name);
-	if (update_var(var_name, new_var, app) == 1)
+	if (update_env_var(var_name, new_var, app) == 1)
 		app->envp = add_var_to_envp(app->envp, new_var);
 	if (var_val != NULL)
 		free(var_name);
@@ -138,7 +145,7 @@ int	set_export_var(t_app *app, char *arg)
 		var_name = arg;
 		if (copy_from_loc_to_envp(var_name, app) == 1)
 			return (update_or_add_var(var_name, NULL, app));
-		return(0);
+		return (0);
 	}
 }
 
