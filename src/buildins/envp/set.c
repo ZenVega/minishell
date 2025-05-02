@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:07:52 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/02 11:53:11 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 12:44:15 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ int set_var(t_app *app, t_cmd_info *cmd)
 	addr_equal = ft_strchr(cmd->args[0], '=');
 	var_name = ft_substr(cmd->args[0], 0, (size_t)(addr_equal - cmd->args[0]));
 	//fall: var already in envp --> update in envp
-	if (update_var(var_name, cmd->args[0], app) == 1)
-		return (1);
-			//then set in local list
+	if (update_var(var_name, cmd->args[0], app) == 0)
+	{
+		free(var_name);
+		return (0);
+	}	//then set in local list
 	
 	// var not yet in envp
-	//free(var_name);
-	return (0);
+	free(var_name);
+	return (1);
 }

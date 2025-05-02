@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:19:13 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/02 11:42:04 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 12:42:17 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**add_var_to_envp(char **envp, char *new_var)
 		}
 		i++;
 	}
-	new[i++] = new_var;
+	new[i++] = ft_strdup(new_var);
 	new[i] = NULL;
 	free_envp(envp);
 	return (new);
@@ -75,7 +75,7 @@ int	update_var(char *var_name, char *new_var, t_app *app)
 			|| app->envp[i][ft_strlen(var_name)] == '\0'))
 		{
 			free(app->envp[i]);
-			app->envp[i] = new_var;
+			app->envp[i] = ft_strdup(new_var);
 			return (0);
 		}
 		i++;
@@ -101,6 +101,7 @@ int	update_or_add_var(char *var_name, char *var_val, t_app *app)
 		app->envp = add_var_to_envp(app->envp, new_var);
 	if (var_val != NULL)
 		free(var_name);
+	free(new_var);
 	return (0);
 }
 
