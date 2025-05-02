@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 10:43:13 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/28 10:44:24 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/02 11:31:36 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CD_H
 
 # include "../../includes/types.h"
+# include "../envp/env.h"
 # include "../../error/error.h"
 # include "../../utils/utils.h"
 
