@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:19:13 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/02 12:42:17 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 14:22:04 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,27 @@ char	**add_var_to_envp(char **envp, char *new_var)
 	free_envp(envp);
 	return (new);
 }
+int copy_from_loc_to_envp(char *var_name, t_app *app)
+{
+	t_list *local;
+	
+	local = *(app->local_var);
+	while(local)
+	{	
+		if (ft_strncmp(local->content, var_name, ft_strlen(var_name)) == 0
+			&& (((char *)(local->content))[ft_strlen(var_name)] == '=' 
+			|| ((char*)local->content)[ft_strlen(var_name)] == '\0'))
+		{
+			app->envp = add_var_to_envp(app->envp, local->content);
+			return (0);
+		}
+		local = local->next;
+	}
+	return (1);
+}
 int	update_var(char *var_name, char *new_var, t_app *app)
 {
-	int i;
+	int		i;
 	
 	i = 0;
 	while (app->envp[i])
@@ -81,7 +99,6 @@ int	update_var(char *var_name, char *new_var, t_app *app)
 		i++;
 	}
 	return (1);
-	
 }
 
 int	update_or_add_var(char *var_name, char *var_val, t_app *app)
@@ -119,7 +136,9 @@ int	set_export_var(t_app *app, char *arg)
 	else
 	{
 		var_name = arg;
-		return (update_or_add_var(var_name, NULL, app));
+		if (copy_from_loc_to_envp(var_name, app) == 1)
+			return (update_or_add_var(var_name, NULL, app));
+		return(0);
 	}
 }
 
