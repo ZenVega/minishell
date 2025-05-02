@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:59:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/02 15:12:39 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:35:48 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_home_path(t_app *app)
 	home_path = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + 7));
 	if (!home_path)
 		return (free(tmp), NULL);
-	ft_strlcat(home_path, "/home/", 7);
+	ft_strlcpy(home_path, "/home/", 7);
 	ft_strlcat(home_path, tmp, ft_strlen(tmp) + 7);
 	free(tmp);
 	return (home_path);

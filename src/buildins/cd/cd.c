@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 11:31:28 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/02 15:12:43 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:36:16 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ static char	*add_to_home_route(t_app *app, char *path)
 		return (NULL);
 	if (path == NULL)
 		return (tmp);
+	abs_path = (char *)malloc_and_add_list(&app->malloc_list, sizeof(char)
+			* (ft_strlen(tmp) + ft_strlen(path) + 1));
 	abs_path = ft_strjoin(tmp, path + 1);
 	if (!abs_path)
 		return (free(tmp), NULL);
+	ft_printf("%s\n", abs_path);
 	return (add_to_malloc_list(&app->malloc_list, abs_path), abs_path);
 }
 
@@ -44,10 +47,10 @@ static char	*add_to_path(t_app *app, char *cur_path, char *new_path)
 			* (len_cur_path + ft_strlen(new_path) + 2));
 	if (!abs_path)
 		return (NULL);
-	ft_strlcat(abs_path, cur_path, len_cur_path + 1);
+	ft_strlcpy(abs_path, cur_path, len_cur_path + 1);
 	ft_strlcat(abs_path + len_cur_path, "/", ft_strlen(abs_path) + 2);
 	ft_strlcat(abs_path + len_cur_path + 1, new_path,
-		ft_strlen(abs_path) + ft_strlen(new_path) + 1);
+		len_cur_path + ft_strlen(new_path) + 3);
 	return (abs_path);
 }
 
@@ -55,7 +58,7 @@ static char	*get_abs_path(t_app *app, char *path)
 {
 	char	*cur_path;
 
-	if (path == NULL)
+	if (path == NULL || !ft_strncmp("~\0", path, 2))
 		return (add_to_home_route(app, NULL));
 	if (path[0] == '/')
 		return (path);
@@ -69,6 +72,8 @@ static char	*get_abs_path(t_app *app, char *path)
 	}
 	if (!ft_strncmp("~/", path, 2))
 		return (add_to_home_route(app, path));
+	if (!ft_strncmp("-\0", path, 2))
+		return (get_env_val(app, "OLDPWD"));
 	if (!ft_strncmp("..", path, 2) && path[2] == '\0')
 	{
 		if (remove_last_route(&cur_path))
