@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/02 10:06:29 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 13:19:12 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ t_app	*init_shell(char *envp[])
 	if (!app->envp)
 		return (NULL);
 	app->local_var = NULL;
+	app->local_var = malloc(sizeof(t_list *));
+	if (!app->local_var)
+    	return (NULL);
+	*(app->local_var) = NULL;  // Initialize the list to NULL
 	app->prompt = NULL;
 	app->ret_val = 0;
 	return (app);

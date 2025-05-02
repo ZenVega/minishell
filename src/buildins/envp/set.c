@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:07:52 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/02 12:44:15 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 13:19:25 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,23 @@ int set_var(t_app *app, t_cmd_info *cmd)
 {
 	char	*addr_equal;
 	char	*var_name;
+	int		i;
+	t_list	*new_local;
 	
-	addr_equal = ft_strchr(cmd->args[0], '=');
-	var_name = ft_substr(cmd->args[0], 0, (size_t)(addr_equal - cmd->args[0]));
-	//fall: var already in envp --> update in envp
-	if (update_var(var_name, cmd->args[0], app) == 0)
+	i = 0;
+	while (cmd->args[i])
 	{
+		addr_equal = ft_strchr(cmd->args[i], '=');
+		var_name = ft_substr(cmd->args[i], 0, (size_t)(addr_equal - cmd->args[i]));
+		//fall: var already in envp --> update in envp
+		if (update_var(var_name, cmd->args[i], app) == 1)
+		{// if not: set var in local list
+			new_local = ft_lstnew(ft_strdup(cmd->args[i]));
+			ft_lstadd_back(app->local_var, new_local);		
+		}	
 		free(var_name);
-		return (0);
-	}	//then set in local list
+		i++;
+	}
+	return (0);
 	
-	// var not yet in envp
-	free(var_name);
-	return (1);
 }

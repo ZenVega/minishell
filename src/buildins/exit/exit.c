@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/25 13:46:23 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 13:00:34 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	free_comp_app(t_app *app)
 {
 	free_malloc_list(app);
 	free_envp(app->envp);
+	ft_lstclear(app->local_var, free);
 	free(app->prompt);
 	free(app);
 }
