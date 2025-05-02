@@ -14,6 +14,7 @@ vpath %.c $(SRC_FOLDER)buildins/envp
 CFILES += env.c
 CFILES += export.c
 CFILES += export_with_args.c
+CFILES += set.c
 vpath %.c $(SRC_FOLDER)buildins/pwd
 CFILES += pwd.c
 vpath %.c $(SRC_FOLDER)buildins/echo

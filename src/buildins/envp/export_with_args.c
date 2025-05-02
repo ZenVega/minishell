@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_with_args.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:19:13 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/30 12:28:03 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 11:42:04 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,29 @@ char	**add_var_to_envp(char **envp, char *new_var)
 	free_envp(envp);
 	return (new);
 }
-
-int	update_or_set_new_var(char *var_name, char *var_val, t_app *app)
+int	update_var(char *var_name, char *new_var, t_app *app)
 {
-	int		i;
+	int i;
+	
+	i = 0;
+	while (app->envp[i])
+	{
+		if (ft_strncmp(app->envp[i], var_name, ft_strlen(var_name)) == 0
+			&& (app->envp[i][ft_strlen(var_name)] == '=' 
+			|| app->envp[i][ft_strlen(var_name)] == '\0'))
+		{
+			free(app->envp[i]);
+			app->envp[i] = new_var;
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+	
+}
+
+int	update_or_add_var(char *var_name, char *var_val, t_app *app)
+{
 	char	*tmp;
 	char	*new_var;
 
@@ -78,27 +97,14 @@ int	update_or_set_new_var(char *var_name, char *var_val, t_app *app)
 	}
 	else
 		new_var = ft_strdup(var_name);
-	i = 0;
-	while (app->envp[i])
-	{
-		if (ft_strncmp(app->envp[i], var_name, ft_strlen(var_name)) == 0
-			&& (app->envp[i][ft_strlen(var_name)] == '=' 
-			|| app->envp[i][ft_strlen(var_name)] == '\0'))
-		{
-			free(app->envp[i]);
-			app->envp[i] = new_var;
-			free(var_name);
-			return (0);
-		}
-		i++;
-	}
-	app->envp = add_var_to_envp(app->envp, new_var);
+	if (update_var(var_name, new_var, app) == 1)
+		app->envp = add_var_to_envp(app->envp, new_var);
 	if (var_val != NULL)
 		free(var_name);
 	return (0);
 }
 
-int	set_var(t_app *app, char *arg)
+int	set_export_var(t_app *app, char *arg)
 {
 	char	*var_name;
 	char	*addr_equal;
@@ -107,12 +113,12 @@ int	set_var(t_app *app, char *arg)
 	if (addr_equal != NULL)
 	{
 		var_name = ft_substr(arg, 0, (size_t)(addr_equal - arg));
-		return (update_or_set_new_var(var_name, addr_equal + 1, app));
+		return (update_or_add_var(var_name, addr_equal + 1, app));
 	}
 	else
 	{
 		var_name = arg;
-		return (update_or_set_new_var(var_name, NULL, app));
+		return (update_or_add_var(var_name, NULL, app));
 	}
 }
 
@@ -135,7 +141,7 @@ int	export_with_args(t_app *app, t_cmd_info *cmd)
 		}
 		else
 		{
-			err = set_var(app, cmd->args[i]);
+			err = set_export_var(app, cmd->args[i]);
 		}
 		i++;
 	}
