@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
 #include "parser.h"
-#include "../malloc_list/malloc_list.h"
 
 // finding > in splits and set infile
 //options: 1) >infile 2) > infile
@@ -25,50 +23,50 @@ int	set_infile(char **args, t_cmd_info *cmd)
 
 	i = 0;
 	while (args[i])
-	{	
+	{
 		if (args[i][0] == '<')
 		{
-			err = found_infile(args, i, cmd);	
+			err = found_infile(args, i, cmd);
 			if (err != 0)
 				return (err);
 		}
 		i++;
 	}
-	return (0);	
+	return (0);
 }
 
-int    found_infile(char **args, int i, t_cmd_info *cmd)
+int	found_infile(char **args, int i, t_cmd_info *cmd)
 {
-    char	*file_name;
+	char	*file_name;
 
-    file_name = NULL;
-    // case < infile
+	file_name = NULL;
+	// case < infile
 	if (ft_strlen(args[i]) == 1)
 	{
 		if (args[i + 1])
 			file_name = args[i + 1];
 		else
-			return (301);
+			return (set_err(cmd, ERR_SYNTAX, "after <"));
 		return (simple_infile(file_name, cmd));
 	}
 	if (ft_strlen(args[i]) > 1)
 	{
-        // case <infile
+		// case <infile
 		if (args[i][1] != '<')
 			return (simple_infile(args[i] + 1, cmd));
 		//here_doc <<
-		    //if (args[i][1] == '<')
+			//if (args[i][1] == '<')
 			//here_doc(args, i, cmd, malloc_list);	
 	}
 	return (0);
 }
 
-int    simple_infile(char *file_name, t_cmd_info *cmd)
+int	simple_infile(char *file_name, t_cmd_info *cmd)
 {
 	if (cmd->infile != STDIN_FILENO)
 		close(cmd->infile);
-    cmd->infile = open(file_name, O_RDONLY);
+	cmd->infile = open(file_name, O_RDONLY);
 	if (cmd->infile < 0)
-		return (302);
+		return (set_err(cmd, ERR_NO_FILE, file_name));
 	return (0);
 }

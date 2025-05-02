@@ -20,9 +20,11 @@ int	exe(t_app *app, t_cmd_info *cmd)
 {
 	int	err;
 
+	if (cmd == NULL)
+		return (-1);
 	err = cmd->err_info.code;
 	if (err)
-		return (err);
+		return (exit_with_error(*cmd));
 	if (cmd->type == BIN)
 		err = exe_bin(app, cmd);
 	else if (cmd->type == PIPE)

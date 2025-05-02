@@ -30,7 +30,6 @@ char	**copy_envp(char **envp)
 	int		size;
 	int		i;
 	char	**copy;
-	int		j;
 
 	size = 0;
 	while (envp[size])
@@ -44,13 +43,7 @@ char	**copy_envp(char **envp)
 		copy[i] = ft_strdup(envp[i]);
 		if (!copy[i]) 
 		{
-			j = 0;
-			while (j < i) 
-			{
-				free(copy[j++]);
-				j++;
-			}
-			free(copy);
+			free_envp(copy);
 			return (NULL);
 		}
 		i++;

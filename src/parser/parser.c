@@ -20,7 +20,10 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 
 	cmd = cmd_info_init(malloc_list, &p_info);
 	if (!cmd)
-		return (NULL);
+	{
+		cmd->err_info.code = ERR_MALLOC;
+		return (set_err(cmd, ERR_MALLOC, ""), cmd);
+	}
 	//find pipe, split on first pipe
 	parts = (char **)malloc_and_add_list (malloc_list, sizeof(char *) * 3);
 	free(p_info.mask);
@@ -41,6 +44,6 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 	cmd->type = BIN;
 	err = set_io_files(p_info.line, cmd, malloc_list, p_info.mask);
 	if (err != 0)
-		return (NULL);
+		return (cmd);
 	return (cmd);
 }
