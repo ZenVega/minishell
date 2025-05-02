@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/30 10:32:47 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/02 10:06:29 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_app	*init_shell(char *envp[])
 	app->envp = copy_envp(envp);
 	if (!app->envp)
 		return (NULL);
+	app->local_var = NULL;
 	app->prompt = NULL;
 	app->ret_val = 0;
 	return (app);
