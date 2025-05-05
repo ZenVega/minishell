@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/20 16:51:54 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/05 10:36:56 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@
 # include "../malloc_list/malloc_list.h"
 
 //parser.c
-t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list);
+t_cmd_info	*parser(t_parser_info p_info, t_app *app);
 
 //pipe_split.c
 int			pipe_split(char **parts, t_parser_info *p_info, t_list **malloc_list);
 
 //cmd_info_init.c
 t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info);
+
+//expand.c
+int			expand(t_parser_info *p_info, t_app *app);
 
 //in_out.c
 int			set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask);

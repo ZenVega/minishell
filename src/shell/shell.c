@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 14:47:23 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 10:29:41 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	start_shell(t_app *app)
 		if (*read_line != '\0')
 		{
 			p_info = init_parser_info(0, 1, read_line);
-			cmd = parser(p_info, &app->malloc_list);
+			cmd = parser(p_info, app);
 			exe(app, cmd);
 			add_history(read_line);
 			free_malloc_list(app);
