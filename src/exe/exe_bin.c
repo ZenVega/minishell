@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/05 14:10:57 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 15:33:30 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 	while (cmd->args[i] && ft_strchr(cmd->args[i], '=') != NULL)
 		i++;
 	if(!cmd->args[i])
+	{
+		cmd->err_info.code = 537;
 		return (NULL);
+	}
 	exe->cmd_name = ft_strdup(cmd->args[i]);
 	exe->args = &exe->args[i];
 	add_to_malloc_list(&app->malloc_list, exe->cmd_name);
@@ -74,11 +77,8 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 		else
 			err = call_execve(exe, app, cmd);
 	}
-	if (err != 0)
-	{
-		if (ft_strchr(cmd->args[0], '=') != NULL)
+	if (cmd->err_info.code == 537)
 		err = set_var(app, cmd);
-	}
 	if (cmd->infile != 0)
 		close(cmd->infile);
 	if (cmd->outfile != 1)
