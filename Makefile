@@ -40,9 +40,10 @@ CFILES += malloc_list.c
 
 vpath %.c $(SRC_FOLDER)parser
 CFILES += cmd_info_init.c
+CFILES += expand.c
 CFILES += here_doc.c
-CFILES += in_out_utils.c
 CFILES += infile.c
+CFILES += in_out_utils.c
 CFILES += mask.c
 CFILES += outfile.c
 CFILES += parser.c

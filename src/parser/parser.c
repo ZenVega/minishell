@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:47:31 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 10:36:30 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:19:46 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 		cmd->err_info.code = ERR_MALLOC;
 		return (set_err(cmd, ERR_MALLOC, ""), cmd);
 	}
-	parts = (char **)malloc_and_add_list (&app->malloc_list, sizeof(char *) * 3);
+	parts = (char **)malloc_and_add_list(
+			&app->malloc_list, sizeof(char *) * 3);
 	free(p_info.mask);
 	err = create_mask(&p_info, &app->malloc_list, cmd);
 	if (err == -1 || !parts)
 		return (NULL);
-	err = expand(p_info, app);
+	err = expand(&p_info, app);
 	err = pipe_split(parts, &p_info, &app->malloc_list);
 	//pipe failed
 	if (err == -1)
