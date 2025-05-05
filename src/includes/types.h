@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:49:38 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/02 13:18:48 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 08:51:07 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_app
 {
 	t_list				*malloc_list;
 	char				**envp;
-	t_list				**local_var;
+	char				**local_var;
 	char				*prompt;
 	int					ret_val;
 	struct sigaction	sa_int;

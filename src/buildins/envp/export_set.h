@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:50:01 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/02 15:33:33 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 10:39:28 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,20 @@
 # include "../../malloc_list/malloc_list.h"
 # include "../../utils/utils.h"
 
-//export.c
-char	**add_var_to_envp(char **envp, char *new_var);
-int		update_env_var(char *var_name, char *new_var, t_app *app);
-int		ft_export(t_app *app, t_cmd_info *cmd);
+//utils
+int		found_var(char *var_line, char *cmd_line, int var_len);
+int		update_var_arr(char *var_name, char *new_var, char **arr);
+char	**add_var_to_array(char **array, char *new_var);
+char	**rm_var_from_array(char **array, char *var);
+
+//export_with_args
 int		export_with_args(t_app *app, t_cmd_info *cmd);
 
+//export
+int		ft_export(t_app *app, t_cmd_info *cmd);
+
+//set.c
 int		set_var(t_app *app, t_cmd_info *cmd);
 int		unset_var(t_app *app, t_cmd_info *cmd);
-
-int		update_local_var(char *var_name, char *new_var, t_app *app);
 
 #endif

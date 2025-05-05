@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:49:45 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/02 15:13:50 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 10:03:29 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	export_no_args(t_app *app)
 			ft_printf("declare -x %s\n", print[i]);
 		i++;
 	}
-	free_envp(print);
+	free_var_arr(print);
 	app->ret_val = 0;
 	return (0);
 }
