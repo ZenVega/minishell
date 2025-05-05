@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/05 14:04:50 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 14:10:57 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 	exe->args = cmd->args;
 	exe->path = NULL;
 	i = 0;
-	while (ft_strchr(cmd->args[i], '=') != NULL)
+	while (cmd->args[i] && ft_strchr(cmd->args[i], '=') != NULL)
 		i++;
+	if(!cmd->args[i])
+		return (NULL);
 	exe->cmd_name = ft_strdup(cmd->args[i]);
 	exe->args = &exe->args[i];
 	add_to_malloc_list(&app->malloc_list, exe->cmd_name);
