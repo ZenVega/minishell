@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_set_utils.c                                 :+:      :+:    :+:   */
+/*   export_and_set_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 09:10:18 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 10:38:58 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 11:54:19 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "export_set.h"
+#include "export_and_set.h"
 
 int	found_var(char *var_line, char *cmd_line, int var_len)
 {
@@ -51,7 +51,7 @@ char	**add_var_to_array(char **array, char *new_var)
 	i = 0;
 	while (array && array[size])
 		size++;
-	new = malloc(sizeof(char *) * (size + 2));
+	new = (char **)malloc(sizeof(char *) * (size + 2));
 	if (!new)
 		return (NULL);
 	while (i < size)
@@ -65,6 +65,8 @@ char	**add_var_to_array(char **array, char *new_var)
 		i++;
 	}
 	new[i++] = ft_strdup(new_var);
+	if (!new[i - 1])
+		return (NULL);
 	new[i] = NULL;
 	free_var_arr(array);
 	return (new);
@@ -81,7 +83,7 @@ char	**rm_var_from_array(char **array, char *var)
 	size = 0;
 	while (array && array[size])
 		size++;
-	new = malloc(sizeof(char *) * size);
+	new = (char **)malloc(sizeof(char *) * size);
 	if (!new)
 		return (NULL);
 	var_len = ft_strlen(var);
@@ -92,7 +94,14 @@ char	**rm_var_from_array(char **array, char *var)
 		if (found_var(array[i], var, var_len))
 			i++;
 		else
+		{
 			new[j++] = ft_strdup(array[i++]);
+			if (!new[j - 1])
+			{
+				free_var_arr(new);
+				return (NULL);
+			}
+		}
 	}
 	new[j] = NULL;
 	free_var_arr(array);

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/02 13:19:12 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 12:07:21 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,10 @@ t_app	*init_shell(char *envp[])
 		return (NULL);
 	app->malloc_list = NULL;
 	app->envp = copy_envp(envp);
-	if (!app->envp)
+	app->local_var = (char **)malloc(sizeof(char *) * 1);
+	if (!app->envp || !app->local_var)
 		return (NULL);
-	app->local_var = NULL;
-	app->local_var = malloc(sizeof(t_list *));
-	if (!app->local_var)
-    	return (NULL);
-	*(app->local_var) = NULL;  // Initialize the list to NULL
+	app->local_var[0] = NULL;  
 	app->prompt = NULL;
 	app->ret_val = 0;
 	return (app);

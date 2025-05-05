@@ -6,11 +6,11 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:19:13 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 10:35:42 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 12:04:15 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "export_set.h"
+#include "export_and_set.h"
 
 static int	invalid_identifier(char *arg)
 {
@@ -47,6 +47,9 @@ int	copy_from_loc_to_envp(char *var_name, t_app *app)
 		if (found_var(app->local_var[i], var_name, var_len))
 		{
 			app->envp = add_var_to_array(app->envp, app->local_var[i]);
+			app->local_var = rm_var_from_array(app->local_var, var_name);
+			if (!app->envp || !app->local_var)
+				return (-1);
 			return (0);
 		}
 		i++;
@@ -62,11 +65,15 @@ int	update_or_add_var(char *var_name, char *var_val, t_app *app)
 	if (var_val)
 	{
 		tmp = ft_strjoin(var_name, "=");
+		if (!tmp)
+			return (-1);
 		new_var = ft_strjoin(tmp, var_val);
 		free(tmp);
 	}
 	else
 		new_var = ft_strdup(var_name);
+	if(!new_var)
+		return (-1);
 	if (update_var_arr(var_name, new_var, app->local_var) == 1
 		&& update_var_arr(var_name, new_var, app->envp) == 1)
 		app->envp = add_var_to_array(app->envp, new_var);

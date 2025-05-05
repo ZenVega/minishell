@@ -6,11 +6,11 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:07:52 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 10:33:02 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 11:44:44 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "export_set.h"
+#include "export_and_set.h"
 
 int	set_var(t_app *app, t_cmd_info *cmd)
 {

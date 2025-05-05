@@ -6,11 +6,11 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:49:45 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 10:03:29 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 11:44:40 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "export_set.h"
+#include "export_and_set.h"
 
 int	export_no_args(t_app *app)
 {
