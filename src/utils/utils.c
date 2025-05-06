@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:24:14 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/16 09:50:06 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 10:03:29 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**copy_envp(char **envp)
 		copy[i] = ft_strdup(envp[i]);
 		if (!copy[i]) 
 		{
-			free_envp(copy);
+			free_var_arr(copy);
 			return (NULL);
 		}
 		i++;
