@@ -18,6 +18,7 @@
 # include "../includes/types.h"
 # include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
+# include "../utils/utils.h"
 
 //parser.c
 t_cmd_info	*parser(t_parser_info p_info, t_app *app);
