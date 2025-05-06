@@ -122,6 +122,5 @@ int	expand(t_parser_info *p_info, t_app *app)
 			replace_var(app, p_info, p$);
 		p$ = ft_strchr(p_info->line, '$');
 	}
-	ft_printf("LINE: %s\n", p_info->line);
 	return (0);
 }
