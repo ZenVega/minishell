@@ -35,6 +35,10 @@ CFILES += exe_get_path.c
 CFILES += exe_pipe.c
 CFILES += exe_utils.c
 
+vpath %.c $(SRC_FOLDER)get_next_line
+CFILES += get_next_line.c
+CFILES += get_next_line_utils.c
+
 vpath %.c $(SRC_FOLDER)init
 CFILES += init.c
 

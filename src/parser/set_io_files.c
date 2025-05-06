@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/06 10:14:24 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/06 10:59:50 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char **redirection_split(char **args)
             {
                 if (k > 0)
                     new[j++] = ft_substr(args[i], 0, k); //part before
-                if (args[i][k] == '>' && args[i][k + 1] == '>')
+                if ((args[i][k] == '>' && args[i][k + 1] == '>' )
+					|| (args[i][k] == '<' && args[i][k + 1] == '<'))
                 {
                     new[j++] = ft_substr(args[i] + k, 0, 2); //2 versions of redirection arrows
                     k += 2;

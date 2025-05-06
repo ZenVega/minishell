@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/06 09:56:08 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/06 10:57:16 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include "../error/error.h"
+# include "../get_next_line/get_next_line.h"
 # include "../includes/types.h"
 # include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
@@ -36,6 +37,7 @@ void		trim_args(char **args, t_cmd_info *cmd);
 int			set_infile(char **args, t_cmd_info *cmd);
 int			found_infile(char **args, int i, t_cmd_info *cmd);
 int			simple_infile(char *file_name, t_cmd_info *cmd);
+int         here_doc(char *delimiter, t_cmd_info *cmd);
 
 //mask.c
 int			create_mask(t_parser_info *p_info, t_list **malloc_list, t_cmd_info *cmd);
