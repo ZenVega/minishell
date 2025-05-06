@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:54:49 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/08 15:02:02 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/06 14:20:23 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNALS_H
 # define SIGNALS_H
 # include <stdio.h>
+# include "../get_next_line/get_next_line.h"
 # include "../includes/types.h"
 # include "../includes/CONSTANTS.h"
 # include <readline/readline.h>

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:56:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/06 14:17:06 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/06 14:23:32 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	handle_signal_parent(int sig)
 {
 	if (sig == SIGINT)
 	{
-		write(STDOUT_FILENO, "\n", 1);
+			write(STDOUT_FILENO, "\n", 1);
 		return ;
 	}
 	else if (sig == SIGQUIT)

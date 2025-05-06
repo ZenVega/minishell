@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/06 11:01:41 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/06 14:26:44 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int here_doc(char *delimiter, t_cmd_info *cmd)
 		return (set_err(cmd, ERR_NO_FILE, "here_doc"));
 	while (1)
 	{
-		next_line = get_next_line(STDIN_FILENO);
+		next_line = readline(">");
 		if (ft_strncmp(delimiter, next_line, ft_strlen(delimiter)) == 0)
 		{
 			free(next_line);
@@ -87,6 +87,7 @@ int here_doc(char *delimiter, t_cmd_info *cmd)
 			return (0);
 		}
 		write(fd, next_line, ft_strlen(next_line));
+		write(fd, "\n", 1);
 		free(next_line);
 	}
 	return (0);

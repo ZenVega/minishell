@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/06 10:57:16 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/06 14:25:41 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../includes/types.h"
 # include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
+# include <readline/readline.h>
 
 //parser.c
 t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list);
