@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 10:02:45 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/05 14:30:51 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:58:40 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ int	expand(t_parser_info *p_info, t_app *app)
 	char	*p$;
 
 	p$ = ft_strchr(p_info->line, '$');
-	if (p$ == NULL || *(p$ + 1) == '\0')
-		return (0);
-	if (*(p$ + 1) == '?')
-		replace_return(app, p_info);
-//	else
-//		replace_var(p_info, p$);
-	ft_printf("LINE: %s\n", p_info->line);
+	while (p$ != NULL && *(p$ + 1) != '\0')
+	{
+		if (*(p$ + 1) == '?')
+			replace_return(app, p_info);
+	//	else
+	//		replace_var(p_info, p$);
+		ft_printf("LINE: %s\n", p_info->line);
+		p$ = ft_strchr(p_info->line, '$');
+	}
 	return (0);
 }

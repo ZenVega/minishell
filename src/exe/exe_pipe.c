@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:02:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/02 10:51:30 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/05 15:00:48 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		{
 			close(fd[0]);
 			p_info = init_parser_info(cmd->infile, fd[1], cmd->args[0]);
-			exe(app, parser(p_info, &app->malloc_list));
+			exe(app, parser(p_info, app));
 			close(fd[1]);
 			exit(0);
 		}
@@ -43,7 +43,7 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 			waitpid(pids[1], NULL, 0);
 			close(fd[1]);
 			p_info = init_parser_info(fd[0], cmd->outfile, cmd->args[1]);
-			exe(app, parser(p_info, &app->malloc_list));
+			exe(app, parser(p_info, app));
 			close(fd[0]);
 			exit(0);
 		}
