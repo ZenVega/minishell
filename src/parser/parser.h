@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 15:06:13 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/06 09:56:08 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int			create_mask(t_parser_info *p_info, t_list **malloc_list, t_cmd_info *cmd);
 
 //outfile.c
 int			set_outfile(char **args, t_cmd_info *cmd);
-int			found_outfile(char **args, int i, char *addr, t_cmd_info *cmd);
+int			found_outfile(char **args, int i, t_cmd_info *cmd);
 int			truncate_outfile(char *file_name, t_cmd_info *cmd);
-int			append_outfile(char **args, int i, char *addr, t_cmd_info *cmd);
+int			append_outfile(char *file_name, t_cmd_info *cmd);
 
 #endif

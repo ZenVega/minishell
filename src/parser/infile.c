@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/02 11:09:05 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/06 09:49:01 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,12 @@ int	found_infile(char **args, int i, t_cmd_info *cmd)
 			return (set_err(cmd, ERR_SYNTAX, "after <"));
 		return (simple_infile(file_name, cmd));
 	}
-	if (ft_strlen(args[i]) > 1)
+	/*if (ft_strlen(args[i]) > 1)
 	{
-		// case <infile
-		if (args[i][1] != '<')
-			return (simple_infile(args[i] + 1, cmd));
 		//here_doc <<
 			//if (args[i][1] == '<')
 			//here_doc(args, i, cmd, malloc_list);	
-	}
+	}*/
 	return (0);
 }
 
