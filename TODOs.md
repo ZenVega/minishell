@@ -50,7 +50,7 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [x] create track_malloc
 - [x] create error_handler
     - [x] clean_up
-    - [ } sig handler
+    - [x} sig handler
 		[x] ctrl-D
 		[x] ctrl-C
 		[x] ctrl-\ should create coredump and finish the current process (but not the shell)
@@ -63,4 +63,4 @@ Here we can create a list of todos with the possibility to assign them and cross
 - [x] ls | < infile sort
 - [x] ls | < infile <in_2 sort
 - [ ] exit | exit - writes 1 exit, should write nothing (but works otherwise)
-- [ ] sleep 3 | pwd really sleeps (for some reason after it completed pwd) - minishell does not
+- [x] sleep 3 | pwd really sleeps (for some reason after it completed pwd) - minishell does not

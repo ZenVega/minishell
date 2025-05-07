@@ -35,10 +35,6 @@ CFILES += exe_get_path.c
 CFILES += exe_pipe.c
 CFILES += exe_utils.c
 
-vpath %.c $(SRC_FOLDER)get_next_line
-CFILES += get_next_line.c
-CFILES += get_next_line_utils.c
-
 vpath %.c $(SRC_FOLDER)init
 CFILES += init.c
 
@@ -47,7 +43,6 @@ CFILES += malloc_list.c
 
 vpath %.c $(SRC_FOLDER)parser
 CFILES += cmd_info_init.c
-CFILES += here_doc.c
 CFILES += in_out_utils.c
 CFILES += infile.c
 CFILES += mask.c
