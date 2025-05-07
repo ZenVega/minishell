@@ -72,13 +72,11 @@ int	update_or_add_var(char *var_name, char *var_val, t_app *app)
 	}
 	else
 		new_var = ft_strdup(var_name);
-	if(!new_var)
+	if (!new_var)
 		return (-1);
 	if (update_var_arr(var_name, new_var, app->local_var) == 1
 		&& update_var_arr(var_name, new_var, app->envp) == 1)
 		app->envp = add_var_to_array(app->envp, new_var);
-	if (var_val)
-		free(var_name);
 	free(new_var);
 	return (0);
 }
@@ -92,6 +90,7 @@ int	set_export_var(t_app *app, char *arg)
 	if (addr_equal)
 	{
 		var_name = ft_substr(arg, 0, addr_equal - arg);
+		add_to_malloc_list(&app->malloc_list, var_name);
 		return (update_or_add_var(var_name, addr_equal + 1, app));
 	}
 	else

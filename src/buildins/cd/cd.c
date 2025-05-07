@@ -12,9 +12,21 @@
 
 #include "cd.h"
 
-//static void	update_pwd(t_app *app, char *new_path)
-//{
-//}
+static int	update_pwd(t_app *app, char *new_path)
+{
+	char	*old_pwd;
+	int		err;
+
+	err = 0;
+	old_pwd = get_env_val(app, "PWD");
+	err = update_or_add_var("OLDPWD", old_pwd, app);
+	if (err)
+		return (err);
+	err = update_or_add_var("PWD", new_path, app);
+	if (err)
+		return (err);
+	return (0);
+}
 
 static char	*add_to_home_route(t_app *app, char *path)
 {
@@ -78,8 +90,7 @@ static char	*get_abs_path(t_app *app, char *path)
 	{
 		if (remove_last_route(&cur_path))
 			return (NULL);
-		else
-			return (cur_path);
+		return (cur_path);
 	}
 	return (add_to_path(app, cur_path, path));
 }
@@ -102,8 +113,9 @@ int	cd(t_app *app, t_cmd_info *cmd)
 		return (set_err(cmd, ERR_NO_FILE, "cd"));
 	if (!chdir(abs_path))
 	{
-		//update_pwd(app, abs_path);
+		if (update_pwd(app, abs_path))
+			return (set_err(cmd, ERR_NO_FILE, "cd"));
 		return (0);
 	}
-	return (1);
+	return (set_err(cmd, ERR_NO_FILE, cmd->args[1]));
 }
