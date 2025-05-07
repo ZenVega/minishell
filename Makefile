@@ -15,10 +15,13 @@ CFILES += cd.c
 CFILES += cd_utils.c
 vpath %.c $(SRC_FOLDER)buildins/echo
 CFILES += echo.c
-vpath %.c $(SRC_FOLDER)buildins/envp
+vpath %.c $(SRC_FOLDER)buildins/env
 CFILES += env.c
+vpath %.c $(SRC_FOLDER)buildins/export_and_set
 CFILES += export.c
+CFILES += export_and_set_utils.c
 CFILES += export_with_args.c
+CFILES += set.c
 vpath %.c $(SRC_FOLDER)buildins/exit
 CFILES += exit.c
 vpath %.c $(SRC_FOLDER)buildins/pwd
@@ -43,7 +46,7 @@ CFILES += malloc_list.c
 
 vpath %.c $(SRC_FOLDER)parser
 CFILES += cmd_info_init.c
-CFILES += here_doc.c
+CFILES += expand.c
 CFILES += in_out_utils.c
 CFILES += infile.c
 CFILES += mask.c

@@ -57,6 +57,8 @@ int	exe_buildin(t_app *app, t_cmd_info *cmd)
 		err = ft_export(app, cmd);
 	else if (bi_cmd == BI_PWD)
 		err = pwd(app, cmd);
+	else if (bi_cmd == BI_UNSET)
+		err = unset_var(app, cmd);
 	app->ret_val = err;
 	return (err);
 }

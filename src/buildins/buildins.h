@@ -15,8 +15,8 @@
 
 # include <sys/wait.h>
 # include "cd/cd.h"
-# include "envp/env.h"
-# include "envp/export.h"
+# include "env/env.h"
+# include "export_and_set/export_and_set.h"
 # include "exit/exit.h"
 # include "pwd/pwd.h"
 # include "echo/echo.h"

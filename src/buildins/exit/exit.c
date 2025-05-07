@@ -15,7 +15,8 @@
 void	free_comp_app(t_app *app)
 {
 	free_malloc_list(app);
-	free_envp(app->envp);
+	free_var_arr(app->envp);
+	free_var_arr(app->local_var);
 	free(app->prompt);
 	free(app);
 }
