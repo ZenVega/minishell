@@ -30,7 +30,7 @@ int			pipe_split(char **parts, t_parser_info *p_info, t_list **malloc_list);
 t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info);
 
 //expand.c
-int			expand(t_parser_info *p_info, t_app *app);
+int			expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd);
 
 //in_out.c
 int			set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask);

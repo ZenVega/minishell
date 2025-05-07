@@ -46,7 +46,7 @@ static int	expand_var(t_app *app, t_parser_info *p_info, char *var, int var_len)
 		* len_newline + 1);
 	if (!ret_val)
 		return (1);
-	while (p_info->line[++i] && p_info->line[i] != '$')
+	while (p_info->line[++i] && (p_info->line[i] != '$' ||  p_info->mask[i] == 1))
 		ret_val[i] = p_info->line[i];
 	k = i + var_len + 1;
 	var += var_len + 1;
@@ -58,7 +58,7 @@ static int	expand_var(t_app *app, t_parser_info *p_info, char *var, int var_len)
 	return (0);
 }
 
-static int	replace_return(t_app *app, t_parser_info *p_info)
+static int	replace_return(t_app *app, t_parser_info *p_info, int i$)
 {
 	char	*ret_val;
 	char	*var;
@@ -68,12 +68,12 @@ static int	replace_return(t_app *app, t_parser_info *p_info)
 	if (var == NULL)
 		return (1);
 	ret_val = (char *)malloc_and_add_list(&app->malloc_list, sizeof(char)
-		* (ft_strlen(p_info->line) + ft_strlen(ret_val) + -1));
+		* (ft_strlen(p_info->line) + ft_strlen(var) - 1));
 	if (!ret_val)
 		return (1);
 	index[0] = -1;
 	index[1] = 0;
-	while (p_info->line[++index[0]] && p_info->line[index[0]] != '$')
+	while (++index[0] < i$)
 		ret_val[index[0]] = p_info->line[index[0]];
 	while (var[index[1]])
 		ret_val[index[0]++] = var[index[1]++];
@@ -109,18 +109,27 @@ static int	replace_var(t_app *app, t_parser_info *p_info, char *p$)
 	return (remove_var(p_info));
 }
 
-int	expand(t_parser_info *p_info, t_app *app)
+int	expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd)
 {
 	char	*p$;
+	int		i$;
 
 	p$ = ft_strchr(p_info->line, '$');
 	while (p$ != NULL && *(p$ + 1) != '\0')
 	{
-		if (*(p$ + 1) == '?')
-			replace_return(app, p_info);
-		else
-			replace_var(app, p_info, p$);
-		p$ = ft_strchr(p_info->line, '$');
+		i$ = p$ - p_info->line;
+		if (p_info->mask[i$] != 1)
+		{
+			if (*(p$ + 1) == '?')
+			{
+				if (replace_return(app, p_info, i$))
+					set_err(cmd, ERR_MALLOC, NULL);
+			}
+			else if (replace_var(app, p_info, p$))
+				set_err(cmd, ERR_MALLOC, NULL);
+		}
+		create_mask(p_info, &app->malloc_list, cmd);
+		p$ = ft_strchr(&p_info->line[i$ + 1], '$');
 	}
 	return (0);
 }
