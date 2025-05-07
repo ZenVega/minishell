@@ -43,7 +43,6 @@ CFILES += malloc_list.c
 
 vpath %.c $(SRC_FOLDER)parser
 CFILES += cmd_info_init.c
-CFILES += here_doc.c
 CFILES += in_out_utils.c
 CFILES += infile.c
 CFILES += mask.c
