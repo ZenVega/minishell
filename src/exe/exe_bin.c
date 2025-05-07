@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/05 15:33:30 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/06 14:02:32 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	}
 	init_sa_parent(app);
 	waitpid(pid, &status, 0);
-	return (status);
+	if (WIFSIGNALED(status))
+		app->ret_val = 130;
+	else
+		app->ret_val = 0;
+	return (0);
 }
 
 int	exe_bin(t_app *app, t_cmd_info *cmd)

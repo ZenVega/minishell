@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:47:31 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 14:59:48 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/07 10:19:48 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 		cmd->type = PIPE;
 		return (cmd);
 	}
+	//no pipe
 	cmd->type = BIN;
 	err = set_io_files(p_info.line, cmd, &app->malloc_list, p_info.mask);
 	if (err != 0)
