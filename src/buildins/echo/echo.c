@@ -31,7 +31,7 @@ int	echo(t_app *app, t_cmd_info *cmd)
 		new_line = 0;
 	}
 	while (args[i])
-		ft_printf("%s ", args[i++]);
+		ft_printf("%s", args[i++]);
 	if (new_line)
 		ft_printf("\n");
 	return (err);
