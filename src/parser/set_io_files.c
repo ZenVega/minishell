@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/07 10:19:06 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/07 11:11:20 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask)
 
 	split = ft_split_safe(line, ' ', mask);
 	if (!split)
-		return (set_err(cmd, 304, NULL), -1);
+		return (set_err(cmd, ERR_MALLOC, NULL), -1);
 	add_list_to_malloc_list(malloc_list, (void *)split);
 	split = redirection_split(split);
 	if (!split)
-		return (set_err(cmd, 304, NULL), -1);
+		return (set_err(cmd, ERR_MALLOC, NULL), -1);
 	add_list_to_malloc_list(malloc_list, (void *)split);
 	err = set_infile(split, cmd);
 	if (err != 0)
