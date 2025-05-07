@@ -85,8 +85,9 @@ all: $(NAME)
 debug: $(NAME)
 	/bin/bash -c "gdb ./$(NAME)"
 
-test: $(NAME)
-	/bin/bash -c "./$(NAME)"
+run start test: $(NAME)
+	@cat welcome.txt
+	@/bin/bash -c "./$(NAME)"
 
 val_test: $(NAME)
 	/bin/bash -c "valgrind --leak-check=full --track-fds=yes ./$(NAME)"
