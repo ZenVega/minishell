@@ -76,11 +76,11 @@ void	start_shell(t_app *app)
 		}
 		if (*read_line != '\0')
 		{
+			add_history(read_line);
 			p_info = init_parser_info(0, 1, read_line);
-			cmd = parser(p_info, &app->malloc_list);
+			cmd = parser(p_info, app);
 			if (cmd->args[0])
 				exe(app, cmd);
-			add_history(read_line);
 			free_malloc_list(app);
 			free(read_line);
 		}

@@ -18,16 +18,20 @@
 # include "../includes/types.h"
 # include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
+# include "../utils/utils.h"
 # include <readline/readline.h>
 
 //parser.c
-t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list);
+t_cmd_info	*parser(t_parser_info p_info, t_app *app);
 
 //pipe_split.c
 int			pipe_split(char **parts, t_parser_info *p_info, t_list **malloc_list);
 
 //cmd_info_init.c
 t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info);
+
+//expand.c
+int			expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd);
 
 //in_out.c
 int			set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask);

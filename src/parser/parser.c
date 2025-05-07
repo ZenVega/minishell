@@ -12,25 +12,28 @@
 
 #include "parser.h"
 
-t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
+t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 {
 	t_cmd_info	*cmd;
 	char		**parts;
 	int			err;
 
-	cmd = cmd_info_init(malloc_list, &p_info);
+	cmd = cmd_info_init(&app->malloc_list, &p_info);
 	if (!cmd)
 	{
 		cmd->err_info.code = ERR_MALLOC;
 		return (set_err(cmd, ERR_MALLOC, ""), cmd);
 	}
-	//find pipe, split on first pipe
-	parts = (char **)malloc_and_add_list (malloc_list, sizeof(char *) * 3);
+	parts = (char **)malloc_and_add_list(
+			&app->malloc_list, sizeof(char *) * 3);
 	free(p_info.mask);
-	err = create_mask(&p_info, malloc_list, cmd);
+	err = create_mask(&p_info, &app->malloc_list, cmd);
 	if (err == -1 || !parts)
 		return (NULL);
-	err = pipe_split(parts, &p_info, malloc_list);
+	err = expand(&p_info, app, cmd);
+	if (err)
+		return (NULL);
+	err = pipe_split(parts, &p_info, &app->malloc_list);
 	//pipe failed
 	if (err == -1)
 		return (NULL);
@@ -43,7 +46,7 @@ t_cmd_info	*parser(t_parser_info p_info, t_list **malloc_list)
 	}
 	//no pipe
 	cmd->type = BIN;
-	err = set_io_files(p_info.line, cmd, malloc_list, p_info.mask);
+	err = set_io_files(p_info.line, cmd, &app->malloc_list, p_info.mask);
 	if (err != 0)
 		return (cmd);
 	return (cmd);

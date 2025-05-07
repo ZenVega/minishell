@@ -44,7 +44,7 @@ int	clean_arg(char *arg)
 		else
 		{
 			remove_quotes(scnd, arg, j);
-			j += (scnd - arg);
+			j += (scnd - &arg[j] - 1);
 		}
 	}
 	return (0);
