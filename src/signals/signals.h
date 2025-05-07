@@ -13,7 +13,6 @@
 #ifndef SIGNALS_H
 # define SIGNALS_H
 # include <stdio.h>
-# include "../get_next_line/get_next_line.h"
 # include "../includes/types.h"
 # include "../includes/CONSTANTS.h"
 # include <readline/readline.h>
