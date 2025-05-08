@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.h                                             :+:      :+:    :+:   */
+/*   cd.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 12:05:38 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/28 10:48:22 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/04/28 10:43:13 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/05/02 15:12:30 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_H
-# define EXIT_H
+#ifndef CD_H
+# define CD_H
+
 # include "../../includes/types.h"
-# include "../../utils/utils.h"
+# include "../env/env.h"
+# include "../export_and_set/export_and_set.h"
 # include "../../error/error.h"
-# include "../../includes/types.h"
-# include "../../libft/libft.h"
-# include "../../malloc_list/malloc_list.h"
 # include "../../utils/utils.h"
 
-int		ft_exit(t_app *app, t_cmd_info *cmd);
+int		cd(t_app *app, t_cmd_info *cmd);
+//cd_utils
+int		remove_last_route(char **path);
+char	*get_home_path(t_app *app);
 
 #endif

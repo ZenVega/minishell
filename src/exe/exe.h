@@ -43,7 +43,6 @@ int				open_pipe(t_app *app, t_cmd_info *cmd);
 int				is_valid(t_cmd_info *cmd);
 void			*free_paths(t_cmd_info *cmd, char **paths,
 					int len, char *cmd_name);
-int				get_paths_len(char **paths);
 //exe_get_path
 char			*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app);
 #endif

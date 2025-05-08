@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:19:06 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/05 13:18:46 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/28 10:42:48 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,19 @@ int	exe_buildin(t_app *app, t_cmd_info *cmd)
 	bi_cmd = is_buildin(cmd->args[0]); 
 	if (bi_cmd == BI_NULL)
 		return (err);
-	else if (bi_cmd == BI_PWD)
-		err = pwd(app, cmd);
-	else if (bi_cmd == BI_ENV)
-		err = env(app, cmd);
-	else if (bi_cmd == BI_EXPORT)
-		err = ft_export(app, cmd);
+	else if (bi_cmd == BI_CD)
+		err = cd(app, cmd);
 	else if (bi_cmd == BI_ECHO)
 		err = echo(app, cmd);
+	else if (bi_cmd == BI_ENV)
+		err = env(app, cmd);
 	else if (bi_cmd == BI_EXIT)
 		err = ft_exit(app, cmd);
-	else if(bi_cmd == BI_UNSET)
+	else if (bi_cmd == BI_EXPORT)
+		err = ft_export(app, cmd);
+	else if (bi_cmd == BI_PWD)
+		err = pwd(app, cmd);
+	else if (bi_cmd == BI_UNSET)
 		err = unset_var(app, cmd);
 	app->ret_val = err;
 	return (err);

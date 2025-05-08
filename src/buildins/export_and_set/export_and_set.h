@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPORT_SET_H
-# define EXPORT_SET_H
+#ifndef EXPORT_AND_SET_H
+# define EXPORT_AND_SET_H
 
 # include "../../error/error.h"
 # include "../../includes/types.h"
@@ -26,6 +26,7 @@ char	**rm_var_from_array(char **array, char *var);
 
 //export_with_args
 int		export_with_args(t_app *app, t_cmd_info *cmd);
+int		update_or_add_var(char *var_name, char *var_val, t_app *app);
 
 //export
 int		ft_export(t_app *app, t_cmd_info *cmd);

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 10:03:29 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/28 10:48:32 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 	reroute_io(cmd->infile, cmd->outfile);
 	err = 0;
 	if (cmd->args[1])
-	{	
+	{
 		if (cmd->args[2])
 		{
 			err = 1;

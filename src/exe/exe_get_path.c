@@ -47,7 +47,7 @@ static char	**get_paths_from_env(t_app *app, t_cmd_info *cmd, char *cmd_name)
 	paths = ft_split(tmp, ':');
 	if (!paths)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
-	path_len = get_paths_len(paths);
+	path_len = get_char_arr_len(paths);
 	paths = add_cmd_name(cmd, cmd_name, path_len, paths);
 	free(cmd_name);
 	return (paths);
