@@ -33,6 +33,7 @@
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
+	ERR_GENERAL = 1,
 	ERR_SYNTAX = 301,
 	ERR_NO_FILE = 302,
 	ERR_NO_VAR = 303,
