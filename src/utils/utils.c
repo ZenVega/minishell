@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:24:14 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/05 10:03:29 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/04/28 10:47:33 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ char	**copy_envp(char **envp)
 	}
 	copy[i] = NULL;
 	return (copy);
+}
+
+int	get_char_arr_len(char **paths)
+{
+	int	i;
+
+	i = 0;
+	while (paths[i])
+		i++;
+	return (i);
 }
 
 void	reroute_io(int input, int output)

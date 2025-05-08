@@ -10,6 +10,11 @@ CFILES += $(NAME).c
 
 vpath %.c $(SRC_FOLDER)buildins
 CFILES += buildins.c
+vpath %.c $(SRC_FOLDER)buildins/cd
+CFILES += cd.c
+CFILES += cd_utils.c
+vpath %.c $(SRC_FOLDER)buildins/echo
+CFILES += echo.c
 vpath %.c $(SRC_FOLDER)buildins/env
 CFILES += env.c
 vpath %.c $(SRC_FOLDER)buildins/export_and_set
@@ -17,12 +22,10 @@ CFILES += export.c
 CFILES += export_and_set_utils.c
 CFILES += export_with_args.c
 CFILES += set.c
-vpath %.c $(SRC_FOLDER)buildins/pwd
-CFILES += pwd.c
-vpath %.c $(SRC_FOLDER)buildins/echo
-CFILES += echo.c
 vpath %.c $(SRC_FOLDER)buildins/exit
 CFILES += exit.c
+vpath %.c $(SRC_FOLDER)buildins/pwd
+CFILES += pwd.c
 
 vpath %.c $(SRC_FOLDER)error
 CFILES += error.c

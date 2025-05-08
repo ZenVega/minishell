@@ -17,9 +17,10 @@
 # include "../includes/types.h"
 # include "../malloc_list/malloc_list.h"
 
+int		is_space(char c);
 char	**copy_and_qsort(char **array);
 char	**copy_envp(char **envp);
-int		is_space(char c);
+int		get_char_arr_len(char **paths);
 void	reroute_io(int input, int output);
 
 #endif

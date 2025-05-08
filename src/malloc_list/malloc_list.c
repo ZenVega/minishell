@@ -59,7 +59,7 @@ void	free_malloc_list(t_app *app)
 void	free_var_arr(char **envp)
 {
 	int	i;
-	
+
 	i = 0;
 	while (envp[i])
 	{
