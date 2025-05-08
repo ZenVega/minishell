@@ -21,6 +21,7 @@ void	free_comp_app(t_app *app)
 	free(app);
 }
 
+// since the err status is only an 8bit integer, the result is truncated to a value between 0-255
 int	ft_exit(t_app *app, t_cmd_info *cmd)
 {
 	int		err;

@@ -37,6 +37,9 @@ int			expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd);
 int			set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask);
 void		trim_args(char **args, t_cmd_info *cmd);
 
+//in_out_utils.c
+char		*clean_filename(char *filename);
+
 //infile.c
 int			set_infile(char **args, t_cmd_info *cmd);
 int			found_infile(char **args, int i, t_cmd_info *cmd);

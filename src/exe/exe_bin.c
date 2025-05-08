@@ -39,7 +39,7 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	exe->path = get_path(cmd, exe, app);
 	if (!exe->path)
-		return (set_err(cmd, ERR_NO_FILE, NULL), NULL);
+		return (app->ret_val = 127, set_err(cmd, ERR_NO_CMD, NULL), NULL);
 	return (exe);
 }
 
@@ -48,6 +48,10 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	int		pid;
 	int		status;
 
+	if (access(exe->path, R_OK) == -1)
+		return (127);
+	if (access(exe->path, X_OK) == -1)
+		return (126);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -62,7 +66,7 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	if (WIFSIGNALED(status))
 		app->ret_val = 130;
 	else
-		app->ret_val = 0;
+		app->ret_val = status;
 	return (0);
 }
 
@@ -77,7 +81,7 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	{
 		exe = init_exe(app, cmd);
 		if (!exe || !exe->path)
-			err = -1;
+			err = app->ret_val;
 		else
 			err = call_execve(exe, app, cmd);
 	}

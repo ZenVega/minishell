@@ -19,17 +19,17 @@
 
 # define ERR_SYNTHAX_MSG "Found syntax error"
 # define ERR_NO_FILE_MSG  "No such file or directory"
+# define ERR_NO_CMD_MSG  "command not found"
 # define ERR_NO_VAR_MSG  "No such variable"
 # define ERR_MALLOC_MSG "Cannot allocate memory"
 # define ERR_FORK_MSG "Cannot fork a process"
 # define ERR_PIPE_MSG "Pipe failed"
 # define ERR_ARGS_MSG "Wrong number of arguments"
-
 # define ERR_MANY_ARGS_MSG "too many arguments"
 # define ERR_NUM_ARGS_MSG "numeric argument required"
 
 # define BUFFER_SIZE 10
-# define ERR_COUNT 10
+# define ERR_COUNT 11
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
@@ -41,6 +41,8 @@ typedef enum s_err_code {
 	ERR_FORK = 305,
 	ERR_PIPE = 306,
 	ERR_ARGS = 307,
+	ERR_NO_CMD = 308,
+	ERR_PERMISSION = 308,
 	ERR_MANY_ARGS = 101,
 	ERR_NUM_ARGS = 102,
 }	t_err_code;
