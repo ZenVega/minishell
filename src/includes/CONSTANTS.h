@@ -29,7 +29,7 @@
 # define ERR_NUM_ARGS_MSG "numeric argument required"
 
 # define BUFFER_SIZE 10
-# define ERR_COUNT 9
+# define ERR_COUNT 10
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,

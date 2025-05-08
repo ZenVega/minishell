@@ -115,10 +115,12 @@ int	expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd)
 	int		i$;
 
 	p$ = ft_strchr(p_info->line, '$');
-	while (p$ != NULL && *(p$ + 1) != '\0')
+	while (p$ != NULL)
 	{
 		i$ = p$ - p_info->line;
-		if (p_info->mask[i$] != 1)
+		if (is_space(*(p$ + 1)) || *(p$ + 1) == '\0' || *(p$ + 1) == '"' )
+			p$++;
+		else if (p_info->mask[i$] != 1)
 		{
 			if (*(p$ + 1) == '?')
 			{
