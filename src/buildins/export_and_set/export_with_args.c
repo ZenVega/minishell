@@ -116,7 +116,7 @@ int	export_with_args(t_app *app, t_cmd_info *cmd)
 		{
 			ft_fprintf(2, "minishell: export: `%s`: not a valid identifier\n",
 				cmd->args[i]);
-			app->ret_val = 1;
+			err = 1;
 		}
 		else
 		{
