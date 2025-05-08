@@ -10,4 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser.h"
 
+char *clean_filename(char *filename)
+{
+	int	len;
+
+	len = ft_strlen(filename);
+	if ((filename[0] == '\"' && filename[len - 1] == '\"')
+		|| (filename[0] == '\'' && filename[len - 1] == '\''))
+	{
+		ft_memmove(filename, filename + 1, len - 2);
+		filename[len - 2] = '\0';
+	}
+	return (filename);
+}

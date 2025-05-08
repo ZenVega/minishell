@@ -105,9 +105,9 @@ int	cd(t_app *app, t_cmd_info *cmd)
 	char	*abs_path;
 
 	if (!app)
-		return (-1);
+		return (1);
 	if (get_char_arr_len(cmd->args) > 2)
-		return (set_err(cmd, ERR_NUM_ARGS, "cd"));
+		return (set_err(cmd, ERR_MANY_ARGS, "cd"), 1);
 	abs_path = get_abs_path(app, cmd->args[1]);
 	if (abs_path == NULL)
 		return (set_err(cmd, ERR_NO_FILE, "cd"));
@@ -117,5 +117,5 @@ int	cd(t_app *app, t_cmd_info *cmd)
 			return (set_err(cmd, ERR_NO_FILE, "cd"));
 		return (0);
 	}
-	return (set_err(cmd, ERR_NO_FILE, cmd->args[1]));
+	return (set_err(cmd, ERR_NO_FILE, cmd->args[1]), 1);
 }
