@@ -45,7 +45,7 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 			exit_with_error(*cmd);
 		}
 		else
-			err = ft_atoi(cmd->args[1]);
+			err = ft_atoi(cmd->args[1]) % 256;
 	}
 	if (cmd->infile != 0)
 		close(cmd->infile);

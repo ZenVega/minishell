@@ -18,7 +18,7 @@
 # define ROOT_PROMPT_PINK "\x1b[1;38;2;255;20;147mmini\x1b[0m🐚: \x1b[1m"
 
 # define ERR_SYNTHAX_MSG "Found syntax error"
-# define ERR_NO_FILE_MSG  "No such file or directroy"
+# define ERR_NO_FILE_MSG  "No such file or directory"
 # define ERR_NO_VAR_MSG  "No such variable"
 # define ERR_MALLOC_MSG "Cannot allocate memory"
 # define ERR_FORK_MSG "Cannot fork a process"
