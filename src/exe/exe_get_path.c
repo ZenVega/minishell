@@ -12,13 +12,15 @@
 
 #include "exe.h"
 
-static int	has_access(t_app *app, t_cmd_info *cmd, char *path)
+static int	has_access_ret(t_app *app, t_cmd_info *cmd, char *path)
 {
 	struct stat	sb;
 
 	stat(path, &sb);
 	if ((sb.st_mode & S_IFMT) == S_IFDIR)
 		return (app->ret_val = 126, set_err(cmd, ERR_IS_FOLDER, path));
+	if (access(path, R_OK))
+		return (app->ret_val = 127, set_err(cmd, ERR_NO_FILE, path));
 	if (access(path, X_OK))
 		return (app->ret_val = 126, set_err(cmd, ERR_PERM, path));
 	return (0);
@@ -74,7 +76,7 @@ char	*filter_paths(t_app *app, t_cmd_info *cmd, char **paths)
 	path = NULL;
 	while (*paths)
 	{
-		if (!found && !access(*paths, X_OK))
+		if (!found && !has_access_ret(app, cmd, *paths))
 		{
 			found = 1;
 			path = *paths;
@@ -94,7 +96,7 @@ char	*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app)
 	char	**paths;
 
 	if (exe->cmd_name[0] == '/' || exe->cmd_name[0] == '.')
-		if (!has_access(app, cmd, exe->cmd_name))
+		if (!has_access_ret(app, cmd, exe->cmd_name))
 			return (exe->cmd_name);
 		else
 			return (NULL);

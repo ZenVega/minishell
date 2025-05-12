@@ -20,6 +20,9 @@
 # include "../malloc_list/malloc_list.h"
 # include "../utils/utils.h"
 # include <readline/readline.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 //parser.c
 t_cmd_info	*parser(t_parser_info p_info, t_app *app);
