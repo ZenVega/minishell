@@ -27,9 +27,11 @@
 # define ERR_ARGS_MSG "Wrong number of arguments"
 # define ERR_MANY_ARGS_MSG "too many arguments"
 # define ERR_NUM_ARGS_MSG "numeric argument required"
+# define ERR_IS_FOLDER_MSG "Is a directory"
+# define ERR_PERM_MSG "Permission denied"
 
 # define BUFFER_SIZE 10
-# define ERR_COUNT 11
+# define ERR_COUNT 12
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
@@ -43,6 +45,8 @@ typedef enum s_err_code {
 	ERR_ARGS = 307,
 	ERR_NO_CMD = 308,
 	ERR_PERMISSION = 308,
+	ERR_IS_FOLDER = 309,
+	ERR_PERM = 310,
 	ERR_MANY_ARGS = 101,
 	ERR_NUM_ARGS = 102,
 }	t_err_code;

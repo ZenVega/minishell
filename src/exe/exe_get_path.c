@@ -12,6 +12,18 @@
 
 #include "exe.h"
 
+static int	has_access(t_app *app, t_cmd_info *cmd, char *path)
+{
+	struct stat	sb;
+
+	stat(path, &sb);
+	if ((sb.st_mode & S_IFMT) == S_IFDIR)
+		return (app->ret_val = 126, set_err(cmd, ERR_IS_FOLDER, path));
+	if (access(path, X_OK))
+		return (app->ret_val = 126, set_err(cmd, ERR_PERM, path));
+	return (0);
+}
+
 static char	**add_cmd_name(t_cmd_info *cmd, char *cmd_name,
 		int path_len, char **paths)
 {
@@ -53,7 +65,7 @@ static char	**get_paths_from_env(t_app *app, t_cmd_info *cmd, char *cmd_name)
 	return (paths);
 }
 
-char	*filter_paths(t_app *app, char **paths)
+char	*filter_paths(t_app *app, t_cmd_info *cmd, char **paths)
 {
 	int		found;
 	char	*path;
@@ -72,6 +84,8 @@ char	*filter_paths(t_app *app, char **paths)
 			free(*paths);
 		paths++;
 	}
+	if (!path)
+		return (app->ret_val = 127, set_err(cmd, ERR_NO_CMD, path), NULL);
 	return (path);
 }
 
@@ -80,14 +94,17 @@ char	*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app)
 	char	**paths;
 
 	if (exe->cmd_name[0] == '/' || exe->cmd_name[0] == '.')
-		return (exe->cmd_name);
+		if (!has_access(app, cmd, exe->cmd_name))
+			return (exe->cmd_name);
+		else
+			return (NULL);
 	else
 	{
 		paths = get_paths_from_env(app, cmd, exe->cmd_name);
 		if (!paths)
-			return (NULL);
+			return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 		add_to_malloc_list(&app->malloc_list, paths);
-		return (filter_paths(app, paths));
+		return (filter_paths(app, cmd, paths));
 	}
 	return (NULL);
 }

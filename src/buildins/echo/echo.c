@@ -30,6 +30,7 @@ int	echo(t_app *app, t_cmd_info *cmd)
 		args++;
 		new_line = 0;
 	}
+	//reroute_io(cmd->infile, cmd->outfile);
 	while (args[i])
 	{
 		if (args[i + 1])
