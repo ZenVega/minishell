@@ -48,11 +48,6 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	int		pid;
 	int		status;
 
-	// check if folder, permission ...
-	if (access(exe->path, R_OK) == -1)
-		return (127);
-	if (access(exe->path, X_OK) == -1)
-		return (126);
 	pid = fork();
 	if (pid == 0)
 	{

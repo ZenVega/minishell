@@ -40,8 +40,6 @@ int	pwd(t_app *app, t_cmd_info *cmd)
 
 	if (!app || !cmd)
 		return (1);
-	//if (cmd->args[1] != 0)
-	//	return (set_err(cmd, ERR_ARGS, NULL));
 	path_abs = get_cwd();
 	if (cmd->args[1] != 0)
 		return (ft_printf("%s\n", path_abs), 0);
