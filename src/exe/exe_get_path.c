@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_get_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:12:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/28 12:55:37 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:37:45 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	has_access_ret(t_app *app, t_cmd_info *cmd, char *path)
 	stat(path, &sb);
 	if ((sb.st_mode & S_IFMT) == S_IFDIR)
 		return (app->ret_val = 126, set_err(cmd, ERR_IS_FOLDER, path));
-	if (access(path, R_OK))
+	else if (access(path, R_OK))
 		return (app->ret_val = 127, set_err(cmd, ERR_NO_FILE, path));
-	if (access(path, X_OK))
+	else if (access(path, X_OK))
 		return (app->ret_val = 126, set_err(cmd, ERR_PERM, path));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/06 14:02:32 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 11:16:16 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	if (WIFSIGNALED(status))
 		app->ret_val = 130;
 	else
-		app->ret_val = status;
+		app->ret_val = WEXITSTATUS(status);
+	//ft_printf("status %d\n", WEXITSTATUS(status));
 	return (0);
 }
 
@@ -87,6 +88,6 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 		close(cmd->infile);
 	if (cmd->outfile != 1)
 		close(cmd->outfile);
-	app->ret_val = err;
+	//app->ret_val = err;
 	return (err);
 }
