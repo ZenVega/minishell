@@ -20,7 +20,7 @@ char **redirection_split(char **args)
 	int		j;
 	int		k;
 	
-	new = malloc(sizeof(char *) * 256);
+	new = (char **)malloc(sizeof(char *) * 256);
     i = 0;
 	j = 0;
     while (args[i])
@@ -92,10 +92,12 @@ int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask)
 	add_list_to_malloc_list(malloc_list, (void *)split);
 	err = set_infile(split, cmd);
 	if (err != 0)
-		return (err);
+		return (set_err(cmd, ERR_NO_FILE, NULL), 1);
 	err = set_outfile(split, cmd);
-	if (err != 0)
-		return (err);
+	if (err == 126)
+		return (set_err(cmd, ERR_PERM, NULL));
+	else if (err)
+		return (set_err(cmd, ERR_NO_FILE, NULL), 1);
 	trim_args(split, cmd);
 	return (0);
 }

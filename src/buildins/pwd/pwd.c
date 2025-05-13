@@ -39,10 +39,10 @@ int	pwd(t_app *app, t_cmd_info *cmd)
 	char	*path_abs;
 
 	if (!app || !cmd)
-		return (-1);
-	if (cmd->args[1] != 0)
-		return (set_err(cmd, ERR_ARGS, NULL));
+		return (1);
 	path_abs = get_cwd();
+	if (cmd->args[1] != 0)
+		return (ft_printf("%s\n", path_abs), 0);
 	if (!path_abs)
 		return (set_err(cmd, ERR_MALLOC, NULL));
 	ft_fprintf(cmd->outfile, "%s\n", path_abs);

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   exe.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/28 12:21:15 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:05:30 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef EXE_H
 # define EXE_H
 
@@ -19,11 +20,13 @@
 # include "../parser/parser.h"
 # include "../signals/signals.h"
 # include "../utils/utils.h"
+# include <errno.h>
 # include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/wait.h>
+# include <sys/stat.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_exe {
 	char	**args;

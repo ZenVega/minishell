@@ -62,11 +62,12 @@ int	simple_infile(char *file_name, t_cmd_info *cmd)
 {
 	if (cmd->infile != STDIN_FILENO)
 		close(cmd->infile);
-	cmd->infile = open(file_name, O_RDONLY);
+	cmd->infile = open(clean_filename(file_name), O_RDONLY);
 	if (cmd->infile < 0)
 		return (set_err(cmd, ERR_NO_FILE, file_name));
 	return (0);
 }
+
 int here_doc(char *delimiter, t_cmd_info *cmd)
 {
 	char	*next_line;

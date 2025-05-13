@@ -14,6 +14,7 @@
 # define ECHO_H
 
 # include "../../includes/types.h"
+# include "../../utils/utils.h"
 
 int	echo(t_app *app, t_cmd_info *cmd);
 

@@ -33,11 +33,11 @@ int	echo(t_app *app, t_cmd_info *cmd)
 	while (args[i])
 	{
 		if (args[i + 1])
-			ft_printf("%s ", args[i++]);
+			ft_fprintf(cmd->outfile, "%s ", args[i++]);
 		else
-			ft_printf("%s", args[i++]);
+			ft_fprintf(cmd->outfile, "%s", args[i++]);
 	}
 	if (new_line)
-		ft_printf("\n");
+		ft_fprintf(cmd->outfile, "\n");
 	return (err);
 }

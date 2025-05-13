@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:19:06 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/28 10:42:48 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:59:10 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int	exe_buildin(t_app *app, t_cmd_info *cmd)
 		err = env(app, cmd);
 	else if (bi_cmd == BI_EXIT)
 		err = ft_exit(app, cmd);
-	else if (bi_cmd == BI_EXPORT)
-		err = ft_export(app, cmd);
 	else if (bi_cmd == BI_PWD)
 		err = pwd(app, cmd);
 	else if (bi_cmd == BI_UNSET)
 		err = unset_var(app, cmd);
 	app->ret_val = err;
+	if (bi_cmd == BI_EXPORT)
+		err = ft_export(app, cmd);
 	return (err);
 }

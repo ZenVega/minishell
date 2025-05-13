@@ -48,6 +48,6 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 	cmd->type = BIN;
 	err = set_io_files(p_info.line, cmd, &app->malloc_list, p_info.mask);
 	if (err != 0)
-		return (cmd);
+		app->ret_val = err;
 	return (cmd);
 }

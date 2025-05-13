@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:02:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/06 14:14:39 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 11:31:09 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 	pid_t			pids[2];
 	int				fd[2];
 	t_parser_info	p_info;
-	int				err;
-
-	err = 0;
+	int				status;
+	
 	pids[0] = fork();
 	if (pids[0] == -1)
 		return (set_err(cmd, ERR_FORK, NULL));
@@ -37,7 +36,7 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 			p_info = init_parser_info(cmd->infile, fd[1], cmd->args[0]);
 			exe(app, parser(p_info, app));
 			close(fd[1]);
-			exit(0);
+			exit(app->ret_val);
 		}
 		else //Parent process - read from child
 		{
@@ -46,18 +45,18 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 			p_info = init_parser_info(fd[0], cmd->outfile, cmd->args[1]);
 			exe(app, parser(p_info, app));
 			close(fd[0]);
-			waitpid(pids[1], NULL, 0);
-			exit(0);
+			waitpid(pids[1], &status, 0);
+			exit(app->ret_val);
 		}
 	}
 	else
 	{
 		init_sa_parent(app);
-		waitpid(pids[0], NULL, 0);
+		waitpid(pids[0], &status, 0);
 		if (cmd && cmd->err_info.suspect)
 			free(cmd->err_info.suspect);
 		free_malloc_list(app);
 	}
-	app->ret_val = err;
-	return (err);
+	app->ret_val = WEXITSTATUS(status);
+	return (WEXITSTATUS(status));
 }

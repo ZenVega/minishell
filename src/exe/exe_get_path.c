@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   exe_get_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:12:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/28 12:55:37 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:37:45 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
+
+static int	has_access_ret(t_app *app, t_cmd_info *cmd, char *path)
+{
+	struct stat	sb;
+
+	stat(path, &sb);
+	if ((sb.st_mode & S_IFMT) == S_IFDIR)
+		return (app->ret_val = 126, set_err(cmd, ERR_IS_FOLDER, path));
+	else if (access(path, R_OK))
+		return (app->ret_val = 127, set_err(cmd, ERR_NO_FILE, path));
+	else if (access(path, X_OK))
+		return (app->ret_val = 126, set_err(cmd, ERR_PERM, path));
+	return (0);
+}
 
 static char	**add_cmd_name(t_cmd_info *cmd, char *cmd_name,
 		int path_len, char **paths)
@@ -53,7 +67,7 @@ static char	**get_paths_from_env(t_app *app, t_cmd_info *cmd, char *cmd_name)
 	return (paths);
 }
 
-char	*filter_paths(t_app *app, char **paths)
+char	*filter_paths(t_app *app, t_cmd_info *cmd, char **paths)
 {
 	int		found;
 	char	*path;
@@ -62,7 +76,7 @@ char	*filter_paths(t_app *app, char **paths)
 	path = NULL;
 	while (*paths)
 	{
-		if (!found && !access(*paths, X_OK))
+		if (!found && !has_access_ret(app, cmd, *paths))
 		{
 			found = 1;
 			path = *paths;
@@ -72,6 +86,8 @@ char	*filter_paths(t_app *app, char **paths)
 			free(*paths);
 		paths++;
 	}
+	if (!path)
+		return (app->ret_val = 127, set_err(cmd, ERR_NO_CMD, path), NULL);
 	return (path);
 }
 
@@ -80,14 +96,17 @@ char	*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app)
 	char	**paths;
 
 	if (exe->cmd_name[0] == '/' || exe->cmd_name[0] == '.')
-		return (exe->cmd_name);
+		if (!has_access_ret(app, cmd, exe->cmd_name))
+			return (exe->cmd_name);
+		else
+			return (NULL);
 	else
 	{
 		paths = get_paths_from_env(app, cmd, exe->cmd_name);
 		if (!paths)
-			return (NULL);
+			return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 		add_to_malloc_list(&app->malloc_list, paths);
-		return (filter_paths(app, paths));
+		return (filter_paths(app, cmd, paths));
 	}
 	return (NULL);
 }

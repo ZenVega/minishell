@@ -18,21 +18,24 @@
 # define ROOT_PROMPT_PINK "\x1b[1;38;2;255;20;147mmini\x1b[0m🐚: \x1b[1m"
 
 # define ERR_SYNTHAX_MSG "Found syntax error"
-# define ERR_NO_FILE_MSG  "No such file or directroy"
+# define ERR_NO_FILE_MSG  "No such file or directory"
+# define ERR_NO_CMD_MSG  "command not found"
 # define ERR_NO_VAR_MSG  "No such variable"
 # define ERR_MALLOC_MSG "Cannot allocate memory"
 # define ERR_FORK_MSG "Cannot fork a process"
 # define ERR_PIPE_MSG "Pipe failed"
 # define ERR_ARGS_MSG "Wrong number of arguments"
-
 # define ERR_MANY_ARGS_MSG "too many arguments"
 # define ERR_NUM_ARGS_MSG "numeric argument required"
+# define ERR_IS_FOLDER_MSG "Is a directory"
+# define ERR_PERM_MSG "Permission denied"
 
 # define BUFFER_SIZE 10
-# define ERR_COUNT 9
+# define ERR_COUNT 12
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
+	ERR_GENERAL = 1,
 	ERR_SYNTAX = 301,
 	ERR_NO_FILE = 302,
 	ERR_NO_VAR = 303,
@@ -40,6 +43,10 @@ typedef enum s_err_code {
 	ERR_FORK = 305,
 	ERR_PIPE = 306,
 	ERR_ARGS = 307,
+	ERR_NO_CMD = 308,
+	ERR_PERMISSION = 308,
+	ERR_IS_FOLDER = 309,
+	ERR_PERM = 310,
 	ERR_MANY_ARGS = 101,
 	ERR_NUM_ARGS = 102,
 }	t_err_code;

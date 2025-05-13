@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/06 14:02:32 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 13:56:06 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	exe->path = get_path(cmd, exe, app);
 	if (!exe->path)
-		return (set_err(cmd, ERR_NO_FILE, NULL), NULL);
+		return ( NULL);
 	return (exe);
 }
 
@@ -62,7 +62,8 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	if (WIFSIGNALED(status))
 		app->ret_val = 130;
 	else
-		app->ret_val = 0;
+		app->ret_val = WEXITSTATUS(status);
+	//ft_printf("status %d\n", WEXITSTATUS(status));
 	return (0);
 }
 
@@ -71,13 +72,15 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	t_exe	*exe;
 	int		err;
 
+	if (cmd->args[0] == NULL)
+		return (0);
 	clean_args(cmd);
 	err = exe_buildin(app, cmd);
 	if (err == BI_NULL) 
 	{
 		exe = init_exe(app, cmd);
 		if (!exe || !exe->path)
-			err = -1;
+			err = app->ret_val;
 		else
 			err = call_execve(exe, app, cmd);
 	}
@@ -87,6 +90,5 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 		close(cmd->infile);
 	if (cmd->outfile != 1)
 		close(cmd->outfile);
-	app->ret_val = err;
 	return (err);
 }
