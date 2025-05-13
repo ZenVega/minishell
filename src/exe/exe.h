@@ -24,9 +24,6 @@
 # include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
 
 typedef struct s_exe {
 	char	**args;
@@ -47,6 +44,7 @@ int				open_pipe(t_app *app, t_cmd_info *cmd);
 int				is_valid(t_cmd_info *cmd);
 void			*free_paths(t_cmd_info *cmd, char **paths,
 					int len, char *cmd_name);
+int				has_access_ret(t_app *app, t_cmd_info *cmd, char *path);
 //exe_get_path
 char			*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app);
 #endif
