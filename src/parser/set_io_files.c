@@ -77,7 +77,7 @@ char **redirection_split(char **args)
 
 //getting the split input
 //looking for > and < to set infile and output
-int	set_io_files(char *line, t_cmd_info *cmd, t_app *app, int *mask)
+int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask)
 {
 	char	**split;
 	int		err;
@@ -85,15 +85,15 @@ int	set_io_files(char *line, t_cmd_info *cmd, t_app *app, int *mask)
 	split = ft_split_safe(line, ' ', mask);
 	if (!split)
 		return (set_err(cmd, ERR_MALLOC, NULL), -1);
-	add_list_to_malloc_list(&app->malloc_list, (void *)split);
+	add_list_to_malloc_list(malloc_list, (void *)split);
 	split = redirection_split(split);
 	if (!split)
 		return (set_err(cmd, ERR_MALLOC, NULL), -1);
-	add_list_to_malloc_list(&app->malloc_list, (void *)split);
+	add_list_to_malloc_list(malloc_list, (void *)split);
 	err = set_infile(split, cmd);
 	if (err != 0)
 		return (set_err(cmd, ERR_NO_FILE, NULL), 1);
-	err = set_outfile(split, cmd, app);
+	err = set_outfile(split, cmd);
 	if (err)
 		return (1);
 	trim_args(split, cmd);

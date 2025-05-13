@@ -38,7 +38,8 @@ t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info);
 int			expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd);
 
 //in_out.c
-int			set_io_files(char *line, t_cmd_info *cmd, t_app *app, int *mask);
+int			set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list,
+				int *mask);
 void		trim_args(char **args, t_cmd_info *cmd);
 
 //in_out_utils.c
@@ -55,7 +56,7 @@ int			create_mask(t_parser_info *p_info, t_list **malloc_list,
 				t_cmd_info *cmd);
 
 //outfile.c
-int			set_outfile(char **args, t_cmd_info *cmd, t_app *app);
-int			found_outfile(char **args, int i, t_cmd_info *cmd, t_app *app);
+int			set_outfile(char **args, t_cmd_info *cmd);
+int			found_outfile(char **args, int i, t_cmd_info *cmd);
 
 #endif
