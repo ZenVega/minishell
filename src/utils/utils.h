@@ -13,14 +13,19 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "../libft/libft.h"
 # include "../includes/types.h"
+# include "../error/error.h"
+# include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 int		is_space(char c);
 char	**copy_and_qsort(char **array);
 char	**copy_envp(char **envp);
 int		get_char_arr_len(char **paths);
 void	reroute_io(int input, int output);
+int		has_access_ret(t_app *app, t_cmd_info *cmd, char *path);
 
 #endif

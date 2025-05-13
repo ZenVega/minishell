@@ -12,7 +12,7 @@
 
 #include "parser.h"
 
-char *clean_filename(char *filename)
+char	*clean_filename(char *filename)
 {
 	int	len;
 

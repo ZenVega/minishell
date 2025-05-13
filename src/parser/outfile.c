@@ -12,17 +12,42 @@
 
 #include "parser.h"
 
-int	set_outfile(char **args, t_cmd_info *cmd)
+static int	truncate_outfile(char *file_name, t_cmd_info *cmd, t_app *app)
+{
+	if (!app)
+		return (-1);
+	if (cmd->outfile != STDOUT_FILENO)
+		close(cmd->outfile);
+	cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (cmd->outfile < 0)
+        //could not open outfile error here
+		return (set_err(cmd, ERR_PERM, file_name));
+	return (0);
+}
+
+static int	append_outfile(char *file_name, t_cmd_info *cmd, t_app *app)
+{
+	if (!app)
+		return (-1);
+	if (cmd->outfile != STDOUT_FILENO)
+		close(cmd->outfile);
+	cmd->outfile = open(file_name, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	if (cmd->outfile < 0)
+        //could not open outfile error here
+		return (set_err(cmd, ERR_PERM, file_name));
+	return (0);
+}
+int	set_outfile(char **args, t_cmd_info *cmd, t_app *app)
 {
 	int		i;
 	int		err;
-	
+
 	i = 0;
 	while (args[i])
 	{
 		if (args[i][0] == '>')
 		{
-			err = found_outfile(args, i, cmd);
+			err = found_outfile(args, i, cmd, app);
 			if (err != 0)
 				return (err);
 		}
@@ -31,7 +56,7 @@ int	set_outfile(char **args, t_cmd_info *cmd)
 	return (0);
 }
 
-int	found_outfile(char **args, int i, t_cmd_info *cmd)
+int	found_outfile(char **args, int i, t_cmd_info *cmd, t_app *app)
 {
 	char	*file_name;
 
@@ -42,37 +67,16 @@ int	found_outfile(char **args, int i, t_cmd_info *cmd)
 			file_name = args[i + 1];
 		else
 			return (set_err(cmd, ERR_SYNTAX, "after >"));
-		return (truncate_outfile(file_name, cmd));
+		return (truncate_outfile(file_name, cmd, app));
 	}
 	else if (args[i][1] == '>')
 	{
-        if (args[i + 1])
+		if (args[i + 1])
 			file_name = args[i + 1];
 		else
 			return (set_err(cmd, ERR_SYNTAX, "after >>"));
-		return (append_outfile(file_name, cmd));
+		return (append_outfile(file_name, cmd, app));
 	}
 	return (0);
 }
 
-int	truncate_outfile(char *file_name, t_cmd_info *cmd)
-{
-	if (cmd->outfile != STDOUT_FILENO)
-		close(cmd->outfile);
-	cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-	if (cmd->outfile < 0)
-        //could not open outfile error here
-		return (set_err(cmd, ERR_NO_FILE, file_name));
-	return (0);
-}
-
-int	append_outfile(char *file_name, t_cmd_info *cmd)
-{
-	if (cmd->outfile != STDOUT_FILENO)
-		close(cmd->outfile);
-	cmd->outfile = open(file_name, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	if (cmd->outfile < 0)
-        //could not open outfile error here
-		return (set_err(cmd, ERR_NO_FILE, file_name));
-	return (0);
-}

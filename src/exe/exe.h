@@ -24,9 +24,6 @@
 # include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
 
 typedef struct s_exe {
 	char	**args;
