@@ -6,73 +6,73 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/13 14:24:24 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:50:29 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "../malloc_list/malloc_list.h"
 
-char **redirection_split(char **args)
+char	**redirection_split(char **args)
 {
-    char	**new;
+	char	**new;
 	int		i;
 	int		j;
 	int		k;
-	
+
 	new = (char **)malloc(sizeof(char *) * 256);
-    i = 0;
+	i = 0;
 	j = 0;
-    while (args[i])
-    {
+	while (args[i])
+	{
 		if (args[i][0] == '\'' || args[i][0] == '\"')
 		{
 			new[j++] = ft_strdup(args[i]);
 			i++;
 			continue ;
-        }
+		}
 		k = 0;
-        while (args[i][k])
-        {
-            if (args[i][k] == '>' || args[i][k] == '<')
-            {
-                if (k > 0)
+		while (args[i][k])
+		{
+			if (args[i][k] == '>' || args[i][k] == '<')
+			{
+				if (k > 0)
 				{
-                    new[j++] = ft_substr(args[i], 0, k); //part before
-                	if (!new[j - 1])
+					new[j++] = ft_substr(args[i], 0, k);
+					if (!new[j - 1])
 						return (free_var_arr(new), NULL);
 				}
 				if ((args[i][k] == '>' && args[i][k + 1] == '>' )
 					|| (args[i][k] == '<' && args[i][k + 1] == '<'))
-                {
-                    new[j++] = ft_substr(args[i] + k, 0, 2); //2 versions of redirection arrows
-                    if (!new[j - 1])
+				{
+					new[j++] = ft_substr(args[i] + k, 0, 2);
+					if (!new[j - 1])
 						return (free_var_arr(new), NULL);
 					k += 2;
-                }
-                else
-                {
-                    new[j++] = ft_substr(args[i] + k, 0, 1);
-                    if (!new[j - 1])
-                         return (free_var_arr(new), NULL);
+				}
+				else
+				{
+					new[j++] = ft_substr(args[i] + k, 0, 1);
+					if (!new[j - 1])
+						return (free_var_arr(new), NULL);
 					k++;
-                }
-                args[i] = args[i] + k;
-                k = 0;
-            }
-            else
-                k++;
-        }
-        if (*args[i])
+				}
+				args[i] = args[i] + k;
+				k = 0;
+			}
+			else
+				k++;
+		}
+		if (*args[i])
 		{
-            new[j++] = ft_strdup(args[i]); // part after
-        	if (!new[j - 1])
- 				return (free_var_arr(new), NULL);
+			new[j++] = ft_strdup(args[i]);
+			if (!new[j - 1])
+				return (free_var_arr(new), NULL);
 		}
 		i++;
-    }
-    new[j] = NULL;
-    return (new);
+	}
+	new[j] = NULL;
+	return (new);
 }
 
 //getting the split input
@@ -102,8 +102,8 @@ int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask)
 	return (0);
 }
 
-//if args are in quotation marks, they will not be kicked out here, because we look for
-//redirection symbols in the 0 position
+//if args are in quotation marks, they will not be kicked out here, 
+//because we look for redirection symbols in the 0 position
 void	trim_args(char **args, t_cmd_info *cmd)
 {
 	int		i;

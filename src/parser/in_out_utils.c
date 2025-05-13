@@ -6,13 +6,13 @@
 /*   By: jhelbig <jhelbig@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:29:53 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/03/12 14:17:38 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:40:13 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-char *clean_filename(char *filename)
+char	*clean_filename(char *filename)
 {
 	int	len;
 

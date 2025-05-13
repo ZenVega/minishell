@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 10:02:45 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/05 14:58:40 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:39:44 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int	remove_var(t_parser_info *p_info)
 	return (0);
 }
 
-static int	expand_var(t_app *app, t_parser_info *p_info, char *var, int var_len)
+static int	expand_var(t_app *app, t_parser_info *p_info, 
+		char *var, int var_len)
 {
 	int		len_newline;
 	int		i;
@@ -43,10 +44,11 @@ static int	expand_var(t_app *app, t_parser_info *p_info, char *var, int var_len)
 	len_newline = ft_strlen(p_info->line) - var_len;
 	len_newline += ft_strlen(var) - var_len - 1;
 	ret_val = (char *)malloc_and_add_list(&app->malloc_list, sizeof(char)
-		* len_newline + 1);
+			* len_newline + 1);
 	if (!ret_val)
 		return (1);
-	while (p_info->line[++i] && (p_info->line[i] != '$' ||  p_info->mask[i] == 1))
+	while (p_info->line[++i]
+		&& (p_info->line[i] != '$' || p_info->mask[i] == 1))
 		ret_val[i] = p_info->line[i];
 	k = i + var_len + 1;
 	var += var_len + 1;
@@ -58,7 +60,7 @@ static int	expand_var(t_app *app, t_parser_info *p_info, char *var, int var_len)
 	return (0);
 }
 
-static int	replace_return(t_app *app, t_parser_info *p_info, int i$)
+static int	replace_return(t_app *app, t_parser_info *p_info, int i_dol)
 {
 	char	*ret_val;
 	char	*var;
@@ -68,12 +70,12 @@ static int	replace_return(t_app *app, t_parser_info *p_info, int i$)
 	if (var == NULL)
 		return (1);
 	ret_val = (char *)malloc_and_add_list(&app->malloc_list, sizeof(char)
-		* (ft_strlen(p_info->line) + ft_strlen(var) - 1));
+			* (ft_strlen(p_info->line) + ft_strlen(var) - 1));
 	if (!ret_val)
 		return (1);
 	index[0] = -1;
 	index[1] = 0;
-	while (++index[0] < i$)
+	while (++index[0] < i_dol)
 		ret_val[index[0]] = p_info->line[index[0]];
 	while (var[index[1]])
 		ret_val[index[0]++] = var[index[1]++];
@@ -85,25 +87,27 @@ static int	replace_return(t_app *app, t_parser_info *p_info, int i$)
 	return (0);
 }
 
-static int	replace_var(t_app *app, t_parser_info *p_info, char *p$)
+static int	replace_var(t_app *app, t_parser_info *p_info, char *p_dol)
 {
 	int	var_len;
 	int	i;
 
 	i = -1;
 	var_len = 1;
-	while (p$[var_len] && p$[var_len] != '$' && p$[var_len] != ' ')
+	while (p_dol[var_len] && p_dol[var_len] != '$' && p_dol[var_len] != ' ')
 		var_len++;
 	while (--var_len > 0)
 	{
 		while (app->envp[++i])
-			if (!ft_strncmp(p$ + 1, app->envp[i], var_len)
-				&& (app->envp[i][var_len] == '=' || app->envp[i][var_len] == '\0'))
+			if (!ft_strncmp(p_dol + 1, app->envp[i], var_len)
+				&& (app->envp[i][var_len] == '='
+				|| app->envp[i][var_len] == '\0'))
 				return (expand_var(app, p_info, app->envp[i], var_len)); 
 		i = -1;
 		while (app->local_var[++i])
-			if (!ft_strncmp(p$ + 1, app->local_var[i], var_len)
-				&& (app->envp[i][var_len] == '=' || app->envp[i][var_len] == '\0'))
+			if (!ft_strncmp(p_dol + 1, app->local_var[i], var_len)
+				&& (app->envp[i][var_len] == '='
+				|| app->envp[i][var_len] == '\0'))
 				return (expand_var(app, p_info, app->local_var[i], var_len)); 
 	}
 	return (remove_var(p_info));
@@ -111,27 +115,28 @@ static int	replace_var(t_app *app, t_parser_info *p_info, char *p$)
 
 int	expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd)
 {
-	char	*p$;
-	int		i$;
+	char	*p_dol;
+	int		i_dol;
 
-	p$ = ft_strchr(p_info->line, '$');
-	while (p$ != NULL)
+	p_dol = ft_strchr(p_info->line, '$');
+	while (p_dol != NULL)
 	{
-		i$ = p$ - p_info->line;
-		if (is_space(*(p$ + 1)) || *(p$ + 1) == '\0' || *(p$ + 1) == '"' )
-			p$++;
-		else if (p_info->mask[i$] != 1)
+		i_dol = p_dol - p_info->line;
+		if (is_space(*(p_dol + 1)) || *(p_dol + 1) == '\0'
+			|| *(p_dol + 1) == '"' )
+			p_dol++;
+		else if (p_info->mask[i_dol] != 1)
 		{
-			if (*(p$ + 1) == '?')
+			if (*(p_dol + 1) == '?')
 			{
-				if (replace_return(app, p_info, i$))
+				if (replace_return(app, p_info, i_dol))
 					set_err(cmd, ERR_MALLOC, NULL);
 			}
-			else if (replace_var(app, p_info, p$))
+			else if (replace_var(app, p_info, p_dol))
 				set_err(cmd, ERR_MALLOC, NULL);
 		}
 		create_mask(p_info, &app->malloc_list, cmd);
-		p$ = ft_strchr(&p_info->line[i$ + 1], '$');
+		p_dol = ft_strchr(&p_info->line[i_dol + 1], '$');
 	}
 	return (0);
 }
