@@ -26,6 +26,5 @@ char	**copy_and_qsort(char **array);
 char	**copy_envp(char **envp);
 int		get_char_arr_len(char **paths);
 void	reroute_io(int input, int output);
-int		has_access_ret(t_app *app, t_cmd_info *cmd, char *path);
 
 #endif
