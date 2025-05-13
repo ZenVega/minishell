@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:29:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/30 11:12:13 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 16:32:47 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,7 @@ char	**copy_envp(char **envp);
 int		get_char_arr_len(char **paths);
 void	reroute_io(int input, int output);
 
+//clean.c
+int		clean_arg(char *arg);
+int		clean_args(t_cmd_info *cmd);
 #endif

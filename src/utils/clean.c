@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exe_clean.c                                        :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 11:59:18 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 13:56:05 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/05/13 16:31:14 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/05/13 16:31:45 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exe.h"
+#include "utils.h"
 
 static void	remove_quotes(char *scnd, char *arg, int pos)
 {
