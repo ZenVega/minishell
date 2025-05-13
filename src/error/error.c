@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:18:44 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 14:34:48 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:02:14 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	exit_with_error(t_cmd_info cmd)
 	if (cmd.err_info.suspect)
 		ft_fprintf(2, "minishell: %s: %s\n",
 			cmd.err_info.suspect, get_error_msg(cmd.err_info.code));
-	else if (cmd.err_info.code == ERR_SUCCESS || cmd.err_info.code == ERR_SUCCESS)
+	else if (cmd.err_info.code == ERR_SUCCESS)
 		ft_fprintf(2, "minishell:\n");
 	else
 		ft_fprintf(2, "minishell: %s\n",
