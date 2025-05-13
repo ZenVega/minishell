@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 11:52:14 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 13:56:06 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,5 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 		close(cmd->infile);
 	if (cmd->outfile != 1)
 		close(cmd->outfile);
-	//app->ret_val = err;
 	return (err);
 }
