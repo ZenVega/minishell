@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 11:16:16 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 11:52:14 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	t_exe	*exe;
 	int		err;
 
+	if (cmd->args[0] == NULL)
+		return (0);
 	clean_args(cmd);
 	err = exe_buildin(app, cmd);
 	if (err == BI_NULL) 
