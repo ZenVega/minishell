@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/07 09:46:51 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:15:56 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include "../error/error.h"
+# include "../exe/exe.h"
 # include "../includes/types.h"
 # include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"

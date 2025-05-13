@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:23 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/06 10:10:03 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:18:30 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	found_outfile(char **args, int i, t_cmd_info *cmd)
 
 int	truncate_outfile(char *file_name, t_cmd_info *cmd)
 {
+	clean_arg(file_name);
 	if (cmd->outfile != STDOUT_FILENO)
 		close(cmd->outfile);
 	cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
@@ -68,6 +69,7 @@ int	truncate_outfile(char *file_name, t_cmd_info *cmd)
 
 int	append_outfile(char *file_name, t_cmd_info *cmd)
 {
+	clean_arg(file_name);
 	if (cmd->outfile != STDOUT_FILENO)
 		close(cmd->outfile);
 	cmd->outfile = open(file_name, O_WRONLY | O_APPEND | O_CREAT, 0644);

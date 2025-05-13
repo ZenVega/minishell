@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/07 11:11:20 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:24:24 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask)
 	err = set_outfile(split, cmd);
 	if (err == 126)
 		return (set_err(cmd, ERR_PERM, NULL));
-	else if (err)
+	else if (err != 0)
 		return (set_err(cmd, ERR_NO_FILE, NULL), 1);
 	trim_args(split, cmd);
 	return (0);
