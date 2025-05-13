@@ -12,20 +12,6 @@
 
 #include "exe.h"
 
-static int	has_access_ret(t_app *app, t_cmd_info *cmd, char *path)
-{
-	struct stat	sb;
-
-	stat(path, &sb);
-	if ((sb.st_mode & S_IFMT) == S_IFDIR)
-		return (app->ret_val = 126, set_err(cmd, ERR_IS_FOLDER, path));
-	else if (access(path, R_OK))
-		return (app->ret_val = 127, set_err(cmd, ERR_NO_FILE, path));
-	else if (access(path, X_OK))
-		return (app->ret_val = 126, set_err(cmd, ERR_PERM, path));
-	return (0);
-}
-
 static char	**add_cmd_name(t_cmd_info *cmd, char *cmd_name,
 		int path_len, char **paths)
 {

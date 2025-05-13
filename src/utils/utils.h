@@ -13,9 +13,13 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "../libft/libft.h"
 # include "../includes/types.h"
+# include "../error/error.h"
+# include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 int		is_space(char c);
 char	**copy_and_qsort(char **array);
