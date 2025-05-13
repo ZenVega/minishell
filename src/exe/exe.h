@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:58:25 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 10:05:30 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:16:59 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int				exe(t_app *app, t_cmd_info *cmd);
 //exe_bin.c
 int				exe_bin(t_app *app, t_cmd_info *cmd);
 //exe_clean.c
+int				clean_arg(char *arg);
 int				clean_args(t_cmd_info *cmd);
 //exe_pip
 int				open_pipe(t_app *app, t_cmd_info *cmd);

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/06 14:26:44 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:31:35 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 // finding > in splits and set infile
 //options: 1) >infile 2) > infile
 
-// circling through all the argument parts, multiple infiles are just overwritten by following
+// circling through all the argument parts,
+//multiple infiles are just overwritten by following
 int	set_infile(char **args, t_cmd_info *cmd)
 {
 	int		i;
@@ -40,7 +41,6 @@ int	found_infile(char **args, int i, t_cmd_info *cmd)
 	char	*file_name;
 
 	file_name = NULL;
-	// case < infile
 	if (ft_strlen(args[i]) == 1)
 	{
 		if (args[i + 1])
@@ -68,7 +68,7 @@ int	simple_infile(char *file_name, t_cmd_info *cmd)
 	return (0);
 }
 
-int here_doc(char *delimiter, t_cmd_info *cmd)
+int	here_doc(char *delimiter, t_cmd_info *cmd)
 {
 	char	*next_line;
 	int		fd;
