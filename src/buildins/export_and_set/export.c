@@ -6,13 +6,13 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:49:45 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 11:44:40 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/14 10:26:04 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "export_and_set.h"
 
-int	export_no_args(t_app *app)
+int	export_no_args(t_app *app, t_cmd_info *cmd)
 {
 	char	**print;
 	int		i;
@@ -29,11 +29,11 @@ int	export_no_args(t_app *app)
 		if (addr != NULL)
 		{
 			substr = ft_substr(print[i], 0, (size_t)(addr - print[i] + 1));
-			ft_printf("declare -x %s\"%s\"\n", substr, addr + 1);
+			ft_fprintf(cmd->outfile, "declare -x %s\"%s\"\n", substr, addr + 1);
 			free(substr);
 		}
 		else
-			ft_printf("declare -x %s\n", print[i]);
+			ft_fprintf(cmd->outfile, "declare -x %s\n", print[i]);
 		i++;
 	}
 	free_var_arr(print);
@@ -44,7 +44,7 @@ int	export_no_args(t_app *app)
 int	ft_export(t_app *app, t_cmd_info *cmd)
 {
 	if (!cmd->args[1])
-		return (export_no_args(app));
+		return (export_no_args(app, cmd));
 	else
 		return (export_with_args(app, cmd));
 }
