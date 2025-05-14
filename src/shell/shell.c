@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 11:42:23 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/14 10:53:14 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ void	start_shell(t_app *app)
 		if (read_line == NULL)
 		{
 			write(STDOUT_FILENO, "exit\n", 5);
-			free_malloc_list(app);
-			free(app->prompt);
-			free(read_line);
-			break ;
+			free_comp_app(app);
+			exit(0) ;
 		}
 		if (*read_line != '\0')
 		{
