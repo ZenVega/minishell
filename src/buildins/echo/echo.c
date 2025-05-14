@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 11:53:37 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/25 14:24:20 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:47:04 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 int	echo(t_app *app, t_cmd_info *cmd)
 {
-	int		err;
 	int		i;
 	int		new_line;
 	char	**args;
 
-	err = 0;
 	new_line = 1;
 	i = 0;
 	if (!app)
-		return (err);
+		return (0);
 	args = cmd->args + 1;
 	if (*args && !ft_strcmp(*args, "-n"))
 	{
@@ -40,6 +38,5 @@ int	echo(t_app *app, t_cmd_info *cmd)
 	}
 	if (new_line)
 		ft_fprintf(cmd->outfile, "\n");
-	reset_io(cmd);
-	return (err);
+	return (reset_io(cmd), 0);
 }
