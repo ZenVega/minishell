@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:38 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/28 10:48:22 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/14 10:49:53 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 # include "../../utils/utils.h"
 
 int		ft_exit(t_app *app, t_cmd_info *cmd);
+void	free_comp_app(t_app *app);
 
 #endif
