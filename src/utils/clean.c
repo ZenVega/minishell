@@ -62,3 +62,19 @@ int	clean_args(t_cmd_info *cmd)
 	}
 	return (0);
 }
+
+void	reset_io(t_cmd_info *cmd)
+{
+	if (cmd->infile != STDIN_FILENO)
+	{
+		dup2(cmd->infile_backup, STDIN_FILENO);
+		close(cmd->infile);
+	}
+	close(cmd->infile_backup);
+	if (cmd->outfile != STDOUT_FILENO)
+	{
+		dup2(cmd->outfile_backup, STDOUT_FILENO);
+		close(cmd->outfile);
+	}
+	close(cmd->outfile_backup);
+}

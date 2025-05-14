@@ -17,17 +17,14 @@ int	env(t_app *app, t_cmd_info *cmd)
 	int	i;
 
 	i = 0;
-	reroute_io(cmd->infile, cmd->outfile);
+	reroute_io(cmd);
 	while (cmd && app->envp[i])
 	{
 		if (ft_strchr(app->envp[i], '=') != NULL)
 			ft_printf("%s\n", app->envp[i]);
 		i++;
 	}
-	if (cmd->infile != 0)
-		close(cmd->infile);
-	if (cmd->outfile != 1)
-		close(cmd->outfile);
+	reset_io(cmd);
 	return (0);
 }
 

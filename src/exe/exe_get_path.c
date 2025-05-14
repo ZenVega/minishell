@@ -62,7 +62,7 @@ char	*filter_paths(t_app *app, t_cmd_info *cmd, char **paths)
 	path = NULL;
 	while (*paths)
 	{
-		if (!found && !has_access_ret(app, cmd, *paths))
+		if (!found && !access(*paths, F_OK))
 		{
 			found = 1;
 			path = *paths;
