@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:02:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/14 15:19:31 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/14 15:25:35 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,6 @@ static void	handle_parent(t_app *app, int pid0, t_cmd_info *cmd, int *status)
 	if (cmd && cmd->err_info.suspect)
 		free(cmd->err_info.suspect);
 	free_malloc_list(app);
-}
-
-static void	handle_child(t_app *app, t_cmd_info *cmd, int fd[2], int pids[2], int *status)
-{
-	t_parser_info	p_info;
-	
-	init_sa_child(app);
-	close(fd[1]);
-	p_info = init_parser_info(fd[0], cmd->outfile, cmd->args[1]);
-	exe(app, parser(p_info, app));
-	close(fd[0]);
-	waitpid(pids[1], status, 0);
-	exit(app->ret_val);
 }
 
 int	open_pipe(t_app *app, t_cmd_info *cmd)
@@ -62,7 +49,13 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		}
 		else
 		{
-			handle_child(app, cmd, fd, pids, &status);
+			init_sa_child(app);
+			close(fd[1]);
+			p_info = init_parser_info(fd[0], cmd->outfile, cmd->args[1]);
+			exe(app, parser(p_info, app));
+			close(fd[0]);
+			waitpid(pids[1], &status, 0);
+			exit(app->ret_val);
 		}
 	}
 	else
