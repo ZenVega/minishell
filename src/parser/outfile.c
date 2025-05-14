@@ -14,7 +14,7 @@
 
 static int	truncate_outfile(char *file_name, t_cmd_info *cmd)
 {
-  clean_arg(file_name);
+	clean_arg(file_name);
 	if (cmd->outfile != STDOUT_FILENO)
 		close(cmd->outfile);
 	cmd->outfile = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
@@ -25,7 +25,7 @@ static int	truncate_outfile(char *file_name, t_cmd_info *cmd)
 
 static int	append_outfile(char *file_name, t_cmd_info *cmd)
 {
-  clean_arg(file_name);
+	clean_arg(file_name);
 	if (cmd->outfile != STDOUT_FILENO)
 		close(cmd->outfile);
 	cmd->outfile = open(file_name, O_WRONLY | O_APPEND | O_CREAT, 0644);
