@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:12:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 10:37:45 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:59:10 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,12 @@ char	*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app)
 	char	**paths;
 
 	if (exe->cmd_name[0] == '/' || exe->cmd_name[0] == '.')
+	{
 		if (!has_access_ret(app, cmd, exe->cmd_name))
 			return (exe->cmd_name);
 		else
 			return (NULL);
+	}
 	else
 	{
 		paths = get_paths_from_env(app, cmd, exe->cmd_name);

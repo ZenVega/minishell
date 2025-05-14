@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:19:06 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 13:59:10 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:53:41 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_buildin	is_buildin(char *cmd)
 	return (BI_NULL);
 }
 
-// for overview the BI_NULL condition in nice, but for saving lines we can kick it here later
 int	exe_buildin(t_app *app, t_cmd_info *cmd)
 {
 	t_buildin	bi_cmd;
