@@ -13,14 +13,52 @@
 #include "parser.h"
 #include "../malloc_list/malloc_list.h"
 
+static int	apnd(char **new, const char *src, int len, int *j)
+{
+	new[(*j)++] = ft_substr(src, 0, len);
+	if (!new[(*j) - 1])
+		return (-1);
+	return (0);
+}
+
+static int	split_redirections(char **new, char *arg, int *j)
+{
+	int	i[2];
+
+	i[0] = -1;
+	i[1] = 0;
+	while (arg[i[1] + ++i[0]])
+	{
+		if (arg[i[1] + i[0]] == '>' || arg[i[1] + i[0]] == '<')
+		{
+			if (i[0] > 0 && apnd(new, arg + i[1], i[0], j) == -1)
+				return (-1);
+			if ((arg[i[1] + i[0]] == '>' && arg[i[1] + i[0] + 1] == '>')
+				|| (arg[i[1] + i[0]] == '<' && arg[i[1] + i[0] + 1] == '<'))
+			{
+				if (apnd(new, arg + i[1] + i[0]++, 2, j) == -1 || i[0]++ == -7)
+					return (-1);
+			}
+			else if (apnd(new, arg + i[1] + i[0]++, 1, j) == -1)
+				return (-1);
+			i[1] += i[0];
+			i[0] = -1;
+		}
+	}
+	if (i[0] > 0 && apnd(new, arg + i[1], i[0], j) == -1)
+		return (-1);
+	return (0);
+}
+
 char	**redirection_split(char **args)
 {
 	char	**new;
 	int		i;
 	int		j;
-	int		k;
 
 	new = (char **)malloc(sizeof(char *) * 256);
+	if (!new)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (args[i])
@@ -28,47 +66,13 @@ char	**redirection_split(char **args)
 		if (args[i][0] == '\'' || args[i][0] == '\"')
 		{
 			new[j++] = ft_strdup(args[i]);
+			if (!new[j - 1])
+				return (free_var_arr(new), NULL);
 			i++;
 			continue ;
 		}
-		k = 0;
-		while (args[i][k])
-		{
-			if (args[i][k] == '>' || args[i][k] == '<')
-			{
-				if (k > 0)
-				{
-					new[j++] = ft_substr(args[i], 0, k);
-					if (!new[j - 1])
-						return (free_var_arr(new), NULL);
-				}
-				if ((args[i][k] == '>' && args[i][k + 1] == '>' )
-					|| (args[i][k] == '<' && args[i][k + 1] == '<'))
-				{
-					new[j++] = ft_substr(args[i] + k, 0, 2);
-					if (!new[j - 1])
-						return (free_var_arr(new), NULL);
-					k += 2;
-				}
-				else
-				{
-					new[j++] = ft_substr(args[i] + k, 0, 1);
-					if (!new[j - 1])
-						return (free_var_arr(new), NULL);
-					k++;
-				}
-				args[i] = args[i] + k;
-				k = 0;
-			}
-			else
-				k++;
-		}
-		if (*args[i])
-		{
-			new[j++] = ft_strdup(args[i]);
-			if (!new[j - 1])
-				return (free_var_arr(new), NULL);
-		}
+		if (split_redirections(new, args[i], &j))
+			return (free_var_arr(new), NULL);
 		i++;
 	}
 	new[j] = NULL;
