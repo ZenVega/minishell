@@ -62,10 +62,12 @@ int	get_char_arr_len(char **paths)
 	return (i);
 }
 
-void	reroute_io(int input, int output)
+void	reroute_io(t_cmd_info *cmd)
 {
-	if (input != STDIN_FILENO)
-		dup2(input, STDIN_FILENO);
-	if (output != STDOUT_FILENO)
-		dup2(output, STDOUT_FILENO);
+	cmd->infile_backup = dup(STDIN_FILENO);
+	cmd->outfile_backup = dup(STDOUT_FILENO);
+	if (cmd->infile != STDIN_FILENO)
+		dup2(cmd->infile, STDIN_FILENO);
+	if (cmd->outfile != STDOUT_FILENO)
+		dup2(cmd->outfile, STDOUT_FILENO);
 }

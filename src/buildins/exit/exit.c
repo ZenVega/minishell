@@ -27,7 +27,7 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 	int		err;
 	char	*suspect;
 
-	reroute_io(cmd->infile, cmd->outfile);
+	reroute_io(cmd);
 	err = 0;
 	if (cmd->args[1])
 	{
@@ -48,10 +48,7 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 		else
 			err = ft_atoi(cmd->args[1]) % 256;
 	}
-	if (cmd->infile != 0)
-		close(cmd->infile);
-	if (cmd->outfile != 1)
-		close(cmd->outfile);
+	reset_io(cmd);
 	free_comp_app(app);
 	ft_fprintf(STDOUT_FILENO, "exit\n");
 	exit(err);

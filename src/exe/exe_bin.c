@@ -52,7 +52,7 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	if (pid == 0)
 	{
 		init_sa_child(app);
-		reroute_io(cmd->infile, cmd->outfile);
+		reroute_io(cmd);
 		execve(exe->path, exe->args, app->envp);
 		perror("execve failed");
 		exit(-1);
@@ -85,9 +85,9 @@ int	exe_bin(t_app *app, t_cmd_info *cmd)
 	}
 	if (cmd->err_info.code == 537)
 		err = set_var(app, cmd);
-	if (cmd->infile != 0)
+	if (cmd->infile != STDIN_FILENO)
 		close(cmd->infile);
-	if (cmd->outfile != 1)
+	if (cmd->outfile != STDOUT_FILENO)
 		close(cmd->outfile);
 	return (err);
 }
