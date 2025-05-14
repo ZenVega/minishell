@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:07:52 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/14 13:42:44 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/14 14:18:21 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,24 @@ int	set_var(t_app *app, t_cmd_info *cmd)
 	return (0);
 }
 
-int	unset_var(t_app *app, t_cmd_info *cmd)
+static void	unset_var_from_arr(char ***arr, char *arg, int var_len)
 {
 	int	i;
+
+	i = 0;
+	while (arr && (*arr)[i])
+	{
+		if (found_var((*arr)[i], arg, var_len))
+		{
+			*arr = rm_var_from_array(*arr, arg);
+			break ;
+		}
+		i++;
+	}
+}
+
+int	unset_var(t_app *app, t_cmd_info *cmd)
+{
 	int	j;
 	int	var_len;
 
@@ -48,27 +63,8 @@ int	unset_var(t_app *app, t_cmd_info *cmd)
 	while (cmd->args[j])
 	{
 		var_len = ft_strlen(cmd->args[j]);
-		i = 0;
-		while (app->envp && app->envp[i])
-		{
-			if (found_var(app->envp[i], cmd->args[j], var_len))
-			{
-				app->envp = rm_var_from_array(app->envp, cmd->args[j]);
-				break ;
-			}
-			i++;
-		}
-		i = 0;
-		while (app->local_var && app->local_var[i])
-		{
-			if (found_var(app->local_var[i], cmd->args[j], var_len))
-			{
-				app->local_var
-					= rm_var_from_array(app->local_var, cmd->args[j]);
-				break ;
-			}
-			i++;
-		}
+		unset_var_from_arr(&app->envp, cmd->args[j], var_len);
+		unset_var_from_arr(&app->local_var, cmd->args[j], var_len);
 		j++;
 	}
 	return (0);
