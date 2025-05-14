@@ -6,14 +6,13 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:38 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/14 10:49:53 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/14 10:56:37 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXIT_H
 # define EXIT_H
-# include "../../includes/types.h"
-# include "../../utils/utils.h"
+
 # include "../../error/error.h"
 # include "../../includes/types.h"
 # include "../../libft/libft.h"
