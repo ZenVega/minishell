@@ -59,7 +59,5 @@ int			create_mask(t_parser_info *p_info, t_list **malloc_list,
 //outfile.c
 int			set_outfile(char **args, t_cmd_info *cmd);
 int			found_outfile(char **args, int i, t_cmd_info *cmd);
-int			truncate_outfile(char *file_name, t_cmd_info *cmd);
-int			append_outfile(char *file_name, t_cmd_info *cmd);
 
 #endif
