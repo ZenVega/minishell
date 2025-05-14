@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 13:56:06 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 15:00:35 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 	i = 0;
 	while (cmd->args[i] && ft_strchr(cmd->args[i], '=') != NULL)
 		i++;
-	if(!cmd->args[i])
+	if (!cmd->args[i])
 	{
 		cmd->err_info.code = 537;
 		return (NULL);
@@ -39,7 +39,7 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	exe->path = get_path(cmd, exe, app);
 	if (!exe->path)
-		return ( NULL);
+		return (NULL);
 	return (exe);
 }
 
@@ -63,7 +63,6 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 		app->ret_val = 130;
 	else
 		app->ret_val = WEXITSTATUS(status);
-	//ft_printf("status %d\n", WEXITSTATUS(status));
 	return (0);
 }
 

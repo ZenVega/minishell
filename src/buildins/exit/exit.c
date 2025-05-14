@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/04/28 10:48:32 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:56:05 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_comp_app(t_app *app)
 	free(app);
 }
 
-// since the err status is only an 8bit integer, the result is truncated to a value between 0-255
+//err status is only an 8bit integer, result is truncated to be between 0-255
 int	ft_exit(t_app *app, t_cmd_info *cmd)
 {
 	int		err;

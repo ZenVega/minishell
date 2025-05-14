@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:02:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 11:31:09 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/13 15:00:00 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 	int				fd[2];
 	t_parser_info	p_info;
 	int				status;
-	
+
 	pids[0] = fork();
 	if (pids[0] == -1)
 		return (set_err(cmd, ERR_FORK, NULL));
@@ -29,7 +29,7 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		pids[1] = fork();
 		if (pids[1] == -1)
 			return (set_err(cmd, ERR_FORK, NULL));
-		else if (pids[1] == 0) //Child process - write to parent
+		else if (pids[1] == 0)
 		{
 			init_sa_child(app);
 			close(fd[0]);
@@ -38,7 +38,7 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 			close(fd[1]);
 			exit(app->ret_val);
 		}
-		else //Parent process - read from child
+		else
 		{
 			init_sa_child(app);
 			close(fd[1]);
