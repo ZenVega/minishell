@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/14 10:53:14 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/14 14:58:58 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,26 @@ int	set_prompt(char **prompt_addr, t_list **malloc_list)
 	return (0);
 }
 
+void	process_input(char *read_line, t_cmd_info *cmd, t_app *app)
+{
+	t_parser_info		p_info;
+
+	add_history(read_line);
+	p_info = init_parser_info(0, 1, read_line);
+	cmd = parser(p_info, app);
+	exe(app, cmd);
+	free_malloc_list(app);
+	free(read_line);
+}
+
 void	start_shell(t_app *app)
 {
 	char				*read_line;
 	t_cmd_info			*cmd;
-	t_parser_info		p_info;
 
 	while (1)
 	{
+		cmd = NULL;
 		init_sa_shell(app);
 		if (set_prompt(&app->prompt, &app->malloc_list) == -1)
 		{
@@ -70,16 +82,9 @@ void	start_shell(t_app *app)
 		{
 			write(STDOUT_FILENO, "exit\n", 5);
 			free_comp_app(app);
-			exit(0) ;
+			exit(0);
 		}
 		if (*read_line != '\0')
-		{
-			add_history(read_line);
-			p_info = init_parser_info(0, 1, read_line);
-			cmd = parser(p_info, app);
-			exe(app, cmd);
-			free_malloc_list(app);
-			free(read_line);
-		}
+			process_input(read_line, cmd, app);
 	}
 }
