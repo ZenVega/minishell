@@ -89,7 +89,6 @@ debug: $(NAME)
 	/bin/bash -c "gdb ./$(NAME)"
 
 run start test: $(NAME)
-	@cat welcome.txt
 	@/bin/bash -c "./$(NAME)"
 
 val_test: $(NAME)
