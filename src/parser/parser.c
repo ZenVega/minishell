@@ -12,6 +12,13 @@
 
 #include "parser.h"
 
+static t_cmd_info	*on_success(t_cmd_info *cmd, char **parts)
+{
+	cmd->args = parts;
+	cmd->type = PIPE;
+	return (cmd);
+}
+
 t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 {
 	t_cmd_info	*cmd;
@@ -20,12 +27,8 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 
 	cmd = cmd_info_init(&app->malloc_list, &p_info);
 	if (!cmd)
-	{
-		cmd->err_info.code = ERR_MALLOC;
 		return (set_err(cmd, ERR_MALLOC, ""), cmd);
-	}
-	parts = (char **)malloc_and_add_list(
-			&app->malloc_list, sizeof(char *) * 3);
+	parts = (char **)malloc_and_add_list(&app->malloc_list, sizeof(char *) * 3);
 	free(p_info.mask);
 	err = create_mask(&p_info, &app->malloc_list, cmd);
 	if (err == -1 || !parts)
@@ -37,11 +40,7 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 	if (err == -1)
 		return (NULL);
 	if (err == 0)
-	{
-		cmd->args = parts;
-		cmd->type = PIPE;
-		return (cmd);
-	}
+		return (on_success(cmd, parts));
 	cmd->type = BIN;
 	err = set_io_files(p_info.line, cmd, &app->malloc_list, p_info.mask);
 	if (err != 0)
