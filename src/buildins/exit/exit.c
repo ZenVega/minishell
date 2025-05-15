@@ -44,8 +44,8 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 		else
 			err = ft_atoi(cmd->args[1]) % 256;
 	}
+	reset_io(cmd);
 	free_comp_app(app);
 	ft_printf("exit\n");
-	reset_io(cmd);
 	exit(err);
 }
