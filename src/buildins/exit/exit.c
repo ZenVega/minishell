@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/13 14:56:05 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/14 14:44:42 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 	if (cmd->args[1])
 	{
 		if (cmd->args[2])
-		{
-			err = 1;
-			set_err(cmd, 101, "exit");
-			return (err);
-		}
+			return (set_err(cmd, 101, "exit"), 1);
 		else if (!ft_isnumber(cmd->args[1]))
 		{
 			err = 2;
@@ -48,8 +44,8 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 		else
 			err = ft_atoi(cmd->args[1]) % 256;
 	}
-	reset_io(cmd);
 	free_comp_app(app);
-	ft_fprintf(STDOUT_FILENO, "exit\n");
+	ft_printf("exit\n");
+	reset_io(cmd);
 	exit(err);
 }

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 09:10:18 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/05 11:54:19 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/14 13:28:59 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ char	**add_var_to_array(char **array, char *new_var)
 	{
 		new[i] = ft_strdup(array[i]);
 		if (!new[i])
-		{
-			free_var_arr(new);
-			return (NULL);
-		}
+			return (free_var_arr(new), NULL);
 		i++;
 	}
 	new[i++] = ft_strdup(new_var);
@@ -80,9 +77,7 @@ char	**rm_var_from_array(char **array, char *var)
 	int		var_len;
 	char	**new;
 
-	size = 0;
-	while (array && array[size])
-		size++;
+	size = get_char_arr_len(array);
 	new = (char **)malloc(sizeof(char *) * size);
 	if (!new)
 		return (NULL);
@@ -97,13 +92,8 @@ char	**rm_var_from_array(char **array, char *var)
 		{
 			new[j++] = ft_strdup(array[i++]);
 			if (!new[j - 1])
-			{
-				free_var_arr(new);
-				return (NULL);
-			}
+				return (free_var_arr(new), NULL);
 		}
 	}
-	new[j] = NULL;
-	free_var_arr(array);
-	return (new);
+	return (new[j] = NULL, new);
 }

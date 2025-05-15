@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 10:02:45 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 14:39:44 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/14 13:46:53 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ static int	replace_var(t_app *app, t_parser_info *p_info, char *p_dol)
 		i = -1;
 		while (app->local_var[++i])
 			if (!ft_strncmp(p_dol + 1, app->local_var[i], var_len)
-				&& (app->envp[i][var_len] == '='
-				|| app->envp[i][var_len] == '\0'))
+				&& (app->local_var[i][var_len] == '='
+				|| app->local_var[i][var_len] == '\0'))
 				return (expand_var(app, p_info, app->local_var[i], var_len)); 
 	}
 	return (remove_var(p_info));
