@@ -46,6 +46,7 @@ typedef struct s_cmd_info
 	int			outfile;
 	int			infile_backup;
 	int			outfile_backup;
+	int			hd_count;
 	char		**args;
 	t_err_info	err_info;
 	t_cmd_type	type;

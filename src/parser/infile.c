@@ -72,10 +72,12 @@ int	here_doc(char *delimiter, t_cmd_info *cmd)
 {
 	char	*next_line;
 	int		fd;
+	char	*hd_name;
 
-	fd = open("here_doc", O_RDWR | O_CREAT | O_TRUNC | O_APPEND, 0777);
+	hd_name = ft_strjoin("here_doc_", ft_itoa(cmd->hd_count++));
+	fd = open(hd_name, O_RDWR | O_CREAT | O_TRUNC | O_APPEND, 0777);
 	if (fd < 0)
-		return (set_err(cmd, ERR_NO_FILE, "here_doc"));
+		return (set_err(cmd, ERR_NO_FILE, hd_name));
 	while (1)
 	{
 		next_line = readline(">");
@@ -83,8 +85,8 @@ int	here_doc(char *delimiter, t_cmd_info *cmd)
 		{
 			free(next_line);
 			close(fd);
-			cmd->infile = open("here_doc", O_RDONLY);
-			unlink("here_doc");
+			cmd->infile = open(hd_name, O_RDONLY);
+			unlink(hd_name);
 			return (0);
 		}
 		write(fd, next_line, ft_strlen(next_line));

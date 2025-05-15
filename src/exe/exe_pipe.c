@@ -29,9 +29,14 @@ static void	handle_grandchild(t_app *app, int fd[2], t_cmd_info *cmd)
 	close(fd[0]);
 	p_info = init_parser_info(cmd->infile, fd[1], cmd->args[0]);
 	exe(app, parser(p_info, app));
-	exit(app->ret_val);
+	close(fd[1]);
+	if (app)
+		exit(app->ret_val);
+	exit(0);
 }
 
+//in order to run multiple pipes, line waitpid(pids[1], &status, 0); has to
+//be moved before exe(...)
 static int	handle_child(t_app *app, int pids[2], int fd[2], t_cmd_info *cmd)
 {
 	t_parser_info	p_info;
@@ -43,9 +48,7 @@ static int	handle_child(t_app *app, int pids[2], int fd[2], t_cmd_info *cmd)
 	if (pids[1] == -1)
 		return (set_err(cmd, ERR_FORK, NULL));
 	else if (pids[1] == 0)
-	{
 		handle_grandchild(app, fd, cmd);
-	}
 	else
 	{
 		init_sa_child(app);
@@ -69,9 +72,7 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 	if (pids[0] == -1)
 		return (set_err(cmd, ERR_FORK, NULL));
 	if (pids[0] == 0)
-	{
 		return (handle_child(app, pids, fd, cmd));
-	}
 	else
 		handle_parent(app, pids[0], cmd, &status);
 	app->ret_val = WEXITSTATUS(status);

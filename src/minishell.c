@@ -31,7 +31,7 @@ int	welcome_screen(char *envp[])
 		waitpid(pid, NULL, 0);
 	return (0);
 }
-
+//line welcome_screen(envp); has to be commented out in order to pass the tests
 int	main(int argc, char **argv, char *envp[])
 {
 	t_app				*app;
@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char *envp[])
 		write(2, "Invalid arguments\n", 18);
 		return (-1);
 	}
-	welcome_screen(envp);
+	//welcome_screen(envp);
 	app = init_shell(envp);
 	if (app == NULL)
 		return (-1);
