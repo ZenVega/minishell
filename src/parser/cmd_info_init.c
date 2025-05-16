@@ -22,7 +22,6 @@ t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info)
 	cmd_info->infile = p_info->infile;
 	cmd_info->outfile = p_info->outfile;
 	cmd_info->args = NULL;
-	cmd_info->hd_count = 0;
 	cmd_info->type = UNDEFINED;
 	cmd_info->err_info.code = 0;
 	cmd_info->err_info.suspect = NULL;

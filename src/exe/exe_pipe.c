@@ -29,13 +29,9 @@ static void	handle_grandchild(t_app *app, int fd[2], t_cmd_info *cmd)
 	p_info = init_parser_info(cmd->infile, fd[1], cmd->args[0]);
 	exe(app, parser(p_info, app));
 	close(fd[1]);
-	if (app)
-		exit(app->ret_val);
-	exit(0);
+	exit(app->ret_val);
 }
 
-//in order to run multiple pipes, line waitpid(pids[1], &status, 0); has to
-//be moved before exe(...)
 static int	handle_child(t_app *app, int pids[2], t_cmd_info *cmd)
 {
 	t_parser_info	p_info;
