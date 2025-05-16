@@ -37,5 +37,5 @@ int	echo(t_app *app, t_cmd_info *cmd)
 	}
 	if (new_line)
 		ft_fprintf(cmd->outfile, "\n");
-	return (reset_io(cmd), 0);
+	return (0);
 }

@@ -18,7 +18,6 @@ static void	handle_parent(t_app *app, int pid0, t_cmd_info *cmd, int *status)
 	waitpid(pid0, status, 0);
 	if (cmd && cmd->err_info.suspect)
 		free(cmd->err_info.suspect);
-	free_malloc_list(app);
 }
 
 static void	handle_grandchild(t_app *app, int fd[2], t_cmd_info *cmd)
@@ -79,5 +78,6 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 	else
 		handle_parent(app, pids[0], cmd, &status);
 	app->ret_val = WEXITSTATUS(status);
-	return (WEXITSTATUS(status));
+	return (0);
+	//return (WEXITSTATUS(status));
 }
