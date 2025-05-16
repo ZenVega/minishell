@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 09:10:18 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/14 13:28:59 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/16 12:01:35 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,5 @@ char	**rm_var_from_array(char **array, char *var)
 				return (free_var_arr(new), NULL);
 		}
 	}
-	return (new[j] = NULL, new);
+	return (free_var_arr(array), new[j] = NULL, new);
 }
