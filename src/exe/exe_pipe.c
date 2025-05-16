@@ -58,8 +58,8 @@ static int	handle_child(t_app *app, int pids[2], t_cmd_info *cmd)
 			close(cmd->infile);
 		p_info = init_parser_info(fd[0], cmd->outfile, cmd->args[1]);
 		exe(app, parser(p_info, app));
-		close(fd[0]);
 		waitpid(pids[1], &status, 0);
+		close(fd[0]);
 		exit(app->ret_val);
 	}
 	return (0);
@@ -79,5 +79,4 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		handle_parent(app, pids[0], cmd, &status);
 	app->ret_val = WEXITSTATUS(status);
 	return (0);
-	//return (WEXITSTATUS(status));
 }

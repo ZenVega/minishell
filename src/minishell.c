@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char *envp[])
 		write(2, "Invalid arguments\n", 18);
 		return (-1);
 	}
-	welcome_screen(envp);
+	//welcome_screen(envp);
 	app = init_shell(envp);
 	if (app == NULL)
 		return (-1);
