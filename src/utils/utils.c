@@ -67,7 +67,11 @@ void	reroute_io(t_cmd_info *cmd)
 	cmd->infile_backup = dup(STDIN_FILENO);
 	cmd->outfile_backup = dup(STDOUT_FILENO);
 	if (cmd->infile != STDIN_FILENO)
+	{
 		dup2(cmd->infile, STDIN_FILENO);
+	}
 	if (cmd->outfile != STDOUT_FILENO)
+	{
 		dup2(cmd->outfile, STDOUT_FILENO);
+	}
 }

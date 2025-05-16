@@ -31,4 +31,5 @@ void	reroute_io(t_cmd_info *cmd);
 int		clean_arg(char *arg);
 int		clean_args(t_cmd_info *cmd);
 void	reset_io(t_cmd_info *cmd);
+
 #endif
