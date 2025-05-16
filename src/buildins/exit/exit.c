@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/14 14:44:42 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/16 11:55:34 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 	int		err;
 	char	*suspect;
 
-	reroute_io(cmd);
 	err = 0;
 	if (cmd->args[1])
 	{
@@ -44,8 +43,7 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 		else
 			err = ft_atoi(cmd->args[1]) % 256;
 	}
-	reset_io(cmd);
+	ft_fprintf(cmd->outfile, "exit\n");
 	free_comp_app(app);
-	ft_printf("exit\n");
 	exit(err);
 }
