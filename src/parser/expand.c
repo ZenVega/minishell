@@ -46,7 +46,7 @@ static int	expand_var(t_app *app, t_parser_info *p_info,
 	ret_val = (char *)malloc_and_add_list(&app->malloc_list, sizeof(char)
 			* len_newline + 1);
 	if (!ret_val)
-		return (1);
+		return (-1);
 	while (p_info->line[++i]
 		&& (p_info->line[i] != '$' || p_info->mask[i] == 1))
 		ret_val[i] = p_info->line[i];
@@ -54,10 +54,11 @@ static int	expand_var(t_app *app, t_parser_info *p_info,
 	var += var_len + 1;
 	while (var[++j])
 		ret_val[i++] = var[j];
+	j = i;
 	while (i < len_newline)
 		ret_val[i++] = p_info->line[k++];
 	p_info->line = ret_val;
-	return (0);
+	return (j);
 }
 
 static int	replace_return(t_app *app, t_parser_info *p_info, int i_dol)
@@ -118,26 +119,35 @@ int	expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd)
 {
 	char	*p_dol;
 	int		i_dol;
+	int		offset;
 
 	p_dol = ft_strchr(p_info->line, '$');
 	while (p_dol != NULL)
 	{
 		i_dol = p_dol - p_info->line;
-		if (is_space(*(p_dol + 1)) || *(p_dol + 1) == '\0'
-			|| *(p_dol + 1) == '"' )
-			p_dol++;
-		else if (p_info->mask[i_dol] != 1)
+		offset = i_dol + 1;
+		if (p_info->mask[i_dol] != 1)
 		{
-			if (*(p_dol + 1) == '?')
+			if (is_space(*(p_dol + 1)) || *(p_dol + 1) == '\0'
+				|| *(p_dol + 1) == '"' )
+				p_dol++;
+			else 
 			{
-				if (replace_return(app, p_info, i_dol))
-					set_err(cmd, ERR_MALLOC, NULL);
+				if (*(p_dol + 1) == '?')
+				{
+					if (replace_return(app, p_info, i_dol))
+						set_err(cmd, ERR_MALLOC, NULL);
+				}
+				else 
+				{
+					offset = replace_var(app, p_info, p_dol);
+					if (offset == -1)
+						set_err(cmd, ERR_MALLOC, NULL);
+				}
 			}
-			else if (replace_var(app, p_info, p_dol))
-				set_err(cmd, ERR_MALLOC, NULL);
+			create_mask(p_info, &app->malloc_list, cmd);
 		}
-		create_mask(p_info, &app->malloc_list, cmd);
-		p_dol = ft_strchr(&p_info->line[i_dol + 1], '$');
+		p_dol = ft_strchr(&p_info->line[offset], '$');
 	}
 	return (0);
 }
