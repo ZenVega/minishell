@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:42:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/14 14:58:58 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 12:23:04 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	process_input(char *read_line, t_cmd_info *cmd, t_app *app)
 	p_info = init_parser_info(0, 1, read_line);
 	cmd = parser(p_info, app);
 	exe(app, cmd);
+	if (cmd->err_info.suspect)
+		free(cmd->err_info.suspect);
 	free_malloc_list(app);
 	free(read_line);
 }

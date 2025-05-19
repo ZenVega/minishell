@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:47:17 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/23 09:32:29 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 12:12:59 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@
 # define ERR_NUM_ARGS_MSG "numeric argument required"
 # define ERR_IS_FOLDER_MSG "Is a directory"
 # define ERR_PERM_MSG "Permission denied"
+# define ERR_IDENT_MSG "not a valid identifier"
 
 # define BUFFER_SIZE 10
-# define ERR_COUNT 12
+# define ERR_COUNT 13
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
@@ -47,6 +48,7 @@ typedef enum s_err_code {
 	ERR_PERMISSION = 308,
 	ERR_IS_FOLDER = 309,
 	ERR_PERM = 310,
+	ERR_IDENT = 311,
 	ERR_MANY_ARGS = 101,
 	ERR_NUM_ARGS = 102,
 }	t_err_code;
