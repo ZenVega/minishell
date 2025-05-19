@@ -48,10 +48,10 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	int		pid;
 	int		status;
 
-	if (global_signal == 0)
+	if (g_global_signal == 0)
 	{
 		init_sa_parent(app);
-		global_signal = -1;
+		g_global_signal = -1;
 	}
 	pid = fork();
 	if (pid == 0)
@@ -64,9 +64,7 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	}
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
-	{
-		app->ret_val = global_signal;
-	}
+		app->ret_val = g_global_signal;
 	else
 		app->ret_val = WEXITSTATUS(status);
 	return (0);

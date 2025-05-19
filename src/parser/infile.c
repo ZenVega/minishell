@@ -83,11 +83,10 @@ static char	*get_hd_name(int count)
 	return (hd_name);
 }
 
-int	here_doc(char *delimiter, t_cmd_info *cmd)
+char	*find_hd_name(void)
 {
-	char	*next_line;
-	int		fd;
 	int		count;
+	int		fd;
 	char	*hd_name;
 
 	count = 0;
@@ -101,6 +100,18 @@ int	here_doc(char *delimiter, t_cmd_info *cmd)
 			free(hd_name);
 		count++;
 	}
+	close(fd);
+	return (hd_name);
+}
+
+int	here_doc(char *delimiter, t_cmd_info *cmd)
+{
+	char	*next_line;
+	int		fd;
+	char	*hd_name;
+
+	hd_name = find_hd_name();
+	fd = open(hd_name, O_RDWR | O_CREAT, 0777);
 	while (1)
 	{
 		next_line = readline(">");
