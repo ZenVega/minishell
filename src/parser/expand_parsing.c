@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   expand_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 10:02:45 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 17:30:37 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:33:38 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expand.h"
+#include "parser.h"
 
-static int	get_offset(t_parser_info *p_info, t_app *app, int i_dol, char *pd)
+
+static	get_offset(t_parser_info *p_info, t_app *app, int i_dol, char *pd)
 {
 	if (*(pd + 1) == '?')
 		return (replace_return(app, p_info, i_dol));
