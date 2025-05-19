@@ -30,6 +30,10 @@ CFILES += pwd.c
 vpath %.c $(SRC_FOLDER)error
 CFILES += error.c
 
+vpath %.c $(SRC_FOLDER)expand
+CFILES += expand.c
+CFILES += expand_utils.c
+
 vpath %.c $(SRC_FOLDER)exe
 CFILES += exe.c
 CFILES += exe_bin.c
@@ -45,7 +49,6 @@ CFILES += malloc_list.c
 
 vpath %.c $(SRC_FOLDER)parser
 CFILES += cmd_info_init.c
-CFILES += expand.c
 CFILES += in_out_utils.c
 CFILES += infile.c
 CFILES += mask.c

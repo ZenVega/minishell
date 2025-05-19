@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/13 16:32:59 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:49:11 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int			pipe_split(char **parts, t_parser_info *p_info,
 //cmd_info_init.c
 t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info);
 
-//expand.c
-int			expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd);
+//expand_parsing.c
+void		expand(t_parser_info *p_info, t_app *app, t_cmd_info *cmd);
 
 //in_out.c
 int			set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list,

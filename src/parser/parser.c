@@ -33,9 +33,7 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 	err = create_mask(&p_info, &app->malloc_list, cmd);
 	if (err == -1 || !parts)
 		return (NULL);
-	err = expand(&p_info, app, cmd);
-	if (err)
-		return (NULL);
+	expand(&p_info, app, cmd);
 	err = pipe_split(parts, &p_info, &app->malloc_list);
 	if (err == -1)
 		return (NULL);
