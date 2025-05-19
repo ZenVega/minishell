@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 11:31:28 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/02 15:36:16 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/19 15:39:08 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ int	cd(t_app *app, t_cmd_info *cmd)
 	abs_path = get_abs_path(app, cmd->args[1]);
 	if (abs_path == NULL)
 		return (set_err(cmd, ERR_NO_FILE, "cd"));
+	if (folder_access(app, cmd, abs_path, cmd->args[1]))
+		return (1);
 	if (!chdir(abs_path))
 	{
 		if (update_pwd(app, abs_path))
