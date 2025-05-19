@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 12:38:00 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 12:41:41 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 	{	
-		write(STDOUT_FILENO, "signaled\n", 9);
-		ft_printf("global_signal: %d\n", global_signal);
 		app->ret_val = global_signal;
 	}
 	else
