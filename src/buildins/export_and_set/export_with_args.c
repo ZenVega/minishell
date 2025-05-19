@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:19:13 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/13 13:59:29 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 14:23:22 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,8 @@ int	export_with_args(t_app *app, t_cmd_info *cmd)
 	{
 		if (invalid_identifier(cmd->args[i]))
 		{
-			ft_fprintf(2, "minishell: export: `%s`: not a valid identifier\n",
-				cmd->args[i]);
-			err = 1;
+			ft_fprintf(2, "minishell: export: `%s`: %s\n",
+				cmd->args[i], ERR_IDENT_MSG);
 			app->ret_val = 1;
 		}
 		else

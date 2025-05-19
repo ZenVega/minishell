@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/16 11:55:34 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 12:20:42 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	ft_exit(t_app *app, t_cmd_info *cmd)
 	if (cmd->args[1])
 	{
 		if (cmd->args[2])
-			return (set_err(cmd, 101, "exit"), 1);
+			return (set_err(cmd, ERR_MANY_ARGS, "exit"), 1);
 		else if (!ft_isnumber(cmd->args[1]))
 		{
 			err = 2;
 			suspect = ft_strjoin("exit: ", cmd->args[1]);
 			add_to_malloc_list(&app->malloc_list, suspect);
-			set_err(cmd, 102, suspect);
+			set_err(cmd, ERR_NUM_ARGS, suspect);
 			exit_with_error(*cmd);
 		}
 		else
