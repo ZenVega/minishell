@@ -6,15 +6,14 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:02:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/15 09:53:14 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 12:29:36 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exe.h"
 
-static void	handle_parent(t_app *app, int pid0, t_cmd_info *cmd, int *status)
+static void	handle_parent(int pid0, t_cmd_info *cmd, int *status)
 {
-	init_sa_parent(app);
 	waitpid(pid0, status, 0);
 	if (cmd && cmd->err_info.suspect)
 		free(cmd->err_info.suspect);
@@ -66,13 +65,18 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 	pid_t			pids[2];
 	int				status;
 
+	if (global_signal == 0)
+	{
+		init_sa_parent(app);
+		global_signal = -1;
+	}
 	pids[0] = fork();
 	if (pids[0] == -1)
 		return (set_err(cmd, ERR_FORK, NULL));
 	if (pids[0] == 0)
 		return (handle_child(app, pids, cmd));
 	else
-		handle_parent(app, pids[0], cmd, &status);
+		handle_parent(pids[0], cmd, &status);
 	app->ret_val = WEXITSTATUS(status);
 	return (0);
 }

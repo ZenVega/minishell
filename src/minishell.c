@@ -6,11 +6,13 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/05 10:03:29 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 11:49:02 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+int	global_signal;
 
 int	welcome_screen(char *envp[])
 {
