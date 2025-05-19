@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:48:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 11:47:47 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:04:46 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int	remove_var(t_parser_info *p_info)
 	while (p_info->line[i] && p_info->line[i] != '$')
 		i++;
 	j = i++;
-	while (p_info->line[i] && !is_space(p_info->line[i]))
+	while (p_info->line[i] && !is_space(p_info->line[i])
+		&& p_info->line[i] != '$' && p_info->line[i] != '=')
 		i++;
 	while (p_info->line[i])
 		p_info->line[j++] = p_info->line[i++];
