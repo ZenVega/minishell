@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 18:53:01 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 19:33:17 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_comp_app(t_app *app)
 void	exit_in_pipe(t_cmd_info *cmd)
 {
 	if (cmd->infile == STDIN_FILENO && cmd->outfile == STDOUT_FILENO)
-		write(STDERR_FILENO, "exit\n", 5);
+		write(STDOUT_FILENO, "exit\n", 5);
 	if (cmd->outfile != STDOUT_FILENO)
 		close(cmd->outfile);
 	if (cmd->infile != STDIN_FILENO)
