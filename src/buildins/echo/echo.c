@@ -54,5 +54,7 @@ int	echo(t_app *app, t_cmd_info *cmd)
 	}
 	if (new_line)
 		ft_fprintf(cmd->outfile, "\n");
+	if (cmd->outfile != STDOUT_FILENO)
+		close(cmd->outfile);
 	return (0);
 }
