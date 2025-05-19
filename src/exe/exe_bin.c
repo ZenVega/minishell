@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 11:45:43 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:36:09 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_exe	*init_exe(t_app *app, t_cmd_info *cmd)
 		return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 	exe->path = get_path(cmd, exe, app);
 	if (!exe->path)
-		return (NULL);
+		return (set_err(cmd, ERR_NO_CMD, exe->cmd_name), NULL);
 	return (exe);
 }
 
