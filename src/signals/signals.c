@@ -6,13 +6,13 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:56:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 14:52:15 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 15:15:41 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signals.h"
 
-int	global_signal;
+int	g_global_signal;
 
 //handling SIGINT to just display a newline
 void	handle_signal_shell(int sig)
@@ -28,8 +28,7 @@ void	handle_signal_shell(int sig)
 
 void	init_sa_shell(t_app *app)
 {
-	global_signal = 0;
-	
+	g_global_signal = 0;
 	app->sa_int.sa_handler = &handle_signal_shell;
 	app->sa_int.sa_flags = 0;
 	sigemptyset(&app->sa_int.sa_mask);
@@ -44,13 +43,13 @@ void	handle_signal_parent(int sig)
 {
 	if (sig == SIGINT)
 	{
-		global_signal = 130;
+		g_global_signal = 130;
 		write(STDOUT_FILENO, "\n", 1);
 		return ;
 	}
 	else if (sig == SIGQUIT)
 	{
-		global_signal = 131;
+		g_global_signal = 131;
 		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
 		return ;
 	}

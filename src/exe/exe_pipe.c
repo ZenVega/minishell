@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:02:31 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 12:29:36 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 16:05:09 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 	pid_t			pids[2];
 	int				status;
 
-	if (global_signal == 0)
+	if (g_global_signal == 0)
 	{
 		init_sa_parent(app);
-		global_signal = -1;
+		g_global_signal = -1;
 	}
 	pids[0] = fork();
 	if (pids[0] == -1)
@@ -77,6 +77,9 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		return (handle_child(app, pids, cmd));
 	else
 		handle_parent(pids[0], cmd, &status);
-	app->ret_val = WEXITSTATUS(status);
+	if (g_global_signal != -1)
+		app->ret_val = g_global_signal;
+	else
+		app->ret_val = WEXITSTATUS(status);
 	return (0);
 }
