@@ -55,12 +55,14 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 		reroute_io(cmd);
 		execve(exe->path, exe->args, app->envp);
 		perror("execve failed");
-		exit(-1);
+		exit(127);
 	}
 	init_sa_parent(app);
 	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status))
+	if (WIFSIGNALED(status) == 0 && WEXITSTATUS(status) == 255)
+	{
 		app->ret_val = 130;
+	}
 	else
 		app->ret_val = WEXITSTATUS(status);
 	return (0);

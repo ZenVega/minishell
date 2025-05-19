@@ -73,6 +73,11 @@ int	open_pipe(t_app *app, t_cmd_info *cmd)
 		return (handle_child(app, pids, cmd));
 	else
 		handle_parent(app, pids[0], cmd, &status);
-	app->ret_val = WEXITSTATUS(status);
+	if (WEXITSTATUS(status) == 127)
+	{
+		app->ret_val = 130;
+	}
+	else
+		app->ret_val = WEXITSTATUS(status);
 	return (0);
 }
