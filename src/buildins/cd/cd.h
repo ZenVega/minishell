@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 10:43:13 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/02 15:12:30 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/19 15:39:58 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int		cd(t_app *app, t_cmd_info *cmd);
 //cd_utils
 int		remove_last_route(char **path);
 char	*get_home_path(t_app *app);
+int		folder_access(t_app *app, t_cmd_info *cmd, char *path, char *og_path);
 
 #endif
