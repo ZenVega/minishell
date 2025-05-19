@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 14:51:04 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 16:07:32 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	welcome_screen(char *envp[])
 		waitpid(pid, NULL, 0);
 	return (0);
 }
+
 //line welcome_screen(envp); has to be commented out in order to pass the tests
 int	main(int argc, char **argv, char *envp[])
 {
