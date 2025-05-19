@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:55:23 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 15:00:35 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 12:41:41 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 	int		pid;
 	int		status;
 
+	if (global_signal == 0)
+	{
+		init_sa_parent(app);
+		global_signal = -1;
+	}
 	pid = fork();
 	if (pid == 0)
 	{
@@ -57,10 +62,11 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 		perror("execve failed");
 		exit(-1);
 	}
-	init_sa_parent(app);
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
-		app->ret_val = 130;
+	{	
+		app->ret_val = global_signal;
+	}
 	else
 		app->ret_val = WEXITSTATUS(status);
 	return (0);

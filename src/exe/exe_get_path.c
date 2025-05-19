@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:12:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 14:59:10 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 14:10:56 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	**get_paths_from_env(t_app *app, t_cmd_info *cmd, char *cmd_name)
 	return (paths);
 }
 
-char	*filter_paths(t_app *app, t_cmd_info *cmd, char **paths)
+char	*filter_paths(t_app *app, t_cmd_info *cmd, char **paths, char *name)
 {
 	int		found;
 	char	*path;
@@ -73,7 +73,7 @@ char	*filter_paths(t_app *app, t_cmd_info *cmd, char **paths)
 		paths++;
 	}
 	if (!path)
-		return (app->ret_val = 127, set_err(cmd, ERR_NO_CMD, path), NULL);
+		return (app->ret_val = 127, set_err(cmd, ERR_NO_CMD, name), NULL);
 	return (path);
 }
 
@@ -94,7 +94,7 @@ char	*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app)
 		if (!paths)
 			return (set_err(cmd, ERR_MALLOC, NULL), NULL);
 		add_to_malloc_list(&app->malloc_list, paths);
-		return (filter_paths(app, cmd, paths));
+		return (filter_paths(app, cmd, paths, exe->cmd_name));
 	}
 	return (NULL);
 }
