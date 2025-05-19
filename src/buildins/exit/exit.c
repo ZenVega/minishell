@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:05:26 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 18:28:35 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 18:30:25 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	free_comp_app(t_app *app)
 	free(app->prompt);
 	free(app);
 }
+
 void	exit_in_pipe(t_cmd_info *cmd)
 {
 	if (cmd->infile == STDIN_FILENO && cmd->outfile == STDOUT_FILENO)
@@ -29,6 +30,7 @@ void	exit_in_pipe(t_cmd_info *cmd)
 	if (cmd->infile != STDIN_FILENO)
 		close(cmd->infile);
 }
+
 //err status is only an 8bit integer, result is truncated to be between 0-255
 int	ft_exit(t_app *app, t_cmd_info *cmd)
 {
