@@ -6,11 +6,13 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:56:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 12:31:38 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 14:52:15 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signals.h"
+
+int	global_signal;
 
 //handling SIGINT to just display a newline
 void	handle_signal_shell(int sig)
