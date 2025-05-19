@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:48:12 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 12:26:45 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:42:06 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	replace_return(t_app *app, t_parser_info *p_info, int i_dol)
 		ret_val[index[0]++] = p_info->line[index[1]++];
 	ret_val[index[0]] = '\0';
 	p_info->line = ret_val;
-	return (ft_strlen(var));
+	return (i_dol + ft_strlen(var) - 2);
 }
 
 int	replace_var(t_app *app, t_parser_info *p_info, char *p_dol)
