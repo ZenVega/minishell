@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:19:13 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/13 13:59:29 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 12:17:06 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ int	set_export_var(t_app *app, char *arg)
 
 int	export_with_args(t_app *app, t_cmd_info *cmd)
 {
-	int	i;
-	int	err;
+	int		i;
+	int		err;
+	char	*subject;
 
 	i = 1;
 	err = 0;
@@ -114,8 +115,9 @@ int	export_with_args(t_app *app, t_cmd_info *cmd)
 	{
 		if (invalid_identifier(cmd->args[i]))
 		{
-			ft_fprintf(2, "minishell: export: `%s`: not a valid identifier\n",
-				cmd->args[i]);
+			subject = ft_strjoin("export: ", cmd->args[i]);
+			add_to_malloc_list(&app->malloc_list, subject);
+			set_err(cmd, ERR_IDENT, subject);
 			err = 1;
 			app->ret_val = 1;
 		}

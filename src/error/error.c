@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:18:44 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 14:02:14 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 12:13:50 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static const char	*get_error_msg(t_err_code err)
 	errors[8] = (t_err){.code = ERR_NO_CMD, .msg = ERR_NO_CMD_MSG};
 	errors[9] = (t_err){.code = ERR_IS_FOLDER, .msg = ERR_IS_FOLDER_MSG};
 	errors[10] = (t_err){.code = ERR_PERM, .msg = ERR_PERM_MSG};
+	errors[11] = (t_err){.code = ERR_IDENT, .msg = ERR_IDENT_MSG};
 	i = -1;
 	while (++i < ERR_COUNT)
 		if (errors[i].code == err)
