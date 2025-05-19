@@ -55,32 +55,16 @@ int	set_outfile(char **args, t_cmd_info *cmd)
 
 int	found_outfile(char **args, int i, t_cmd_info *cmd)
 {
-	char	*file_name;
-
-	file_name = NULL;
-	if (ft_strlen(args[i]) == 1)
+	if (args[i + 1])
 	{
-		if (args[i + 1])
-		{
-			if (args[i + 1][0]
-				&& (args[i + 1][0] == '>' || args[i + 1][0] == '<'))
-				return (set_err(cmd, ERR_SYNTAX, "after >"));
-		}
-		else
+		if (args[i + 1][0] && (args[i + 1][0] == '>' || args[i + 1][0] == '<'))
 			return (set_err(cmd, ERR_SYNTAX, "after >"));
-		return (truncate_outfile(file_name, cmd));
 	}
+	else
+		return (set_err(cmd, ERR_SYNTAX, "after >"));
+	if (ft_strlen(args[i]) == 1)
+		return (truncate_outfile(args[i + 1], cmd));
 	else if (args[i][1] == '>')
-	{
-		if (args[i + 1])
-		{
-			if (args[i + 1][0]
-			&& (args[i + 1][0] == '>' || args[i + 1][0] == '<'))
-				return (set_err(cmd, ERR_SYNTAX, "after >"));
-		}
-		else
-			return (set_err(cmd, ERR_SYNTAX, "after >>"));
-		return (append_outfile(file_name, cmd));
-	}
+		return (append_outfile(args[i + 1], cmd));
 	return (0);
 }
