@@ -20,6 +20,7 @@ static int	update_pwd(t_app *app, char *new_path)
 	err = 0;
 	old_pwd = get_env_val(app, "PWD");
 	err = update_or_add_var("OLDPWD", old_pwd, app);
+	free(old_pwd);
 	if (err)
 		return (err);
 	err = update_or_add_var("PWD", new_path, app);

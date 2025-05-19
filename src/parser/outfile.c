@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:23 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 15:02:38 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 17:10:04 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,16 @@ int	set_outfile(char **args, t_cmd_info *cmd)
 
 int	found_outfile(char **args, int i, t_cmd_info *cmd)
 {
-	char	*file_name;
-
-	file_name = NULL;
-	if (ft_strlen(args[i]) == 1)
+	if (args[i + 1])
 	{
-		if (args[i + 1])
-		{
-			file_name = args[i + 1];
-			if (file_name[0] && (file_name[0] == '>' || file_name[0] =='<'))
-				return (set_err(cmd, ERR_SYNTAX, "after >"));
-		}
-		else
+		if (args[i + 1][0] && (args[i + 1][0] == '>' || args[i + 1][0] == '<'))
 			return (set_err(cmd, ERR_SYNTAX, "after >"));
-		return (truncate_outfile(file_name, cmd));
 	}
+	else
+		return (set_err(cmd, ERR_SYNTAX, "after >"));
+	if (ft_strlen(args[i]) == 1)
+		return (truncate_outfile(args[i + 1], cmd));
 	else if (args[i][1] == '>')
-	{
-		if (args[i + 1])
-		{
-			file_name = args[i + 1];
-			if (file_name[0] && (file_name[0] == '>' || file_name[0] =='<'))
-				return (set_err(cmd, ERR_SYNTAX, "after >"));
-		}
-		else
-			return (set_err(cmd, ERR_SYNTAX, "after >>"));
-		return (append_outfile(file_name, cmd));
-	}
+		return (append_outfile(args[i + 1], cmd));
 	return (0);
 }

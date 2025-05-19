@@ -6,13 +6,13 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 16:49:48 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/04/20 16:50:52 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:33:34 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "mask.h"
 
-int	mask_substr(char *line, int pos, int *mask, char c)
+static int	mask_substr(char *line, int pos, int *mask, char c)
 {
 	char	*tmp;
 	int		mask_id;

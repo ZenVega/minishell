@@ -6,13 +6,13 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:59:35 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/13 14:33:31 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 17:17:53 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-char	*find_pipe(char *line, int *mask)
+static char	*find_pipe(char *line, int *mask)
 {
 	int		i;
 

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/13 16:01:16 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/19 17:23:28 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	split_redirections(char **new, char *arg, int *j)
 	return (0);
 }
 
-char	**redirection_split(char **args)
+static char	**redirection_split(char **args)
 {
 	char	**new;
 	int		i;
