@@ -76,8 +76,7 @@ void	handle_signal_hd_parent(int sig)
 	if (sig == SIGINT)
 	{
 		g_global_signal = 130;
-		write(STDOUT_FILENO, " ^C\n", 5);
-		write(STDOUT_FILENO, "here_doc received SIGINT\n", 26);
+		write(STDOUT_FILENO, " ^C\n", 4);
 		return ;
 	}
 }
@@ -85,5 +84,17 @@ void	handle_signal_hd_parent(int sig)
 void	init_signal_hd_parent(t_app *app)
 {
 	app->sa_int.sa_handler = &handle_signal_hd_parent;
+	sigaction(SIGINT, &app->sa_int, NULL);
+}
+
+void	handle_signal_hd_child(int sig)
+{
+	if (sig == SIGINT)
+		exit (130);
+}
+
+void	init_signal_hd_child(t_app *app)
+{
+	app->sa_int.sa_handler = &handle_signal_hd_child;
 	sigaction(SIGINT, &app->sa_int, NULL);
 }

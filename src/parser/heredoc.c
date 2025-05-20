@@ -53,22 +53,24 @@ int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 	char	*hd_name;
 	int		pid;
 	int		status;
+	int		err;
 	
-	rl_catch_signals = 0;
-	//init_signal_hd_parent(app);
+	usleep (10000); //sehr dirty, I know
+	err = 0;
 	hd_name = find_hd_name(&fd);
 	pid = fork();
 	if (pid == -1)
 		return (-1); // error handling
-	else if (pid == 0 && app)
+	else if (pid == 0)
 	{
+		init_signal_hd_child(app);
 		while (1)
 		{
 			next_line = readline("🐡 ");
 			// handles Ctrl-D
 			if (next_line == NULL)
 			{
-				write(STDOUT_FILENO, "warning: pressed ctrl-D in heredoc\n", 35);
+				write(STDOUT_FILENO, "minishell: warning: here-document delimited by end-of-file (wanted delimiter)\n", 78);
 				close(fd);
 				exit (0);
 			}
@@ -86,9 +88,16 @@ int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 	}
 	else
 	{
+		init_signal_hd_parent(app);
 		waitpid(pid, &status, 0);
 		cmd->infile = open(hd_name, O_RDONLY);
 		unlink(hd_name);
+		if (g_global_signal == 130)
+		{
+			kill(pid, SIGTERM);
+			err = 107;
+			close(fd);
+		}
 	}
-	return (free(hd_name), 0);
+	return (free(hd_name), err);
 }

@@ -28,5 +28,6 @@ void	init_sa_child(t_app *app);
 void	init_sa_parent(t_app *app);
 
 void	init_signal_hd_parent(t_app *app);
+void	init_signal_hd_child(t_app *app);
 
 #endif
