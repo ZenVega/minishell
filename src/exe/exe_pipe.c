@@ -53,8 +53,8 @@ static int	handle_child(t_app *app, int pids[2], t_cmd_info *cmd)
 			close(cmd->infile);
 		p_info = init_parser_info(fd[0], cmd->outfile, cmd->args[1]);
 		exe(app, parser(p_info, app));
-		waitpid(pids[1], &status, 0);
 		close(fd[0]);
+		waitpid(pids[1], &status, 0);
 		exit(app->ret_val);
 	}
 	return (0);
