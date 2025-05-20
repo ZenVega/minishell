@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 17:15:18 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:17:31 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 // circling through all the argument parts,
 //multiple infiles are just overwritten by following
-int	set_infile(char **args, t_cmd_info *cmd)
+int	set_infile(t_app *app, char **args, t_cmd_info *cmd)
 {
 	int		i;
 	int		err;
@@ -27,7 +27,7 @@ int	set_infile(char **args, t_cmd_info *cmd)
 	{
 		if (args[i][0] == '<')
 		{
-			err = found_infile(args, i, cmd);
+			err = found_infile(app, args, i, cmd);
 			if (err != 0)
 				return (err);
 		}
@@ -36,7 +36,7 @@ int	set_infile(char **args, t_cmd_info *cmd)
 	return (0);
 }
 
-int	found_infile(char **args, int i, t_cmd_info *cmd)
+int	found_infile(t_app *app, char **args, int i, t_cmd_info *cmd)
 {
 	char	*file_name;
 
@@ -53,7 +53,7 @@ int	found_infile(char **args, int i, t_cmd_info *cmd)
 	{
 		if (!args[i + 1])
 			return (set_err(cmd, ERR_SYNTAX, "after <<"));
-		return (here_doc(args[i + 1], cmd));
+		return (here_doc(app, args[i + 1], cmd));
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:47:31 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 17:33:01 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:52:12 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 	if (err == 0)
 		return (on_success(cmd, parts));
 	cmd->type = BIN;
-	err = set_io_files(p_info.line, cmd, &app->malloc_list, p_info.mask);
+	err = set_io_files(p_info.line, cmd, app, p_info.mask);
 	if (err != 0)
 		app->ret_val = err;
 	return (cmd);

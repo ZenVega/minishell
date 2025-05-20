@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:56:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 15:15:41 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/20 15:03:40 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,21 @@ void	init_sa_child(t_app *app)
 	sigaction(SIGINT, &app->sa_int, NULL);
 	app->sa_quit.sa_handler = SIG_DFL;
 	sigaction(SIGQUIT, &app->sa_quit, NULL);
+}
+
+void	handle_signal_hd_parent(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_global_signal = 130;
+		write(STDOUT_FILENO, " ^C\n", 5);
+		write(STDOUT_FILENO, "here_doc received SIGINT\n", 26);
+		return ;
+	}
+}
+
+void	init_signal_hd_parent(t_app *app)
+{
+	app->sa_int.sa_handler = &handle_signal_hd_parent;
+	sigaction(SIGINT, &app->sa_int, NULL);
 }

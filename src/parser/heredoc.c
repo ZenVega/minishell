@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:15:04 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 17:32:41 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:45:30 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "parser.h"
 
 static char	*get_hd_name(int count)
@@ -45,28 +46,49 @@ static char	*find_hd_name(int *fd)
 	return (hd_name);
 }
 
-int	here_doc(char *delimiter, t_cmd_info *cmd)
+int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 {
 	char	*next_line;
 	int		fd;
 	char	*hd_name;
-
+	int		pid;
+	int		status;
+	
+	rl_catch_signals = 0;
+	//init_signal_hd_parent(app);
 	hd_name = find_hd_name(&fd);
-	while (1)
+	pid = fork();
+	if (pid == -1)
+		return (-1); // error handling
+	else if (pid == 0 && app)
 	{
-		next_line = readline(">");
-		if (ft_strlen(delimiter) == ft_strlen(next_line)
-			&& ft_strncmp(delimiter, next_line, ft_strlen(delimiter)) == 0)
+		while (1)
 		{
+			next_line = readline("🐡 ");
+			// handles Ctrl-D
+			if (next_line == NULL)
+			{
+				write(STDOUT_FILENO, "warning: pressed ctrl-D in heredoc\n", 35);
+				close(fd);
+				exit (0);
+			}
+			//everything goes well
+			if (ft_strlen(delimiter) == ft_strlen(next_line)
+				&& ft_strncmp(delimiter, next_line, ft_strlen(delimiter)) == 0)
+			{
+				free(next_line);
+				close(fd); 
+				exit (0);
+			}
+			ft_fprintf(fd, "%s\n", next_line);
 			free(next_line);
-			close(fd);
-			cmd->infile = open(hd_name, O_RDONLY);
-			unlink(hd_name);
-			free(hd_name); 
-			return (0);
 		}
-		ft_fprintf(fd, "%s\n", next_line);
-		free(next_line);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+		cmd->infile = open(hd_name, O_RDONLY);
+		unlink(hd_name);
 	}
 	return (free(hd_name), 0);
 }
