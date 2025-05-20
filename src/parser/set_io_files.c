@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:21:47 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 17:23:28 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:31:24 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,34 +79,9 @@ static char	**redirection_split(char **args)
 	return (new);
 }
 
-//getting the split input
-//looking for > and < to set infile and output
-int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask)
-{
-	char	**split;
-	int		err;
-
-	split = ft_split_safe(line, ' ', mask);
-	if (!split)
-		return (set_err(cmd, ERR_MALLOC, NULL), -1);
-	add_list_to_malloc_list(malloc_list, (void *)split);
-	split = redirection_split(split);
-	if (!split)
-		return (set_err(cmd, ERR_MALLOC, NULL), -1);
-	add_list_to_malloc_list(malloc_list, (void *)split);
-	err = set_infile(split, cmd);
-	if (err != 0)
-		return (set_err(cmd, ERR_NO_FILE, NULL), 1);
-	err = set_outfile(split, cmd);
-	if (err)
-		return (1);
-	trim_args(split, cmd);
-	return (0);
-}
-
 //if args are in quotation marks, they will not be kicked out here, 
 //because we look for redirection symbols in the 0 position
-void	trim_args(char **args, t_cmd_info *cmd)
+static void	trim_args(char **args, t_cmd_info *cmd)
 {
 	int		i;
 	int		j;
@@ -132,4 +107,29 @@ void	trim_args(char **args, t_cmd_info *cmd)
 		j++;
 	}
 	cmd->args = args;
+}
+
+//getting the split input
+//looking for > and < to set infile and output
+int	set_io_files(char *line, t_cmd_info *cmd, t_list **malloc_list, int *mask)
+{
+	char	**split;
+	int		err;
+
+	split = ft_split_white_safe(line, mask);
+	if (!split)
+		return (set_err(cmd, ERR_MALLOC, NULL), -1);
+	add_list_to_malloc_list(malloc_list, (void *)split);
+	split = redirection_split(split);
+	if (!split)
+		return (set_err(cmd, ERR_MALLOC, NULL), -1);
+	add_list_to_malloc_list(malloc_list, (void *)split);
+	err = set_infile(split, cmd);
+	if (err != 0)
+		return (set_err(cmd, ERR_NO_FILE, NULL), 1);
+	err = set_outfile(split, cmd);
+	if (err)
+		return (1);
+	trim_args(split, cmd);
+	return (0);
 }

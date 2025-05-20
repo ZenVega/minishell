@@ -87,12 +87,15 @@ DEPS		= $(SRC_FOLDER)includes/minishell.h\
 
 CC			= cc
 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -g -Wall -Wextra -Werror
 
 all: $(NAME) 
 
 run: $(NAME)
 	@/bin/bash -c "./$(NAME)"
+
+debug: $(NAME)
+	@/bin/bash -c "gdb ./$(NAME)"
 
 norm:
 	norminette $(NAME).c

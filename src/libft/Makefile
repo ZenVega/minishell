@@ -6,7 +6,7 @@
 #    By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 10:42:30 by uschmidt          #+#    #+#              #
-#    Updated: 2025/04/15 11:53:49 by jhelbig          ###   ########.fr        #
+#    Updated: 2025/05/20 14:35:11 by uschmidt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ ft_isascii.c\
 ft_isdigit.c\
 ft_isnumber.c\
 ft_isprint.c\
+ft_iswhitespace.c\
 ft_itoa.c\
 ft_memchr.c\
 ft_memcpy.c\
@@ -34,6 +35,7 @@ ft_putnbr_fd.c\
 ft_putstr_fd.c\
 ft_split.c\
 ft_split_safe.c\
+ft_split_white_safe.c\
 ft_strchr.c\
 ft_strdup.c\
 ft_striteri.c\
