@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:47:31 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/20 13:52:12 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/21 15:55:08 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 	cmd = cmd_info_init(&app->malloc_list, &p_info);
 	if (!cmd)
 		return (set_err(cmd, ERR_MALLOC, ""), cmd);
-	parts = (char **)malloc_and_add_list(&app->malloc_list, sizeof(char *) * 3);
 	free(p_info.mask);
 	err = create_mask(&p_info, &app->malloc_list, cmd);
-	if (err == -1 || !parts)
+	if (err == -1)
 		return (NULL);
+	ft_printf("LINE_BEFORE: %s\n", p_info.line);
+	err = create_heredoc(app, &p_info, cmd);
+	ft_printf("LINE_AFTER: %s\n", p_info.line);
 	expand(&p_info, app, cmd);
+	parts = (char **)malloc_and_add_list(&app->malloc_list, sizeof(char *) * 3);
+	if (!parts)
+		return (NULL);
 	err = pipe_split(parts, &p_info, &app->malloc_list);
 	if (err == -1)
 		return (NULL);

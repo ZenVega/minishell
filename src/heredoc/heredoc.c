@@ -3,48 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 17:15:04 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/21 10:26:28 by jhelbig          ###   ########.fr       */
+/*   Created: 2025/05/21 11:42:30 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/05/21 15:38:36 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-
-static char	*get_hd_name(int count)
-{
-	char	*hd_name;
-	char	*hd_id;
-
-	hd_id = ft_itoa(count);
-	if (!hd_id)
-		return (NULL);
-	hd_name = ft_strjoin("here_doc_", hd_id);
-	if (!hd_name)
-		return (free(hd_id), NULL);
-	free(hd_id);
-	return (hd_name);
-}
-
-static char	*find_hd_name(int *fd)
-{
-	int		count;
-	char	*hd_name;
-
-	count = 0;
-	*fd = -1;
-	while (*fd < 0)
-	{
-		hd_name = get_hd_name(count);
-		if (access(hd_name, F_OK))
-			*fd = open(hd_name, O_RDWR | O_CREAT, 0777);
-		else
-			free(hd_name);
-		count++;
-	}
-	return (hd_name);
-}
+#include "heredoc.h"
 
 int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 {
@@ -54,7 +20,7 @@ int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 	int		pid;
 	int		status;
 	int		err;
-	
+
 	usleep (10000); //sehr dirty, I know
 	err = 0;
 	hd_name = find_hd_name(&fd);
@@ -107,4 +73,25 @@ int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 		}
 	}
 	return (free(hd_name), err);
+}
+
+int	create_heredoc(t_app *app, t_parser_info *p_info, t_cmd_info *cmd)
+{
+	t_heredoc	*hd;
+	t_list		*new;
+	int			err;
+
+	while (1)
+	{
+		err = find_del(app, p_info, cmd, &hd);
+		if (err == 1)
+			break ;
+		if (err == -1)
+			return (-1);
+		new = ft_lstnew(hd);
+		if (!new)
+			return (-1);
+		ft_lstadd_back(&app->hds, new);
+	}
+	return (0);
 }

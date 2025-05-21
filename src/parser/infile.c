@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:20:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/20 14:17:31 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/21 15:52:29 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	found_infile(t_app *app, char **args, int i, t_cmd_info *cmd)
 			return (set_err(cmd, ERR_SYNTAX, "after <"));
 		return (simple_infile(file_name, cmd));
 	}
-	if (ft_strlen(args[i]) == 2 && args[i][1] == '<')
+	if (0 && ft_strlen(args[i]) == 2 && args[i][1] == '<')
 	{
 		if (!args[i + 1])
 			return (set_err(cmd, ERR_SYNTAX, "after <<"));

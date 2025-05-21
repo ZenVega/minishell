@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 09:49:59 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/20 14:21:25 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/21 11:49:02 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <fcntl.h>
 # include "../error/error.h"
 # include "../expand/expand.h"
+# include "../heredoc/heredoc.h"
 # include "../includes/types.h"
 # include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
@@ -34,9 +35,6 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app);
 //cmd_info_init.c
 t_cmd_info	*cmd_info_init(t_list **malloc_list, t_parser_info *p_info);
 
-//heredoc.c
-int			here_doc(t_app *app, char *delimiter, t_cmd_info *cmd);
-
 //in_out_utils.c
 char		*clean_filename(char *filename);
 
@@ -54,6 +52,5 @@ int			pipe_split(char **parts, t_parser_info *p_info,
 				t_list **malloc_list);
 //set_io_files.c
 int			set_io_files(char *line, t_cmd_info *cmd, t_app *app, int *mask);
-void		trim_args(char **args, t_cmd_info *cmd);
 
 #endif

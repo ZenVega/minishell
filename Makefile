@@ -44,6 +44,10 @@ CFILES += exe_utils.c
 vpath %.c $(SRC_FOLDER)init
 CFILES += init.c
 
+vpath %.c $(SRC_FOLDER)heredoc
+CFILES += heredoc.c
+CFILES += heredoc_utils.c
+
 vpath %.c $(SRC_FOLDER)malloc_list
 CFILES += malloc_list.c
 
@@ -52,7 +56,6 @@ CFILES += mask.c
 
 vpath %.c $(SRC_FOLDER)parser
 CFILES += cmd_info_init.c
-CFILES += heredoc.c
 CFILES += in_out_utils.c
 CFILES += infile.c
 CFILES += outfile.c
@@ -91,14 +94,14 @@ CFLAGS		= -g -Wall -Wextra -Werror
 
 all: $(NAME) 
 
-debug: $(NAME)
-	/bin/bash -c "gdb ./$(NAME)"
-
-run start test: $(NAME)
+run: $(NAME)
 	@/bin/bash -c "./$(NAME)"
 
+debug: $(NAME)
+	@/bin/bash -c "gdb ./$(NAME)"
+
 val_test: $(NAME)
-	/bin/bash -c "valgrind --leak-check=full --track-fds=yes ./$(NAME)"
+	@/bin/bash -c "valgrind --track-fds=yes ./$(NAME)"
 
 norm:
 	norminette $(NAME).c
