@@ -91,14 +91,14 @@ CFLAGS		= -g -Wall -Wextra -Werror
 
 all: $(NAME) 
 
-debug: $(NAME)
-	/bin/bash -c "gdb ./$(NAME)"
-
-run start test: $(NAME)
+run: $(NAME)
 	@/bin/bash -c "./$(NAME)"
 
+debug: $(NAME)
+	@/bin/bash -c "gdb ./$(NAME)"
+
 val_test: $(NAME)
-	/bin/bash -c "valgrind --leak-check=full --track-fds=yes ./$(NAME)"
+	@/bin/bash -c "valgrind --track-fds=yes ./$(NAME)"
 
 norm:
 	norminette $(NAME).c
