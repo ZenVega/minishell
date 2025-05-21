@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:15:04 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/20 15:45:30 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/21 10:26:28 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 			// handles Ctrl-D
 			if (next_line == NULL)
 			{
-				write(STDOUT_FILENO, "minishell: warning: here-document delimited by end-of-file (wanted delimiter)\n", 78);
+				write(STDOUT_FILENO, "minishell: warning: here-document delimited by end-of-file (wanted ", 67);
+				write(STDOUT_FILENO, delimiter, ft_strlen(delimiter));
+				write(STDOUT_FILENO, ")\n", 2);
 				close(fd);
 				exit (0);
 			}
@@ -90,13 +92,18 @@ int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 	{
 		init_signal_hd_parent(app);
 		waitpid(pid, &status, 0);
-		cmd->infile = open(hd_name, O_RDONLY);
-		unlink(hd_name);
+		ft_printf("%d, %d, %d\n", status % 256, WIFEXITED(status), WIFSIGNALED(status));
 		if (g_global_signal == 130)
 		{
 			kill(pid, SIGTERM);
 			err = 107;
+			unlink(hd_name);
 			close(fd);
+		}
+		else
+		{
+			cmd->infile = open(hd_name, O_RDONLY);
+			unlink(hd_name);
 		}
 	}
 	return (free(hd_name), err);

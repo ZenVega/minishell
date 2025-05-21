@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:56:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/20 15:03:40 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/21 10:10:25 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ void	handle_signal_shell(int sig)
 void	init_sa_shell(t_app *app)
 {
 	g_global_signal = 0;
+	
 	app->sa_int.sa_handler = &handle_signal_shell;
 	app->sa_int.sa_flags = 0;
 	sigemptyset(&app->sa_int.sa_mask);
 	sigaction(SIGINT, &app->sa_int, NULL);
+	
 	app->sa_quit.sa_handler = SIG_IGN;
 	app->sa_quit.sa_flags = 0;
 	sigemptyset(&app->sa_quit.sa_mask);
