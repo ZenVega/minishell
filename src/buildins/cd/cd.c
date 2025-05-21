@@ -105,8 +105,8 @@ int	cd(t_app *app, t_cmd_info *cmd)
 {
 	char	*abs_path;
 
-	if (!app)
-		return (1);
+	if (!cmd->args[1])
+		return (0);
 	if (get_char_arr_len(cmd->args) > 2)
 		return (set_err(cmd, ERR_MANY_ARGS, "cd"), 1);
 	abs_path = get_abs_path(app, cmd->args[1]);
