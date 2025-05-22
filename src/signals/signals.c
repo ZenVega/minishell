@@ -29,12 +29,10 @@ void	handle_signal_shell(int sig)
 void	init_sa_shell(t_app *app)
 {
 	g_global_signal = 0;
-	
 	app->sa_int.sa_handler = &handle_signal_shell;
 	app->sa_int.sa_flags = 0;
 	sigemptyset(&app->sa_int.sa_mask);
 	sigaction(SIGINT, &app->sa_int, NULL);
-	
 	app->sa_quit.sa_handler = SIG_IGN;
 	app->sa_quit.sa_flags = 0;
 	sigemptyset(&app->sa_quit.sa_mask);
@@ -45,7 +43,7 @@ void	handle_signal_parent(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_global_signal = 130;
+		g_global_signal = ERR_SIG;
 		write(STDOUT_FILENO, "\n", 1);
 		return ;
 	}
@@ -77,26 +75,37 @@ void	handle_signal_hd_parent(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_global_signal = 130;
-		write(STDOUT_FILENO, " ^C\n", 4);
-		return ;
+		g_global_signal = ERR_SIG;  // Set a global flag
+		write(STDOUT_FILENO, " ^D\n", 4);
 	}
 }
 
 void	init_signal_hd_parent(t_app *app)
 {
-	app->sa_int.sa_handler = &handle_signal_hd_parent;
+	sigemptyset(&app->sa_int.sa_mask);
+	app->sa_int.sa_flags = 0;
+	app->sa_int.sa_handler = SIG_IGN;
+	//app->sa_int.sa_handler = &handle_signal_hd_parent;
 	sigaction(SIGINT, &app->sa_int, NULL);
 }
 
 void	handle_signal_hd_child(int sig)
 {
+	int	fd;
+
 	if (sig == SIGINT)
-		exit (130);
+	{
+		ft_printf("SIGINT in child");
+		g_global_signal = ERR_SIG;
+		fd = open("/dev/null", O_RDONLY);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
+	}
 }
 
 void	init_signal_hd_child(t_app *app)
 {
+	sigemptyset(&app->sa_int.sa_mask);
+	app->sa_int.sa_flags = 0;
 	app->sa_int.sa_handler = &handle_signal_hd_child;
-	sigaction(SIGINT, &app->sa_int, NULL);
 }

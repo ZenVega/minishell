@@ -46,13 +46,13 @@ typedef enum s_err_code {
 	ERR_PIPE = 306,
 	ERR_ARGS = 307,
 	ERR_NO_CMD = 308,
-	ERR_PERMISSION = 308,
 	ERR_IS_FOLDER = 309,
 	ERR_PERM = 310,
 	ERR_IDENT = 311,
 	ERR_IS_NO_FOLDER = 312,
 	ERR_MANY_ARGS = 101,
 	ERR_NUM_ARGS = 102,
+	ERR_SIG = 130,
 }	t_err_code;
 
 # define BI_COUNT 8

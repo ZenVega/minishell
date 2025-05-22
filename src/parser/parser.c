@@ -33,6 +33,9 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 	if (err == -1)
 		return (NULL);
 	err = create_heredoc(app, &p_info, cmd);
+	ft_printf("heredoc err: %d\n", err);
+	if (err)
+		return (NULL);
 	expand(&p_info, app, cmd);
 	parts = (char **)malloc_and_add_list(&app->malloc_list, sizeof(char *) * 3);
 	if (!parts)

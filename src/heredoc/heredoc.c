@@ -29,6 +29,15 @@ int	write_heredoc(t_app *app, t_heredoc *hd, t_cmd_info *cmd)
 		while (1)
 		{
 			next_line = readline("🐡 ");
+			ft_printf("readline: %s\n", next_line);
+			ft_printf("global_sig: %d\n", g_global_signal);
+ 			if (g_global_signal == ERR_SIG)
+			{
+				close(hd->fd);
+				unlink(hd->doc_name);
+				write(2, "^C heredoc interrupted\n", 24);
+				exit(ERR_SIG);
+			}
 			// handles Ctrl-D
 			if (next_line == NULL)
 			{
@@ -54,17 +63,19 @@ int	write_heredoc(t_app *app, t_heredoc *hd, t_cmd_info *cmd)
 	{
 		init_signal_hd_parent(app);
 		waitpid(pid, &status, 0);
-		ft_printf("%d, %d, %d\n", status % 256, WIFEXITED(status), WIFSIGNALED(status));
-		if (g_global_signal == 130)
+		ft_printf("heredoc status: %d\n", status);
+		if (g_global_signal == ERR_SIG)
 		{
 			kill(pid, SIGTERM);
-			err = 107;
+			err = ERR_SIG;
 			unlink(hd->doc_name);
 			close(hd->fd);
+			ft_printf("err signal\n");
 		}
 		else
 			cmd->infile = open(hd->doc_name, O_RDONLY);
 	}
+	ft_printf("heredoc err: %d\n", err);
 	return (err);
 }
 
@@ -82,6 +93,8 @@ int	create_heredoc(t_app *app, t_parser_info *p_info, t_cmd_info *cmd)
 		if (err == -1)
 			return (-1);
 		err = write_heredoc(app, hd, cmd);
+		if (err == ERR_SIG)
+			return (set_err(cmd, ERR_SIG, NULL));
 		new = ft_lstnew(hd);
 		if (!new)
 			return (-1);

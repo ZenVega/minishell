@@ -45,6 +45,8 @@ int	exit_with_error(t_cmd_info cmd)
 			cmd.err_info.suspect, get_error_msg(cmd.err_info.code));
 	else if (cmd.err_info.code == ERR_SUCCESS)
 		ft_fprintf(2, "minishell:\n");
+	else if (cmd.err_info.code == ERR_SIG)
+		return (-1);
 	else
 		ft_fprintf(2, "minishell: %s\n",
 			get_error_msg(cmd.err_info.code));
