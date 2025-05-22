@@ -32,9 +32,7 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 	err = create_mask(&p_info, &app->malloc_list, cmd);
 	if (err == -1)
 		return (NULL);
-	ft_printf("LINE_BEFORE: %s\n", p_info.line);
 	err = create_heredoc(app, &p_info, cmd);
-	ft_printf("LINE_AFTER: %s\n", p_info.line);
 	expand(&p_info, app, cmd);
 	parts = (char **)malloc_and_add_list(&app->malloc_list, sizeof(char *) * 3);
 	if (!parts)

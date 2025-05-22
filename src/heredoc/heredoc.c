@@ -12,18 +12,14 @@
 
 #include "heredoc.h"
 
-int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
+int	write_heredoc(t_app *app, t_heredoc *hd, t_cmd_info *cmd)
 {
 	char	*next_line;
-	int		fd;
-	char	*hd_name;
 	int		pid;
 	int		status;
 	int		err;
 
-	usleep (10000); //sehr dirty, I know
 	err = 0;
-	hd_name = find_hd_name(&fd);
 	pid = fork();
 	if (pid == -1)
 		return (-1); // error handling
@@ -37,20 +33,20 @@ int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 			if (next_line == NULL)
 			{
 				write(STDOUT_FILENO, "minishell: warning: here-document delimited by end-of-file (wanted ", 67);
-				write(STDOUT_FILENO, delimiter, ft_strlen(delimiter));
+				write(STDOUT_FILENO, hd->del, ft_strlen(hd->del));
 				write(STDOUT_FILENO, ")\n", 2);
-				close(fd);
+				close(hd->fd);
 				exit (0);
 			}
 			//everything goes well
-			if (ft_strlen(delimiter) == ft_strlen(next_line)
-				&& ft_strncmp(delimiter, next_line, ft_strlen(delimiter)) == 0)
+			if (ft_strlen(hd->del) == ft_strlen(next_line)
+				&& ft_strncmp(hd->del, next_line, ft_strlen(hd->del)) == 0)
 			{
 				free(next_line);
-				close(fd); 
+				close(hd->fd); 
 				exit (0);
 			}
-			ft_fprintf(fd, "%s\n", next_line);
+			ft_fprintf(hd->fd, "%s\n", next_line);
 			free(next_line);
 		}
 	}
@@ -63,16 +59,13 @@ int	here_doc(t_app *app, char *delimiter, t_cmd_info *cmd)
 		{
 			kill(pid, SIGTERM);
 			err = 107;
-			unlink(hd_name);
-			close(fd);
+			unlink(hd->doc_name);
+			close(hd->fd);
 		}
 		else
-		{
-			cmd->infile = open(hd_name, O_RDONLY);
-			unlink(hd_name);
-		}
+			cmd->infile = open(hd->doc_name, O_RDONLY);
 	}
-	return (free(hd_name), err);
+	return (err);
 }
 
 int	create_heredoc(t_app *app, t_parser_info *p_info, t_cmd_info *cmd)
@@ -83,11 +76,12 @@ int	create_heredoc(t_app *app, t_parser_info *p_info, t_cmd_info *cmd)
 
 	while (1)
 	{
-		err = find_del(app, p_info, cmd, &hd);
+		err = rep_hd(app, p_info, cmd, &hd);
 		if (err == 1)
 			break ;
 		if (err == -1)
 			return (-1);
+		err = write_heredoc(app, hd, cmd);
 		new = ft_lstnew(hd);
 		if (!new)
 			return (-1);

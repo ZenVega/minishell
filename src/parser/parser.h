@@ -41,7 +41,6 @@ char		*clean_filename(char *filename);
 //infile.c
 int			set_infile(t_app *app, char **args, t_cmd_info *cmd);
 int			found_infile(t_app *app, char **args, int i, t_cmd_info *cmd);
-int			simple_infile(char *file_name, t_cmd_info *cmd);
 
 //outfile.c
 int			set_outfile(char **args, t_cmd_info *cmd);

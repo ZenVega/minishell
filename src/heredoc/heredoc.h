@@ -33,6 +33,6 @@ int			here_doc(t_app *app, char *delimiter, t_cmd_info *cmd);
 
 //heredoc_utils.c
 char		*find_hd_name(int *fd);
-int			find_del(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc	**hd);
+int			rep_hd(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc **hd);
 
 #endif

@@ -36,6 +36,34 @@ int	set_infile(t_app *app, char **args, t_cmd_info *cmd)
 	return (0);
 }
 
+static int	is_heredoc(t_app *app, char *file_name)
+{
+	t_list		*hd_list;
+	t_heredoc	*hd;
+
+	hd_list = app->hds;
+	while (hd_list)
+	{
+		hd = hd_list->content;
+		if (!ft_strncmp(hd->doc_name, file_name, ft_strlen(file_name)))
+			return (1);
+		hd_list = hd_list->next;
+	}
+	return (0);
+}
+
+static int	simple_infile(t_app *app, char *file_name, t_cmd_info *cmd)
+{
+	if (cmd->infile != STDIN_FILENO)
+		close(cmd->infile);
+	cmd->infile = open(clean_filename(file_name), O_RDONLY);
+	if (cmd->infile < 0)
+		return (set_err(cmd, ERR_NO_FILE, file_name));
+	if (is_heredoc(app, file_name))
+		unlink(file_name);
+	return (0);
+}
+
 int	found_infile(t_app *app, char **args, int i, t_cmd_info *cmd)
 {
 	char	*file_name;
@@ -47,23 +75,7 @@ int	found_infile(t_app *app, char **args, int i, t_cmd_info *cmd)
 			file_name = args[i + 1];
 		else
 			return (set_err(cmd, ERR_SYNTAX, "after <"));
-		return (simple_infile(file_name, cmd));
+		return (simple_infile(app, file_name, cmd));
 	}
-	if (0 && ft_strlen(args[i]) == 2 && args[i][1] == '<')
-	{
-		if (!args[i + 1])
-			return (set_err(cmd, ERR_SYNTAX, "after <<"));
-		return (here_doc(app, args[i + 1], cmd));
-	}
-	return (0);
-}
-
-int	simple_infile(char *file_name, t_cmd_info *cmd)
-{
-	if (cmd->infile != STDIN_FILENO)
-		close(cmd->infile);
-	cmd->infile = open(clean_filename(file_name), O_RDONLY);
-	if (cmd->infile < 0)
-		return (set_err(cmd, ERR_NO_FILE, file_name));
 	return (0);
 }
