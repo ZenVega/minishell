@@ -61,8 +61,9 @@ static char	*replace_str(char *line, char *repl, char *pos, int len)
 	j = 0;
 	while (repl[j])
 		new_line[i++] = repl[j++];
-	while (line[len])
-		new_line[i++] = line[len++];
+	while (pos[len])
+		new_line[i++] = pos[len++];
+	new_line[i] = '\0';
 	return (new_line);
 }
 
@@ -86,9 +87,11 @@ int	find_del(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc	**hd)
 	len = 0;
 	while (!ft_iswhitespace(pos[i + len]))
 		len++;
-	(*hd)->del = ft_substr(p_info->line, i, len);
+	(*hd)->del = ft_substr(pos, i, len);
 	(*hd)->doc_name = find_hd_name(&((*hd)->fd));
+	ft_printf("DEL: %s\n", (*hd)->del);
 	p_info->line = replace_str(p_info->line, (*hd)->doc_name, pos, i + len);
+	ft_printf("LINE: %s\n", p_info->line);
 	if (!p_info->line)
 		return (set_err(cmd, ERR_MALLOC, NULL), -1);
 	add_to_malloc_list(&app->malloc_list, p_info->line);
