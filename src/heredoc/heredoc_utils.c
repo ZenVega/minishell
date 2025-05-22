@@ -67,6 +67,23 @@ static char	*replace_str(char *line, char *repl, char *pos, int len)
 	return (new_line);
 }
 
+char	*search_line(t_parser_info *p_info)
+{
+	char	*pos;
+	int		i;
+
+	i = 0;
+	pos = ft_strnstr(p_info->line, "<<", ft_strlen(p_info->line));
+	while (pos)
+	{
+		if (p_info->mask[pos - p_info->line])
+			pos = ft_strnstr(pos + 1, "<<", ft_strlen(pos + 1));
+		else
+			return (pos);
+	}
+	return (NULL);
+}
+
 int	find_del(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc	**hd)
 {
 	char		*pos;
@@ -74,7 +91,7 @@ int	find_del(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc	**hd)
 	int			len;
 
 	i = 2;
-	pos = ft_strnstr(p_info->line, "<<", ft_strlen(p_info->line));
+	pos = search_line(p_info);
 	if (pos == NULL)
 		return (1);
 	*hd = (t_heredoc *)malloc(sizeof(t_heredoc));
@@ -89,11 +106,10 @@ int	find_del(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc	**hd)
 		len++;
 	(*hd)->del = ft_substr(pos, i, len);
 	(*hd)->doc_name = find_hd_name(&((*hd)->fd));
-	ft_printf("DEL: %s\n", (*hd)->del);
 	p_info->line = replace_str(p_info->line, (*hd)->doc_name, pos, i + len);
-	ft_printf("LINE: %s\n", p_info->line);
 	if (!p_info->line)
 		return (set_err(cmd, ERR_MALLOC, NULL), -1);
 	add_to_malloc_list(&app->malloc_list, p_info->line);
+	create_mask(p_info, &app->malloc_list, cmd);
 	return (0);
 }
