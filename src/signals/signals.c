@@ -93,6 +93,7 @@ void	handle_signal_hd_child(int sig)
 {
 	int	fd;
 
+	ft_printf("SIGINT handler");
 	if (sig == SIGINT)
 	{
 		ft_printf("SIGINT in child");
@@ -105,7 +106,6 @@ void	handle_signal_hd_child(int sig)
 
 void	init_signal_hd_child(t_app *app)
 {
-	sigemptyset(&app->sa_int.sa_mask);
-	app->sa_int.sa_flags = 0;
 	app->sa_int.sa_handler = &handle_signal_hd_child;
+	sigaction(SIGINT, &app->sa_int, NULL);
 }
