@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:56:09 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 15:15:41 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/23 12:39:38 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	handle_signal_parent(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_global_signal = 130;
+		g_global_signal = ERR_SIGINT;
 		write(STDOUT_FILENO, "\n", 1);
 		return ;
 	}
 	else if (sig == SIGQUIT)
 	{
-		g_global_signal = 131;
+		g_global_signal = ERR_SIGTER;
 		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
 		return ;
 	}

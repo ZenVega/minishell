@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:49:38 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/05 08:51:07 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/21 15:37:15 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_app
 {
 	t_list				*malloc_list;
+	t_list				*hds;
 	char				**envp;
 	char				**local_var;
 	char				*prompt;
@@ -27,6 +28,13 @@ typedef struct s_app
 	struct sigaction	sa_int;
 	struct sigaction	sa_quit;
 }	t_app;
+
+typedef struct s_heredoc
+{
+	char	*del;
+	char	*doc_name;
+	int		fd;
+}	t_heredoc;
 
 typedef enum e_cmd_type {
 	UNDEFINED = 0,
