@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:47:17 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 16:04:36 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:26:21 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define ERR_IDENT_MSG "not a valid identifier"
 
 # define BUFFER_SIZE 10
-# define ERR_COUNT 14
+# define ERR_COUNT 15
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
@@ -52,7 +52,8 @@ typedef enum s_err_code {
 	ERR_IS_NO_FOLDER = 312,
 	ERR_MANY_ARGS = 101,
 	ERR_NUM_ARGS = 102,
-	ERR_SIG = 130,
+	ERR_SIGINT = 130,
+	ERR_SIGTER = 131,
 }	t_err_code;
 
 # define BI_COUNT 8

@@ -6,59 +6,46 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:42:30 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/23 12:11:34 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:47:02 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 
-int	write_heredoc(t_app *app, t_heredoc *hd, t_cmd_info *cmd)
+static void	write_hd_file(t_app *app, t_heredoc *hd)
 {
 	char	*next_line;
+
+	init_signal_hd_child(app);
+	while (1)
+	{
+		next_line = readline("🐡 ");
+		handle_signals(hd, next_line);
+		if (ft_strlen(hd->del) == ft_strlen(next_line)
+			&& ft_strncmp(hd->del, next_line, ft_strlen(hd->del)) == 0)
+		{
+			free(next_line);
+			close(hd->fd); 
+			exit (0);
+		}
+		ft_fprintf(hd->fd, "%s\n", next_line);
+		free(next_line);
+	}
+}
+
+int	write_heredoc(t_app *app, t_heredoc *hd, t_cmd_info *cmd)
+{
 	int		pid;
 	int		status;
 	int		err;
 
 	err = 0;
 	pid = fork();
+	disable_ctrl_c_echo(1);
 	if (pid == -1)
-		return (-1); // error handling
+		return (-1);
 	else if (pid == 0)
-	{
-		init_signal_hd_child(app);
-		while (1)
-		{
-			next_line = readline("🐡 ");
-			// handles Ctrl-C
- 			if (g_global_signal == ERR_SIG)
-			{
-				unlink(hd->doc_name);
-				close(hd->fd);
-				write(2, "^C\n", 3);
-				exit(ERR_SIG);
-				g_global_signal = 0;
-			}
-			// handles Ctrl-D
-			if (next_line == NULL)
-			{
-				write(STDOUT_FILENO, "minishell: warning: here-document delimited by end-of-file (wanted ", 67);
-				write(STDOUT_FILENO, hd->del, ft_strlen(hd->del));
-				write(STDOUT_FILENO, ")\n", 2);
-				close(hd->fd);
-				exit (0);
-			}
-			//everything goes well
-			if (ft_strlen(hd->del) == ft_strlen(next_line)
-				&& ft_strncmp(hd->del, next_line, ft_strlen(hd->del)) == 0)
-			{
-				free(next_line);
-				close(hd->fd); 
-				exit (0);
-			}
-			ft_fprintf(hd->fd, "%s\n", next_line);
-			free(next_line);
-		}
-	}
+		write_hd_file(app, hd);
 	else
 	{
 		init_signal_hd_parent(app);
@@ -66,6 +53,7 @@ int	write_heredoc(t_app *app, t_heredoc *hd, t_cmd_info *cmd)
 		err = WEXITSTATUS(status);
 		if (!err)
 			cmd->infile = open(hd->doc_name, O_RDONLY);
+		close(hd->fd);
 	}
 	return (err);
 }
@@ -84,8 +72,12 @@ int	create_heredoc(t_app *app, t_parser_info *p_info, t_cmd_info *cmd)
 		if (err == -1)
 			return (-1);
 		err = write_heredoc(app, hd, cmd);
-		if (err == ERR_SIG)
-			return (set_err(cmd, ERR_SIG, NULL));
+		disable_ctrl_c_echo(1);
+		if (err == ERR_SIGINT || err == ERR_SIGTER)
+			return (p_info->line = "", 0);
+		//TODO: How to prevent Ctrl + D from stopping further execution????
+		if (err == ERR_SIGTER)
+			return (set_err(cmd, ERR_SIGTER, NULL));
 		new = ft_lstnew(hd);
 		if (!new)
 			return (-1);
