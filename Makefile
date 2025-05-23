@@ -47,6 +47,7 @@ CFILES += init.c
 vpath %.c $(SRC_FOLDER)heredoc
 CFILES += heredoc.c
 CFILES += heredoc_utils.c
+CFILES += heredoc_signals.c
 
 vpath %.c $(SRC_FOLDER)malloc_list
 CFILES += malloc_list.c

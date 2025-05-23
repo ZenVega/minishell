@@ -56,7 +56,7 @@ void	process_input(char *read_line, t_cmd_info *cmd, t_app *app)
 	p_info = init_parser_info(0, 1, read_line);
 	cmd = parser(p_info, app);
 	exe(app, cmd);
-	if (cmd->err_info.suspect)
+	if (cmd && cmd->err_info.suspect)
 		free(cmd->err_info.suspect);
 	free_malloc_list(app);
 	free(read_line);

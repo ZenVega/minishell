@@ -46,25 +46,29 @@ char	*find_hd_name(int *fd)
 	return (hd_name);
 }
 
-static char	*replace_str(char *line, char *repl, char *pos, int len)
+static int	replace_str(t_parser_info *p_info, char *repl, char *pos, int len)
 {
 	char	*new_line;
 	int		i;
 	int		j;
+	int		size;
 
-	new_line = malloc(sizeof(char) * (ft_strlen(line) - len + ft_strlen(repl)) - 1);
+	size = ft_strlen(p_info->line) - len + 2 + ft_strlen(repl);
+	new_line = malloc(
+			sizeof(char) * (size));
 	if (new_line == NULL)
-		return (NULL);
+		return (1);
 	i = -1;
-	while (++i < (pos - line + 1))
-		new_line[i] = line[i];
+	while (++i < (pos - p_info->line + 1))
+		new_line[i] = p_info->line[i];
 	j = 0;
 	while (repl[j])
 		new_line[i++] = repl[j++];
 	while (pos[len])
 		new_line[i++] = pos[len++];
 	new_line[i] = '\0';
-	return (new_line);
+	p_info->line = new_line;
+	return (0);
 }
 
 static char	*search_line(t_parser_info *p_info)
@@ -106,8 +110,7 @@ int	rep_hd(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc **hd)
 		len++;
 	(*hd)->del = ft_substr(pos, i, len);
 	(*hd)->doc_name = find_hd_name(&((*hd)->fd));
-	p_info->line = replace_str(p_info->line, (*hd)->doc_name, pos, i + len);
-	if (!p_info->line)
+	if (replace_str(p_info, (*hd)->doc_name, pos, i + len))
 		return (set_err(cmd, ERR_MALLOC, NULL), -1);
 	add_to_malloc_list(&app->malloc_list, p_info->line);
 	create_mask(p_info, &app->malloc_list, cmd);

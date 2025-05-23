@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:42:30 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/21 15:38:36 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:11:34 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	write_heredoc(t_app *app, t_heredoc *hd, t_cmd_info *cmd)
 		while (1)
 		{
 			next_line = readline("🐡 ");
-			ft_printf("readline: %s\n", next_line);
-			ft_printf("global_sig: %d\n", g_global_signal);
+			// handles Ctrl-C
  			if (g_global_signal == ERR_SIG)
 			{
-				close(hd->fd);
 				unlink(hd->doc_name);
-				write(2, "^C heredoc interrupted\n", 24);
+				close(hd->fd);
+				write(2, "^C\n", 3);
 				exit(ERR_SIG);
+				g_global_signal = 0;
 			}
 			// handles Ctrl-D
 			if (next_line == NULL)
@@ -63,19 +63,10 @@ int	write_heredoc(t_app *app, t_heredoc *hd, t_cmd_info *cmd)
 	{
 		init_signal_hd_parent(app);
 		waitpid(pid, &status, 0);
-		ft_printf("heredoc status: %d\n", status);
-		if (g_global_signal == ERR_SIG)
-		{
-			kill(pid, SIGTERM);
-			err = ERR_SIG;
-			unlink(hd->doc_name);
-			close(hd->fd);
-			ft_printf("err signal\n");
-		}
-		else
+		err = WEXITSTATUS(status);
+		if (!err)
 			cmd->infile = open(hd->doc_name, O_RDONLY);
 	}
-	ft_printf("heredoc err: %d\n", err);
 	return (err);
 }
 

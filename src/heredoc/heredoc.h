@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:42:00 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/21 14:02:17 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:13:24 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,7 @@ int			here_doc(t_app *app, char *delimiter, t_cmd_info *cmd);
 char		*find_hd_name(int *fd);
 int			rep_hd(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc **hd);
 
+//heredoc_signals.c
+void		init_signal_hd_parent(t_app *app);
+void		init_signal_hd_child(t_app *app);
 #endif

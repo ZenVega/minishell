@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:54:49 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/20 14:20:14 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/23 12:13:09 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,5 @@ void	init_sa_shell(t_app *app);
 void	handle_signal_parent(int sig);
 void	init_sa_child(t_app *app);
 void	init_sa_parent(t_app *app);
-
-void	init_signal_hd_parent(t_app *app);
-void	init_signal_hd_child(t_app *app);
 
 #endif
