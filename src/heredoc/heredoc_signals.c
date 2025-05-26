@@ -64,8 +64,7 @@ void	handle_signals(t_heredoc *hd, char *next_line)
 		write(STDOUT_FILENO, "minishell: warning: here-document delimited by end-of-file (wanted ", 67);
 		write(STDOUT_FILENO, hd->del, ft_strlen(hd->del));
 		write(STDOUT_FILENO, ")\n", 2);
-		unlink(hd->doc_name);
 		close(hd->fd);
-		exit (ERR_SIGTER);
+		exit (0);
 	}
 }

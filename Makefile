@@ -102,7 +102,7 @@ debug: $(NAME)
 	@/bin/bash -c "gdb ./$(NAME)"
 
 val_test: $(NAME)
-	@/bin/bash -c "valgrind --track-fds=yes ./$(NAME)"
+	@/bin/bash -c "valgrind --leak-check=full --track-fds=yes ./$(NAME)"
 
 norm:
 	norminette $(NAME).c
