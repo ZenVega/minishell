@@ -75,7 +75,6 @@ int	create_heredoc(t_app *app, t_parser_info *p_info, t_cmd_info *cmd)
 		disable_ctrl_c_echo(1);
 		if (err == ERR_SIGINT || err == ERR_SIGTER)
 			return (p_info->line = "", 0);
-		//TODO: How to prevent Ctrl + D from stopping further execution????
 		if (err == ERR_SIGTER)
 			return (set_err(cmd, ERR_SIGTER, NULL));
 		new = ft_lstnew(hd);

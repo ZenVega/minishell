@@ -13,7 +13,7 @@
 #ifndef HEREDOC_H
 # define HEREDOC_H
 
-#include <termios.h>
+# include <termios.h>
 # include <fcntl.h>
 # include "../error/error.h"
 # include "../expand/expand.h"
@@ -34,7 +34,8 @@ int			here_doc(t_app *app, char *delimiter, t_cmd_info *cmd);
 
 //heredoc_utils.c
 char		*find_hd_name(int *fd);
-int			rep_hd(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc **hd);
+int			rep_hd(t_app *app, t_parser_info *p_info,
+				t_cmd_info *cmd, t_heredoc **hd);
 
 //heredoc_signals.c
 void		init_signal_hd_parent(t_app *app);

@@ -19,6 +19,22 @@ static t_cmd_info	*on_success(t_cmd_info *cmd, char **parts)
 	return (cmd);
 }
 
+static int	mask_and_expantion(
+		t_parser_info *p_info, t_app *app, t_cmd_info *cmd)
+{
+	int			err;
+
+	free(p_info->mask);
+	err = create_mask(p_info, &app->malloc_list, cmd);
+	if (err == -1)
+		return (-1);
+	err = create_heredoc(app, p_info, cmd);
+	if (err)
+		return (-1);
+	expand(p_info, app, cmd);
+	return (0);
+}
+
 t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 {
 	t_cmd_info	*cmd;
@@ -28,14 +44,8 @@ t_cmd_info	*parser(t_parser_info p_info, t_app *app)
 	cmd = cmd_info_init(&app->malloc_list, &p_info);
 	if (!cmd)
 		return (set_err(cmd, ERR_MALLOC, ""), cmd);
-	free(p_info.mask);
-	err = create_mask(&p_info, &app->malloc_list, cmd);
-	if (err == -1)
+	if (mask_and_expantion(&p_info, app, cmd))
 		return (NULL);
-	err = create_heredoc(app, &p_info, cmd);
-	if (err)
-		return (NULL);
-	expand(&p_info, app, cmd);
 	parts = (char **)malloc_and_add_list(&app->malloc_list, sizeof(char *) * 3);
 	if (!parts)
 		return (NULL);

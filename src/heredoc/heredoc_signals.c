@@ -12,7 +12,7 @@
 
 #include "heredoc.h"
 
-void	disable_ctrl_c_echo(int activate) 
+void	disable_ctrl_c_echo(int activate)
 {
 	struct termios	term;
 
@@ -61,7 +61,8 @@ void	handle_signals(t_heredoc *hd, char *next_line)
 	}
 	if (next_line == NULL)
 	{
-		write(STDOUT_FILENO, "minishell: warning: here-document delimited by end-of-file (wanted ", 67);
+		write(STDOUT_FILENO, WARNING, ft_strlen(WARNING));
+		write(STDOUT_FILENO, HD_DELSTR, ft_strlen(HD_DELSTR));
 		write(STDOUT_FILENO, hd->del, ft_strlen(hd->del));
 		write(STDOUT_FILENO, ")\n", 2);
 		close(hd->fd);

@@ -35,6 +35,9 @@
 # define BUFFER_SIZE 10
 # define ERR_COUNT 15
 
+# define WARNING "minishell: warning:"
+# define HD_DELSTR "here-document delimited by end-of-file (wanted "
+
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
 	ERR_GENERAL = 1,

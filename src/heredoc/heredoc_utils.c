@@ -106,13 +106,13 @@ int	rep_hd(t_app *app, t_parser_info *p_info, t_cmd_info *cmd, t_heredoc **hd)
 	while (ft_iswhitespace(pos[i]))
 		i++;
 	len = 0;
-	while (!ft_iswhitespace(pos[i + len]) && pos[i + len] != '\0' && pos[i + len] != '|')
+	while (!ft_iswhitespace(pos[i + len])
+		&& pos[i + len] != '\0' && pos[i + len] != '|')
 		len++;
 	(*hd)->del = ft_substr(pos, i, len);
 	(*hd)->doc_name = find_hd_name(&((*hd)->fd));
 	if (replace_str(p_info, (*hd)->doc_name, pos, i + len))
 		return (set_err(cmd, ERR_MALLOC, NULL), -1);
 	add_to_malloc_list(&app->malloc_list, p_info->line);
-	create_mask(p_info, &app->malloc_list, cmd);
-	return (0);
+	return (create_mask(p_info, &app->malloc_list, cmd));
 }
