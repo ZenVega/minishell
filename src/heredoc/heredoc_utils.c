@@ -74,9 +74,7 @@ static int	replace_str(t_parser_info *p_info, char *repl, char *pos, int len)
 static char	*search_line(t_parser_info *p_info)
 {
 	char	*pos;
-	int		i;
 
-	i = 0;
 	pos = ft_strnstr(p_info->line, "<<", ft_strlen(p_info->line));
 	while (pos)
 	{
