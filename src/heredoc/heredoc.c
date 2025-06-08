@@ -20,7 +20,7 @@ static void	write_hd_file(t_app *app, t_heredoc *hd)
 	while (1)
 	{
 		next_line = readline("🐡 ");
-		handle_signals(hd, next_line);
+		handle_signals(app->hds, hd, next_line);
 		if (ft_strlen(hd->del) == ft_strlen(next_line)
 			&& ft_strncmp(hd->del, next_line, ft_strlen(hd->del)) == 0)
 		{

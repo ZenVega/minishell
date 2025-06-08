@@ -49,10 +49,16 @@ void	init_signal_hd_child(t_app *app)
 	sigaction(SIGINT, &app->sa_int, NULL);
 }
 
-void	handle_signals(t_heredoc *hd, char *next_line)
+void	handle_signals(t_list *hd_list, t_heredoc *hd, char *next_line)
 {
 	if (g_global_signal == ERR_SIGINT)
 	{
+		while (hd_list)
+		{
+			unlink(((t_heredoc *)(hd_list->content))->doc_name);
+			close(((t_heredoc *)(hd_list->content))->fd);
+			hd_list = hd_list->next;
+		}
 		unlink(hd->doc_name);
 		close(hd->fd);
 		write(2, "🐡\n", 6);

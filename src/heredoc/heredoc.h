@@ -40,6 +40,6 @@ int			rep_hd(t_app *app, t_parser_info *p_info,
 //heredoc_signals.c
 void		init_signal_hd_parent(t_app *app);
 void		init_signal_hd_child(t_app *app);
-void		handle_signals(t_heredoc *hd, char *next_line);
+void		handle_signals(t_list *hd_list, t_heredoc *hd, char *next_line);
 void		disable_ctrl_c_echo(int activate);
 #endif
