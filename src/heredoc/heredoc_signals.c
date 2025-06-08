@@ -55,7 +55,7 @@ void	handle_signals(t_heredoc *hd, char *next_line)
 	{
 		unlink(hd->doc_name);
 		close(hd->fd);
-		write(2, "^C\n", 3);
+		write(2, "🐡\n", 6);
 		g_global_signal = 0;
 		exit(ERR_SIGINT);
 	}
