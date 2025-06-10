@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:27:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 19:34:11 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/20 13:57:27 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv, char *envp[])
 		write(2, "Invalid arguments\n", 18);
 		return (-1);
 	}
-	//welcome_screen(envp);
+	welcome_screen(envp);
 	app = init_shell(envp);
 	if (app == NULL)
 		return (-1);

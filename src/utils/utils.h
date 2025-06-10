@@ -13,8 +13,8 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "../includes/types.h"
 # include "../error/error.h"
+# include "../includes/types.h"
 # include "../libft/libft.h"
 # include "../malloc_list/malloc_list.h"
 # include <sys/stat.h>
@@ -27,9 +27,10 @@ char	**copy_envp(char **envp);
 int		get_char_arr_len(char **paths);
 void	reroute_io(t_cmd_info *cmd);
 
-//clean.c
+// clean.c
 int		clean_arg(char *arg);
 int		clean_args(t_cmd_info *cmd);
 void	reset_io(t_cmd_info *cmd);
+void	free_hd_list(t_list **hds);
 
 #endif

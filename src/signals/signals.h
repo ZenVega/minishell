@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:54:49 by jhelbig           #+#    #+#             */
-/*   Updated: 2025/05/19 15:17:13 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/23 12:13:09 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../includes/CONSTANTS.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
 
 extern int	g_global_signal;
 

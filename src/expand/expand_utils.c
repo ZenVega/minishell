@@ -82,12 +82,11 @@ int	replace_return(t_app *app, t_parser_info *p_info, int i_dol)
 	while (var[index[1]])
 		ret_val[index[0]++] = var[index[1]++];
 	index[1] = index[0] - index[1] + 2;
-	free(var);
 	while (p_info->line[index[1]])
 		ret_val[index[0]++] = p_info->line[index[1]++];
 	ret_val[index[0]] = '\0';
 	p_info->line = ret_val;
-	return (i_dol + ft_strlen(var) - 2);
+	return (i_dol + ft_strlen(var) - 1);
 }
 
 int	replace_var(t_app *app, t_parser_info *p_info, char *p_dol)
