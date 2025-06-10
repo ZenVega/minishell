@@ -59,6 +59,7 @@ void	process_input(char *read_line, t_cmd_info *cmd, t_app *app)
 	if (cmd && cmd->err_info.suspect)
 		free(cmd->err_info.suspect);
 	free_malloc_list(app);
+	free_hd_list(&app->hds);
 	free(read_line);
 }
 

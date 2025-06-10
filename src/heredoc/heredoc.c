@@ -51,7 +51,7 @@ int	write_heredoc(t_app *app, t_heredoc *hd, t_cmd_info *cmd)
 		init_signal_hd_parent(app);
 		waitpid(pid, &status, 0);
 		err = WEXITSTATUS(status);
-		if (!err)
+		if (!cmd && !err)
 			cmd->infile = open(hd->doc_name, O_RDONLY);
 		close(hd->fd);
 	}
@@ -71,16 +71,16 @@ int	create_heredoc(t_app *app, t_parser_info *p_info, t_cmd_info *cmd)
 			break ;
 		if (err == -1)
 			return (-1);
+		new = ft_lstnew(hd);
+		if (!new)
+			return (-1);
+		ft_lstadd_back(&app->hds, new);
 		err = write_heredoc(app, hd, cmd);
 		disable_ctrl_c_echo(1);
 		if (err == ERR_SIGINT || err == ERR_SIGTER)
 			return (p_info->line = "", 0);
 		if (err == ERR_SIGTER)
 			return (set_err(cmd, ERR_SIGTER, NULL));
-		new = ft_lstnew(hd);
-		if (!new)
-			return (-1);
-		ft_lstadd_back(&app->hds, new);
 	}
 	return (0);
 }

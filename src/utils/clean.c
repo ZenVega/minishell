@@ -78,3 +78,17 @@ void	reset_io(t_cmd_info *cmd)
 	}
 	close(cmd->outfile_backup);
 }
+
+void	free_hd_list(t_list **hds)
+{
+	t_list	*hd;
+
+	hd = *hds;
+	while (hd)
+	{
+		free(((t_heredoc *)(hd->content))->del);
+		free(((t_heredoc *)(hd->content))->doc_name);
+		hd = hd->next;
+	}
+	ft_lstclear(hds, free);
+}
