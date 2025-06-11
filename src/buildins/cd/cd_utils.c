@@ -49,7 +49,8 @@ char	*get_home_path(t_app *app)
 	tmp = get_env_val(app, "USER");
 	if (!tmp)
 		return (NULL);
-	home_path = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + 7));
+	home_path = (char *)malloc_and_add_list(
+			&app->malloc_list, sizeof(char) * (ft_strlen(tmp) + 7));
 	if (!home_path)
 		return (free(tmp), NULL);
 	ft_strlcpy(home_path, "/home/", 7);
