@@ -75,3 +75,17 @@ void	reroute_io(t_cmd_info *cmd)
 		dup2(cmd->outfile, STDOUT_FILENO);
 	}
 }
+
+int	has_access_ret(t_app *app, t_cmd_info *cmd, char *path)
+{
+	struct stat	sb;
+
+	stat(path, &sb);
+	if ((sb.st_mode & S_IFMT) == S_IFDIR)
+		return (app->ret_val = 126, set_err(cmd, ERR_IS_FOLDER, path));
+	else if (access(path, F_OK))
+		return (app->ret_val = 127, set_err(cmd, ERR_NO_FILE, path));
+	else if (access(path, X_OK))
+		return (app->ret_val = 126, set_err(cmd, ERR_PERM, path));
+	return (0);
+}
