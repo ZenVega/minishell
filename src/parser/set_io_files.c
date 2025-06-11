@@ -116,7 +116,7 @@ int	set_io_files(char *line, t_cmd_info *cmd, t_app *app, int *mask)
 	char	**split;
 	int		err;
 
-	split = ft_split_safe(line, ' ', mask);
+	split = ft_split_white_safe(line, mask);
 	if (!split)
 		return (set_err(cmd, ERR_MALLOC, NULL), -1);
 	add_list_to_malloc_list(&app->malloc_list, (void *)split);
