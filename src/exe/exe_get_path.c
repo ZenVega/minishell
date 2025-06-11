@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:12:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 16:05:18 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/06/11 11:14:02 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	**get_paths_from_env(t_app *app, t_cmd_info *cmd, char *cmd_name)
 
 	tmp = get_env_val(app, "PATH");
 	if (!tmp)
-		return (set_err(cmd, ERR_NO_VAR, "PATH"), NULL);
+		return (set_err(cmd, ERR_NO_FILE, cmd_name), app->ret_val = 127, NULL);
 	add_to_malloc_list(&app->malloc_list, tmp);
 	cmd_name = ft_strjoin("/", cmd_name);
 	if (!cmd_name)
@@ -92,7 +92,7 @@ char	*get_path(t_cmd_info *cmd, t_exe *exe, t_app *app)
 	{
 		paths = get_paths_from_env(app, cmd, exe->cmd_name);
 		if (!paths)
-			return (set_err(cmd, ERR_MALLOC, NULL), NULL);
+			return (NULL);
 		add_to_malloc_list(&app->malloc_list, paths);
 		return (filter_paths(app, cmd, paths, exe->cmd_name));
 	}
