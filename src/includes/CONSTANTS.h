@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CONSTANTS.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:47:17 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/19 16:04:36 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/06/11 10:49:49 by jhelbig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define ERR_SYNTHAX_MSG "Found syntax error"
 # define ERR_NO_FILE_MSG  "No such file or directory"
 # define ERR_NO_CMD_MSG  "command not found"
-# define ERR_NO_VAR_MSG  "No such variable"
+# define ERR_NO_VAR_MSG  "No such file or directory"
 # define ERR_MALLOC_MSG "Cannot allocate memory"
 # define ERR_FORK_MSG "Cannot fork a process"
 # define ERR_PIPE_MSG "Pipe failed"
@@ -33,7 +33,10 @@
 # define ERR_IDENT_MSG "not a valid identifier"
 
 # define BUFFER_SIZE 10
-# define ERR_COUNT 14
+# define ERR_COUNT 15
+
+# define WARNING "minishell: warning: "
+# define HD_DELSTR "here-document delimited by end-of-file (wanted "
 
 typedef enum s_err_code {
 	ERR_SUCCESS = 0,
@@ -46,13 +49,14 @@ typedef enum s_err_code {
 	ERR_PIPE = 306,
 	ERR_ARGS = 307,
 	ERR_NO_CMD = 308,
-	ERR_PERMISSION = 308,
 	ERR_IS_FOLDER = 309,
 	ERR_PERM = 310,
 	ERR_IDENT = 311,
 	ERR_IS_NO_FOLDER = 312,
 	ERR_MANY_ARGS = 101,
 	ERR_NUM_ARGS = 102,
+	ERR_SIGINT = 130,
+	ERR_SIGTER = 131,
 }	t_err_code;
 
 # define BI_COUNT 8

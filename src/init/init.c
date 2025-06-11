@@ -6,7 +6,7 @@
 /*   By: jhelbig <jhelbig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:03:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/05/13 15:01:41 by jhelbig          ###   ########.fr       */
+/*   Updated: 2025/05/21 15:37:24 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_app	*init_shell(char *envp[])
 	app->local_var[0] = NULL; 
 	app->prompt = NULL;
 	app->ret_val = 0;
+	app->hds = NULL;
 	return (app);
 }
 
