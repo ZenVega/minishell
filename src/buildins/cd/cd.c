@@ -61,7 +61,11 @@ static char	*get_abs_path(t_app *app, char *path)
 	if (!ft_strncmp("~/", path, 2))
 		return (add_to_home_route(app, path));
 	if (!ft_strncmp("-\0", path, 2))
-		return (get_env_val(app, "OLDPWD"));
+	{
+		cur_path = get_env_val(app, "OLDPWD");
+		add_to_malloc_list(&app->malloc_list, cur_path);
+		return (cur_path);
+	}
 	return (path);
 }
 

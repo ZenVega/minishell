@@ -63,7 +63,8 @@ static char	**redirection_split(char **args)
 	j = 0;
 	while (args[i])
 	{
-		if (args[i][0] == '\'' || args[i][0] == '\"')
+		if ((args[i][0] == '\'' && args[i][ft_strlen(args[i]) - 1] == '\'' )
+			|| (args[i][0] == '\"' && args[i][ft_strlen(args[i]) - 1] == '\"'))
 		{
 			new[j++] = ft_strdup(args[i]);
 			if (!new[j - 1])
@@ -75,8 +76,7 @@ static char	**redirection_split(char **args)
 			return (free_var_arr(new), NULL);
 		i++;
 	}
-	new[j] = NULL;
-	return (new);
+	return (new[j] = NULL, new);
 }
 
 //if args are in quotation marks, they will not be kicked out here, 
