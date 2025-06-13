@@ -63,7 +63,7 @@ int	call_execve(t_exe *exe, t_app *app, t_cmd_info *cmd)
 		exit(-1);
 	}
 	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status))
+	if (g_global_signal == ERR_SIGTER || g_global_signal == ERR_SIGINT)
 		app->ret_val = g_global_signal;
 	else
 		app->ret_val = WEXITSTATUS(status);
