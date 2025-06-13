@@ -62,6 +62,13 @@ void	process_input(char *read_line, t_cmd_info *cmd, t_app *app)
 	free_hd_list(&app->hds);
 	free(read_line);
 }
+void	prompt_err(t_cmd_info *cmd, t_app *app, char *read_line)
+{
+	cmd->err_info.code = ERR_MALLOC;
+	exit_with_error(*cmd);
+	free_malloc_list(app);
+	free(read_line);
+}
 
 void	start_shell(t_app *app)
 {
@@ -72,15 +79,15 @@ void	start_shell(t_app *app)
 	{
 		cmd = NULL;
 		init_sa_shell(app);
+		disable_ctrl_c_echo(1);
 		if (set_prompt(&app->prompt, &app->malloc_list) == -1)
 		{
-			cmd->err_info.code = ERR_MALLOC;
-			exit_with_error(*cmd);
-			free_malloc_list(app);
-			free(read_line);
+			prompt_err(cmd, app, read_line);
 			break ;
 		}
 		read_line = readline(app->prompt);
+		if (g_global_signal == 130)
+			app->ret_val = g_global_signal;
 		if (read_line == NULL)
 		{
 			write(STDOUT_FILENO, "exit\n", 5);
