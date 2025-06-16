@@ -62,6 +62,7 @@ void	process_input(char *read_line, t_cmd_info *cmd, t_app *app)
 	free_hd_list(&app->hds);
 	free(read_line);
 }
+
 void	prompt_err(t_cmd_info *cmd, t_app *app, char *read_line)
 {
 	cmd->err_info.code = ERR_MALLOC;
