@@ -17,8 +17,11 @@ int	folder_access(t_app *app, t_cmd_info *cmd, char *path, char *og_path)
 	struct stat	sb;
 	char		*subject;
 
-	subject = ft_strjoin("cd: ", og_path);
-	add_to_malloc_list(&app->malloc_list, subject);
+	if (og_path != NULL)
+	{
+		subject = ft_strjoin("cd: ", og_path);
+		add_to_malloc_list(&app->malloc_list, subject);
+	}
 	stat(path, &sb);
 	if (access(path, F_OK))
 		return (app->ret_val = 127, set_err(cmd, ERR_NO_FILE, subject));
