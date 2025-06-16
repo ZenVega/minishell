@@ -77,7 +77,7 @@ DEPS = libft.h
 
 CC = cc
 
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=leak
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = libft.a
 

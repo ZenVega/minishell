@@ -91,7 +91,7 @@ DEPS		= $(SRC_FOLDER)includes/minishell.h\
 
 CC			= cc
 
-CFLAGS		= -g -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror
 
 all: $(NAME) 
 
