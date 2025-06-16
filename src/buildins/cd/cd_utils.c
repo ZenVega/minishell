@@ -17,11 +17,8 @@ int	folder_access(t_app *app, t_cmd_info *cmd, char *path, char *og_path)
 	struct stat	sb;
 	char		*subject;
 
-	if (og_path != NULL)
-	{
-		subject = ft_strjoin("cd: ", og_path);
-		add_to_malloc_list(&app->malloc_list, subject);
-	}
+	subject = ft_strjoin("cd: ", og_path);
+	add_to_malloc_list(&app->malloc_list, subject);
 	stat(path, &sb);
 	if (access(path, F_OK))
 		return (app->ret_val = 127, set_err(cmd, ERR_NO_FILE, subject));
@@ -39,9 +36,11 @@ int	remove_last_route(char **path)
 	len = ft_strlen(*path);
 	while (len >= 0 && (*path)[len] != '/')
 		(*path)[len--] = 0;
-	if (len >= 0 && (*path)[len] == '/')
+	if ((*path)[len] == '/' && len != 0)
+		(*path)[len] = 0;
+	if (len >= 1 && (*path)[len] == '/')
 		return ((*path)[len] = 0, 0);
-	return (-1);
+	return (0);
 }
 
 char	*get_home_path(t_app *app)
@@ -52,8 +51,7 @@ char	*get_home_path(t_app *app)
 	tmp = get_env_val(app, "USER");
 	if (!tmp)
 		return (NULL);
-	home_path = (char *)malloc_and_add_list(
-			&app->malloc_list, sizeof(char) * (ft_strlen(tmp) + 7));
+	home_path = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + 7));
 	if (!home_path)
 		return (free(tmp), NULL);
 	ft_strlcpy(home_path, "/home/", 7);
