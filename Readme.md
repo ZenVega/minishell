@@ -4,6 +4,7 @@
 
 This is [jhelbig42](https://github.com/jhelbig42)\`s and [ZenVega](https://github.com/ZenVega)\`s version of 42s minishell subject. A simple shell with basic functionality;
 
+![screenshot from terminal](./shell_demo.png)
 ## File Structure
 
 This is could be our main app structure. Depending on it's complexity, a feature might also have two *.h files, one for feature specific functionality and an export *.h for imports in the main app
